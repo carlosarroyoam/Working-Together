@@ -7,6 +7,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Toast;
 
+import com.workingtogether.workingtogether.parent.ParentDashboard;
+
 public class Signin extends AppCompatActivity {
 
     @Override
@@ -23,6 +25,9 @@ public class Signin extends AppCompatActivity {
         String password = passwordWrapper.getEditText().getText().toString();
 
         Toast.makeText(this, "Hola " + user + " pass: " + password, Toast.LENGTH_SHORT).show();
+
+        startActivity(new Intent(this, ParentDashboard.class));
+        finish();
     }
 
     public void forgotPassword(View view){

@@ -28,17 +28,17 @@
             android:parentActivityName=".Signin"
             android:label="@string/layout_signup_name"
             android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".parent.ParentDashboard" android:configChanges="keyboardHidden|orientation|screenSize" />
-        <activity android:name=".teacher.TeacherDashboard" />
-        <activity android:name=".parent.ParentHomeworks" />
-        <activity android:name=".parent.ParentGrades" />
         <activity android:name=".NotificationsTray" />
-        <activity android:name=".teacher.TeacherHomeworks" />
-        <activity android:name=".parent.ParentStudents" />
-        <activity android:name=".teacher.TeacherStudents" />
-        <activity android:name=".parent.ParentSemaphore" />
-        <activity android:name=".parent.ParentActivities" />
-        <activity android:name=".teacher.TeacherActivities" />
+        <activity android:name=".parent.ParentDashboard" android:configChanges="keyboardHidden|orientation|screenSize" />
+        <activity android:name=".parent.ParentHomeworks" android:label="@string/layout_parent_homeworks_name"/>
+        <activity android:name=".parent.ParentGrades" android:label="@string/layout_parent_grades_name"/>
+        <activity android:name=".parent.ParentStudents" android:label="@string/layout_parent_students_name"/>
+        <activity android:name=".parent.ParentActivities" android:label="@string/layout_parent_activities_name"/>
+        <activity android:name=".parent.ParentSemaphore" android:label="@string/layout_parent_semaphore_name"/>
+        <activity android:name=".teacher.TeacherDashboard" android:label="@string/layout_teacher_dashboard_name"/>
+        <activity android:name=".teacher.TeacherHomeworks" android:label="@string/layout_teacher_homeworks_name"/>
+        <activity android:name=".teacher.TeacherStudents" android:label="@string/layout_teacher_students_name"/>
+        <activity android:name=".teacher.TeacherActivities" android:label="@string/layout_teacher_activities_name"/>
     </application>
 
 </manifest>

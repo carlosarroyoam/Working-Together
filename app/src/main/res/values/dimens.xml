@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <dimen name="dashboard_squared_icon_size">100dp</dimen>
+    <dimen name="dashboard_squared_icon_size">130dp</dimen>
     <dimen name="squared_app_icon_size">140dp</dimen>
+    <dimen name="semaphore_icon_size">240dp</dimen>
+
+    <dimen name="grid_column_size">200dp</dimen>
 
     <dimen name="half_padding">8dp</dimen>
     <dimen name="padding">16dp</dimen>
@@ -12,8 +15,8 @@
     <dimen name="margin">16dp</dimen>
     <dimen name="double_margin">32dp</dimen>
 
-    <dimen name="txt_title_text_size">16sp</dimen>
-    <dimen name="txt_subtitle_text_size">16sp</dimen>
+    <dimen name="txt_title_text_size">20sp</dimen>
+    <dimen name="txt_subtitle_text_size">18sp</dimen>
     <dimen name="txt_text_size">16sp</dimen>
     <dimen name="etxt_text_size">16sp</dimen>
     <dimen name="btn_text_size">16sp</dimen>

@@ -16,6 +16,7 @@
     <string name="layout_teacher_dashboard_name">Tablero</string>
     <string name="layout_teacher_students_name">Estudiantes</string>
     <string name="layout_teacher_homeworks_name">Tareas</string>
+    <string name="layout_teacher_activities_name">Actividades</string>
 
     <string name="btn_signin">Iniciar sesión</string>
     <string name="btn_signup">Crear cuenta</string>
@@ -32,5 +33,13 @@
     <string name="txt_signin_msg">Bienvenido a Working Together</string>
     <string name="txt_signup_msg">Ingresa tus datos</string>
     <string name="txt_no_account_msg">¿Aun no tienes cuenta? Crea una gratis</string>
+
+    <string name="semaphore_red_status_name">Rojo</string>
+    <string name="semaphore_yellow_status_name">Amarillo</string>
+    <string name="semaphore_green_status_name">Verde</string>
+
+    <string name="semaphore_red_status_msg"></string>
+    <string name="semaphore_yellow_status_msg"></string>
+    <string name="semaphore_green_status_msg">Tu desempeño ha sido muy bueno, muchas felicidades.</string>
 
 </resources>

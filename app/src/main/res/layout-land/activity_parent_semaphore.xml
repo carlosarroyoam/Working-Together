@@ -27,28 +27,26 @@
                 android:id="@+id/activity_parent_semaphore_img"
                 android:layout_width="@dimen/semaphore_icon_size"
                 android:layout_height="@dimen/semaphore_icon_size"
-                android:layout_centerHorizontal="true"
                 android:src="@drawable/ic_semaphore" />
 
             <TextView
                 android:id="@+id/activity_parent_semaphore_status_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingTop="@dimen/padding"
-                android:layout_below="@+id/activity_parent_semaphore_img"
+                android:layout_toRightOf="@id/activity_parent_semaphore_img"
                 android:text="@string/semaphore_green_status_name"
-                android:textAlignment="center"
                 android:textSize="@dimen/txt_title_text_size"
-                android:textStyle="bold"/>
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/activity_parent_semaphore_msg_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_toRightOf="@id/activity_parent_semaphore_img"
                 android:layout_below="@+id/activity_parent_semaphore_status_txt"
                 android:text="@string/semaphore_green_status_msg"
                 android:textSize="@dimen/txt_subtitle_text_size"
-                android:textStyle="normal"/>
+                android:textStyle="normal" />
 
         </RelativeLayout>
 
