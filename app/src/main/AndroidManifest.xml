@@ -35,19 +35,24 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".parent.ParentHomeworks"
-            android:label="@string/layout_parent_homeworks_name" />
+            android:label="@string/layout_parent_homeworks_name"
+            android:parentActivityName=".parent.ParentDashboard"/>
         <activity
             android:name=".parent.ParentGrades"
-            android:label="@string/layout_parent_grades_name" />
+            android:label="@string/layout_parent_grades_name"
+            android:parentActivityName=".parent.ParentDashboard"/>
         <activity
             android:name=".parent.ParentStudents"
-            android:label="@string/layout_parent_students_name" />
+            android:label="@string/layout_parent_students_name"
+            android:parentActivityName=".parent.ParentDashboard"/>
         <activity
             android:name=".parent.ParentActivities"
-            android:label="@string/layout_parent_activities_name" />
+            android:label="@string/layout_parent_activities_name"
+            android:parentActivityName=".parent.ParentDashboard"/>
         <activity
             android:name=".parent.ParentSemaphore"
-            android:label="@string/layout_parent_semaphore_name" />
+            android:label="@string/layout_parent_semaphore_name"
+            android:parentActivityName=".parent.ParentDashboard"/>
         <activity
             android:name=".teacher.TeacherDashboard"
             android:label="@string/layout_teacher_dashboard_name" />
