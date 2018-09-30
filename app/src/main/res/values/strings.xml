@@ -30,7 +30,7 @@
     <string name="etxt_lastname">Apellidos</string>
     <string name="etxt_email">Correo electrónico</string>
 
-    <string name="txt_signin_msg">Bienvenido a Working Together</string>
+    <string name="txt_signin_msg">Bienvenido a Working Together. ¡Si tienes una cuenta con nosotros, ingresa tus datos para comenzar!</string>
     <string name="txt_signup_msg">Ingresa tus datos</string>
     <string name="txt_no_account_msg">¿Aun no tienes cuenta? Crea una gratis</string>
 

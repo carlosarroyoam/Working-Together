@@ -20,6 +20,7 @@
         </activity>
         <activity
             android:name=".Signin"
+            android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signin_name"
             android:windowSoftInputMode="adjustNothing" />
@@ -28,7 +29,6 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signup_name"
             android:parentActivityName=".Signin" />
-        <activity android:name=".NotificationsTray" />
         <activity
             android:name=".parent.ParentDashboard"
             android:configChanges="keyboardHidden|orientation|screenSize"

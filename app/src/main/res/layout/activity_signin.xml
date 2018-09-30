@@ -10,105 +10,140 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:padding="@dimen/padding"
-        tools:context=".Signin">
+        android:background="@color/colorPrimary"
+        tools:context=".Signin" >
 
-        <ImageView
-            android:id="@+id/image"
-            android:layout_width="@dimen/squared_app_icon_size"
-            android:layout_height="@dimen/squared_app_icon_size"
-            android:layout_centerHorizontal="true"
+        <android.support.v7.widget.CardView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin"
-            app:srcCompat="@drawable/ic_activities" />
-
-        <TextView
-            android:id="@+id/textview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/image"
-            android:text="@string/txt_signin_msg"
-            android:textAlignment="center"
-            android:textSize="@dimen/txt_subtitle_text_size" />
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/activity_signin_user_etxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/textview"
-            android:layout_marginTop="@dimen/margin">
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/etxt_user"
-                android:imeOptions="flagNoExtractUi"
-                android:inputType="textEmailAddress"
-                android:textSize="@dimen/etxt_text_size" />
-
-            <!--android:paddingRight="@dimen/padding"
-            android:drawableRight="@drawable/ic_email_24dp"
-            android:drawableTint="@color/colorAccent"-->
-
-        </android.support.design.widget.TextInputLayout>
-
-        <android.support.design.widget.TextInputLayout
-            android:id="@+id/activity_signin_pass_etxt"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/activity_signin_user_etxt"
-            app:passwordToggleEnabled="true" >
-
-            <EditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="@string/etxt_password"
-                android:imeOptions="flagNoExtractUi"
-                android:inputType="textPassword"
-                android:textSize="@dimen/etxt_text_size" />
-
-        </android.support.design.widget.TextInputLayout>
-
-        <Button
-            android:id="@+id/activity_signin_signin_btn"
-            android:layout_width="@dimen/btn_width"
-            android:layout_height="@dimen/btn_height"
-            android:layout_below="@+id/activity_signin_pass_etxt"
-            android:layout_centerHorizontal="true"
-            android:layout_marginTop="@dimen/margin"
-            android:background="@drawable/positive_button_shape"
-            android:onClick="signin"
-            android:text="@string/btn_signin"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            android:textSize="@dimen/btn_text_size" />
-
-        <TextView
-            android:id="@+id/activity_signin_forgot_password_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/activity_signin_signin_btn"
-            android:layout_marginTop="@dimen/half_margin"
-            android:onClick="forgotPassword"
-            android:text="@string/btn_forgot_password"
-            android:textAlignment="center"
-            android:textSize="@dimen/btn_text_size" />
-
-        <TextView
-            android:id="@+id/activity_signin_signup_btn"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:onClick="signup"
             android:padding="@dimen/padding"
-            android:text="@string/txt_no_account_msg"
-            android:textAlignment="center"
-            android:textSize="@dimen/txt_text_size" />
+            android:layout_centerHorizontal="true"
+            app:cardCornerRadius="8dp"
+            app:cardElevation="8dp">
 
-        <Space
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/activity_signin_forgot_password_btn"
-            android:layout_margin="@dimen/double_margin" />
+            <RelativeLayout
+                xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                xmlns:tools="http://schemas.android.com/tools"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="@dimen/padding" >
+
+                <TextView
+                    android:id="@+id/title_txt"
+                    android:layout_width="@dimen/txt_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/half_margin"
+                    android:text="@string/layout_signin_name"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/txt_title_text_size" />
+
+                <ImageView
+                    android:id="@+id/image"
+                    android:layout_width="@dimen/squared_app_icon_size"
+                    android:layout_height="@dimen/squared_app_icon_size"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/title_txt"
+                    android:layout_margin="@dimen/margin"
+                    app:srcCompat="@drawable/ic_activities" />
+
+                <TextView
+                    android:id="@+id/textview"
+                    android:layout_width="@dimen/txt_width"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/half_margin"
+                    android:layout_below="@+id/image"
+                    android:text="@string/txt_signin_msg"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/txt_text_size" />
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/activity_signin_user_etxt"
+                    android:layout_width="@dimen/etxt_width"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/margin"
+                    android:layout_below="@+id/textview"
+                    android:layout_centerHorizontal="true">
+
+                    <EditText
+                        android:layout_width="@dimen/etxt_width"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/etxt_user"
+                        android:imeOptions="flagNoExtractUi"
+                        android:inputType="textEmailAddress"
+                        android:textSize="@dimen/etxt_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <android.support.design.widget.TextInputLayout
+                    android:id="@+id/activity_signin_pass_etxt"
+                    android:layout_width="@dimen/etxt_width"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/activity_signin_user_etxt"
+                    android:layout_centerHorizontal="true"
+                    app:passwordToggleEnabled="true">
+
+                    <EditText
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:hint="@string/etxt_password"
+                        android:imeOptions="flagNoExtractUi"
+                        android:inputType="textPassword"
+                        android:textSize="@dimen/etxt_text_size" />
+
+                </android.support.design.widget.TextInputLayout>
+
+                <Button
+                    android:id="@+id/activity_signin_signin_btn"
+                    android:layout_width="@dimen/btn_width"
+                    android:layout_height="@dimen/btn_height"
+                    android:layout_below="@+id/activity_signin_pass_etxt"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin"
+                    android:background="@drawable/positive_button_shape"
+                    android:onClick="signin"
+                    android:text="@string/btn_signin"
+                    android:textAllCaps="false"
+                    android:textColor="@color/white"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <TextView
+                    android:id="@+id/activity_signin_forgot_password_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@+id/activity_signin_signin_btn"
+                    android:layout_marginTop="@dimen/half_margin"
+                    android:onClick="forgotPassword"
+                    android:text="@string/btn_forgot_password"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/btn_text_size" />
+
+                <TextView
+                    android:id="@+id/activity_signin_signup_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_alignParentBottom="true"
+                    android:onClick="signup"
+                    android:padding="@dimen/padding"
+                    android:text="@string/txt_no_account_msg"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/txt_text_size" />
+
+                <Space
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_below="@id/activity_signin_forgot_password_btn"
+                    android:layout_margin="@dimen/double_margin" />
+
+            </RelativeLayout>
+
+        </android.support.v7.widget.CardView>
 
     </RelativeLayout>
 
