@@ -24,8 +24,6 @@ public class Signin extends AppCompatActivity {
         String user = userWrapper.getEditText().getText().toString();
         String password = passwordWrapper.getEditText().getText().toString();
 
-        Toast.makeText(this, "Hola " + user + " pass: " + password, Toast.LENGTH_SHORT).show();
-
         startActivity(new Intent(this, ParentDashboard.class));
         finish();
     }
