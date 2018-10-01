@@ -149,11 +149,11 @@ public class ParentDashboard extends AppCompatActivity implements NavigationView
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.menu_seccion_1:
-                Toast.makeText(this, "Menu 1 Seccion 1", Toast.LENGTH_SHORT).show();
+            case R.id.menu_dashboard_support:
+                Toast.makeText(this, "Necesitas ayuda?", Toast.LENGTH_SHORT).show();
                 break;
-            case R.id.menu_seccion_4:
-                Toast.makeText(this, "Menu 2 Seccion 4", Toast.LENGTH_SHORT).show();
+            case R.id.menu_dashboard_about:
+                Toast.makeText(this, "Working Together", Toast.LENGTH_SHORT).show();
                 break;
         }
         return true;
