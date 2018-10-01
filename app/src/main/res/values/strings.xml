@@ -21,6 +21,8 @@
     <string name="btn_signin">Iniciar sesión</string>
     <string name="btn_signup">Crear cuenta</string>
     <string name="btn_forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="btn_parent_account">Soy un Familiar</string>
+    <string name="btn_teacher_account">Soy un Profesor</string>
 
     <string name="etxt_user">Correo electrónico</string>
     <string name="etxt_password">Contraseña</string>
@@ -31,7 +33,7 @@
     <string name="etxt_email">Correo electrónico</string>
 
     <string name="txt_signin_msg">Bienvenido a Working Together. ¡Si tienes una cuenta con nosotros, ingresa tus datos para comenzar!</string>
-    <string name="txt_signup_msg">Ingresa tus datos</string>
+    <string name="txt_signup_msg">Crea tu cuenta gratuita</string>
     <string name="txt_no_account_msg">¿Aun no tienes cuenta? Crea una gratis</string>
 
     <string name="semaphore_red_status_name">Rojo</string>

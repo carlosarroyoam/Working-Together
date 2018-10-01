@@ -2,15 +2,15 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <group android:checkableBehavior="single">
+    <group android:checkableBehavior="none">
         <item
-            android:id="@+id/menu_dashboard_1"
-            android:icon="@drawable/ic_activities"
-            android:title="seccion_1" />
-        <item
-            android:id="@+id/menu_dashboard_2"
+            android:id="@+id/menu_dashboard_about"
             android:icon="@drawable/ic_semaphore"
-            android:title="seccion_2" />
+            android:title="Acerca de Working Together" />
+        <item
+            android:id="@+id/menu_dashboard_support"
+            android:icon="@drawable/ic_activities"
+            android:title="Soporte técnico"/>
         <item
             android:id="@+id/menu_dashboard_notifications"
             android:icon="@drawable/ic_notification"

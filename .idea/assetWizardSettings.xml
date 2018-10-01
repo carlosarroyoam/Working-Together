@@ -14,8 +14,8 @@
                         <option name="values">
                           <map>
                             <entry key="assetSourceType" value="FILE" />
-                            <entry key="outputName" value="ic_teachers" />
-                            <entry key="sourceFile" value="C:\Users\Carlos\AndroidStudioProjects\Working Together\app\src\main\res\drawable\SVG\teachers.svg" />
+                            <entry key="outputName" value="ic_parents" />
+                            <entry key="sourceFile" value="C:\Users\Carlos\AndroidStudioProjects\Working Together\app\src\main\res\drawable\SVG\parents.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -3,22 +3,44 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimaryDark">
+    android:background="@color/colorPrimary">
 
-    <ImageView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:src="@drawable/ic_homeworks"
-        android:scaleType="centerCrop" />
-
-    <TextView
-        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="usuario"
-        android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-        android:textStyle="bold"
-        android:layout_gravity="bottom"
-        android:layout_marginBottom="10dp"
-        android:layout_marginLeft="10dp" />
+        android:layout_margin="@dimen/half_margin">
+
+        <ImageView
+            android:layout_width="@dimen/drawer_squared_icon_size"
+            android:layout_height="@dimen/drawer_squared_icon_size"
+            android:scaleType="centerCrop"
+            android:src="@drawable/ic_student" />
+
+        <TextView
+            android:id="@+id/nav_drawer_user_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:text="usuario"
+            android:textSize="@dimen/txt_title_text_size"
+            android:textStyle="bold"
+            android:textAlignment="viewEnd" />
+
+        <TextView
+            android:id="@+id/nav_drawer_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/nav_drawer_user_name"
+            android:layout_marginBottom="10dp"
+            android:layout_marginLeft="10dp"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:text="usuario@gmail.com"
+            android:textSize="@dimen/txt_text_size"
+            android:textAlignment="viewEnd"
+            android:textStyle="bold" />
+
+    </RelativeLayout>
+
 
 </FrameLayout>
