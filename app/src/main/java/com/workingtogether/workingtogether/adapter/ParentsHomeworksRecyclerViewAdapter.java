@@ -36,7 +36,7 @@ public class ParentsHomeworksRecyclerViewAdapter extends RecyclerView.Adapter<Pa
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.activities_cardview_item_homework_title);
+            mTextView = itemView.findViewById(R.id.homeworks_cardview_item_homework_title);
         }
     }
 }

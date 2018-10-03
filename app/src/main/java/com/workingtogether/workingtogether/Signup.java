@@ -48,7 +48,7 @@ public class Signup extends AppCompatActivity {
     @Override
     public void onBackPressed() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Aun no creamos tu cuenta.");
+        alertDialogBuilder.setTitle("Aun no creamos tu cuenta");
         alertDialogBuilder
                 .setMessage("¿Estas seguro que quieres cancelar?")
                 .setCancelable(false)

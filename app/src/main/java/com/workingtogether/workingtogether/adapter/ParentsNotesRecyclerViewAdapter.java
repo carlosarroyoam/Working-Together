@@ -10,17 +10,17 @@ import com.workingtogether.workingtogether.R;
 
 import java.text.DecimalFormat;
 
-public class ParentsGradesRecyclerViewAdapter extends RecyclerView.Adapter<ParentsGradesRecyclerViewAdapter.ViewHolder> {
-    private String[] mGradesDataset;
+public class ParentsNotesRecyclerViewAdapter extends RecyclerView.Adapter<ParentsNotesRecyclerViewAdapter.ViewHolder> {
+    private String[] mNotesDataset;
 
-    public ParentsGradesRecyclerViewAdapter() {
+    public ParentsNotesRecyclerViewAdapter() {
         String[] fromDBDataset = {"Espanol", "Matematicas", "Geografia"};//Cargar desde db
-        mGradesDataset = fromDBDataset;
+        mNotesDataset = fromDBDataset;
     }
 
     @Override
-    public ParentsGradesRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_parent_grades_cardview_item, parent, false);
+    public ParentsNotesRecyclerViewAdapter.ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_parent_notes_cardview_item, parent, false);
         return new ViewHolder(view);
     }
 
@@ -29,23 +29,23 @@ public class ParentsGradesRecyclerViewAdapter extends RecyclerView.Adapter<Paren
         DecimalFormat gradeDecimalFormat = new DecimalFormat("##.#");
         Double grade = Math.random() * 10;
 
-        holder.mSubjectName.setText(mGradesDataset[position]);
-        holder.mGrade.setText(gradeDecimalFormat.format(grade) + "");
+        holder.mSubjectName.setText(mNotesDataset[position]);
+        holder.mNote.setText(gradeDecimalFormat.format(grade) + "");
     }
 
     @Override
     public int getItemCount() {
-        return mGradesDataset.length;
+        return mNotesDataset.length;
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mSubjectName;
-        private TextView mGrade;
+        private TextView mNote;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mSubjectName = itemView.findViewById(R.id.activities_cardview_item_activity_subject);
-            mGrade = itemView.findViewById(R.id.activities_cardview_item_activity_grade);
+            mSubjectName = itemView.findViewById(R.id.notes_cardview_item_activity_subject);
+            mNote = itemView.findViewById(R.id.notes_cardview_item_activity_note);
         }
     }
 }

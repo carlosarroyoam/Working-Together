@@ -6,8 +6,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <android.support.v7.widget.CardView
-        android:layout_width="@dimen/grades_squared_grade_cardview_size"
-        android:layout_height="@dimen/grades_squared_grade_cardview_size"
+        android:layout_width="@dimen/notes_squared_notes_cardview_size"
+        android:layout_height="@dimen/notes_squared_notes_cardview_size"
         android:layout_columnWeight="1"
         android:layout_margin="@dimen/half_margin"
         android:layout_rowWeight="0"
@@ -21,7 +21,7 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/activities_cardview_item_activity_subject"
+                android:id="@+id/notes_cardview_item_activity_subject"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -29,11 +29,11 @@
                 android:text="Materia"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/txt_text_size"
+                android:textSize="@dimen/txt_title_text_size"
                 android:textStyle="bold" />
 
             <TextView
-                android:id="@+id/activities_cardview_item_activity_grade"
+                android:id="@+id/notes_cardview_item_activity_note"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
@@ -41,7 +41,7 @@
                 android:text="8.8"
                 android:textAlignment="center"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/txt_text_size"
+                android:textSize="@dimen/txt_subtitle_text_size"
                 android:textStyle="bold" />
 
         </LinearLayout>

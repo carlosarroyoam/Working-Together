@@ -1,14 +1,20 @@
 package com.workingtogether.workingtogether;
 
+import android.content.DialogInterface;
 import android.content.Intent;
-import android.content.res.Configuration;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.design.widget.TextInputLayout;
+import android.support.v7.app.AlertDialog;
+import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import com.workingtogether.workingtogether.db.SessionDB;
+import com.workingtogether.workingtogether.db.UserDB;
+import com.workingtogether.workingtogether.obj.User;
 import com.workingtogether.workingtogether.parent.ParentDashboard;
+import com.workingtogether.workingtogether.teacher.TeacherDashboard;
+import com.workingtogether.workingtogether.util.LocalParams;
 
 public class Signin extends AppCompatActivity {
 
@@ -18,22 +24,61 @@ public class Signin extends AppCompatActivity {
         setContentView(R.layout.activity_signin);
     }
 
-    public void signin(View view){
+    public void signin(View view) {
         final TextInputLayout userWrapper = findViewById(R.id.activity_signin_user_etxt);
         final TextInputLayout passwordWrapper = findViewById(R.id.activity_signin_pass_etxt);
 
-        String user = userWrapper.getEditText().getText().toString();
+        String email = userWrapper.getEditText().getText().toString();
         String password = passwordWrapper.getEditText().getText().toString();
 
-        startActivity(new Intent(this, ParentDashboard.class));
-        finish();
+        UserDB userDB = new UserDB(this);
+
+        if (userDB.verifyLogin(email, password)) {
+            User user = userDB.getUserDetails(email);
+
+            if (user.getUSERTYPE().equals(LocalParams.PARENTUSER)) {
+                addSession(user.getUIDUSER(), user.getUSERTYPE());
+                startActivity(new Intent(this, ParentDashboard.class));
+                finish();
+            } else if (user.getUSERTYPE().equals(LocalParams.TEACHERUSER)) {
+                addSession(user.getUIDUSER(), user.getUSERTYPE());
+                startActivity(new Intent(this, TeacherDashboard.class));
+                finish();
+            } else {
+                //TODO handle USERTYPE error
+            }
+        } else {
+            String dialogMessage = "Contraseña o usuario incorrecto"; //TODO comprobar si usuario o contrasena son incorrectos
+            incorrectLoginDialog(dialogMessage);
+        }
     }
 
-    public void forgotPassword(View view){
+    private void addSession(int UIDUSER, String TYPEUSER) {
+        SessionDB sessionDB = new SessionDB(this);
+        sessionDB.addSession(UIDUSER, TYPEUSER);
+    }
+
+    private void incorrectLoginDialog(String dialogMessage) {
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
+        alertDialogBuilder.setTitle("Working Together");
+        alertDialogBuilder
+                .setMessage(dialogMessage)
+                .setCancelable(false)
+                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        dialog.dismiss();
+                    }
+                });
+
+        AlertDialog alertDialog = alertDialogBuilder.create();
+        alertDialog.show();
+    }
+
+    public void forgotPassword(View view) {
         Toast.makeText(this, "Olvidaste tu contrasena?", Toast.LENGTH_SHORT).show();
     }
 
-    public void signup(View view){
+    public void signup(View view) {
         startActivity(new Intent(this, Signup.class));
         finish();
     }

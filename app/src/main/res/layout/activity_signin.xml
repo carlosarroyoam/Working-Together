@@ -40,7 +40,8 @@
                     android:layout_margin="@dimen/half_margin"
                     android:text="@string/layout_signin_name"
                     android:textAlignment="center"
-                    android:textSize="@dimen/txt_title_text_size" />
+                    android:textSize="@dimen/txt_title_text_size"
+                    android:textStyle="bold"/>
 
                 <ImageView
                     android:id="@+id/image"

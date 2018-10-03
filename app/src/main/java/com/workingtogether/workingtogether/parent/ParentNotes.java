@@ -5,10 +5,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.adapter.ParentsActivitiesRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.ParentsGradesRecyclerViewAdapter;
+import com.workingtogether.workingtogether.adapter.ParentsNotesRecyclerViewAdapter;
 
-public class ParentGrades extends AppCompatActivity {
+public class ParentNotes extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -16,15 +15,15 @@ public class ParentGrades extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_parent_grades);
+        setContentView(R.layout.activity_parent_notes);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        mRecyclerView = findViewById(R.id.recycler_view_grades);
+        mRecyclerView = findViewById(R.id.recycler_view_notes);
         mRecyclerView.setHasFixedSize(true);
         mLayoutManager = new GridLayoutManager(this, 3);
         mRecyclerView.setLayoutManager(mLayoutManager);
-        mAdapter = new ParentsGradesRecyclerViewAdapter();
+        mAdapter = new ParentsNotesRecyclerViewAdapter();
         mRecyclerView.setAdapter(mAdapter);
     }
 

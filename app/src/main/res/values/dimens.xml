@@ -2,8 +2,9 @@
 <resources>
 
     <dimen name="dashboard_squared_icon_size">130dp</dimen>
-    <dimen name="grades_squared_grade_cardview_size">130dp</dimen>
-    <dimen name="drawer_squared_icon_size">130dp</dimen>
+    <dimen name="notes_squared_notes_cardview_size">130dp</dimen>
+    <dimen name="homeworks_squared_icon_size">90dp</dimen>
+    <dimen name="drawer_squared_icon_size">140dp</dimen>
     <dimen name="squared_app_icon_size">140dp</dimen>
     <dimen name="semaphore_icon_size">240dp</dimen>
 
