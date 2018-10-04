@@ -19,22 +19,6 @@ public class SessionDB {
         mDatabase = sqLiteOpenHelper.getWritableDatabase();
     }
 
-    /*public List<Product> getListProduct() {
-        Product product = null;
-        List<Product> productList = new ArrayList<>();
-        openDatabase();
-        Cursor cursor = mDatabase.rawQuery("SELECT * FROM PRODUCT", null);
-        cursor.moveToFirst();
-        while (!cursor.isAfterLast()) {
-            product = new Product(cursor.getInt(0), cursor.getString(1), cursor.getInt(2), cursor.getString(3));
-            productList.add(product);
-            cursor.moveToNext();
-        }
-        cursor.close();
-        closeDatabase();
-        return productList;
-    }
-*/
     public boolean isUserlogged() {
         sqLiteOpenHelper.openDatabase();
         String[] selectArgs = {Integer.toString(1)};
@@ -96,6 +80,5 @@ public class SessionDB {
         mDatabase.update("SESSION", contentValues, "SESSTATE = ?", whereArgs);
         sqLiteOpenHelper.closeDatabase();
     }
-
 
 }

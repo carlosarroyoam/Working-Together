@@ -23,52 +23,68 @@
         </activity>
         <activity
             android:name=".Signin"
+            android:label="@string/layout_signin_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/layout_signin_name"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Signup"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signup_name"
-            android:parentActivityName=".Signin" />
+            android:parentActivityName=".Signin"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Dashboard"
-            android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/layout_dashboard_name"/>
+            android:label="@string/layout_dashboard_name"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".parent.ParentHomeworks"
             android:label="@string/layout_parent_homeworks_name"
-            android:parentActivityName=".Dashboard"/>
+            android:parentActivityName=".Dashboard" />
         <activity
             android:name=".parent.ParentNotes"
             android:label="@string/layout_parent_notes_name"
-            android:parentActivityName=".Dashboard"/>
+            android:parentActivityName=".Dashboard" />
         <activity
             android:name=".parent.ParentStudents"
             android:label="@string/layout_parent_students_name"
-            android:parentActivityName=".Dashboard"/>
+            android:parentActivityName=".Dashboard" />
         <activity
             android:name=".parent.ParentActivities"
             android:label="@string/layout_parent_activities_name"
-            android:parentActivityName=".Dashboard"/>
+            android:parentActivityName=".Dashboard" />
         <activity
             android:name=".parent.ParentSemaphore"
             android:label="@string/layout_parent_semaphore_name"
-            android:parentActivityName=".Dashboard"/>
+            android:parentActivityName=".Dashboard" />
         <activity
             android:name=".teacher.TeacherHomeworks"
             android:label="@string/layout_teacher_homeworks_name"
-            android:parentActivityName=".Dashboard"/>
+            android:parentActivityName=".Dashboard"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".teacher.TeacherStudents"
             android:label="@string/layout_teacher_students_name"
-            android:parentActivityName=".Dashboard"/>
+            android:parentActivityName=".Dashboard" />
         <activity
             android:name=".teacher.TeacherActivities"
             android:label="@string/layout_teacher_activities_name"
-            android:parentActivityName=".Dashboard"/>
+            android:parentActivityName=".Dashboard"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:windowSoftInputMode="adjustNothing" />
+        <service android:name=".firebase.FirebaseInstanceServiceId">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name=".firebase.FirebaseMessagingService">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
     </application>
+
 
 </manifest>

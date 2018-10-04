@@ -27,20 +27,29 @@ public class Signin extends AppCompatActivity {
 
         String email = userWrapper.getEditText().getText().toString();
         String password = passwordWrapper.getEditText().getText().toString();
+        String dialogMessage = "";
 
-        UserDB userDB = new UserDB(this);
+        if (!email.trim().equals("")) {
+            if (!password.trim().equals("")) {
+                UserDB userDB = new UserDB(this);
+                if (userDB.verifyLogin(email, password)) {
+                    User user = userDB.getUserDetails(email);
+                    addSession(user.getUIDUSER(), user.getUSERTYPE());
+                    startActivity(new Intent(this, Dashboard.class));
+                    finish();
 
-        if (userDB.verifyLogin(email, password)) {
-            User user = userDB.getUserDetails(email);
-            addSession(user.getUIDUSER(), user.getUSERTYPE());
-            startActivity(new Intent(this, Dashboard.class));
-            finish();
-
+                } else {
+                    dialogMessage = "Contraseña o usuario incorrecto";
+                    incorrectLoginDialog(dialogMessage);
+                }
+            } else {
+                dialogMessage = "Ingresa tu contraseña";
+                incorrectLoginDialog(dialogMessage);
+            }
         } else {
-            String dialogMessage = "Contraseña o usuario incorrecto"; //TODO comprobar si usuario o contrasena son incorrectos
+            dialogMessage = "Ingresa tu correo electrónico";
             incorrectLoginDialog(dialogMessage);
         }
-
     }
 
     private void addSession(int UIDUSER, String TYPEUSER) {
