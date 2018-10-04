@@ -16,12 +16,12 @@ public class UserDB {
 
     public UserDB(Context context) {
         sqLiteOpenHelper = new SQLiteOpenHelper(context);
+        mDatabase = sqLiteOpenHelper.getWritableDatabase();
     }
 
     public User getUserDetails(String mail) {
         User user = new User();
         sqLiteOpenHelper.openDatabase();
-        mDatabase = sqLiteOpenHelper.getWritableDatabase();
         String[] selectArgs = {mail, mail}; // para buscar en las dos tablas repetimos el parametro
         StringBuilder query = new StringBuilder("SELECT UIDTEACHER, NAME, LASTNAME, EMAIL, UIDTYPEUSER FROM TEACHERS" +
                 " WHERE EMAIL = ?" +
@@ -43,7 +43,6 @@ public class UserDB {
 
     public boolean verifyLogin(String mail, String password) {
         sqLiteOpenHelper.openDatabase();
-        mDatabase = sqLiteOpenHelper.getWritableDatabase();
         String[] selectArgs = {mail, password, mail, password}; //se repiten parametros para poder buscar en dos tablas
         StringBuilder query = new StringBuilder("SELECT * FROM TEACHERS" +
                 " WHERE EMAIL = ? AND PASSWORD = ?" +

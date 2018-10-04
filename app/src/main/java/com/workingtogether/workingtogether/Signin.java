@@ -12,9 +12,6 @@ import android.widget.Toast;
 import com.workingtogether.workingtogether.db.SessionDB;
 import com.workingtogether.workingtogether.db.UserDB;
 import com.workingtogether.workingtogether.obj.User;
-import com.workingtogether.workingtogether.parent.ParentDashboard;
-import com.workingtogether.workingtogether.teacher.TeacherDashboard;
-import com.workingtogether.workingtogether.util.LocalParams;
 
 public class Signin extends AppCompatActivity {
 
@@ -35,22 +32,15 @@ public class Signin extends AppCompatActivity {
 
         if (userDB.verifyLogin(email, password)) {
             User user = userDB.getUserDetails(email);
+            addSession(user.getUIDUSER(), user.getUSERTYPE());
+            startActivity(new Intent(this, Dashboard.class));
+            finish();
 
-            if (user.getUSERTYPE().equals(LocalParams.PARENTUSER)) {
-                addSession(user.getUIDUSER(), user.getUSERTYPE());
-                startActivity(new Intent(this, ParentDashboard.class));
-                finish();
-            } else if (user.getUSERTYPE().equals(LocalParams.TEACHERUSER)) {
-                addSession(user.getUIDUSER(), user.getUSERTYPE());
-                startActivity(new Intent(this, TeacherDashboard.class));
-                finish();
-            } else {
-                //TODO handle USERTYPE error
-            }
         } else {
             String dialogMessage = "Contraseña o usuario incorrecto"; //TODO comprobar si usuario o contrasena son incorrectos
             incorrectLoginDialog(dialogMessage);
         }
+
     }
 
     private void addSession(int UIDUSER, String TYPEUSER) {

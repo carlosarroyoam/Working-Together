@@ -5,14 +5,13 @@
     <!-- Spanish -->
     <string name="layout_signin_name">Iniciar sesión</string>
     <string name="layout_signup_name">Registro</string>
+    <string name="layout_dashboard_name">Tablero</string>
     <string name="layout_notifications_tray_name">Notificaciones</string>
-    <string name="layout_parent_dashboard_name">Tablero</string>
     <string name="layout_parent_students_name">Estudiantes</string>
     <string name="layout_parent_homeworks_name">Tareas</string>
     <string name="layout_parent_activities_name">Actividades</string>
     <string name="layout_parent_notes_name">Calificaciones</string>
     <string name="layout_parent_semaphore_name">Semáforo</string>
-    <string name="layout_teacher_dashboard_name">Tablero</string>
     <string name="layout_teacher_students_name">Estudiantes</string>
     <string name="layout_teacher_homeworks_name">Agregar Tarea</string>
     <string name="layout_teacher_activities_name">Agregar actividad</string>

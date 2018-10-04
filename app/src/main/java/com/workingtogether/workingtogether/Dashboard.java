@@ -1,47 +1,81 @@
-package com.workingtogether.workingtogether.teacher;
+package com.workingtogether.workingtogether;
 
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
+import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewStub;
+import android.widget.ImageView;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.Signin;
+import com.workingtogether.workingtogether.db.ParentDB;
 import com.workingtogether.workingtogether.db.SessionDB;
+import com.workingtogether.workingtogether.db.TeacherDB;
+import com.workingtogether.workingtogether.db.UserDB;
+import com.workingtogether.workingtogether.obj.Parent;
 import com.workingtogether.workingtogether.obj.SessionApp;
+import com.workingtogether.workingtogether.obj.Teacher;
+import com.workingtogether.workingtogether.obj.User;
 import com.workingtogether.workingtogether.parent.ParentActivities;
 import com.workingtogether.workingtogether.parent.ParentHomeworks;
+import com.workingtogether.workingtogether.parent.ParentNotes;
+import com.workingtogether.workingtogether.parent.ParentSemaphore;
+import com.workingtogether.workingtogether.teacher.TeacherActivities;
+import com.workingtogether.workingtogether.teacher.TeacherHomeworks;
+import com.workingtogether.workingtogether.util.LocalParams;
 
-public class TeacherDashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private DrawerLayout nav_drawer;
     private ActionBarDrawerToggle nav_drawer_toggle;
     private View nav_drawer_view;
     private View notification_drawer_view;
+    NavigationView navigation_nav_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_teacher_dashboard);
+        setContentView(R.layout.activity_dashboard);
+        setDashboardLayout();
 
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setTitle(R.string.layout_teacher_dashboard_name);
+        getSupportActionBar().setTitle(R.string.layout_dashboard_name);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
+        /*
 
+        One navigation drawer example
+
+        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_email_24dp);
+        nav_drawer = findViewById(R.id.nav_drawer_layout);
+        nav_drawer_toggle = new ActionBarDrawerToggle(this, nav_drawer, toolbar, R.string.app_name, R.string.app_name);
+        nav_drawer.addDrawerListener(nav_drawer_toggle);
+        NavigationView navigation_nav_view = findViewById(R.id.nav_drawer_view);
+        navigation_nav_view.setNavigationItemSelectedListener(this);
+
+        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (nav_drawer.isDrawerOpen(Gravity.RIGHT)) {
+                    nav_drawer.closeDrawer(Gravity.RIGHT);
+                } else {
+                    nav_drawer.openDrawer(Gravity.RIGHT);
+                }
+            }
+        });*/
     }
 
     @Override
@@ -81,10 +115,11 @@ public class TeacherDashboard extends AppCompatActivity implements NavigationVie
             };
 
             nav_drawer.addDrawerListener(nav_drawer_toggle); // Set the drawer toggle as the DrawerListener
-            NavigationView navigation_nav_view = findViewById(R.id.nav_drawer_view);
+            navigation_nav_view = findViewById(R.id.nav_drawer_view);
             NavigationView notification_nav_view = findViewById(R.id.notification_drawer_view);
             navigation_nav_view.setNavigationItemSelectedListener(this); // Set navigation drawer on itemClickListener
             notification_nav_view.setNavigationItemSelectedListener(this); // Set navigation drawer on itemClickListener
+            loadUserInfo(); // Load user info into nav drawer
         }
     }
 
@@ -160,6 +195,42 @@ public class TeacherDashboard extends AppCompatActivity implements NavigationVie
         }
     }
 
+    private void loadUserInfo() {
+        SessionDB sessionDB = new SessionDB(this);
+        SessionApp sessionApp = sessionDB.getUserlogged();
+
+        if (sessionApp.getTYPEUSER().equals(LocalParams.PARENTUSER)){
+            ParentDB parentDB = new ParentDB(this);
+            Parent parentInfo = parentDB.getParentById(sessionApp.getUIDUSER());
+            setNavDrawerInfo(parentInfo.getNAME() + " " + parentInfo.getLASTNAME(), parentInfo.getEMAIL());
+        }else if (sessionApp.getTYPEUSER().equals(LocalParams.TEACHERUSER)){
+            TeacherDB teacherDB = new TeacherDB(this);
+            Teacher teacherInfo = teacherDB.getTeacherById(sessionApp.getUIDUSER());
+            setNavDrawerInfo(teacherInfo.getNAME() + " " + teacherInfo.getLASTNAME(), teacherInfo.getEMAIL());
+        }
+    }
+
+    private void setNavDrawerInfo(String userName, String mail){
+        View navView =  navigation_nav_view.getHeaderView(0);
+        ImageView nav_picture = navView.findViewById(R.id.nav_drawer_user_picture);
+
+        TextView nav_user = navView.findViewById(R.id.nav_drawer_user_name);
+        nav_user.setText(userName);
+        TextView nav_mail = navView.findViewById(R.id.nav_drawer_email);
+        nav_mail.setText(mail);
+    }
+
+    private void setDashboardLayout() {
+        SessionDB sessionDB = new SessionDB(this);
+        SessionApp sessionApp = sessionDB.getUserlogged();
+        ViewStub stub = findViewById(R.id.dashboard_layout_loader);
+        if (sessionApp.getTYPEUSER().equals(LocalParams.PARENTUSER))
+            stub.setLayoutResource(R.layout.activity_dashboard_parent_content);
+        if (sessionApp.getTYPEUSER().equals(LocalParams.TEACHERUSER))
+            stub.setLayoutResource(R.layout.activity_dashboard_teacher_content);
+        stub.inflate();
+    }
+
     public void showLogOffDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Estas por salir de Working Together");
@@ -189,11 +260,26 @@ public class TeacherDashboard extends AppCompatActivity implements NavigationVie
     }
 
     public void homeworksActivity(View view) {
-        startActivity(new Intent(this, TeacherHomeworks.class));
+        startActivity(new Intent(this, ParentHomeworks.class));
+    }
+
+    public void semaphoreActivity(View view) {
+        startActivity(new Intent(this, ParentSemaphore.class));
     }
 
     public void activitiesActivity(View view) {
-        startActivity(new Intent(this, TeacherActivities.class));
+        startActivity(new Intent(this, ParentActivities.class));
     }
 
+    public void notesActivity(View view) {
+        startActivity(new Intent(this, ParentNotes.class));
+    }
+
+    public void addHomeworksActivity(View view) {
+        startActivity(new Intent(this, TeacherHomeworks.class));
+    }
+
+    public void addActivitiesActivity(View view) {
+        startActivity(new Intent(this, TeacherActivities.class));
+    }
 }

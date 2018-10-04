@@ -33,42 +33,42 @@
             android:label="@string/layout_signup_name"
             android:parentActivityName=".Signin" />
         <activity
-            android:name=".parent.ParentDashboard"
+            android:name=".Dashboard"
+            android:theme="@style/AppTheme.NoActionBar"
             android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:label="@string/layout_dashboard_name"/>
         <activity
             android:name=".parent.ParentHomeworks"
             android:label="@string/layout_parent_homeworks_name"
-            android:parentActivityName=".parent.ParentDashboard"/>
+            android:parentActivityName=".Dashboard"/>
         <activity
             android:name=".parent.ParentNotes"
             android:label="@string/layout_parent_notes_name"
-            android:parentActivityName=".parent.ParentDashboard"/>
+            android:parentActivityName=".Dashboard"/>
         <activity
             android:name=".parent.ParentStudents"
             android:label="@string/layout_parent_students_name"
-            android:parentActivityName=".parent.ParentDashboard"/>
+            android:parentActivityName=".Dashboard"/>
         <activity
             android:name=".parent.ParentActivities"
             android:label="@string/layout_parent_activities_name"
-            android:parentActivityName=".parent.ParentDashboard"/>
+            android:parentActivityName=".Dashboard"/>
         <activity
             android:name=".parent.ParentSemaphore"
             android:label="@string/layout_parent_semaphore_name"
-            android:parentActivityName=".parent.ParentDashboard"/>
-        <activity
-            android:name=".teacher.TeacherDashboard"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:parentActivityName=".Dashboard"/>
         <activity
             android:name=".teacher.TeacherHomeworks"
-            android:label="@string/layout_teacher_homeworks_name" />
+            android:label="@string/layout_teacher_homeworks_name"
+            android:parentActivityName=".Dashboard"/>
         <activity
             android:name=".teacher.TeacherStudents"
-            android:label="@string/layout_teacher_students_name" />
+            android:label="@string/layout_teacher_students_name"
+            android:parentActivityName=".Dashboard"/>
         <activity
             android:name=".teacher.TeacherActivities"
-            android:label="@string/layout_teacher_activities_name" />
+            android:label="@string/layout_teacher_activities_name"
+            android:parentActivityName=".Dashboard"/>
     </application>
 
 </manifest>

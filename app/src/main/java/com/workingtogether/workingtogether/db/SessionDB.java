@@ -3,6 +3,7 @@ package com.workingtogether.workingtogether.db;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
@@ -70,10 +71,9 @@ public class SessionDB {
             mDatabase.execSQL("INSERT INTO SESSION (UIDUSER, TYPEUSER, SESSTATE) " +
                     "VALUES ('" + UIDUSER + "', '" + TYPEUSER + "', 1)");
 
+        } catch (SQLiteConstraintException c) {
+            updateSession(UIDUSER, 1);
         } catch (SQLiteException e) {
-            if(e.getMessage().equals("UNIQUE constraint failed: SESSION.UIDUSER (code 1555)")){
-                updateSession(UIDUSER, 1);
-            }
             Log.d("Exception: ", e.getMessage());
         }
         sqLiteOpenHelper.closeDatabase();

@@ -3,14 +3,8 @@ package com.workingtogether.workingtogether;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.widget.Toast;
 
-import com.workingtogether.workingtogether.db.SQLiteOpenHelper;
 import com.workingtogether.workingtogether.db.SessionDB;
-import com.workingtogether.workingtogether.obj.SessionApp;
-import com.workingtogether.workingtogether.parent.ParentDashboard;
-import com.workingtogether.workingtogether.teacher.TeacherDashboard;
 import com.workingtogether.workingtogether.util.LocalParams;
 
 import java.io.File;
@@ -28,21 +22,12 @@ public class SplashScreen extends AppCompatActivity {
         isUserlogged(); //Check if exist an active session.
     }
 
-    private void isUserlogged(){
+    private void isUserlogged() {
         SessionDB sessionDB = new SessionDB(this);
-        if(sessionDB.isUserlogged()){
-            SessionApp sessionApp = sessionDB.getUserlogged();
-
-            if(sessionApp.getTYPEUSER().equals(LocalParams.TEACHERUSER)){
-                startActivity(new Intent(this, TeacherDashboard.class));
-                finish();
-            }else if(sessionApp.getTYPEUSER().equals(LocalParams.PARENTUSER)){
-                startActivity(new Intent(this, ParentDashboard.class));
-                finish();
-            } else {
-                //TODO handle USERTYPE error
-            }
-        }else{
+        if (sessionDB.isUserlogged()) {
+            startActivity(new Intent(this, Dashboard.class));
+            finish();
+        } else {
             startActivity(new Intent(this, Signin.class));
             finish();
         }
