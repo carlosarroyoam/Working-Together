@@ -20,6 +20,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.workingtogether.workingtogether.db.ParentDB;
 import com.workingtogether.workingtogether.db.SessionDB;
 import com.workingtogether.workingtogether.db.TeacherDB;
@@ -34,6 +35,7 @@ import com.workingtogether.workingtogether.parent.ParentNotes;
 import com.workingtogether.workingtogether.parent.ParentSemaphore;
 import com.workingtogether.workingtogether.teacher.TeacherActivities;
 import com.workingtogether.workingtogether.teacher.TeacherHomeworks;
+import com.workingtogether.workingtogether.teacher.TeacherNotes;
 import com.workingtogether.workingtogether.util.LocalParams;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
@@ -48,6 +50,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
         setDashboardLayout();
+
+        FirebaseMessaging.getInstance().subscribeToTopic("NOTIFICACIONES");
 
         Toolbar toolbar = findViewById(R.id.toolbar_main);
         setSupportActionBar(toolbar);
@@ -233,9 +237,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     public void showLogOffDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Estas por salir de Working Together");
+        alertDialogBuilder.setTitle("Estas a punto de la cerrar sesión");
         alertDialogBuilder
-                .setMessage("¿Estas seguro que quieres cerrar sesión?")
+                .setMessage("¿Estas seguro que quieres continuar?")
                 .setCancelable(false)
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
@@ -282,4 +286,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     public void addActivitiesActivity(View view) {
         startActivity(new Intent(this, TeacherActivities.class));
     }
+
+    public void sendNotesActivity(View view) {
+        startActivity(new Intent(this, TeacherNotes.class));
+    }
+
 }

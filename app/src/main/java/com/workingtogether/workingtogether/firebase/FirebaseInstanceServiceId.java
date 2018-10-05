@@ -8,6 +8,8 @@ import com.google.firebase.iid.FirebaseInstanceIdService;
 public class FirebaseInstanceServiceId extends FirebaseInstanceIdService {
     @Override
     public void onTokenRefresh() {
+        super.onTokenRefresh();
+
         String refreshedToken = FirebaseInstanceId.getInstance().getToken();
         Log.d("Refreshed token: ", refreshedToken);
 

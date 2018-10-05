@@ -6,13 +6,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import com.workingtogether.workingtogether.R;
+import com.workingtogether.workingtogether.obj.Homework;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class ParentsHomeworksRecyclerViewAdapter extends RecyclerView.Adapter<ParentsHomeworksRecyclerViewAdapter.ViewHolder> {
-    private String[] mHomeworksDataset;
+    private ArrayList<Homework> mHomeworksDataset;
 
-    public ParentsHomeworksRecyclerViewAdapter() {
-        String[] fromDBDataset = { "Tarea 1", "Tarea 2", "Tarea 3"};//Cargar desde db
-        mHomeworksDataset = fromDBDataset;
+    public ParentsHomeworksRecyclerViewAdapter(ArrayList<Homework> homeworkList) {
+        mHomeworksDataset = homeworkList;
     }
 
     @Override
@@ -23,20 +26,29 @@ public class ParentsHomeworksRecyclerViewAdapter extends RecyclerView.Adapter<Pa
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTextView.setText(mHomeworksDataset[position]);
+        holder.mId.setText(Integer.toString(mHomeworksDataset.get(position).getUIDHOMEWORK()));
+        holder.mTitle.setText(mHomeworksDataset.get(position).getTITLE());
+        holder.mDescription.setText(mHomeworksDataset.get(position).getDESCRIPTION());
+        holder.mDeliverDate.setText("Fecha de entrega: " + mHomeworksDataset.get(position).getDELIVERDATE());
     }
 
     @Override
     public int getItemCount() {
-        return mHomeworksDataset.length;
+        return mHomeworksDataset.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTextView;
+        private TextView mId;
+        private TextView mTitle;
+        private TextView mDescription;
+        private TextView mDeliverDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.homeworks_cardview_item_homework_title);
+            mId = itemView.findViewById(R.id.homeworks_cardview_item_homework_id);
+            mTitle = itemView.findViewById(R.id.homeworks_cardview_item_homework_title);
+            mDescription = itemView.findViewById(R.id.homeworks_cardview_item_homework_description);
+            mDeliverDate = itemView.findViewById(R.id.homeworks_cardview_item_homework_deliverdate);
         }
     }
 }

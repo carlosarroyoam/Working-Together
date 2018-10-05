@@ -13,8 +13,9 @@
     <string name="layout_parent_notes_name">Calificaciones</string>
     <string name="layout_parent_semaphore_name">Semáforo</string>
     <string name="layout_teacher_students_name">Estudiantes</string>
-    <string name="layout_teacher_homeworks_name">Agregar Tarea</string>
-    <string name="layout_teacher_activities_name">Agregar actividad</string>
+    <string name="layout_teacher_homeworks_name">Enviar Tarea</string>
+    <string name="layout_teacher_activities_name">Enviar actividad</string>
+    <string name="layout_teacher_notes_name">Subir calificaciones</string>
 
     <string name="btn_signin">Iniciar sesión</string>
     <string name="btn_signup">Crear cuenta</string>
@@ -35,8 +36,20 @@
 
 
     <string name="etxt_deliver_date">Fecha de entrega</string>
+    <string name="etxt_attach_url">Adjuntar URL</string>
+    <string name="etxt_attach_file">Adjuntar archivo</string>
 
     <string name="txt_signin_msg">Bienvenido a Working Together. ¡Si tienes una cuenta con nosotros, ingresa tus datos para comenzar!</string>
+    <string name="txt_create_homework_msg">Ingresa la información de la tarea, después has clic en el botón enviar para publicarla</string>
+    <string name="txt_create_activity_msg">Ingresa la información de la actividad, después has clic en el botón enviar para publicarla</string>
+    <string name="txt_homework_empty_tray_msg">Aun no tienes tareas</string>
+    <string name="txt_homework_empty_tray_msg2">No te preocupes, aquí aparecerán cuando tengas alguna</string>
+    <string name="txt_activity_empty_tray_msg">Aun no tienes actividades</string>
+    <string name="txt_activity_empty_tray_msg2">No te preocupes, aquí aparecerán cuando tengas alguna</string>
+    <string name="txt_notifications_empty_tray_msg">Aun no tienes notificaciones</string>
+    <string name="txt_notifications_empty_tray_msg2">No te preocupes, te avisaremos cuando llegue una</string>
+    <string name="txt_notes_empty_tray_msg">Aun no tienes calificaciones</string>
+    <string name="txt_notes_empty_tray_msg2">No te preocupes, aquí aparecerán cuando tengas alguna</string>
     <string name="txt_signup_msg">Crea tu cuenta gratuita</string>
     <string name="txt_no_account_msg">¿Aun no tienes cuenta? Crea una gratis</string>
 

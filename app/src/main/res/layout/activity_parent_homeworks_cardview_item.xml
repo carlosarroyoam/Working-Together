@@ -29,6 +29,7 @@
                 android:layout_margin="@dimen/half_margin"
                 android:src="@drawable/ic_homeworks" />
 
+
             <TextView
                 android:id="@+id/homeworks_cardview_item_homework_title"
                 android:layout_width="match_parent"
@@ -52,8 +53,25 @@
                 android:text="Descripcion"
                 android:textAlignment="textStart"
                 android:textColor="@android:color/black"
-                android:textSize="@dimen/txt_text_size"
-                android:textStyle="bold" />
+                android:textSize="@dimen/txt_text_size" />
+
+            <TextView
+                android:id="@+id/homeworks_cardview_item_homework_deliverdate"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_toRightOf="@id/img"
+                android:layout_marginLeft="@dimen/half_margin"
+                android:text="Fecha de entrega"
+                android:textAlignment="viewEnd"
+                android:textColor="@android:color/black"
+                android:textSize="12sp" />
+
+            <TextView
+                android:id="@+id/homeworks_cardview_item_homework_id"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:visibility="gone" />
 
         </RelativeLayout>
 

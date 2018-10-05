@@ -39,7 +39,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/half_margin"
                     android:layout_below="@+id/image"
-                    android:text="@string/txt_signin_msg"
+                    android:text="@string/txt_create_homework_msg"
                     android:textAlignment="center"
                     android:textSize="@dimen/txt_text_size" />
 
@@ -85,6 +85,8 @@
                     android:layout_width="@dimen/etxt_width"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="@dimen/margin"
+                    android:layout_marginBottom="@dimen/margin"
+
                     android:layout_below="@+id/activity_teacher_homeworks_description_etxt"
                     android:layout_centerHorizontal="true">
 
@@ -103,6 +105,13 @@
 
                 </android.support.design.widget.TextInputLayout>
 
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentRight="true"
+                    android:layout_below="@id/activity_teacher_homeworks_deliver_date"
+                    android:layout_marginRight="16dp" />
+
                 <Button
                     android:id="@+id/activity_teacher_homeworks_send_btn"
                     android:layout_width="@dimen/btn_width"
@@ -110,6 +119,7 @@
                     android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
                     android:layout_marginTop="@dimen/double_margin"
+                    android:layout_marginBottom="@dimen/half_margin"
                     android:background="@drawable/positive_button_shape"
                     android:text="@string/btn_send"
                     android:textAllCaps="false"
@@ -118,11 +128,12 @@
                     android:onClick="sendHomework" />
 
                 <Space
+                    android:id="@+id/space"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
-                    android:layout_below="@id/activity_teacher_homeworks_deliver_date"
-                    android:layout_margin="@dimen/double_margin" />
+                    android:layout_margin="@dimen/double_margin"
+                    android:layout_below="@+id/activity_teacher_homeworks_deliver_date"
+                    android:layout_centerHorizontal="true"/>
 
             </RelativeLayout>
 

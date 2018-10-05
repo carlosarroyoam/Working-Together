@@ -23,15 +23,15 @@
         </activity>
         <activity
             android:name=".Signin"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signin_name"
             android:theme="@style/AppTheme.NoActionBar"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Signup"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signup_name"
             android:parentActivityName=".Signin"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".Dashboard"
@@ -60,9 +60,9 @@
             android:parentActivityName=".Dashboard" />
         <activity
             android:name=".teacher.TeacherHomeworks"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_teacher_homeworks_name"
             android:parentActivityName=".Dashboard"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".teacher.TeacherStudents"
@@ -70,10 +70,15 @@
             android:parentActivityName=".Dashboard" />
         <activity
             android:name=".teacher.TeacherActivities"
+            android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_teacher_activities_name"
             android:parentActivityName=".Dashboard"
-            android:configChanges="keyboardHidden|orientation|screenSize"
             android:windowSoftInputMode="adjustNothing" />
+        <activity
+            android:name=".teacher.TeacherNotes"
+            android:label="@string/layout_teacher_notes_name"
+            android:parentActivityName=".Dashboard" />
+
         <service android:name=".firebase.FirebaseInstanceServiceId">
             <intent-filter>
                 <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
@@ -81,10 +86,10 @@
         </service>
         <service android:name=".firebase.FirebaseMessagingService">
             <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>
         </service>
-    </application>
 
+    </application>
 
 </manifest>

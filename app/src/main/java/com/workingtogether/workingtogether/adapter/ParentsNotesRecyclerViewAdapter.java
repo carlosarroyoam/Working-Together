@@ -7,15 +7,17 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
+import com.workingtogether.workingtogether.obj.Activity;
+import com.workingtogether.workingtogether.obj.Note;
 
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 
 public class ParentsNotesRecyclerViewAdapter extends RecyclerView.Adapter<ParentsNotesRecyclerViewAdapter.ViewHolder> {
-    private String[] mNotesDataset;
+    private ArrayList<Note> mNotesDataset;
 
-    public ParentsNotesRecyclerViewAdapter() {
-        String[] fromDBDataset = {"Espanol", "Matematicas", "Geografia"};//Cargar desde db
-        mNotesDataset = fromDBDataset;
+    public ParentsNotesRecyclerViewAdapter(ArrayList<Note> notesArrayList) {
+        mNotesDataset = notesArrayList;
     }
 
     @Override
@@ -26,16 +28,13 @@ public class ParentsNotesRecyclerViewAdapter extends RecyclerView.Adapter<Parent
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        DecimalFormat gradeDecimalFormat = new DecimalFormat("##.#");
-        Double grade = Math.random() * 10;
-
-        holder.mSubjectName.setText(mNotesDataset[position]);
-        holder.mNote.setText(gradeDecimalFormat.format(grade) + "");
+        holder.mSubjectName.setText(mNotesDataset.get(position).getSUBJECT());
+        holder.mNote.setText(Double.toString(mNotesDataset.get(position).getNOTE()));
     }
 
     @Override
     public int getItemCount() {
-        return mNotesDataset.length;
+        return mNotesDataset.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {

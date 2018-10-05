@@ -2,8 +2,10 @@
 <resources>
 
     <dimen name="dashboard_squared_icon_size">130dp</dimen>
+    <dimen name="emty_tray_squared_icon_size">230dp</dimen>
     <dimen name="notes_squared_notes_cardview_size">130dp</dimen>
     <dimen name="homeworks_squared_icon_size">90dp</dimen>
+    <dimen name="add_layouts_squared_icon_size">24dp</dimen>
     <dimen name="drawer_squared_icon_size">140dp</dimen>
     <dimen name="squared_app_icon_size">140dp</dimen>
     <dimen name="semaphore_icon_size">240dp</dimen>
@@ -20,6 +22,7 @@
 
     <dimen name="txt_text_dots_size">64sp</dimen>
     <dimen name="txt_title_text_size">20sp</dimen>
+    <dimen name="txt_note_text_size">32sp</dimen>
     <dimen name="txt_subtitle_text_size">18sp</dimen>
     <dimen name="txt_text_size">16sp</dimen>
     <dimen name="etxt_text_size">16sp</dimen>

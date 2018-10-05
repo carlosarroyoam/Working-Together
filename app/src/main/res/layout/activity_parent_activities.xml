@@ -5,13 +5,12 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@color/colorPrimary"
     tools:context=".parent.ParentHomeworks">
 
-    <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_view_activities"
-        android:scrollbars="vertical"
+    <ViewStub
+        android:id="@+id/activities_layout_loader"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"/>
+        android:layout_height="match_parent"
+        android:inflatedId="@+id/message_layout"/>
 
 </RelativeLayout>

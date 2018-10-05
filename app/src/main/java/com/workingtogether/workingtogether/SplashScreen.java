@@ -3,7 +3,10 @@ package com.workingtogether.workingtogether;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 
+import com.google.firebase.iid.FirebaseInstanceId;
+import com.google.firebase.iid.FirebaseInstanceIdService;
 import com.workingtogether.workingtogether.db.SessionDB;
 import com.workingtogether.workingtogether.util.LocalParams;
 
@@ -18,6 +21,7 @@ public class SplashScreen extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         createDataBase(); //First app run, database will be created.
         isUserlogged(); //Check if exist an active session.
     }

@@ -5,15 +5,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-
 import com.workingtogether.workingtogether.R;
+import com.workingtogether.workingtogether.obj.Activity;
+import java.util.ArrayList;
 
 public class ParentsActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<ParentsActivitiesRecyclerViewAdapter.ViewHolder> {
-    private String[] mActivitiesDataset;
+    private ArrayList<Activity> mActivitiesDataset;
 
-    public ParentsActivitiesRecyclerViewAdapter() {
-        String[] fromDBDataset = { "Actividad 1", "Actividad 2", "Actividad 3"};//Cargar desde db
-        mActivitiesDataset = fromDBDataset;
+    public ParentsActivitiesRecyclerViewAdapter(ArrayList<Activity> activityArrayList) {
+        mActivitiesDataset = activityArrayList;
     }
 
     @Override
@@ -24,20 +24,20 @@ public class ParentsActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<P
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTextView.setText(mActivitiesDataset[position]);
+        holder.mId.setText(Integer.toString(mActivitiesDataset.get(position).getUIDACTIVITY()));
     }
 
     @Override
     public int getItemCount() {
-        return mActivitiesDataset.length;
+        return mActivitiesDataset.size();
     }
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
-        private TextView mTextView;
+        private TextView mId;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mTextView = itemView.findViewById(R.id.activities_cardview_item_activity_title);
+            mId = itemView.findViewById(R.id.homeworks_cardview_item_homework_id);
         }
     }
 }

@@ -2,7 +2,10 @@ package com.workingtogether.workingtogether.db;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.util.Log;
 
 import com.workingtogether.workingtogether.obj.Homework;
 import com.workingtogether.workingtogether.obj.Parent;
@@ -19,12 +22,13 @@ public class HomeworksDB {
         mDatabase = sqLiteOpenHelper.getWritableDatabase();
     }
 
-    public List<Homework> getAllHomeworksDetails() {
-        List<Homework> homeworkList = new ArrayList<>();
+    public ArrayList<Homework> getAllHomeworks() {
+        ArrayList<Homework> homeworkList = new ArrayList<>();
 
         sqLiteOpenHelper.openDatabase();
         StringBuilder query = new StringBuilder("SELECT UIDHOMEWORK, TITLE, DESCRIPTION, DELIVERDATE, PUBLISHDATE" +
-                " FROM HOMEWORKS");
+                " FROM HOMEWORKS" +
+                " ORDER BY PUBLISHDATE DESC");
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
         while (cursor.moveToNext()) {
             Homework homework = new Homework();
@@ -60,6 +64,20 @@ public class HomeworksDB {
         cursor.close();
         sqLiteOpenHelper.closeDatabase();
         return homework;
+    }
+
+    public void insertHomework(String TITLE, String DESCRIPTION, String DELIVERDATE, String PUBISHDATE) {
+        sqLiteOpenHelper.openDatabase();
+
+        try {
+            mDatabase.execSQL("INSERT INTO HOMEWORKS (TITLE, DESCRIPTION, DELIVERDATE, PUBLISHDATE) " +
+                    "VALUES ('" + TITLE + "', '" + DESCRIPTION + "', '" + DELIVERDATE + "', ' " + PUBISHDATE + "')");
+        } catch (SQLiteConstraintException c) {
+            Log.d("Exception: ", c.getMessage());
+        } catch (SQLiteException e) {
+            Log.d("Exception: ", e.getMessage());
+        }
+        sqLiteOpenHelper.closeDatabase();
     }
 
 }
