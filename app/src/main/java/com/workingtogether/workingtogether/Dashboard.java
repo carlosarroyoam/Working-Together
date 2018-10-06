@@ -184,6 +184,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             case R.id.menu_navigation_log_off:
                 showLogOffDialog();
                 break;
+            case R.id.menu_notification_show_all:
+                startActivity(new Intent(this, NotificationsTray.class));
+                if (nav_drawer.isDrawerOpen(notification_drawer_view))
+                    nav_drawer.closeDrawer(notification_drawer_view);
+                break;
         }
         return true;
     }

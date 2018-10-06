@@ -6,6 +6,7 @@ public class Notification {
     private String DESCRIPTION;
     private String NOTIFICATIONTYPE;
     private String PUBLISHDATE;
+    private int UIDRESOURSE;
 
     public int getUIDNOTIFICATION() {
         return UIDNOTIFICATION;
@@ -47,4 +48,11 @@ public class Notification {
         this.PUBLISHDATE = PUBLISHDATE;
     }
 
+    public int getUIDRESOURSE() {
+        return UIDRESOURSE;
+    }
+
+    public void setUIDRESOURSE(int UIDRESOURSE) {
+        this.UIDRESOURSE = UIDRESOURSE;
+    }
 }
