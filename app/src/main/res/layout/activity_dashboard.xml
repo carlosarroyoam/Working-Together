@@ -31,14 +31,25 @@
             app:menu="@menu/menu_nav_drawer_view" />
 
         <!--  Notifications View Layout -->
-        <android.support.design.widget.NavigationView
+        <ListView android:id="@+id/notification_drawer_view"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="end"
+            android:fitsSystemWindows="true"
+            android:choiceMode="singleChoice"
+            tools:listheader="@layout/header_notification_drawer_view"
+            android:divider="@color/gray"
+            android:dividerHeight="1dp"
+            android:background="@color/white"/>
+
+        <!--<android.support.design.widget.NavigationView
             android:id="@+id/notification_drawer_view"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="end"
             android:fitsSystemWindows="true"
             app:headerLayout="@layout/header_notification_drawer_view"
-            app:menu="@menu/menu_notification_drawer_view" />
+            app:menu="@menu/menu_notification_drawer_view" />-->
 
     </android.support.v4.widget.DrawerLayout>
 

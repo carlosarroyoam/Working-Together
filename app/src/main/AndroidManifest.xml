@@ -38,7 +38,8 @@
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_dashboard_name"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".NotificationsTray"
+        <activity
+            android:name=".NotificationsTray"
             android:label="@string/layout_notifications_tray_name"
             android:parentActivityName=".Dashboard" />
         <activity

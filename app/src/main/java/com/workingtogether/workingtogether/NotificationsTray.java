@@ -2,6 +2,7 @@ package com.workingtogether.workingtogether;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.ViewStub;
@@ -47,9 +48,10 @@ public class NotificationsTray extends AppCompatActivity {
             stub.inflate();
 
             mRecyclerView = findViewById(R.id.recycler_view_notifications);
-            mRecyclerView.setHasFixedSize(true);
             mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(mLayoutManager);
+            mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
             mAdapter = new NotificationsRecyclerViewAdapter(notificationArrayList);
             mRecyclerView.setAdapter(mAdapter);
 

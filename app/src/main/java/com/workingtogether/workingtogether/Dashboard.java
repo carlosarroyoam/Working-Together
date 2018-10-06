@@ -1,5 +1,6 @@
 package com.workingtogether.workingtogether;
 
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.res.Configuration;
@@ -11,24 +12,30 @@ import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.ViewStub;
+import android.widget.AdapterView;
+import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.messaging.FirebaseMessaging;
+import com.workingtogether.workingtogether.adapter.NotificationsDrawerAdapter;
+import com.workingtogether.workingtogether.db.NotificationsDB;
 import com.workingtogether.workingtogether.db.ParentDB;
 import com.workingtogether.workingtogether.db.SessionDB;
 import com.workingtogether.workingtogether.db.TeacherDB;
-import com.workingtogether.workingtogether.db.UserDB;
+import com.workingtogether.workingtogether.obj.Notification;
 import com.workingtogether.workingtogether.obj.Parent;
 import com.workingtogether.workingtogether.obj.SessionApp;
 import com.workingtogether.workingtogether.obj.Teacher;
-import com.workingtogether.workingtogether.obj.User;
 import com.workingtogether.workingtogether.parent.ParentActivities;
 import com.workingtogether.workingtogether.parent.ParentHomeworks;
 import com.workingtogether.workingtogether.parent.ParentNotes;
@@ -38,11 +45,13 @@ import com.workingtogether.workingtogether.teacher.TeacherHomeworks;
 import com.workingtogether.workingtogether.teacher.TeacherNotes;
 import com.workingtogether.workingtogether.util.LocalParams;
 
-public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+import java.util.ArrayList;
+
+public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener {
     private DrawerLayout nav_drawer;
     private ActionBarDrawerToggle nav_drawer_toggle;
     private View nav_drawer_view;
-    private View notification_drawer_view;
+    private ListView notification_drawer_view;
     NavigationView navigation_nav_view;
 
     @Override
@@ -67,8 +76,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         nav_drawer = findViewById(R.id.nav_drawer_layout);
         nav_drawer_toggle = new ActionBarDrawerToggle(this, nav_drawer, toolbar, R.string.app_name, R.string.app_name);
         nav_drawer.addDrawerListener(nav_drawer_toggle);
-        NavigationView navigation_nav_view = findViewById(R.id.nav_drawer_view);
-        navigation_nav_view.setNavigationItemSelectedListener(this);
+        NavigationView nav_drawer_view = findViewById(R.id.nav_drawer_view);
+        nav_drawer_view.setNavigationItemSelectedListener(this);
 
         toolbar.setNavigationOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,7 +100,18 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             nav_drawer = findViewById(R.id.nav_drawer_layout);
             nav_drawer_view = findViewById(R.id.nav_drawer_view);
             notification_drawer_view = findViewById(R.id.notification_drawer_view);
+
+            // Set the adapter for the list view
+            View headerView = ((LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.header_notification_drawer_view, null, false);
+            notification_drawer_view.setAdapter(new NotificationsDrawerAdapter(this, loadNotificationsList()));
+            notification_drawer_view.addHeaderView(headerView);
+
+            // Set the list's click listener
+            notification_drawer_view.setOnItemClickListener(this);
+
+            notification_drawer_view = findViewById(R.id.notification_drawer_view);
             nav_drawer_toggle = new ActionBarDrawerToggle(this, nav_drawer, R.string.app_name, R.string.app_name) {
+
 
                 /** Called when a drawer has settled in a completely closed state. */
                 public void onDrawerClosed(View drawerView) {
@@ -120,9 +140,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
             nav_drawer.addDrawerListener(nav_drawer_toggle); // Set the drawer toggle as the DrawerListener
             navigation_nav_view = findViewById(R.id.nav_drawer_view);
-            NavigationView notification_nav_view = findViewById(R.id.notification_drawer_view);
             navigation_nav_view.setNavigationItemSelectedListener(this); // Set navigation drawer on itemClickListener
-            notification_nav_view.setNavigationItemSelectedListener(this); // Set navigation drawer on itemClickListener
             loadUserInfo(); // Load user info into nav drawer
         }
     }
@@ -184,13 +202,13 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             case R.id.menu_navigation_log_off:
                 showLogOffDialog();
                 break;
-            case R.id.menu_notification_show_all:
-                startActivity(new Intent(this, NotificationsTray.class));
-                if (nav_drawer.isDrawerOpen(notification_drawer_view))
-                    nav_drawer.closeDrawer(notification_drawer_view);
-                break;
         }
         return true;
+    }
+
+    @Override
+    public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+
     }
 
     @Override
@@ -208,19 +226,19 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         SessionDB sessionDB = new SessionDB(this);
         SessionApp sessionApp = sessionDB.getUserlogged();
 
-        if (sessionApp.getTYPEUSER().equals(LocalParams.PARENTUSER)){
+        if (sessionApp.getTYPEUSER().equals(LocalParams.PARENTUSER)) {
             ParentDB parentDB = new ParentDB(this);
             Parent parentInfo = parentDB.getParentById(sessionApp.getUIDUSER());
             setNavDrawerInfo(parentInfo.getNAME() + " " + parentInfo.getLASTNAME(), parentInfo.getEMAIL());
-        }else if (sessionApp.getTYPEUSER().equals(LocalParams.TEACHERUSER)){
+        } else if (sessionApp.getTYPEUSER().equals(LocalParams.TEACHERUSER)) {
             TeacherDB teacherDB = new TeacherDB(this);
             Teacher teacherInfo = teacherDB.getTeacherById(sessionApp.getUIDUSER());
             setNavDrawerInfo(teacherInfo.getNAME() + " " + teacherInfo.getLASTNAME(), teacherInfo.getEMAIL());
         }
     }
 
-    private void setNavDrawerInfo(String userName, String mail){
-        View navView =  navigation_nav_view.getHeaderView(0);
+    private void setNavDrawerInfo(String userName, String mail) {
+        View navView = navigation_nav_view.getHeaderView(0);
         ImageView nav_picture = navView.findViewById(R.id.nav_drawer_user_picture);
 
         TextView nav_user = navView.findViewById(R.id.nav_drawer_user_name);
@@ -238,6 +256,13 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         if (sessionApp.getTYPEUSER().equals(LocalParams.TEACHERUSER))
             stub.setLayoutResource(R.layout.activity_dashboard_teacher_content);
         stub.inflate();
+    }
+
+
+    private ArrayList<Notification> loadNotificationsList() {
+        NotificationsDB notificationsDB = new NotificationsDB(this);
+        ArrayList<Notification> notificationArrayList = notificationsDB.getLastestNotifications();
+        return notificationArrayList;
     }
 
     public void showLogOffDialog() {
@@ -266,6 +291,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     public void logOff() {
         SessionDB sessionDB = new SessionDB(this);
         sessionDB.closeSession();
+    }
+
+    public void showAllNotifications(View view){
+        startActivity(new Intent(this, NotificationsTray.class));
+        if (nav_drawer.isDrawerOpen(notification_drawer_view))
+            nav_drawer.closeDrawer(notification_drawer_view);
     }
 
     public void homeworksActivity(View view) {
