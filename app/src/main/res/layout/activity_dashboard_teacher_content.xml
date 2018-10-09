@@ -176,7 +176,7 @@
             </android.support.v7.widget.CardView>
 
             <!-- Column 4 : Send notes -->
-            <android.support.v7.widget.CardView
+            <!--<android.support.v7.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_columnWeight="1"
@@ -213,7 +213,7 @@
                 </LinearLayout>
 
             </android.support.v7.widget.CardView>
-
+-->
         </GridLayout>
 
 </RelativeLayout>

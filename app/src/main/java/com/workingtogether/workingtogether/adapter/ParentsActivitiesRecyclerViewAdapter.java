@@ -7,7 +7,10 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.obj.Activity;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class ParentsActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<ParentsActivitiesRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Activity> mActivitiesDataset;
@@ -50,4 +53,5 @@ public class ParentsActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<P
             mDeliverDate = itemView.findViewById(R.id.activities_cardview_item_activity_deliverdate);
         }
     }
+
 }

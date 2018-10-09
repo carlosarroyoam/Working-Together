@@ -17,6 +17,7 @@ import android.widget.Toast;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.db.HomeworksDB;
+import com.workingtogether.workingtogether.util.DateUtils;
 import com.workingtogether.workingtogether.util.firebaseConsoleWS;
 
 import org.json.JSONArray;
@@ -127,9 +128,7 @@ public class TeacherHomeworks extends AppCompatActivity {
     }
 
     public void sendHomework(View view) {
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat dateFormatormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-        String dateTime = dateFormatormat.format(c.getTime());
+        String dateTime = DateUtils.getDateTime();
 
         String title = titleTextInputLayout.getEditText().getText().toString();
         String description = descTextInputLayout.getEditText().getText().toString();

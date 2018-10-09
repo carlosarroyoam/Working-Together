@@ -94,6 +94,12 @@
             </intent-filter>
         </service>
 
+        <activity
+            android:name=".HomeworkDetails"
+            android:parentActivityName=".parent.ParentHomeworks"/>
+        <activity
+            android:name=".ActivityDetails"
+            android:parentActivityName=".parent.ParentActivities"/>
     </application>
 
 </manifest>

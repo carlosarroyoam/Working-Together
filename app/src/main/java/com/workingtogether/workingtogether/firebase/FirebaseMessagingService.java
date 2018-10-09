@@ -19,6 +19,7 @@ import com.workingtogether.workingtogether.db.SessionDB;
 import com.workingtogether.workingtogether.db.UserDB;
 import com.workingtogether.workingtogether.parent.ParentActivities;
 import com.workingtogether.workingtogether.parent.ParentHomeworks;
+import com.workingtogether.workingtogether.util.DateUtils;
 import com.workingtogether.workingtogether.util.LocalParams;
 
 import org.json.JSONArray;
@@ -85,9 +86,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         }
     }
 
-    private void sendNotificationToDatabase(String TITLE, String DESCRIPTION, String DELIVERDATE, String NOTIFICATIONTYPE, int UIDRESOURSE) {
+    private void sendNotificationToDatabase(String TITLE, String DESCRIPTION, String NOTIFICATIONTYPE, int UIDRESOURSE) {
         NotificationsDB notificationsDB = new NotificationsDB(this);
-        notificationsDB.insertNotification(TITLE, DESCRIPTION, DELIVERDATE, NOTIFICATIONTYPE, UIDRESOURSE);
+        notificationsDB.insertNotification(TITLE, DESCRIPTION, DateUtils.getDateTime(), NOTIFICATIONTYPE, UIDRESOURSE);
     }
 
     private void sendHomeworkToDatabase(JSONObject json) throws JSONException {
@@ -100,22 +101,23 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         HomeworksDB homeworksDB = new HomeworksDB(this);
         homeworksDB.insertHomework(title, description, deliverDate, publishDate);
 
-        sendNotificationToDatabase(title, description, getDateTime(), LocalParams.HOMEWORKNOTIFICATION, 1);
+        sendNotificationToDatabase("Diana López publico una nueva tarea", title, LocalParams.HOMEWORKNOTIFICATION, 1);
         mostrarNotificacion(title, description, LocalParams.HOMEWORKNOTIFICATION);
     }
 
 
     private void sendActivityToDatabase(JSONObject json) throws JSONException {
-        String title, description, deliverDate, publishDate;
+        String title, description, deliverDate, url, publishDate;
         title = json.getString(LocalParams.TITLE);
         description = json.getString(LocalParams.DESCRIPTION);
+        url = json.getString(LocalParams.DESCRIPTION);
         deliverDate = json.getString(LocalParams.DELIVERDATE);
         publishDate = json.getString(LocalParams.PUBLISHDATE);
 
         ActivityDB activityDB = new ActivityDB(this);
-        activityDB.insertActivity(title, description, deliverDate, publishDate);
+        activityDB.insertActivity(title, description, url, deliverDate, publishDate);
 
-        sendNotificationToDatabase(title, description, getDateTime(), LocalParams.ACTIVITYNOTIFICATION, 1);
+        sendNotificationToDatabase("Diana López publico una nueva actividad", title, LocalParams.ACTIVITYNOTIFICATION, 1);
         mostrarNotificacion(title, description, LocalParams.ACTIVITYNOTIFICATION);
     }
 
@@ -161,10 +163,4 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         return new Intent(this, Dashboard.class);
     }
 
-    private String getDateTime() {
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat dateFormatormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-        String dateTime = dateFormatormat.format(c.getTime());
-        return dateTime;
-    }
 }

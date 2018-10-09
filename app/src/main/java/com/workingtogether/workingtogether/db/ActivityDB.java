@@ -64,12 +64,12 @@ public class ActivityDB {
         return activity;
     }
 
-    public void insertActivity(String TITLE, String DESCRIPTION, String DELIVERDATE, String PUBISHDATE) {
+    public void insertActivity(String TITLE, String DESCRIPTION, String URL, String DELIVERDATE, String PUBISHDATE) {
         sqLiteOpenHelper.openDatabase();
 
         try {
-            mDatabase.execSQL("INSERT INTO ACTIVITIES (TITLE, DESCRIPTION, DELIVERDATE, PUBLISHDATE) " +
-                    "VALUES ('" + TITLE + "', '" + DESCRIPTION + "', '" + DELIVERDATE + "', ' " + PUBISHDATE +"')");
+            mDatabase.execSQL("INSERT INTO ACTIVITIES (TITLE, DESCRIPTION, URL, DELIVERDATE, PUBLISHDATE) " +
+                    "VALUES ('" + TITLE + "', '" + DESCRIPTION + "', '" + URL + "', '" + DELIVERDATE + "', ' " + PUBISHDATE +"')");
         } catch (SQLiteConstraintException c) {
             Log.d("Exception: ", c.getMessage());
         } catch (SQLiteException e) {

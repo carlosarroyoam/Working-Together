@@ -8,8 +8,12 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.obj.Notification;
+import com.workingtogether.workingtogether.util.DateUtils;
 import com.workingtogether.workingtogether.util.LocalParams;
+
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<NotificationsRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Notification> mNotificationsDataset;
@@ -31,6 +35,11 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
         holder.mTitle.setText(mNotificationsDataset.get(position).getTITLE());
         holder.mDescription.setText(mNotificationsDataset.get(position).getDESCRIPTION());
         holder.mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE());
+
+        if (mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(DateUtils.getDateTime().substring(0, 9)))
+            holder.mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(11, 16));
+        else
+            holder.mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 10));
 
         if (mNotificationsDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.HOMEWORKNOTIFICATION)) {
             holder.mImg.setImageResource(R.drawable.ic_homeworks);
@@ -66,4 +75,5 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
             mDeliverDate = itemView.findViewById(R.id.notifications_cardview_item_notification_deliverdate);
         }
     }
+
 }

@@ -3,6 +3,10 @@ package com.workingtogether.workingtogether.util;
 public class LocalParams {
     public static String DB_NAME = "working_together.db";
 
+    public static String HOMEWORK = "HOMEWORK";
+    public static String ACTIVITY = "ACTIVITY";
+    public static String NOTE = "NOTE";
+
     //USER TYPES
     public static String USERTYPE = "USERTYPE";
     public static String TEACHERUSER = "TEACHERUSER";
@@ -21,6 +25,7 @@ public class LocalParams {
     public static String UIDNOTIFICATION = "UIDNOTIFICATION";
     public static String TITLE = "TITLE";
     public static String DESCRIPTION = "DESCRIPTION";
+    public static String URL = "URL";
     public static String DELIVERDATE = "DELIVERDATE";
     public static String PUBLISHDATE = "PUBLISHDATE";
 

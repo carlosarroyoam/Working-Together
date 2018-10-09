@@ -24,6 +24,7 @@ public class TeacherNotes extends AppCompatActivity{
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_teacher_notes);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
     }
     
 

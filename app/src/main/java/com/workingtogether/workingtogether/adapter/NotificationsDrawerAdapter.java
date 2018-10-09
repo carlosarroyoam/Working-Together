@@ -1,6 +1,7 @@
 package com.workingtogether.workingtogether.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,9 +11,15 @@ import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.obj.Notification;
+import com.workingtogether.workingtogether.parent.ParentActivities;
+import com.workingtogether.workingtogether.parent.ParentHomeworks;
+import com.workingtogether.workingtogether.parent.ParentNotes;
+import com.workingtogether.workingtogether.util.DateUtils;
 import com.workingtogether.workingtogether.util.LocalParams;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 public class NotificationsDrawerAdapter extends BaseAdapter {
     private Context mContext;
@@ -39,11 +46,11 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
+    public View getView(final int position, View convertView, ViewGroup parent) {
         View row = null;
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-            row = layoutInflater.inflate(R.layout.activity_notifications_cardview_item, parent, false );
+            row = layoutInflater.inflate(R.layout.activity_notifications_cardview_item, parent, false);
         } else {
             row = convertView;
         }
@@ -59,7 +66,13 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
         mIdResourse.setText(Integer.toString(mNotificationsDataset.get(position).getUIDRESOURSE()));
         mTitle.setText(mNotificationsDataset.get(position).getTITLE());
         mDescription.setText(mNotificationsDataset.get(position).getDESCRIPTION());
-        mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE());
+
+
+        if (mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(DateUtils.getDateTime().substring(0, 9)))
+            mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(11, 16));
+        else
+            mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 10));
+
 
         if (mNotificationsDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.HOMEWORKNOTIFICATION)) {
             mImg.setImageResource(R.drawable.ic_homeworks);
@@ -71,7 +84,20 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
             mImg.setImageResource(R.drawable.ic_message);
         }
 
+        row.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if (mNotificationsDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.HOMEWORKNOTIFICATION)) {
+                    mContext.startActivity(new Intent(mContext, ParentHomeworks.class));
+                } else if (mNotificationsDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.ACTIVITYNOTIFICATION)) {
+                    mContext.startActivity(new Intent(mContext, ParentActivities.class));
+                } else if (mNotificationsDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.NOTESNOTIFICATION)) {
+                    mContext.startActivity(new Intent(mContext, ParentNotes.class));
+                }
+            }
+        });
+
         return row;
     }
-
+    
 }

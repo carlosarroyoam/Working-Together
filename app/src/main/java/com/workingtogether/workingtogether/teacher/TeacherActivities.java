@@ -1,34 +1,51 @@
 package com.workingtogether.workingtogether.teacher;
 
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.Uri;
+import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
-import android.support.v4.view.GravityCompat;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.Signin;
-import com.workingtogether.workingtogether.db.HomeworksDB;
+import com.workingtogether.workingtogether.db.ActivityDB;
+import com.workingtogether.workingtogether.util.DateUtils;
+import com.workingtogether.workingtogether.util.firebaseConsoleWS;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.File;
+import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
 public class TeacherActivities extends AppCompatActivity {
-    TextInputLayout titleTextInputLayout;
-    TextInputLayout descTextInputLayout;
-    TextInputLayout urlTextInputLayout;
-    TextInputLayout delDateTextInputLayout;
+    private static final int PICKFILE_REQUEST_CODE = 1234;
+    private TextInputLayout titleTextInputLayout;
+    private TextInputLayout descTextInputLayout;
+    private TextInputLayout urlTextInputLayout;
+    private TextInputLayout delDateTextInputLayout;
+    private LinearLayout layoutAttachedFiles;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,6 +57,7 @@ public class TeacherActivities extends AppCompatActivity {
         descTextInputLayout = findViewById(R.id.activity_teacher_activities_description_etxt);
         urlTextInputLayout = findViewById(R.id.activity_teacher_activities_url);
         delDateTextInputLayout = findViewById(R.id.activity_teacher_activities_deliver_date);
+        layoutAttachedFiles = findViewById(R.id.linearlayout_attached_files);
     }
 
     @Override
@@ -117,18 +135,16 @@ public class TeacherActivities extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void hideKeyboard(){
+    private void hideKeyboard() {
         View view = this.getCurrentFocus();
         if (view != null) {
-            InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
         }
     }
 
-    public void sendHomework(View view){
-        Calendar c = Calendar.getInstance();
-        SimpleDateFormat dateFormatormat = new SimpleDateFormat("dd/MM/yyyy hh:mm:ss");
-        String dateTime = dateFormatormat.format(c.getTime());
+    public void sendHomework(View view) {
+        String dateTime = DateUtils.getDateTime();
 
         String title = titleTextInputLayout.getEditText().getText().toString();
         String description = descTextInputLayout.getEditText().getText().toString();
@@ -142,10 +158,22 @@ public class TeacherActivities extends AppCompatActivity {
             if (!description.trim().equals("")) {
 
                 if (!deliverDate.trim().equals("")) {
-                    HomeworksDB homeworksDB = new HomeworksDB(this);
-                    homeworksDB.insertHomework(title, description, deliverDate, dateTime);
+                    ActivityDB activityDB = new ActivityDB(this);
+                    activityDB.insertActivity(title, description, url, deliverDate, dateTime);
 
-                    succesDialog();
+                    //TODO reemplazar por un servicio de un servidor propio
+                    StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENTUSER\",\"NOTIFICATIONTYPE\":\"ACTIVITYNOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"" + title + "\",\"DESCRIPTION\":\"" + title + "\",\"URL\":\"" + url + "\",\"DELIVERDATE\":\"" + deliverDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");
+
+                    try {
+                        JSONObject jsonArray = new JSONObject(String.valueOf(json));
+                        firebaseConsoleWS firebaseConsoleWS = new firebaseConsoleWS(jsonArray);
+
+                        firebaseConsoleWS.execute();
+                        succesDialog();
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+
                 } else {
                     dialogMessage = "Selecciona una fecha de entrega";
                     incorrectFormDialog(dialogMessage);
@@ -195,12 +223,65 @@ public class TeacherActivities extends AppCompatActivity {
     }
 
 
-    public void attachURL(View view){
+    public void attachURL(View view) {
         hideKeyboard();
+
+        final Dialog dialog = new Dialog(this);
+        //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
+        dialog.setCancelable(false);
+        dialog.setContentView(R.layout.dialogattachurl);
+
+        final EditText url = dialog.findViewById(R.id.dialog_url);
+
+        ImageView imgClose = dialog.findViewById(R.id.imgClose);
+        imgClose.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
+            }
+        });
+
+        Button dialogButton = dialog.findViewById(R.id.btn_dialog);
+        dialogButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String attachedURL = url.getText().toString();
+                if (!attachedURL.trim().equals("")) {
+                    urlTextInputLayout.getEditText().setText(attachedURL);
+                    dialog.dismiss();
+                }
+            }
+        });
+
+        dialog.show();
     }
 
-    public void attachFile(View view){
+    public void attachFile(View view) {
         hideKeyboard();
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
+        startActivityForResult(intent, PICKFILE_REQUEST_CODE);
+    }
+
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if (data != null) {
+            /*Uri uri = data.getData();
+            File selectedFile = new File(uri.getPath());
+            String filePath = selectedFile.getAbsolutePath();
+            String fileName = selectedFile.getName();
+            String fileExtention = "";//filePath.substring(filePath.lastIndexOf("."));
+
+            ImageView actualFile = new ImageView(this);
+            actualFile.setLayoutParams(new LinearLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.WRAP_CONTENT));
+            actualFile.setImageResource(R.drawable.ic_notes);
+            layoutAttachedFiles.addView(actualFile);
+            layoutAttachedFiles.setVisibility(View.VISIBLE);*/
+
+            RelativeLayout relativeLayout = findViewById(R.id.relativelayout);
+            Snackbar.make(relativeLayout, "Se adjunto el archivo.", Snackbar.LENGTH_SHORT).show();
+        }
+
+        super.onActivityResult(requestCode, resultCode, data);
     }
 
 }
