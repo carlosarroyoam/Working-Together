@@ -7,15 +7,15 @@
     <string name="layout_signup_name">Registro</string>
     <string name="layout_dashboard_name">Tablero</string>
     <string name="layout_notifications_tray_name">Notificaciones</string>
-    <string name="layout_parent_students_name">Estudiantes</string>
-    <string name="layout_parent_homeworks_name">Tareas</string>
-    <string name="layout_parent_activities_name">Actividades</string>
+    <string name="layout_activities_name">Actividades</string>
+    <string name="layout_homeworks_name">Tareas</string>
     <string name="layout_parent_notes_name">Calificaciones</string>
     <string name="layout_parent_semaphore_name">Semáforo</string>
-    <string name="layout_teacher_students_name">Estudiantes</string>
+    <string name="layout_parent_students_name">Estudiantes</string>
     <string name="layout_teacher_homeworks_name">Enviar Tarea</string>
     <string name="layout_teacher_activities_name">Enviar actividad</string>
     <string name="layout_teacher_notes_name">Subir calificaciones</string>
+    <string name="layout_teacher_students_name">Estudiantes</string>
 
     <string name="btn_signin">Iniciar sesión</string>
     <string name="btn_signup">Crear cuenta</string>
@@ -70,5 +70,7 @@
 
     <string name="dialog_attach_url_confirm_button">Adjuntar URL</string>
     <string name="dialog_attach_url_msg">Escribe la dirección de la pagina Web que quieres adjuntar</string>
+
+    <string name="action_delete">Eliminar</string>
 
 </resources>

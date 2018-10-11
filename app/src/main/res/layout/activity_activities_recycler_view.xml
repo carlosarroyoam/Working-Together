@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".NotificationsTray">
+    tools:context=".Activities">
 
     <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
         android:id="@+id/swipe_refresh_layout"
@@ -19,7 +19,7 @@
             tools:context=".Homeworks">
 
             <android.support.v7.widget.RecyclerView
-                android:id="@+id/recycler_view_notifications"
+                android:id="@+id/recycler_view_activities"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:scrollbars="vertical" />

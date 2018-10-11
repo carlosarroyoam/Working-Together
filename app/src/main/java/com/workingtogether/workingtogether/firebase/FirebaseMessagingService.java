@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
-import android.net.Uri;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
@@ -16,18 +15,13 @@ import com.workingtogether.workingtogether.db.ActivityDB;
 import com.workingtogether.workingtogether.db.HomeworksDB;
 import com.workingtogether.workingtogether.db.NotificationsDB;
 import com.workingtogether.workingtogether.db.SessionDB;
-import com.workingtogether.workingtogether.db.UserDB;
-import com.workingtogether.workingtogether.parent.ParentActivities;
-import com.workingtogether.workingtogether.parent.ParentHomeworks;
+import com.workingtogether.workingtogether.Activities;
+import com.workingtogether.workingtogether.Homeworks;
 import com.workingtogether.workingtogether.util.DateUtils;
 import com.workingtogether.workingtogether.util.LocalParams;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.text.SimpleDateFormat;
-import java.util.Calendar;
 
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
@@ -149,12 +143,12 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     private Intent setIntentType(String notificationType){
         Intent intent;
         if (notificationType.equals(LocalParams.HOMEWORKNOTIFICATION)) {
-            intent = new Intent(this, ParentHomeworks.class);
+            intent = new Intent(this, Homeworks.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             return intent;
 
         } else if (notificationType.equals(LocalParams.ACTIVITYNOTIFICATION)) {
-            intent = new Intent(this, ParentActivities.class);
+            intent = new Intent(this, Activities.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             return intent;
 

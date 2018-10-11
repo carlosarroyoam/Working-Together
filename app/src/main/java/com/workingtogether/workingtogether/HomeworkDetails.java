@@ -18,7 +18,6 @@ public class HomeworkDetails extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         homework = getHomework();
-        Toast.makeText(this, homework.getTITLE(), Toast.LENGTH_SHORT).show();
     }
 
     @Override

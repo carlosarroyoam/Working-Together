@@ -1,5 +1,6 @@
 package com.workingtogether.workingtogether.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
@@ -75,6 +76,13 @@ public class ActivityDB {
         } catch (SQLiteException e) {
             Log.d("Exception: ", e.getMessage());
         }
+        sqLiteOpenHelper.closeDatabase();
+    }
+
+    public void deleteActivity(int UIDACTIVITY) {
+        sqLiteOpenHelper.openDatabase();
+        String[] whereArgs = {Integer.toString(UIDACTIVITY)};
+        mDatabase.delete("ACTIVITIES","UIDACTIVITY = ?", whereArgs);
         sqLiteOpenHelper.closeDatabase();
     }
 

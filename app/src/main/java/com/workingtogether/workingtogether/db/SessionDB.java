@@ -25,7 +25,6 @@ public class SessionDB {
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM SESSION WHERE SESSTATE = ?", selectArgs);
         if (cursor.moveToFirst())
             return true;
-        //Only 1 resul
         cursor.close();
         sqLiteOpenHelper.closeDatabase();
         return false;
@@ -61,6 +60,7 @@ public class SessionDB {
             Log.d("Exception: ", e.getMessage());
         }
         sqLiteOpenHelper.closeDatabase();
+
     }
 
     public void updateSession(int UIDUSER, int SESSTATE) {
@@ -70,6 +70,7 @@ public class SessionDB {
         String[] whereArgs = {Integer.toString(UIDUSER)};
         mDatabase.update("SESSION", contentValues, "UIDUSER = ?", whereArgs);
         sqLiteOpenHelper.closeDatabase();
+
     }
 
     public void closeSession() {
@@ -79,6 +80,7 @@ public class SessionDB {
         String[] whereArgs = {Integer.toString(1)};
         mDatabase.update("SESSION", contentValues, "SESSTATE = ?", whereArgs);
         sqLiteOpenHelper.closeDatabase();
+
     }
 
 }

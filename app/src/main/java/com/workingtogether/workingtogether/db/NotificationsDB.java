@@ -1,5 +1,6 @@
 package com.workingtogether.workingtogether.db;
 
+import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
@@ -105,6 +106,14 @@ public class NotificationsDB {
             Log.d("Exception: ", e.getMessage());
         }
         sqLiteOpenHelper.closeDatabase();
+    }
+
+    public void deleteNotification(int UIDNOTIFICATION) {
+        sqLiteOpenHelper.openDatabase();
+        String[] whereArgs = {Integer.toString(UIDNOTIFICATION)};
+        mDatabase.delete("NOTIFICATIONS","UIDNOTIFICATION = ?", whereArgs);
+        sqLiteOpenHelper.closeDatabase();
+
     }
 
 }

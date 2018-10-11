@@ -11,15 +11,13 @@ import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.obj.Notification;
-import com.workingtogether.workingtogether.parent.ParentActivities;
-import com.workingtogether.workingtogether.parent.ParentHomeworks;
+import com.workingtogether.workingtogether.Activities;
+import com.workingtogether.workingtogether.Homeworks;
 import com.workingtogether.workingtogether.parent.ParentNotes;
 import com.workingtogether.workingtogether.util.DateUtils;
 import com.workingtogether.workingtogether.util.LocalParams;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 
 public class NotificationsDrawerAdapter extends BaseAdapter {
     private Context mContext;
@@ -27,7 +25,7 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
 
     public NotificationsDrawerAdapter(Context context, ArrayList<Notification> notificationArrayList) {
         this.mContext = context;
-        mNotificationsDataset = notificationArrayList;
+        this.mNotificationsDataset = notificationArrayList;
     }
 
     @Override
@@ -47,7 +45,7 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
-        View row = null;
+        View row;
         if (convertView == null) {
             LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
             row = layoutInflater.inflate(R.layout.activity_notifications_cardview_item, parent, false);
@@ -88,9 +86,9 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
             @Override
             public void onClick(View v) {
                 if (mNotificationsDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.HOMEWORKNOTIFICATION)) {
-                    mContext.startActivity(new Intent(mContext, ParentHomeworks.class));
+                    mContext.startActivity(new Intent(mContext, Homeworks.class));
                 } else if (mNotificationsDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.ACTIVITYNOTIFICATION)) {
-                    mContext.startActivity(new Intent(mContext, ParentActivities.class));
+                    mContext.startActivity(new Intent(mContext, Activities.class));
                 } else if (mNotificationsDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.NOTESNOTIFICATION)) {
                     mContext.startActivity(new Intent(mContext, ParentNotes.class));
                 }

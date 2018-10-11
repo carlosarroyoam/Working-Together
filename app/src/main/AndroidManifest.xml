@@ -40,11 +40,10 @@
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".NotificationsTray"
-            android:label="@string/layout_notifications_tray_name"
-            android:parentActivityName=".Dashboard" />
+            android:label="@string/layout_notifications_tray_name"/>
         <activity
-            android:name=".parent.ParentHomeworks"
-            android:label="@string/layout_parent_homeworks_name"
+            android:name=".Homeworks"
+            android:label="@string/layout_homeworks_name"
             android:parentActivityName=".Dashboard" />
         <activity
             android:name=".parent.ParentNotes"
@@ -55,8 +54,8 @@
             android:label="@string/layout_parent_students_name"
             android:parentActivityName=".Dashboard" />
         <activity
-            android:name=".parent.ParentActivities"
-            android:label="@string/layout_parent_activities_name"
+            android:name=".Activities"
+            android:label="@string/layout_activities_name"
             android:parentActivityName=".Dashboard" />
         <activity
             android:name=".parent.ParentSemaphore"
@@ -82,6 +81,12 @@
             android:name=".teacher.TeacherNotes"
             android:label="@string/layout_teacher_notes_name"
             android:parentActivityName=".Dashboard" />
+        <activity
+            android:name=".HomeworkDetails"
+            android:parentActivityName=".Homeworks" />
+        <activity
+            android:name=".ActivityDetails"
+            android:parentActivityName=".Activities" />
 
         <service android:name=".firebase.FirebaseInstanceServiceId">
             <intent-filter>
@@ -94,12 +99,6 @@
             </intent-filter>
         </service>
 
-        <activity
-            android:name=".HomeworkDetails"
-            android:parentActivityName=".parent.ParentHomeworks"/>
-        <activity
-            android:name=".ActivityDetails"
-            android:parentActivityName=".parent.ParentActivities"/>
     </application>
 
 </manifest>

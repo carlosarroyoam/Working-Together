@@ -54,7 +54,7 @@ public class ParentNotes extends AppCompatActivity {
             mRecyclerView.setAdapter(mAdapter);
 
         } else {
-            stub.setLayoutResource(R.layout.activity_parent_homeworks_empty_tray);
+            stub.setLayoutResource(R.layout.activity_homeworks_empty_tray);
             stub.inflate();
 
         }

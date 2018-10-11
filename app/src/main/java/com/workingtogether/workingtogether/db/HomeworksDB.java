@@ -1,6 +1,8 @@
 package com.workingtogether.workingtogether.db;
 
+import android.content.ContentValues;
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteConstraintException;
 import android.database.sqlite.SQLiteDatabase;
@@ -78,6 +80,14 @@ public class HomeworksDB {
             Log.d("Exception: ", e.getMessage());
         }
         sqLiteOpenHelper.closeDatabase();
+    }
+
+    public void deleteHomework(int UIDHOMEWORK) {
+        sqLiteOpenHelper.openDatabase();
+        String[] whereArgs = {Integer.toString(UIDHOMEWORK)};
+        mDatabase.delete("HOMEWORKS","UIDHOMEWORK = ?", whereArgs);
+        sqLiteOpenHelper.closeDatabase();
+
     }
 
 }

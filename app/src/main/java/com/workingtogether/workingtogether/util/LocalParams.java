@@ -29,4 +29,9 @@ public class LocalParams {
     public static String DELIVERDATE = "DELIVERDATE";
     public static String PUBLISHDATE = "PUBLISHDATE";
 
+    public static int SHOWALLNOTIFICATIONSREQUEST = 12394;
+    public static int SHOWNOTIFICATIONDETAILSREQUEST = 12378;
+    public static int SHOWHOMEWORKDETAILSREQUEST = 10092;
+    public static int SHOWACTIVITYDETAILSREQUEST = 34138;
+
 }

@@ -1,45 +1,44 @@
 package com.workingtogether.workingtogether;
 
-import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.Intent;
+import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.os.Bundle;
 import android.support.v7.view.ActionMode;
-import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
-import com.workingtogether.workingtogether.adapter.NotificationsRecyclerViewAdapter;
+
+import com.workingtogether.workingtogether.adapter.ActivitiesRecyclerViewAdapter;
+import com.workingtogether.workingtogether.db.ActivityDB;
 import com.workingtogether.workingtogether.db.HomeworksDB;
-import com.workingtogether.workingtogether.db.NotificationsDB;
+import com.workingtogether.workingtogether.obj.Activity;
 import com.workingtogether.workingtogether.obj.Homework;
-import com.workingtogether.workingtogether.obj.Notification;
-import com.workingtogether.workingtogether.util.LocalParams;
 
 import java.util.ArrayList;
 
-public class NotificationsTray extends AppCompatActivity implements NotificationsRecyclerViewAdapter.RecyclerViewOnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class Activities extends AppCompatActivity implements ActivitiesRecyclerViewAdapter.RecyclerViewOnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
-    private NotificationsRecyclerViewAdapter mAdapter;
+    private ActivitiesRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
     private SwipeRefreshLayout swipeRefreshLayout;
-    private NotificationsTray.ActionModeCallback actionModeCallback;
+    private Activities.ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
-    private ArrayList<Notification> mDataset;
+    private ArrayList<Activity> mDataset;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_notifications_tray);
+        setContentView(R.layout.activity_activities);
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setLayout();
+
+
     }
 
     @Override
@@ -53,53 +52,9 @@ public class NotificationsTray extends AppCompatActivity implements Notification
         super.onBackPressed();
     }
 
-    private void setLayout() {
-        mDataset = new ArrayList<>();
-        mDataset.addAll(loadNotificationsList());
-        ViewStub stub = findViewById(R.id.notificatios_layout_loader);
-
-        if (mDataset.size() > 0) {
-            stub.setLayoutResource(R.layout.activity_notifications_recycler_view);
-            stub.inflate();
-
-            mRecyclerView = findViewById(R.id.recycler_view_notifications);
-            mLayoutManager = new LinearLayoutManager(this);
-            mRecyclerView.setHasFixedSize(true);
-            mRecyclerView.setLayoutManager(mLayoutManager);
-            mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-            mAdapter = new NotificationsRecyclerViewAdapter(this, mDataset);
-            mRecyclerView.setAdapter(mAdapter);
-
-            actionModeCallback = new NotificationsTray.ActionModeCallback();
-            swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
-            swipeRefreshLayout.setOnRefreshListener(this);
-            swipeRefreshLayout.post(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            updateNotificationsList();
-                        }
-                    });
-        } else {
-            stub.setLayoutResource(R.layout.activity_notifications_empty_tray);
-            stub.inflate();
-
-        }
-
-    }
-
-    private ArrayList<Notification> loadNotificationsList() {
-        NotificationsDB notificationsDB = new NotificationsDB(this);
-        ArrayList<Notification> notificationArrayList = notificationsDB.getAllNotifications();
-        return notificationArrayList;
-    }
-
-    private void updateNotificationsList() {
-        swipeRefreshLayout.setRefreshing(true);
-        mDataset.clear();
-        mDataset.addAll(loadNotificationsList());
-        mAdapter.notifyDataSetChanged();
-        swipeRefreshLayout.setRefreshing(false);
+    @Override
+    public void onRefresh() {
+        updateActivitiesList();
     }
 
     @Override
@@ -127,9 +82,54 @@ public class NotificationsTray extends AppCompatActivity implements Notification
         }
     }
 
-    @Override
-    public void onRefresh() {
-        updateNotificationsList();
+
+    private void setLayout() {
+        mDataset = new ArrayList<>();
+        mDataset.addAll(loadActivitiesList());
+
+        ViewStub stub = findViewById(R.id.activities_layout_loader);
+
+        if (mDataset.size() > 0) {
+            stub.setLayoutResource(R.layout.activity_activities_recycler_view);
+            stub.inflate();
+
+            mRecyclerView = findViewById(R.id.recycler_view_activities);
+            mRecyclerView.setHasFixedSize(true);
+            mLayoutManager = new LinearLayoutManager(this);
+            mRecyclerView.setLayoutManager(mLayoutManager);
+            mAdapter = new ActivitiesRecyclerViewAdapter(this, mDataset);
+            mRecyclerView.setAdapter(mAdapter);
+
+            actionModeCallback = new Activities.ActionModeCallback();
+            swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+            swipeRefreshLayout.setOnRefreshListener(this);
+            swipeRefreshLayout.post(
+                    new Runnable() {
+                        @Override
+                        public void run() {
+                            updateActivitiesList();
+                        }
+                    });
+        } else {
+            stub.setLayoutResource(R.layout.activity_activities_empty_tray);
+            stub.inflate();
+
+        }
+
+    }
+
+    private ArrayList<Activity> loadActivitiesList() {
+        ActivityDB activityDB = new ActivityDB(this);
+        ArrayList<Activity> activityArrayList = activityDB.getAllActivities();
+        return activityArrayList;
+    }
+
+    private void updateActivitiesList() {
+        swipeRefreshLayout.setRefreshing(true);
+        mDataset.clear();
+        mDataset.addAll(loadActivitiesList());
+        mAdapter.notifyDataSetChanged();
+        swipeRefreshLayout.setRefreshing(false);
     }
 
     private class ActionModeCallback implements ActionMode.Callback {
@@ -174,16 +174,15 @@ public class NotificationsTray extends AppCompatActivity implements Notification
 
     }
 
-
-    private void deleteHomeworks(ArrayList<Notification> selectedItems) {
-        NotificationsDB homeworksDB = new NotificationsDB(getApplicationContext());
+    private void deleteHomeworks(ArrayList<Activity> selectedItems) {
+        ActivityDB activityDB = new ActivityDB(getApplicationContext());
         for (int i = 0; i < selectedItems.size(); i++) {
-            homeworksDB.deleteNotification(selectedItems.get(i).getUIDNOTIFICATION());
-            updateNotificationsList();
+            activityDB.deleteActivity(selectedItems.get(i).getUIDACTIVITY());
+            updateActivitiesList();
         }
     }
 
-    private void showDeleteDialog(final ArrayList<Notification> selectedItems) {
+    private void showDeleteDialog(final ArrayList<Activity> selectedItems) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Eliminar");
         alertDialogBuilder
@@ -204,4 +203,5 @@ public class NotificationsTray extends AppCompatActivity implements Notification
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
     }
+
 }

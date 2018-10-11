@@ -1,5 +1,6 @@
 package com.workingtogether.workingtogether;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -17,10 +18,8 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.ViewStub;
 import android.widget.AdapterView;
-import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,8 +35,6 @@ import com.workingtogether.workingtogether.obj.Notification;
 import com.workingtogether.workingtogether.obj.Parent;
 import com.workingtogether.workingtogether.obj.SessionApp;
 import com.workingtogether.workingtogether.obj.Teacher;
-import com.workingtogether.workingtogether.parent.ParentActivities;
-import com.workingtogether.workingtogether.parent.ParentHomeworks;
 import com.workingtogether.workingtogether.parent.ParentNotes;
 import com.workingtogether.workingtogether.parent.ParentSemaphore;
 import com.workingtogether.workingtogether.teacher.TeacherActivities;
@@ -52,6 +49,8 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private ActionBarDrawerToggle nav_drawer_toggle;
     private View nav_drawer_view;
     private ListView notification_drawer_view;
+    private NotificationsDrawerAdapter mAdapter;
+    private ArrayList<Notification> mNotificationsDataset;
     NavigationView navigation_nav_view;
 
     @Override
@@ -68,27 +67,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         getSupportActionBar().setHomeButtonEnabled(true);
-        /*
 
-        One navigation drawer example
-
-        //getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_email_24dp);
-        nav_drawer = findViewById(R.id.nav_drawer_layout);
-        nav_drawer_toggle = new ActionBarDrawerToggle(this, nav_drawer, toolbar, R.string.app_name, R.string.app_name);
-        nav_drawer.addDrawerListener(nav_drawer_toggle);
-        NavigationView nav_drawer_view = findViewById(R.id.nav_drawer_view);
-        nav_drawer_view.setNavigationItemSelectedListener(this);
-
-        toolbar.setNavigationOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                if (nav_drawer.isDrawerOpen(Gravity.RIGHT)) {
-                    nav_drawer.closeDrawer(Gravity.RIGHT);
-                } else {
-                    nav_drawer.openDrawer(Gravity.RIGHT);
-                }
-            }
-        });*/
+        mNotificationsDataset = new ArrayList<>();
+        mNotificationsDataset.addAll(loadNotificationsList());
     }
 
     @Override
@@ -96,14 +77,16 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         super.onStart();
 
         if (nav_drawer == null || nav_drawer_view == null || notification_drawer_view == null || nav_drawer_toggle == null) {
+
             // Configure navigation drawer
             nav_drawer = findViewById(R.id.nav_drawer_layout);
             nav_drawer_view = findViewById(R.id.nav_drawer_view);
             notification_drawer_view = findViewById(R.id.notification_drawer_view);
 
+            mAdapter = new NotificationsDrawerAdapter(this, mNotificationsDataset);
             // Set the adapter for the list view
             View headerView = ((LayoutInflater) this.getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.header_notification_drawer_view, null, false);
-            notification_drawer_view.setAdapter(new NotificationsDrawerAdapter(this, loadNotificationsList()));
+            notification_drawer_view.setAdapter(mAdapter);
             notification_drawer_view.addHeaderView(headerView);
 
             // Set the list's click listener
@@ -222,6 +205,12 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        updateNotificationsList();
+    }
+
     private void loadUserInfo() {
         SessionDB sessionDB = new SessionDB(this);
         SessionApp sessionApp = sessionDB.getUserlogged();
@@ -250,7 +239,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     private void setDashboardLayout() {
         SessionDB sessionDB = new SessionDB(this);
         SessionApp sessionApp = sessionDB.getUserlogged();
+
         ViewStub stub = findViewById(R.id.dashboard_layout_loader);
+
         if (sessionApp.getTYPEUSER().equals(LocalParams.PARENTUSER))
             stub.setLayoutResource(R.layout.activity_dashboard_parent_content);
         if (sessionApp.getTYPEUSER().equals(LocalParams.TEACHERUSER))
@@ -265,9 +256,15 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         return notificationArrayList;
     }
 
+    private void updateNotificationsList() {
+        mNotificationsDataset.clear();
+        mNotificationsDataset.addAll(loadNotificationsList());
+        mAdapter.notifyDataSetChanged();
+    }
+
     public void showLogOffDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Estas a punto de la cerrar sesión");
+        alertDialogBuilder.setTitle("Estas a punto de cerrar la sesión");
         alertDialogBuilder
                 .setMessage("¿Estas seguro que quieres continuar?")
                 .setCancelable(false)
@@ -293,14 +290,14 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         sessionDB.closeSession();
     }
 
-    public void showAllNotifications(View view){
+    public void showAllNotifications(View view) {
         startActivity(new Intent(this, NotificationsTray.class));
         if (nav_drawer.isDrawerOpen(notification_drawer_view))
             nav_drawer.closeDrawer(notification_drawer_view);
     }
 
     public void homeworksActivity(View view) {
-        startActivity(new Intent(this, ParentHomeworks.class));
+        startActivity(new Intent(this, Homeworks.class));
     }
 
     public void semaphoreActivity(View view) {
@@ -308,7 +305,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     }
 
     public void activitiesActivity(View view) {
-        startActivity(new Intent(this, ParentActivities.class));
+        startActivity(new Intent(this, Activities.class));
     }
 
     public void notesActivity(View view) {
