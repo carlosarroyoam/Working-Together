@@ -4,13 +4,13 @@
 
     <group android:checkableBehavior="none">
         <item
-            android:id="@+id/menu_dashboard_about"
-            android:icon="@drawable/ic_semaphore"
-            android:title="Acerca de Working Together" />
-        <item
             android:id="@+id/menu_dashboard_support"
             android:icon="@drawable/ic_activities"
-            android:title="Soporte técnico"/>
+            android:title="@string/layout_support_name"/>
+        <item
+            android:id="@+id/menu_dashboard_about"
+            android:icon="@drawable/ic_semaphore"
+            android:title="@string/layout_about_name" />
         <item
             android:id="@+id/menu_dashboard_notifications"
             android:icon="@drawable/ic_notification"

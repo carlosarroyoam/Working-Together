@@ -9,6 +9,10 @@
     <string name="layout_notifications_tray_name">Notificaciones</string>
     <string name="layout_activities_name">Actividades</string>
     <string name="layout_homeworks_name">Tareas</string>
+    <string name="layout_messages_name">Mensajes</string>
+    <string name="layout_support_name">Soporte técnico</string>
+    <string name="layout_about_name">Acerca de Working Together</string>
+    <string name="layout_contacts_name">Selecciona un contacto</string>
     <string name="layout_parent_notes_name">Calificaciones</string>
     <string name="layout_parent_semaphore_name">Semáforo</string>
     <string name="layout_parent_students_name">Estudiantes</string>
@@ -20,6 +24,7 @@
     <string name="btn_signin">Iniciar sesión</string>
     <string name="btn_signup">Crear cuenta</string>
     <string name="btn_send">Enviar</string>
+    <string name="btn_support">Enviar correo</string>
     <string name="btn_forgot_password">¿Olvidaste tu contraseña?</string>
     <string name="btn_parent_account">Soy un Familiar</string>
     <string name="btn_teacher_account">Soy un Profesor</string>
@@ -42,6 +47,8 @@
     <string name="txt_signin_msg">Bienvenido a Working Together. ¡Si tienes una cuenta con nosotros, ingresa tus datos para comenzar!</string>
     <string name="txt_create_homework_msg">Ingresa la información de la tarea, después has clic en el botón enviar para publicarla</string>
     <string name="txt_create_activity_msg">Ingresa la información de la actividad, después has clic en el botón enviar para publicarla</string>
+    <string name="txt_messages_empty_tray_msg">Aun no tienes mensajes</string>
+    <string name="txt_messages_empty_tray_msg2">Inicia una conversación con alguno de tus contactos, o espera a recibir un mensaje</string>
     <string name="txt_homework_empty_tray_msg">Aun no tienes tareas</string>
     <string name="txt_homework_empty_tray_msg2">No te preocupes, aquí aparecerán cuando tengas alguna</string>
     <string name="txt_activity_empty_tray_msg">Aun no tienes actividades</string>
@@ -50,6 +57,10 @@
     <string name="txt_notifications_empty_tray_msg2">No te preocupes, te avisaremos cuando llegue una</string>
     <string name="txt_notes_empty_tray_msg">Aun no tienes calificaciones</string>
     <string name="txt_notes_empty_tray_msg2">No te preocupes, aquí aparecerán cuando tengas alguna</string>
+    <string name="txt_support_msg">¿Necesitas ayuda? Escríbenos</string>
+    <string name="txt_support_msg2">Envíanos un correo en donde nos cuentes en que podemos ayudarte, tan pronto como sea posible nos pondremos en contacto contigo</string>
+    <string name="txt_about_msg">Acerca de</string>
+    <string name="txt_about_copyright_msg">©2018 WORKING TOGETHER. TODOS LOS DERECHOS RESERVADOS.</string>
     <string name="txt_signup_msg">Crea tu cuenta gratuita</string>
     <string name="txt_no_account_msg">¿Aun no tienes cuenta? Crea una gratis</string>
 

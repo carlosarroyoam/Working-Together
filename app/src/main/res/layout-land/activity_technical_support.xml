@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="@dimen/double_padding">
+
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/emty_tray_squared_icon_size"
+        android:layout_height="@dimen/emty_tray_squared_icon_size"
+        android:layout_margin="@dimen/half_margin"
+        android:src="@drawable/ic_support" />
+
+    <TextView
+        android:id="@+id/textview"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/half_margin"
+        android:layout_toRightOf="@id/img"
+        android:text="@string/txt_support_msg"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/txt_title_text_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/textview2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textview"
+        android:layout_margin="@dimen/half_margin"
+        android:layout_toRightOf="@id/img"
+        android:text="@string/txt_support_msg2"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/txt_text_size" />
+
+    <Button
+        android:id="@+id/activity_signin_signin_btn"
+        android:layout_width="@dimen/btn_width"
+        android:layout_height="@dimen/btn_height"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@id/space"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="@dimen/margin"
+        android:background="@drawable/positive_button_shape"
+        android:onClick="sendMailToSupport"
+        android:text="@string/btn_support"
+        android:textAllCaps="false"
+        android:textColor="@color/white"
+        android:textSize="@dimen/btn_text_size" />
+
+    <Space
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/double_margin" />
+
+</RelativeLayout>

@@ -66,7 +66,7 @@
                 android:text="Fecha de entrega"
                 android:textAlignment="viewEnd"
                 android:textColor="@android:color/black"
-                android:textSize="12sp" />
+                android:textSize="@dimen/txt_small_text_size" />
 
             <TextView
                 android:id="@+id/activities_cardview_item_activity_id"

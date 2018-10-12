@@ -33,8 +33,9 @@
                         </option>
                         <option name="values">
                           <map>
-                            <entry key="outputName" value="ic_delete_24dp" />
-                            <entry key="sourceFile" value="C:\Users\Carlos" />
+                            <entry key="assetSourceType" value="FILE" />
+                            <entry key="outputName" value="ic_support" />
+                            <entry key="sourceFile" value="C:\Users\Carlos\Downloads\support.svg" />
                           </map>
                         </option>
                       </PersistentState>

@@ -1,6 +1,5 @@
 package com.workingtogether.workingtogether;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -168,11 +167,11 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
                 nav_drawer_toggle.syncState();
                 break;
-            case R.id.menu_dashboard_support:
-                Toast.makeText(this, "Necesitas ayuda?", Toast.LENGTH_SHORT).show();
-                break;
             case R.id.menu_dashboard_about:
-                Toast.makeText(this, "Working Together", Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(this, About.class));
+                break;
+            case R.id.menu_dashboard_support:
+                startActivity(new Intent(this, TechnicalSupport.class));
                 break;
         }
 
@@ -218,15 +217,15 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         if (sessionApp.getTYPEUSER().equals(LocalParams.PARENTUSER)) {
             ParentDB parentDB = new ParentDB(this);
             Parent parentInfo = parentDB.getParentById(sessionApp.getUIDUSER());
-            setNavDrawerInfo(parentInfo.getNAME() + " " + parentInfo.getLASTNAME(), parentInfo.getEMAIL());
+            setNavDrawerInfo(LocalParams.PARENTUSER, parentInfo.getNAME() + " " + parentInfo.getLASTNAME(), parentInfo.getEMAIL());
         } else if (sessionApp.getTYPEUSER().equals(LocalParams.TEACHERUSER)) {
             TeacherDB teacherDB = new TeacherDB(this);
             Teacher teacherInfo = teacherDB.getTeacherById(sessionApp.getUIDUSER());
-            setNavDrawerInfo(teacherInfo.getNAME() + " " + teacherInfo.getLASTNAME(), teacherInfo.getEMAIL());
+            setNavDrawerInfo(LocalParams.TEACHERUSER, teacherInfo.getNAME() + " " + teacherInfo.getLASTNAME(), teacherInfo.getEMAIL());
         }
     }
 
-    private void setNavDrawerInfo(String userName, String mail) {
+    private void setNavDrawerInfo(String typeUser, String userName, String mail) {
         View navView = navigation_nav_view.getHeaderView(0);
         ImageView nav_picture = navView.findViewById(R.id.nav_drawer_user_picture);
 
@@ -234,6 +233,14 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         nav_user.setText(userName);
         TextView nav_mail = navView.findViewById(R.id.nav_drawer_email);
         nav_mail.setText(mail);
+
+        if (typeUser.equals(LocalParams.PARENTUSER)) {
+            nav_picture.setImageResource(R.drawable.ic_student);
+        } else if (typeUser.equals(LocalParams.TEACHERUSER)) {
+            nav_picture.setImageResource(R.drawable.ic_teacher);
+        }
+
+
     }
 
     private void setDashboardLayout() {
@@ -322,6 +329,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
 
     public void sendNotesActivity(View view) {
         startActivity(new Intent(this, TeacherNotes.class));
+    }
+
+    public void messagesActivity(View view) {
+        startActivity(new Intent(this, Conversations.class));
     }
 
 }
