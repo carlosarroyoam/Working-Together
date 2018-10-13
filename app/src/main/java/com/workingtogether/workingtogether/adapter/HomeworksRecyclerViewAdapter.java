@@ -30,7 +30,6 @@ public class HomeworksRecyclerViewAdapter extends RecyclerView.Adapter<Homeworks
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.mId.setText(Integer.toString(mHomeworksDataset.get(position).getUIDHOMEWORK()));
         holder.mTitle.setText(mHomeworksDataset.get(position).getTITLE());
         holder.mDescription.setText(mHomeworksDataset.get(position).getDESCRIPTION());
         holder.mDeliverDate.setText("Fecha de entrega: " + mHomeworksDataset.get(position).getDELIVERDATE());
@@ -69,14 +68,12 @@ public class HomeworksRecyclerViewAdapter extends RecyclerView.Adapter<Homeworks
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        private TextView mId;
         private TextView mTitle;
         private TextView mDescription;
         private TextView mDeliverDate;
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mId = itemView.findViewById(R.id.homeworks_cardview_item_homework_id);
             mTitle = itemView.findViewById(R.id.homeworks_cardview_item_homework_title);
             mDescription = itemView.findViewById(R.id.homeworks_cardview_item_homework_description);
             mDeliverDate = itemView.findViewById(R.id.homeworks_cardview_item_homework_deliverdate);

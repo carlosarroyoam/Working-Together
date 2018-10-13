@@ -1,8 +1,6 @@
 package com.workingtogether.workingtogether;
 
-import android.app.Activity;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,11 +14,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
 import com.workingtogether.workingtogether.adapter.NotificationsRecyclerViewAdapter;
-import com.workingtogether.workingtogether.db.HomeworksDB;
 import com.workingtogether.workingtogether.db.NotificationsDB;
-import com.workingtogether.workingtogether.obj.Homework;
 import com.workingtogether.workingtogether.obj.Notification;
-import com.workingtogether.workingtogether.util.LocalParams;
 
 import java.util.ArrayList;
 
@@ -174,7 +169,7 @@ public class NotificationsTray extends AppCompatActivity implements Notification
 
     }
 
-    private void deleteHomeworks(ArrayList<Notification> selectedItems) {
+    private void deleteNotifications(ArrayList<Notification> selectedItems) {
         NotificationsDB homeworksDB = new NotificationsDB(getApplicationContext());
         for (int i = 0; i < selectedItems.size(); i++) {
             homeworksDB.deleteNotification(selectedItems.get(i).getUIDNOTIFICATION());
@@ -190,7 +185,7 @@ public class NotificationsTray extends AppCompatActivity implements Notification
                 .setCancelable(false)
                 .setPositiveButton("Si", new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        deleteHomeworks(selectedItems);
+                        deleteNotifications(selectedItems);
                         dialog.dismiss();
                     }
                 })

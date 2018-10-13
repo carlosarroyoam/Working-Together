@@ -1,11 +1,15 @@
 package com.workingtogether.workingtogether;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.view.ActionMode;
+import android.support.v7.widget.AppCompatDrawableManager;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -21,6 +25,9 @@ import com.workingtogether.workingtogether.db.NotificationsDB;
 import com.workingtogether.workingtogether.obj.Conversation;
 import com.workingtogether.workingtogether.obj.Notification;
 
+import java.lang.reflect.Constructor;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 public class Conversations extends AppCompatActivity implements ConversationsRecyclerViewAdapter.RecyclerViewOnItemClickListener, SwipeRefreshLayout.OnRefreshListener  {
@@ -36,7 +43,6 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_conversations);
-
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setLayout();
     }
@@ -130,6 +136,10 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
     @Override
     public void onRefresh() {
         updateConversationsList();
+    }
+
+    public void newMessage(View view){
+        startActivity(new Intent(this, Contacts.class));
     }
 
     private class ActionModeCallback implements ActionMode.Callback {

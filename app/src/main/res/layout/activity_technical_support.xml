@@ -3,6 +3,7 @@
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:fillViewport="true">
 
     <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
@@ -16,7 +17,7 @@
             android:layout_height="@dimen/emty_tray_squared_icon_size"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/half_margin"
-            android:src="@drawable/ic_support" />
+            app:srcCompat="@drawable/ic_support" />
 
         <TextView
             android:id="@+id/textview"

@@ -32,7 +32,6 @@ public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<Conve
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mId.setText(Integer.toString(mConversationsDataset.get(position).getUIDCONVERSATION()));
 
         holder.itemView.setActivated(mSelectedItems.get(position, false)); //Cambiar estado a activado en items seleccionados
 
@@ -75,7 +74,6 @@ public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<Conve
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        private TextView mId;
         private ImageView mImg;
         private TextView mContactName;
         private TextView mLastMessageContent;
@@ -83,7 +81,6 @@ public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<Conve
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mId = itemView.findViewById(R.id.messages_cardview_item_conversation_id);
             mImg = itemView.findViewById(R.id.messages_contact_profile_picture);
             mContactName = itemView.findViewById(R.id.messages_cardview_item_contactname);
             mLastMessageContent = itemView.findViewById(R.id.messages_cardview_item_last_message_content);

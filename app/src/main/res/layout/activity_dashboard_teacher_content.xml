@@ -42,7 +42,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_homeworks" />
+                        app:srcCompat="@drawable/ic_homeworks" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -80,7 +80,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_homeworks" />
+                        app:srcCompat="@drawable/ic_homeworks" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -119,7 +119,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_activities" />
+                        app:srcCompat="@drawable/ic_activities" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -158,7 +158,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_activities" />
+                        app:srcCompat="@drawable/ic_activities" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -197,7 +197,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_notes" />
+                        app:srcCompat="@drawable/ic_notes" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -237,7 +237,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_message" />
+                        app:srcCompat="@drawable/ic_message" />
 
                     <TextView
                         android:layout_width="wrap_content"

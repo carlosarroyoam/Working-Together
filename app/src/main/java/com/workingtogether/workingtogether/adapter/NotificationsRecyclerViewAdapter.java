@@ -36,7 +36,6 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mId.setText(Integer.toString(mNotificationsDataset.get(position).getUIDNOTIFICATION()));
         holder.mIdResourse.setText(Integer.toString(mNotificationsDataset.get(position).getUIDRESOURSE()));
         holder.mTitle.setText(mNotificationsDataset.get(position).getTITLE());
         holder.mDescription.setText(mNotificationsDataset.get(position).getDESCRIPTION());
@@ -91,7 +90,6 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        private TextView mId;
         private TextView mIdResourse;
         private ImageView mImg;
         private TextView mTitle;
@@ -100,8 +98,6 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
 
         public ViewHolder(View itemView) {
             super(itemView);
-            mId = itemView.findViewById(R.id.notifications_cardview_item_notification_id);
-            mIdResourse = itemView.findViewById(R.id.notifications_cardview_item_resourse_id);
             mImg = itemView.findViewById(R.id.img);
             mTitle = itemView.findViewById(R.id.notifications_cardview_item_notification_title);
             mDescription = itemView.findViewById(R.id.notification_cardview_item_notification_description);

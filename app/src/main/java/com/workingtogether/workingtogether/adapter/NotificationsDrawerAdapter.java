@@ -53,15 +53,11 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
             row = convertView;
         }
 
-        TextView mId = row.findViewById(R.id.notifications_cardview_item_notification_id);
-        TextView mIdResourse = row.findViewById(R.id.notifications_cardview_item_resourse_id);
         ImageView mImg = row.findViewById(R.id.img);
         TextView mTitle = row.findViewById(R.id.notifications_cardview_item_notification_title);
         TextView mDescription = row.findViewById(R.id.notification_cardview_item_notification_description);
         TextView mDeliverDate = row.findViewById(R.id.notifications_cardview_item_notification_deliverdate);
 
-        mId.setText(Integer.toString(mNotificationsDataset.get(position).getUIDNOTIFICATION()));
-        mIdResourse.setText(Integer.toString(mNotificationsDataset.get(position).getUIDRESOURSE()));
         mTitle.setText(mNotificationsDataset.get(position).getTITLE());
         mDescription.setText(mNotificationsDataset.get(position).getDESCRIPTION());
 

@@ -3,15 +3,17 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/double_padding">
 
     <ImageView
         android:id="@+id/img"
         android:layout_width="@dimen/emty_tray_squared_icon_size"
         android:layout_height="@dimen/emty_tray_squared_icon_size"
+        android:scaleType="centerCrop"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/half_margin"
-        android:src="@drawable/ic_message" />
+        app:srcCompat="@drawable/ic_message" />
 
     <TextView
         android:id="@+id/textview"

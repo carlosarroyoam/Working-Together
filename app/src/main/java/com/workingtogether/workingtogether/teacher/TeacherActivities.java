@@ -5,7 +5,6 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.design.widget.TextInputLayout;
@@ -15,7 +14,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
@@ -23,7 +21,6 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.workingtogether.workingtogether.R;
@@ -34,8 +31,6 @@ import com.workingtogether.workingtogether.util.firebaseConsoleWS;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.File;
-import java.net.URI;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
@@ -229,7 +224,7 @@ public class TeacherActivities extends AppCompatActivity {
         final Dialog dialog = new Dialog(this);
         //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
         dialog.setCancelable(false);
-        dialog.setContentView(R.layout.dialogattachurl);
+        dialog.setContentView(R.layout.dialog_attach_url);
 
         final EditText url = dialog.findViewById(R.id.dialog_url);
 

@@ -29,7 +29,7 @@
                 android:layout_height="@dimen/homeworks_squared_icon_size"
                 android:layout_gravity="center_horizontal"
                 android:layout_margin="@dimen/half_margin"
-                android:src="@drawable/ic_activities" />
+                app:srcCompat="@drawable/ic_activities" />
 
             <TextView
                 android:id="@+id/activities_cardview_item_activity_title"

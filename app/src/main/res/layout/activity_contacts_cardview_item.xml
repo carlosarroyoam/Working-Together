@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/bg_list_row">
+
+    <android.support.v7.widget.CardView
+        android:id="@+id/cardview_homework"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_columnWeight="1"
+        android:layout_margin="@dimen/half_margin"
+        android:layout_rowWeight="0"
+        app:cardCornerRadius="8dp"
+        app:cardElevation="8dp">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal|center_vertical"
+            android:orientation="vertical"
+            android:padding="@dimen/half_padding">
+
+            <ImageView
+                android:id="@+id/contacts_cardview_item_contact_profile_picture"
+                android:layout_width="@dimen/messages_squared_profile_picture_size"
+                android:layout_height="@dimen/messages_squared_profile_picture_size"
+                android:layout_gravity="center_horizontal"
+                android:layout_margin="@dimen/half_margin"
+                app:srcCompat="@drawable/ic_student" />
+
+
+            <TextView
+                android:id="@+id/contacts_cardview_item_contact_name"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/half_margin"
+                android:layout_marginTop="@dimen/half_margin"
+                android:layout_toRightOf="@+id/contacts_cardview_item_contact_profile_picture"
+                android:text="Nombre"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txt_subtitle_text_size"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/contacts_cardview_item_contact_email"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/contacts_cardview_item_contact_name"
+                android:layout_marginLeft="@dimen/half_margin"
+                android:layout_toRightOf="@id/contacts_cardview_item_contact_profile_picture"
+                android:text="Correo"
+                android:textAlignment="textStart"
+                android:textColor="@android:color/black"
+                android:textSize="@dimen/txt_text_size" />
+
+        </RelativeLayout>
+
+    </android.support.v7.widget.CardView>
+
+</RelativeLayout>

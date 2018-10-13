@@ -27,7 +27,7 @@
                 android:id="@+id/activity_parent_semaphore_img"
                 android:layout_width="@dimen/semaphore_icon_size"
                 android:layout_height="@dimen/semaphore_icon_size"
-                android:src="@drawable/ic_semaphore" />
+                app:srcCompat="@drawable/ic_semaphore" />
 
             <TextView
                 android:id="@+id/activity_parent_semaphore_status_txt"

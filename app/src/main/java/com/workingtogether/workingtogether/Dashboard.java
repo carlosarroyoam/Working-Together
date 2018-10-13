@@ -99,7 +99,6 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 public void onDrawerClosed(View drawerView) {
                     if (drawerView.equals(nav_drawer_view)) {
                         getSupportActionBar().setTitle(getTitle());
-                        supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
                         nav_drawer_toggle.syncState();
                     }
                 }
@@ -108,7 +107,9 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 public void onDrawerOpened(View drawerView) {
                     if (drawerView.equals(nav_drawer_view)) {
                         getSupportActionBar().setTitle(getTitle());
-                        supportInvalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
+                        nav_drawer_toggle.syncState();
+                    } else if (drawerView.equals(notification_drawer_view)) {
+                        getSupportActionBar().setTitle(getTitle());
                         nav_drawer_toggle.syncState();
                     }
                 }

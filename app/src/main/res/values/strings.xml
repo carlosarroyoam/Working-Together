@@ -49,6 +49,7 @@
     <string name="txt_create_activity_msg">Ingresa la información de la actividad, después has clic en el botón enviar para publicarla</string>
     <string name="txt_messages_empty_tray_msg">Aun no tienes mensajes</string>
     <string name="txt_messages_empty_tray_msg2">Inicia una conversación con alguno de tus contactos, o espera a recibir un mensaje</string>
+    <string name="txt_contacts_empty_tray_msg">Aun no tienes ningun contacto</string>
     <string name="txt_homework_empty_tray_msg">Aun no tienes tareas</string>
     <string name="txt_homework_empty_tray_msg2">No te preocupes, aquí aparecerán cuando tengas alguna</string>
     <string name="txt_activity_empty_tray_msg">Aun no tienes actividades</string>
@@ -65,22 +66,16 @@
     <string name="txt_no_account_msg">¿Aun no tienes cuenta? Crea una gratis</string>
 
     <string name="semaphore_red_status_name">Rojo</string>
-    <string name="semaphore_yellow_status_name">Amarillo</string>
-    <string name="semaphore_green_status_name">Verde</string>
-
     <string name="semaphore_red_status_msg"></string>
+    <string name="semaphore_yellow_status_name">Amarillo</string>
     <string name="semaphore_yellow_status_msg"></string>
+    <string name="semaphore_green_status_name">Verde</string>
     <string name="semaphore_green_status_msg">Tu desempeño ha sido muy bueno, muchas felicidades.</string>
-    <string name="title_activity_main">MainActivity</string>
-    <string name="navigation_drawer_open">Open navigation drawer</string>
-    <string name="navigation_drawer_close">Close navigation drawer</string>
-    <string name="nav_header_title">Android Studio</string>
-    <string name="nav_header_subtitle">android.studio@android.com</string>
-    <string name="nav_header_desc">Navigation header</string>
-    <string name="action_settings">Settings</string>
 
     <string name="dialog_attach_url_confirm_button">Adjuntar URL</string>
     <string name="dialog_attach_url_msg">Escribe la dirección de la pagina Web que quieres adjuntar</string>
+
+    <string name="write_message_chart">Escribe un mensaje</string>
 
     <string name="action_delete">Eliminar</string>
 

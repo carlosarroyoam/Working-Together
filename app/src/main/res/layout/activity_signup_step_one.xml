@@ -56,7 +56,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_teacher" />
+                        app:srcCompat="@drawable/ic_teacher" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -96,7 +96,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_parents" />
+                        app:srcCompat="@drawable/ic_parents" />
 
                     <TextView
                         android:layout_width="wrap_content"
