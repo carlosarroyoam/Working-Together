@@ -1,7 +1,10 @@
 package com.workingtogether.workingtogether;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Bundle;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -13,10 +16,13 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.RelativeLayout;
+
 import com.workingtogether.workingtogether.adapter.HomeworksRecyclerViewAdapter;
 import com.workingtogether.workingtogether.db.HomeworksDB;
 import com.workingtogether.workingtogether.obj.Homework;
 import com.workingtogether.workingtogether.util.LocalParams;
+
 import java.util.ArrayList;
 
 public class Homeworks extends AppCompatActivity implements HomeworksRecyclerViewAdapter.RecyclerViewOnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
@@ -27,6 +33,8 @@ public class Homeworks extends AppCompatActivity implements HomeworksRecyclerVie
     private ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
     private ArrayList<Homework> mDataset;
+    private RelativeLayout emptyTrayLayout;
+    private MyReceiver myReceiver;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -35,6 +43,22 @@ public class Homeworks extends AppCompatActivity implements HomeworksRecyclerVie
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setLayout();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(myReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(getPackageName() + ".newHomework");
+        registerReceiver(myReceiver, filter);
+
+        updateHomeworksList();
     }
 
     @Override
@@ -82,37 +106,42 @@ public class Homeworks extends AppCompatActivity implements HomeworksRecyclerVie
     }
 
     private void setLayout() {
+        myReceiver = new MyReceiver();
+        emptyTrayLayout = findViewById(R.id.activity_homeworks_empty_tray);
+
         mDataset = new ArrayList<>();
         mDataset.addAll(loadHomeworksList());
-        ViewStub stub = findViewById(R.id.homeworks_layout_loader);
 
+        mRecyclerView = findViewById(R.id.recycler_view_homeworks);
+        mRecyclerView.setHasFixedSize(true);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mAdapter = new HomeworksRecyclerViewAdapter(this, mDataset);
+        mRecyclerView.setAdapter(mAdapter);
+
+        actionModeCallback = new ActionModeCallback();
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        updateHomeworksList();
+                    }
+                });
+
+        toogleEmptyLayout();
+    }
+
+    private void toogleEmptyLayout() {
         if (mDataset.size() > 0) {
-            stub.setLayoutResource(R.layout.activity_homeworks_recycler_view);
-            stub.inflate();
-
-            mRecyclerView = findViewById(R.id.recycler_view_homeworks);
-            mRecyclerView.setHasFixedSize(true);
-            mLayoutManager = new LinearLayoutManager(this);
-            mRecyclerView.setLayoutManager(mLayoutManager);
-            mAdapter = new HomeworksRecyclerViewAdapter(this, mDataset);
-            mRecyclerView.setAdapter(mAdapter);
-
-            actionModeCallback = new ActionModeCallback();
-            swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
-            swipeRefreshLayout.setOnRefreshListener(this);
-            swipeRefreshLayout.post(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            updateHomeworksList();
-                        }
-                    });
-
+            mRecyclerView.setVisibility(View.VISIBLE);
+            emptyTrayLayout.setVisibility(View.GONE);
         } else {
-            stub.setLayoutResource(R.layout.activity_homeworks_empty_tray);
-            stub.inflate();
-
+            mRecyclerView.setVisibility(View.GONE);
+            emptyTrayLayout.setVisibility(View.VISIBLE);
         }
+
     }
 
     private ArrayList<Homework> loadHomeworksList() {
@@ -126,6 +155,7 @@ public class Homeworks extends AppCompatActivity implements HomeworksRecyclerVie
         mDataset.clear();
         mDataset.addAll(loadHomeworksList());
         mAdapter.notifyDataSetChanged();
+        toogleEmptyLayout();
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -198,6 +228,16 @@ public class Homeworks extends AppCompatActivity implements HomeworksRecyclerVie
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    private class MyReceiver extends BroadcastReceiver {
+        public MyReceiver() {
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateHomeworksList();
+        }
     }
 
 }

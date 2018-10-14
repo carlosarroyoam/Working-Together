@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
 import android.support.v4.app.NotificationCompat;
+import android.support.v4.content.ContextCompat;
 import android.util.Log;
 
 import com.google.firebase.messaging.RemoteMessage;
@@ -107,8 +108,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         sendNotificationToDatabase("Diana López publico una nueva tarea", title, LocalParams.HOMEWORKNOTIFICATION, 1);
         mostrarNotificacion(title, description, LocalParams.HOMEWORKNOTIFICATION);
+        sendNewHomeworkBroadcastReceiver();
     }
 
+    private void sendNewHomeworkBroadcastReceiver(){
+        Intent intent = new Intent();
+        intent.setAction(getPackageName() + ".newHomework");
+        sendBroadcast(intent);
+    }
 
     private void sendActivityToDatabase(JSONObject json) throws JSONException {
         String title, description, deliverDate, url, publishDate;
@@ -123,10 +130,24 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         sendNotificationToDatabase("Diana López publico una nueva actividad", title, LocalParams.ACTIVITYNOTIFICATION, 1);
         mostrarNotificacion(title, description, LocalParams.ACTIVITYNOTIFICATION);
+        sendNewActivityBroadcastReceiver();
+    }
+
+    private void sendNewActivityBroadcastReceiver(){
+        Intent intent = new Intent();
+        intent.setAction(getPackageName() + ".newActivity");
+        sendBroadcast(intent);
     }
 
     private void sendNoteToDatabase(JSONObject json) throws JSONException {
 
+        sendNewNoteBroadcastReceiver();
+    }
+
+    private void sendNewNoteBroadcastReceiver(){
+        Intent intent = new Intent();
+        intent.setAction(getPackageName() + ".newNote");
+        sendBroadcast(intent);
     }
 
     private void sendMessageToDatabase(JSONObject json) throws JSONException {
@@ -154,7 +175,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
             sendNotificationToDatabase("Tienes un nuevo mensaje de " + userFrom.getNAME() + " " + userFrom.getLASTNAME(), data, LocalParams.MESSAGENOTIFICATION, 1);
             mostrarNotificacion("Tienes un nuevo mensaje de " + userFrom.getNAME() + " " + userFrom.getLASTNAME(), data, LocalParams.MESSAGENOTIFICATION);
+            sendNewMessageBroadcastReceiver();
         }
+    }
+
+    private void sendNewMessageBroadcastReceiver(){
+        Intent intent = new Intent();
+        intent.setAction(getPackageName() + ".newMessage");
+        sendBroadcast(intent);
     }
 
     private void mostrarNotificacion(String title, String body, String notificationType) {
@@ -166,6 +194,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 .setContentTitle(title)
                 .setContentText(body)
                 .setAutoCancel(true)
+                .setColor(ContextCompat.getColor(this, R.color.orange))
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setContentIntent(pendingIntent);
 

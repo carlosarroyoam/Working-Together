@@ -58,7 +58,7 @@ public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<Conve
 
         if (message.getSENDSTATE() == 1) {
             if (message.getSENDDATE().substring(0, 9).equals(DateUtils.getDateTime().substring(0, 9)))
-                holder.mLastMessageDate.setText(message.getSENDDATE().substring(11, 21));
+                holder.mLastMessageDate.setText(message.getSENDDATE().substring(11, 16));
             else
                 holder.mLastMessageDate.setText(message.getSENDDATE().substring(0, 10));
         }

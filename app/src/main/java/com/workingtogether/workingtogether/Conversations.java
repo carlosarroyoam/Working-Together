@@ -1,8 +1,11 @@
 package com.workingtogether.workingtogether;
 
 import android.annotation.SuppressLint;
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.os.Build;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
@@ -17,10 +20,12 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.RelativeLayout;
 
 import com.workingtogether.workingtogether.adapter.ConversationsRecyclerViewAdapter;
 import com.workingtogether.workingtogether.adapter.NotificationsRecyclerViewAdapter;
 import com.workingtogether.workingtogether.db.ConversationsDB;
+import com.workingtogether.workingtogether.db.MessagesDB;
 import com.workingtogether.workingtogether.db.NotificationsDB;
 import com.workingtogether.workingtogether.obj.Conversation;
 import com.workingtogether.workingtogether.obj.Notification;
@@ -31,7 +36,7 @@ import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
 
-public class Conversations extends AppCompatActivity implements ConversationsRecyclerViewAdapter.RecyclerViewOnItemClickListener, SwipeRefreshLayout.OnRefreshListener  {
+public class Conversations extends AppCompatActivity implements ConversationsRecyclerViewAdapter.RecyclerViewOnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private ConversationsRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -39,6 +44,8 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
     private Conversations.ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
     private ArrayList<Conversation> mDataset;
+    private RelativeLayout emptyTrayLayout;
+    private MyReceiver myReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,7 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
         setContentView(R.layout.activity_conversations);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setLayout();
+
     }
 
     @Override
@@ -55,41 +63,62 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
     }
 
     @Override
+    protected void onPause() {
+        super.onPause();
+        unregisterReceiver(myReceiver);
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        IntentFilter filter = new IntentFilter();
+        filter.addAction(getPackageName() + ".newMessage");
+        registerReceiver(myReceiver, filter);
+
+        updateConversationsList();
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
     }
 
     private void setLayout() {
+        myReceiver = new Conversations.MyReceiver();
+        emptyTrayLayout = findViewById(R.id.activity_conversations_empty_tray);
+
         mDataset = new ArrayList<>();
         mDataset.addAll(loadConversationsList());
-        ViewStub stub = findViewById(R.id.conversations_layout_loader);
 
+        mRecyclerView = findViewById(R.id.recycler_view_conversations);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        mAdapter = new ConversationsRecyclerViewAdapter(this, this, mDataset);
+        mRecyclerView.setAdapter(mAdapter);
+
+        actionModeCallback = new Conversations.ActionModeCallback();
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        updateConversationsList();
+                    }
+                });
+
+        toogleEmptyLayout();
+    }
+
+    private void toogleEmptyLayout() {
         if (mDataset.size() > 0) {
-            stub.setLayoutResource(R.layout.activity_conversations_recycler_view);
-            stub.inflate();
-
-            mRecyclerView = findViewById(R.id.recycler_view_conversations);
-            mLayoutManager = new LinearLayoutManager(this);
-            mRecyclerView.setHasFixedSize(true);
-            mRecyclerView.setLayoutManager(mLayoutManager);
-            mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-            mAdapter = new ConversationsRecyclerViewAdapter(this, this, mDataset);
-            mRecyclerView.setAdapter(mAdapter);
-
-            actionModeCallback = new Conversations.ActionModeCallback();
-            swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
-            swipeRefreshLayout.setOnRefreshListener(this);
-            swipeRefreshLayout.post(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            updateConversationsList();
-                        }
-                    });
+            mRecyclerView.setVisibility(View.VISIBLE);
+            emptyTrayLayout.setVisibility(View.GONE);
         } else {
-            stub.setLayoutResource(R.layout.activity_conversations_empty_tray);
-            stub.inflate();
-
+            mRecyclerView.setVisibility(View.GONE);
+            emptyTrayLayout.setVisibility(View.VISIBLE);
         }
 
     }
@@ -105,6 +134,7 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
         mDataset.clear();
         mDataset.addAll(loadConversationsList());
         mAdapter.notifyDataSetChanged();
+        toogleEmptyLayout();
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -142,7 +172,7 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
         updateConversationsList();
     }
 
-    public void newMessage(View view){
+    public void newMessage(View view) {
         startActivity(new Intent(this, Contacts.class));
     }
 
@@ -191,6 +221,8 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
     private void deleteHomeworks(ArrayList<Conversation> selectedItems) {
         ConversationsDB conversationsDB = new ConversationsDB(getApplicationContext());
         for (int i = 0; i < selectedItems.size(); i++) {
+            MessagesDB messagesDB = new MessagesDB(this);
+            messagesDB.deleteMessages(selectedItems.get(i).getUIDCONVERSATION());
             conversationsDB.deleteConversation(selectedItems.get(i).getUIDCONVERSATION());
             updateConversationsList();
         }
@@ -216,6 +248,16 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
 
         AlertDialog alertDialog = alertDialogBuilder.create();
         alertDialog.show();
+    }
+
+    private class MyReceiver extends BroadcastReceiver {
+        public MyReceiver() {
+        }
+
+        @Override
+        public void onReceive(Context context, Intent intent) {
+            updateConversationsList();
+        }
     }
 
 }

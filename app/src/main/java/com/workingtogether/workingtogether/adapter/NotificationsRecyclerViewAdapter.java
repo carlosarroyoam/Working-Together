@@ -42,7 +42,7 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
         holder.itemView.setActivated(mSelectedItems.get(position, false)); //Cambiar estado a activado en items seleccionados
 
         if (mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(DateUtils.getDateTime().substring(0, 9)))
-            holder.mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(11, 21));
+            holder.mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(11, 16));
         else
             holder.mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 10));
 

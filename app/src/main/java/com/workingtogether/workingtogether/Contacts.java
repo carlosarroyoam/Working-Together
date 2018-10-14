@@ -1,5 +1,7 @@
 package com.workingtogether.workingtogether;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -10,6 +12,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewStub;
+import android.widget.RelativeLayout;
 
 import com.workingtogether.workingtogether.adapter.ContactsRecyclerViewAdapter;
 import com.workingtogether.workingtogether.db.ConversationsDB;
@@ -31,6 +34,7 @@ public class Contacts extends AppCompatActivity implements ContactsRecyclerViewA
     private RecyclerView.LayoutManager mLayoutManager;
     private SwipeRefreshLayout swipeRefreshLayout;
     private ArrayList<User> mDataset;
+    private RelativeLayout emptyTrayLayout;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,35 +58,39 @@ public class Contacts extends AppCompatActivity implements ContactsRecyclerViewA
     }
 
     private void setLayout() {
+        emptyTrayLayout = findViewById(R.id.activity_contacts_empty_tray);
+
         mDataset = new ArrayList<>();
         mDataset.addAll(loadContactsList());
-        ViewStub stub = findViewById(R.id.contacts_layout_loader);
 
+        mRecyclerView = findViewById(R.id.recycler_view_contacts);
+        mLayoutManager = new LinearLayoutManager(this);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(mLayoutManager);
+        mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
+        mAdapter = new ContactsRecyclerViewAdapter(this, mDataset);
+        mRecyclerView.setAdapter(mAdapter);
+
+        swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
+        swipeRefreshLayout.setOnRefreshListener(this);
+        swipeRefreshLayout.post(
+                new Runnable() {
+                    @Override
+                    public void run() {
+                        updateContactsList();
+                    }
+                });
+
+        toogleEmptyLayout();
+    }
+
+    private void toogleEmptyLayout() {
         if (mDataset.size() > 0) {
-            stub.setLayoutResource(R.layout.activity_contacts_recycler_view);
-            stub.inflate();
-
-            mRecyclerView = findViewById(R.id.recycler_view_contacts);
-            mLayoutManager = new LinearLayoutManager(this);
-            mRecyclerView.setHasFixedSize(true);
-            mRecyclerView.setLayoutManager(mLayoutManager);
-            mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-            mAdapter = new ContactsRecyclerViewAdapter(this, mDataset);
-            mRecyclerView.setAdapter(mAdapter);
-
-            swipeRefreshLayout = findViewById(R.id.swipe_refresh_layout);
-            swipeRefreshLayout.setOnRefreshListener(this);
-            swipeRefreshLayout.post(
-                    new Runnable() {
-                        @Override
-                        public void run() {
-                            updateContactsList();
-                        }
-                    });
+            mRecyclerView.setVisibility(View.VISIBLE);
+            emptyTrayLayout.setVisibility(View.GONE);
         } else {
-            stub.setLayoutResource(R.layout.activity_contacts_empty_tray);
-            stub.inflate();
-
+            mRecyclerView.setVisibility(View.GONE);
+            emptyTrayLayout.setVisibility(View.VISIBLE);
         }
 
     }
@@ -109,6 +117,7 @@ public class Contacts extends AppCompatActivity implements ContactsRecyclerViewA
         mDataset.clear();
         mDataset.addAll(loadContactsList());
         mAdapter.notifyDataSetChanged();
+        toogleEmptyLayout();
         swipeRefreshLayout.setRefreshing(false);
     }
 
@@ -117,10 +126,10 @@ public class Contacts extends AppCompatActivity implements ContactsRecyclerViewA
         Conversation conversation = getConversation(mDataset.get(position).getUIDUSER());
         Intent intent = new Intent(this, ConversationDetails.class);
 
-        if(conversation.getUIDCONVERSATION() > 0){
+        if (conversation.getUIDCONVERSATION() > 0) {
             intent.putExtra(LocalParams.UIDCONVERSATION, conversation.getUIDCONVERSATION());
             intent.putExtra(LocalParams.UIDUSER, conversation.getUIDUSER());
-        }else{
+        } else {
             intent.putExtra(LocalParams.UIDUSER, mDataset.get(position).getUIDUSER());
         }
 
@@ -128,7 +137,7 @@ public class Contacts extends AppCompatActivity implements ContactsRecyclerViewA
         finish();
     }
 
-    private Conversation getConversation(int USERID){
+    private Conversation getConversation(int USERID) {
         ConversationsDB conversationsDB = new ConversationsDB(this);
         return conversationsDB.getConversationByContactId(USERID);
     }

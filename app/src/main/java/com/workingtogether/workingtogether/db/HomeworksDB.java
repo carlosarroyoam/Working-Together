@@ -73,7 +73,7 @@ public class HomeworksDB {
 
         try {
             mDatabase.execSQL("INSERT INTO HOMEWORKS (TITLE, DESCRIPTION, DELIVERDATE, PUBLISHDATE) " +
-                    "VALUES ('" + TITLE + "', '" + DESCRIPTION + "', '" + DELIVERDATE + "', ' " + PUBISHDATE + "')");
+                    "VALUES ('" + TITLE + "', '" + DESCRIPTION + "', '" + DELIVERDATE + "', '" + PUBISHDATE + "')");
         } catch (SQLiteConstraintException c) {
             Log.d("Exception: ", c.getMessage());
         } catch (SQLiteException e) {

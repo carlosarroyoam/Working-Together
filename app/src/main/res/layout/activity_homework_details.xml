@@ -1,9 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".HomeworkDetails">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:padding="@dimen/double_padding"
+    tools:context=".HomeworkDetails" >
 
-</android.support.constraint.ConstraintLayout>
+    <ImageView
+        android:id="@+id/img"
+        android:layout_width="@dimen/emty_tray_squared_icon_size"
+        android:layout_height="@dimen/emty_tray_squared_icon_size"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/half_margin"
+        app:srcCompat="@drawable/ic_homeworks" />
+
+    <TextView
+        android:id="@+id/homeworks_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/img"
+        android:layout_centerHorizontal="true"
+        android:layout_margin="@dimen/half_margin"
+        android:text="@string/txt_notifications_empty_tray_msg"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/txt_title_text_size"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/homeworks_description"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/homeworks_title"
+        android:layout_centerHorizontal="true"
+        android:text="@string/txt_notifications_empty_tray_msg2"
+        android:textAlignment="center"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/txt_text_size" />
+
+    <TextView
+        android:id="@+id/homeworks_deliverdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="@dimen/half_margin"
+        android:text="12/10/2018"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/txt_small_text_size" />
+
+    <TextView
+        android:id="@+id/homeworks_publishdate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="@dimen/half_margin"
+        android:text="12/10/2018"
+        android:textAlignment="viewEnd"
+        android:textColor="@color/gray"
+        android:textSize="@dimen/txt_small_text_size" />
+
+</RelativeLayout>

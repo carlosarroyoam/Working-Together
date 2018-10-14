@@ -2,6 +2,8 @@ package com.workingtogether.workingtogether;
 
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.EditText;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.workingtogether.workingtogether.db.HomeworksDB;
@@ -17,7 +19,17 @@ public class HomeworkDetails extends AppCompatActivity {
         setContentView(R.layout.activity_homework_details);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
+        TextView title = findViewById(R.id.homeworks_title);
+        TextView desc = findViewById(R.id.homeworks_description);
+        TextView deliverdate = findViewById(R.id.homeworks_deliverdate);
+        TextView publishdate = findViewById(R.id.homeworks_publishdate);
+
         homework = getHomework();
+
+        title.setText(homework.getTITLE());
+        desc.setText(homework.getDESCRIPTION());
+        deliverdate.setText("Fecha de entrega: " + homework.getDELIVERDATE());
+        publishdate.setText(homework.getPUBLISHDATE());
     }
 
     @Override

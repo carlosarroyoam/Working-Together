@@ -98,4 +98,20 @@ public class MessagesDB {
         sqLiteOpenHelper.closeDatabase();
     }
 
+    public void deleteMessages(int UIDCONVERSATION) {
+        sqLiteOpenHelper.openDatabase();
+        String[] whereArgs = {Integer.toString(UIDCONVERSATION)};
+        mDatabase.delete("MESSAGES", "UIDCONVERSATION = ?", whereArgs);
+        sqLiteOpenHelper.closeDatabase();
+
+    }
+
+    public void deleteMessagesById(int UIDMESSAGE) {
+        sqLiteOpenHelper.openDatabase();
+        String[] whereArgs = {Integer.toString(UIDMESSAGE)};
+        mDatabase.delete("MESSAGES", "UIDMESSAGE = ?", whereArgs);
+        sqLiteOpenHelper.closeDatabase();
+
+    }
+
 }

@@ -64,7 +64,7 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
 
 
         if (mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(DateUtils.getDateTime().substring(0, 9)))
-            mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(11, 21));
+            mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(11, 16));
         else
             mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 10));
 

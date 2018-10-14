@@ -88,7 +88,7 @@ public class ConversationDetailListAdapter extends BaseAdapter {
             holder.mDate = convertView.findViewById(R.id.message_date);
 
             if (mMessagesDataset.get(position).getSENDDATE().substring(0, 9).equals(DateUtils.getDateTime().substring(0, 9)))
-                holder.mDate.setText(mMessagesDataset.get(position).getSENDDATE().substring(11, 21));
+                holder.mDate.setText(mMessagesDataset.get(position).getSENDDATE().substring(11, 16));
             else
                 holder.mDate.setText(mMessagesDataset.get(position).getSENDDATE());
         }
