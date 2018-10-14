@@ -10,39 +10,46 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/recycler_view_conversations"
+        <ListView
+            android:id="@+id/list_view_conversations"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:scrollbars="vertical" />
+            android:layout_height="wrap_content"
+            android:layout_weight="2"
+            android:divider="#fff" />
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_alignParentBottom="true"
-            android:background="@color/white"
-            android:orientation="horizontal">
+            android:orientation="horizontal"
+            android:padding="@dimen/half_padding">
 
             <EditText
                 android:id="@+id/editText"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_weight="2"
+                android:background="@drawable/sendmessageshape"
                 android:ems="10"
                 android:hint="@string/write_message_chart"
-                android:inputType="text"
+                android:inputType="textMultiLine"
+                android:maxLines="5"
                 android:paddingHorizontal="10dp"
-                android:text="" />
+                android:text=""
+                android:textColor="@color/gray"
+                android:textSize="@dimen/txt_subtitle_text_size">
+                <requestFocus />
+            </EditText>
 
             <ImageButton
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_width="38dp"
+                android:layout_height="38dp"
                 android:layout_gravity="center"
                 android:layout_marginHorizontal="10dp"
-                android:background="@drawable/ic_send_black_24dp"
+                android:background="@drawable/sendmessagebuttonshape"
                 android:onClick="sendMessage"
-                android:padding="20dp"
-                android:scaleType="fitCenter" />
+                android:scaleType="fitCenter"
+                android:src="@drawable/ic_menu_send" />
         </LinearLayout>
 
     </RelativeLayout>

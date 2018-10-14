@@ -46,11 +46,11 @@ import java.util.ArrayList;
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener, AdapterView.OnItemClickListener {
     private DrawerLayout nav_drawer;
     private ActionBarDrawerToggle nav_drawer_toggle;
+    private NavigationView navigation_nav_view;
     private View nav_drawer_view;
     private ListView notification_drawer_view;
     private NotificationsDrawerAdapter mAdapter;
     private ArrayList<Notification> mNotificationsDataset;
-    NavigationView navigation_nav_view;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

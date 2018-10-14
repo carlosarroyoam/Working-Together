@@ -53,8 +53,9 @@
                 android:layout_marginLeft="@dimen/half_margin"
                 android:layout_toRightOf="@id/messages_contact_profile_picture"
                 android:text="Contenido del ultimo mensaje"
+                android:maxLines="1"
                 android:textAlignment="textStart"
-                android:textColor="@android:color/black"
+                android:textColor="@color/gray"
                 android:textSize="@dimen/txt_text_size" />
 
             <TextView
@@ -66,7 +67,7 @@
                 android:layout_toRightOf="@id/img"
                 android:text="12/10/2018"
                 android:textAlignment="viewEnd"
-                android:textColor="@android:color/black"
+                android:textColor="@color/gray"
                 android:textSize="12sp" />
 
         </RelativeLayout>

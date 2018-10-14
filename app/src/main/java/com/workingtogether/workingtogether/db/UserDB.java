@@ -41,6 +41,28 @@ public class UserDB {
         return user;
     }
 
+    public User getUserDetails(int UIDUSER) {
+        User user = new User();
+        sqLiteOpenHelper.openDatabase();
+        String[] selectArgs = {Integer.toString(UIDUSER), Integer.toString(UIDUSER)}; // para buscar en las dos tablas repetimos el parametro
+        StringBuilder query = new StringBuilder("SELECT UIDTEACHER, NAME, LASTNAME, EMAIL, UIDTYPEUSER FROM TEACHERS" +
+                " WHERE UIDTEACHER = ?" +
+                " UNION" +
+                " SELECT UIDPARENT, NAME, LASTNAME, EMAIL, UIDTYPEUSER FROM PARENTS" +
+                " WHERE UIDPARENT = ?");
+        Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);
+        while (cursor.moveToNext()) {
+            user.setUIDUSER(cursor.getInt(0));
+            user.setNAME(cursor.getString(1));
+            user.setLASTNAME(cursor.getString(2));
+            user.setEMAIL(cursor.getString(3));
+            user.setUSERTYPE(cursor.getString(4));
+        }
+        cursor.close();
+        sqLiteOpenHelper.closeDatabase();
+        return user;
+    }
+
     public boolean verifyLogin(String mail, String password) {
         sqLiteOpenHelper.openDatabase();
         String[] selectArgs = {mail, password, mail, password}; //se repiten parametros para poder buscar en dos tablas

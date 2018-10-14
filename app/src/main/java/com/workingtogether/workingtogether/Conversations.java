@@ -24,6 +24,7 @@ import com.workingtogether.workingtogether.db.ConversationsDB;
 import com.workingtogether.workingtogether.db.NotificationsDB;
 import com.workingtogether.workingtogether.obj.Conversation;
 import com.workingtogether.workingtogether.obj.Notification;
+import com.workingtogether.workingtogether.util.LocalParams;
 
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
@@ -72,7 +73,7 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
             mRecyclerView.setHasFixedSize(true);
             mRecyclerView.setLayoutManager(mLayoutManager);
             mRecyclerView.addItemDecoration(new DividerItemDecoration(this, DividerItemDecoration.VERTICAL));
-            mAdapter = new ConversationsRecyclerViewAdapter(this, mDataset);
+            mAdapter = new ConversationsRecyclerViewAdapter(this, this, mDataset);
             mRecyclerView.setAdapter(mAdapter);
 
             actionModeCallback = new Conversations.ActionModeCallback();
@@ -110,7 +111,10 @@ public class Conversations extends AppCompatActivity implements ConversationsRec
 
     @Override
     public void onClick(View v, int position) {
-
+        Intent intent = new Intent(this, ConversationDetails.class);
+        intent.putExtra(LocalParams.UIDCONVERSATION, mDataset.get(position).getUIDCONVERSATION());
+        intent.putExtra(LocalParams.UIDUSER, mDataset.get(position).getUIDUSER());
+        startActivity(intent);
     }
 
     @Override

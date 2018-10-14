@@ -23,83 +23,65 @@ public class ConversationsDB {
     }
 
     public ArrayList<Conversation> getAllConversations() {
-        ArrayList<Conversation> notificationList = new ArrayList<>();
+        ArrayList<Conversation> conversationList = new ArrayList<>();
 
         sqLiteOpenHelper.openDatabase();
-        StringBuilder query = new StringBuilder("SELECT UIDCONVERSATION, CONTACTNAME, LASTMESSAGECONTENT, LASTMESSAGEDATE" +
-                " FROM CONVERSATIONS" +
-                " ORDER BY LASTMESSAGEDATE DESC");
+        StringBuilder query = new StringBuilder("SELECT UIDCONVERSATION, UIDUSER" +
+                " FROM CONVERSATIONS");
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
-        while (cursor.moveToNext()) {
-            Conversation notification = new Conversation();
-
-            /*notification.setUIDNOTIFICATION(cursor.getInt(0));
-            notification.setTITLE(cursor.getString(1));
-            notification.setDESCRIPTION(cursor.getString(2));
-            notification.setPUBLISHDATE(cursor.getString(3));
-            notification.setNOTIFICATIONTYPE(cursor.getString(4));
-            notification.setUIDRESOURSE(cursor.getInt(5));*/
-
-            notificationList.add(notification);
-        }
-        cursor.close();
-        sqLiteOpenHelper.closeDatabase();
-        return notificationList;
-    }
-
-    public ArrayList<Conversation> getLastConversationMessage(int UIDMESSAGE) {
-        ArrayList<Conversation> conversationsList = new ArrayList<>();
-
-        sqLiteOpenHelper.openDatabase();
-        String[] selectArgs = {Integer.toString(UIDMESSAGE)};
-        StringBuilder query = new StringBuilder("SELECT UIDMESSAGE" +
-                " FROM MESSAGES" +
-                " WHERE UIDCONVERSATION = ?");
-        Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);
         while (cursor.moveToNext()) {
             Conversation conversation = new Conversation();
 
-            /*conversation.setUIDNOTIFICATION(cursor.getInt(0));
-            conversation.setTITLE(cursor.getString(1));
-            conversation.setDESCRIPTION(cursor.getString(2));
-            conversation.setPUBLISHDATE(cursor.getString(3));
-            conversation.setNOTIFICATIONTYPE(cursor.getString(4));
-            conversation.setUIDRESOURSE(cursor.getInt(5));*/
+            conversation.setUIDCONVERSATION(cursor.getInt(0));
+            conversation.setUIDUSER(cursor.getInt(1));
 
-            conversationsList.add(conversation);
+            conversationList.add(conversation);
         }
         cursor.close();
         sqLiteOpenHelper.closeDatabase();
-        return conversationsList;
+        return conversationList;
     }
 
-    public Notification getConversationById(int UIDHOMEWORK) {
-        Notification notification = new Notification();
+    public Conversation getConversationById(int UIDCONVERSATION) {
+        Conversation conversation = new Conversation();
         sqLiteOpenHelper.openDatabase();
-        String[] selectArgs = {Integer.toString(UIDHOMEWORK)};
-        StringBuilder query = new StringBuilder("SELECT UIDCONVERSATION, CONTACTNAME, LASTMESSAGECONTENT, LASTMESSAGEDATE" +
+        String[] selectArgs = {Integer.toString(UIDCONVERSATION)};
+        StringBuilder query = new StringBuilder("SELECT UIDCONVERSATION, UIDUSER" +
                 " FROM CONVERSATIONS" +
-                " WHERE UIDNOTIFICATION = ?");
+                " WHERE UIDCONVERSATION = ?");
         Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);
         while (cursor.moveToNext()) {
-            notification.setUIDNOTIFICATION(cursor.getInt(0));
-            notification.setTITLE(cursor.getString(1));
-            notification.setDESCRIPTION(cursor.getString(2));
-            notification.setPUBLISHDATE(cursor.getString(3));
-            notification.setNOTIFICATIONTYPE(cursor.getString(4));
-            notification.setUIDRESOURSE(cursor.getInt(5));
+            conversation.setUIDCONVERSATION(cursor.getInt(0));
+            conversation.setUIDUSER(cursor.getInt(1));
         }
         cursor.close();
         sqLiteOpenHelper.closeDatabase();
-        return notification;
+        return conversation;
     }
 
-    public void insertConversation(String TITLE, String DESCRIPTION, String DATE, String NOTIFICATIONTYPE, int UIDRESOURSE) {
+    public Conversation getConversationByContactId(int UIDUSER) {
+        Conversation conversation = new Conversation();
+        sqLiteOpenHelper.openDatabase();
+        String[] selectArgs = {Integer.toString(UIDUSER)};
+        StringBuilder query = new StringBuilder("SELECT UIDCONVERSATION, UIDUSER" +
+                " FROM CONVERSATIONS" +
+                " WHERE UIDUSER = ?");
+        Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);
+        while (cursor.moveToNext()) {
+            conversation.setUIDCONVERSATION(cursor.getInt(0));
+            conversation.setUIDUSER(cursor.getInt(1));
+        }
+        cursor.close();
+        sqLiteOpenHelper.closeDatabase();
+        return conversation;
+    }
+
+    public void insertConversation(int UIDUSER) {
         sqLiteOpenHelper.openDatabase();
 
         try {
-            mDatabase.execSQL("INSERT INTO NOTIFICATIONS (TITLE, DESCRIPTION, DATE, NOTIFICATIONTYPE, UIDRESOURSE) " +
-                    "VALUES ('" + TITLE + "', '" + DESCRIPTION + "', '" + DATE + "', '" + NOTIFICATIONTYPE + "', " + UIDRESOURSE + ")");
+            mDatabase.execSQL("INSERT INTO CONVERSATIONS (UIDUSER) " +
+                    "VALUES (" + UIDUSER + ")");
         } catch (SQLiteConstraintException c) {
             Log.d("Exception: ", c.getMessage());
         } catch (SQLiteException e) {

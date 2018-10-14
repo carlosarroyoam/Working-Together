@@ -1,6 +1,7 @@
 package com.workingtogether.workingtogether;
 
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -16,6 +17,8 @@ import android.view.ViewStub;
 import com.workingtogether.workingtogether.adapter.NotificationsRecyclerViewAdapter;
 import com.workingtogether.workingtogether.db.NotificationsDB;
 import com.workingtogether.workingtogether.obj.Notification;
+import com.workingtogether.workingtogether.parent.ParentNotes;
+import com.workingtogether.workingtogether.util.LocalParams;
 
 import java.util.ArrayList;
 
@@ -99,7 +102,15 @@ public class NotificationsTray extends AppCompatActivity implements Notification
 
     @Override
     public void onClick(View v, int position) {
-
+        if (mDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.HOMEWORKNOTIFICATION)) {
+            startActivity(new Intent(this, Homeworks.class));
+        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.ACTIVITYNOTIFICATION)) {
+            startActivity(new Intent(this, Activities.class));
+        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.NOTESNOTIFICATION)) {
+            startActivity(new Intent(this, ParentNotes.class));
+        }  else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.NOTESNOTIFICATION)) {
+            startActivity(new Intent(this, Conversations.class));
+        }
     }
 
     @Override

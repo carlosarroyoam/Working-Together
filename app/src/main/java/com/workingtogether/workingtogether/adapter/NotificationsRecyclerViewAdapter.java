@@ -36,14 +36,13 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mIdResourse.setText(Integer.toString(mNotificationsDataset.get(position).getUIDRESOURSE()));
         holder.mTitle.setText(mNotificationsDataset.get(position).getTITLE());
         holder.mDescription.setText(mNotificationsDataset.get(position).getDESCRIPTION());
         holder.mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE());
         holder.itemView.setActivated(mSelectedItems.get(position, false)); //Cambiar estado a activado en items seleccionados
 
         if (mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(DateUtils.getDateTime().substring(0, 9)))
-            holder.mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(11, 16));
+            holder.mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(11, 21));
         else
             holder.mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 10));
 
@@ -90,7 +89,6 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener, View.OnLongClickListener {
-        private TextView mIdResourse;
         private ImageView mImg;
         private TextView mTitle;
         private TextView mDescription;

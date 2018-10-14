@@ -1,5 +1,6 @@
 package com.workingtogether.workingtogether;
 
+import android.content.Intent;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -11,10 +12,12 @@ import android.view.View;
 import android.view.ViewStub;
 
 import com.workingtogether.workingtogether.adapter.ContactsRecyclerViewAdapter;
+import com.workingtogether.workingtogether.db.ConversationsDB;
 import com.workingtogether.workingtogether.db.NotificationsDB;
 import com.workingtogether.workingtogether.db.ParentDB;
 import com.workingtogether.workingtogether.db.SessionDB;
 import com.workingtogether.workingtogether.db.TeacherDB;
+import com.workingtogether.workingtogether.obj.Conversation;
 import com.workingtogether.workingtogether.obj.Notification;
 import com.workingtogether.workingtogether.obj.SessionApp;
 import com.workingtogether.workingtogether.obj.User;
@@ -111,7 +114,23 @@ public class Contacts extends AppCompatActivity implements ContactsRecyclerViewA
 
     @Override
     public void onClick(View v, int position) {
+        Conversation conversation = getConversation(mDataset.get(position).getUIDUSER());
+        Intent intent = new Intent(this, ConversationDetails.class);
 
+        if(conversation.getUIDCONVERSATION() > 0){
+            intent.putExtra(LocalParams.UIDCONVERSATION, conversation.getUIDCONVERSATION());
+            intent.putExtra(LocalParams.UIDUSER, conversation.getUIDUSER());
+        }else{
+            intent.putExtra(LocalParams.UIDUSER, mDataset.get(position).getUIDUSER());
+        }
+
+        startActivity(intent);
+        finish();
+    }
+
+    private Conversation getConversation(int USERID){
+        ConversationsDB conversationsDB = new ConversationsDB(this);
+        return conversationsDB.getConversationByContactId(USERID);
     }
 
     @Override

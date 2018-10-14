@@ -23,6 +23,8 @@ public class LocalParams {
     public static String UIDACTIVITY = "UIDACTIVITY";
     public static String UIDHOMEWORK = "UIDHOMEWORK";
     public static String UIDNOTIFICATION = "UIDNOTIFICATION";
+    public static String UIDCONVERSATION = "UIDCONVERSATION";
+    public static String UIDUSER = "UIDUSER";
     public static String TITLE = "TITLE";
     public static String DESCRIPTION = "DESCRIPTION";
     public static String URL = "URL";

@@ -9,6 +9,7 @@ import android.widget.BaseAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.workingtogether.workingtogether.Conversations;
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.obj.Notification;
 import com.workingtogether.workingtogether.Activities;
@@ -63,7 +64,7 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
 
 
         if (mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(DateUtils.getDateTime().substring(0, 9)))
-            mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(11, 16));
+            mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(11, 21));
         else
             mDeliverDate.setText(mNotificationsDataset.get(position).getPUBLISHDATE().substring(0, 10));
 
@@ -87,6 +88,8 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
                     mContext.startActivity(new Intent(mContext, Activities.class));
                 } else if (mNotificationsDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.NOTESNOTIFICATION)) {
                     mContext.startActivity(new Intent(mContext, ParentNotes.class));
+                }  else if (mNotificationsDataset.get(position).getNOTIFICATIONTYPE().equals(LocalParams.NOTESNOTIFICATION)) {
+                    mContext.startActivity(new Intent(mContext, Conversations.class));
                 }
             }
         });

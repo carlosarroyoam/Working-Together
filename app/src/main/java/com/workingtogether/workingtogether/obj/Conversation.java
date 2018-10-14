@@ -2,7 +2,7 @@ package com.workingtogether.workingtogether.obj;
 
 public class Conversation {
     private int UIDCONVERSATION;
-    private String LASTMESSAGEDATE;
+    private int UIDUSER;
 
     public int getUIDCONVERSATION() {
         return UIDCONVERSATION;
@@ -12,11 +12,11 @@ public class Conversation {
         this.UIDCONVERSATION = UIDCONVERSATION;
     }
 
-    public String getLASTMESSAGEDATE() {
-        return LASTMESSAGEDATE;
+    public int getUIDUSER() {
+        return UIDUSER;
     }
 
-    public void setLASTMESSAGEDATE(String LASTMESSAGEDATE) {
-        this.LASTMESSAGEDATE = LASTMESSAGEDATE;
+    public void setUIDUSER(int UIDUSER) {
+        this.UIDUSER = UIDUSER;
     }
 }

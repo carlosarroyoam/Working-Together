@@ -9,14 +9,21 @@ import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 
 import com.google.firebase.messaging.RemoteMessage;
+import com.workingtogether.workingtogether.Conversations;
 import com.workingtogether.workingtogether.Dashboard;
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.db.ActivityDB;
+import com.workingtogether.workingtogether.db.ConversationsDB;
 import com.workingtogether.workingtogether.db.HomeworksDB;
+import com.workingtogether.workingtogether.db.MessagesDB;
 import com.workingtogether.workingtogether.db.NotificationsDB;
 import com.workingtogether.workingtogether.db.SessionDB;
 import com.workingtogether.workingtogether.Activities;
 import com.workingtogether.workingtogether.Homeworks;
+import com.workingtogether.workingtogether.db.UserDB;
+import com.workingtogether.workingtogether.obj.Conversation;
+import com.workingtogether.workingtogether.obj.SessionApp;
+import com.workingtogether.workingtogether.obj.User;
 import com.workingtogether.workingtogether.util.DateUtils;
 import com.workingtogether.workingtogether.util.LocalParams;
 
@@ -32,11 +39,12 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         Log.d("From: ", remoteMessage.getFrom());
         SessionDB sessionDB = new SessionDB(this);
 
-        if (sessionDB.getUserlogged().getTYPEUSER().equals(LocalParams.PARENTUSER)) {
-            // Check if message contains a data payload.
-            if (remoteMessage.getData().size() > 0) {
-                Log.d("Message data payload: ", remoteMessage.getData().toString());
 
+        // Check if message contains a data payload.
+        if (remoteMessage.getData().size() > 0) {
+            Log.d("Message data payload: ", remoteMessage.getData().toString());
+
+            if (sessionDB.getUserlogged().getTYPEUSER().equals(LocalParams.PARENTUSER)) {
                 if (!remoteMessage.getData().get(LocalParams.NOTIFICATIONTYPE).trim().equals("")) {
 
                     if (remoteMessage.getData().get(LocalParams.NOTIFICATIONTYPE).equals(LocalParams.HOMEWORKNOTIFICATION)) {
@@ -49,7 +57,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
                     } else if (remoteMessage.getData().get(LocalParams.NOTIFICATIONTYPE).equals(LocalParams.ACTIVITYNOTIFICATION)) {
                         try {
-                            JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("HOMEWORKCONTENT"));
+                            JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("ACTIVITYCONTENT"));
                             sendActivityToDatabase(dataPayload);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -58,15 +66,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
                     } else if (remoteMessage.getData().get(LocalParams.NOTIFICATIONTYPE).equals(LocalParams.NOTESNOTIFICATION)) {
                         try {
-                            JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("HOMEWORKCONTENT"));
-                            sendNoteToDatabase(dataPayload);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-                    } else if (remoteMessage.getData().get(LocalParams.NOTIFICATIONTYPE).equals(LocalParams.MESSAGENOTIFICATION)) {
-                        try {
-                            JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("HOMEWORKCONTENT"));
+                            JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("NOTESCONTENT"));
                             sendNoteToDatabase(dataPayload);
                         } catch (JSONException e) {
                             e.printStackTrace();
@@ -76,6 +76,16 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                 } else {
                     Log.d("Notification Error: ", "No notification type specified");
                 }
+            }
+
+            if (remoteMessage.getData().get(LocalParams.NOTIFICATIONTYPE).equals(LocalParams.MESSAGENOTIFICATION)) {
+                try {
+                    JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("MESSAGECONTENT"));
+                    sendMessageToDatabase(dataPayload);
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
+
             }
         }
     }
@@ -120,7 +130,31 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     }
 
     private void sendMessageToDatabase(JSONObject json) throws JSONException {
+        int UIDUSERFROM = Integer.parseInt(json.getString("UIDUSERFROM"));
+        int UIDUSERTO = Integer.parseInt(json.getString("UIDUSERTO"));
+        String data = json.getString("DATA");
+        String date = json.getString("SENDDATE");
 
+        SessionDB sessionDB = new SessionDB(this);
+        SessionApp sessionApp = sessionDB.getUserlogged();
+        if (sessionApp.getUIDUSER() != UIDUSERFROM) {
+            ConversationsDB conversationsDB = new ConversationsDB(this);
+            MessagesDB messagesDB = new MessagesDB(this);
+            Conversation conversation = conversationsDB.getConversationByContactId(UIDUSERFROM);
+            if (conversation.getUIDCONVERSATION() > 0) {
+                messagesDB.insertMessage(conversation.getUIDCONVERSATION(), UIDUSERFROM, UIDUSERTO, data, date);
+            } else {
+                conversationsDB.insertConversation(UIDUSERFROM);
+                Conversation conversation1 = conversationsDB.getConversationByContactId(UIDUSERFROM);
+                messagesDB.insertMessage(conversation1.getUIDCONVERSATION(), UIDUSERFROM, UIDUSERTO, data, date);
+            }
+
+            UserDB userDB = new UserDB(this);
+            User userFrom = userDB.getUserDetails(UIDUSERFROM);
+
+            sendNotificationToDatabase("Tienes un nuevo mensaje de " + userFrom.getNAME() + " " + userFrom.getLASTNAME(), data, LocalParams.MESSAGENOTIFICATION, 1);
+            mostrarNotificacion("Tienes un nuevo mensaje de " + userFrom.getNAME() + " " + userFrom.getLASTNAME(), data, LocalParams.MESSAGENOTIFICATION);
+        }
     }
 
     private void mostrarNotificacion(String title, String body, String notificationType) {
@@ -140,7 +174,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     }
 
-    private Intent setIntentType(String notificationType){
+    private Intent setIntentType(String notificationType) {
         Intent intent;
         if (notificationType.equals(LocalParams.HOMEWORKNOTIFICATION)) {
             intent = new Intent(this, Homeworks.class);
@@ -149,6 +183,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
         } else if (notificationType.equals(LocalParams.ACTIVITYNOTIFICATION)) {
             intent = new Intent(this, Activities.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            return intent;
+
+        } else if (notificationType.equals(LocalParams.MESSAGENOTIFICATION)) {
+            intent = new Intent(this, Conversations.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             return intent;
 
