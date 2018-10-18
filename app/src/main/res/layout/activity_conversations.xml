@@ -1,0 +1,83 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:fillViewport="true"
+    tools:context=".Conversations">
+
+    <android.support.v4.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:id="@+id/swipe_refresh_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recycler_view_conversations"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:scrollbars="vertical" />
+
+            <!-- Empty tray View -->
+            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+                xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/activity_conversations_empty_tray"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:padding="@dimen/double_padding">
+
+                <ImageView
+                    android:id="@+id/img"
+                    android:layout_width="@dimen/emty_tray_squared_icon_size"
+                    android:layout_height="@dimen/emty_tray_squared_icon_size"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/half_margin"
+                    android:scaleType="centerCrop"
+                    app:srcCompat="@drawable/ic_message" />
+
+                <TextView
+                    android:id="@+id/textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/img"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/half_margin"
+                    android:text="@string/txt_messages_empty_tray_msg"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/txt_title_text_size"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/textview"
+                    android:layout_centerHorizontal="true"
+                    android:text="@string/txt_messages_empty_tray_msg2"
+                    android:textAlignment="center"
+                    android:textColor="@color/gray"
+                    android:textSize="@dimen/txt_text_size" />
+
+            </RelativeLayout>
+
+            <android.support.design.widget.FloatingActionButton
+                android:layout_width="@dimen/messages_squared_message_icon"
+                android:layout_height="@dimen/messages_squared_message_icon"
+                android:layout_alignParentBottom="true"
+                android:layout_alignParentRight="true"
+                android:layout_margin="16dp"
+                android:backgroundTint="@color/colorPrimary"
+                android:onClick="newMessage"
+                app:srcCompat="@drawable/ic_message_floating" />
+
+        </RelativeLayout>
+
+    </android.support.v4.widget.SwipeRefreshLayout>
+
+</ScrollView>
