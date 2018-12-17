@@ -6,8 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.workingtogether.workingtogether.activities.DashboardActivity;
 import com.workingtogether.workingtogether.activities.SigninActivity;
+import com.workingtogether.workingtogether.db.DatabaseSchema;
 import com.workingtogether.workingtogether.models.dao.SessionDAO;
-import com.workingtogether.workingtogether.util.GlobalParams;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -37,13 +37,12 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void createDataBase() {
-        String DB_PATH = this.getApplicationInfo().dataDir + "/databases";
-        File dbFolder = new File(DB_PATH);
-        File db = new File(DB_PATH + "/" + GlobalParams.DB_NAME);
+        String databasePath = this.getApplicationInfo().dataDir + "/databases";
+        File dbFolder = new File(databasePath);
+        File database = new File(databasePath + "/" + DatabaseSchema.DATABASE_NAME);
 
-        InputStream myInput = null;
-        OutputStream myOutput = null;
-
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
         byte[] buffer = new byte[1024];
         int length;
 
@@ -51,19 +50,20 @@ public class SplashScreen extends AppCompatActivity {
             if (!dbFolder.exists()) {
                 dbFolder.mkdir();
             }
-            if (!db.exists()) {
-                myInput = this.getAssets().open(GlobalParams.DB_NAME);
-                myOutput = new FileOutputStream(DB_PATH + "/" + GlobalParams.DB_NAME);
+            if (!database.exists()) {
+                inputStream = this.getAssets().open(DatabaseSchema.DATABASE_NAME);
+                outputStream = new FileOutputStream(databasePath + "/" + DatabaseSchema.DATABASE_NAME);
 
-                while ((length = myInput.read(buffer)) > 0) {
-                    myOutput.write(buffer, 0, length);
+                while ((length = inputStream.read(buffer)) > 0) {
+                    outputStream.write(buffer, 0, length);
                 }
-                myOutput.close();
-                myOutput.flush();
-                myInput.close();
+                outputStream.flush();
+                outputStream.close();
+                inputStream.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
 }

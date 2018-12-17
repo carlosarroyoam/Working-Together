@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class ActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<ActivitiesRecyclerViewAdapter.ViewHolder> {
     private ArrayList mActivitiesDataset;
-    private RecyclerViewOnItemClickListener mRecyclerViewOnItemClickListener;
+    private RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
     private SparseBooleanArray mSelectedItems;
 
-    public ActivitiesRecyclerViewAdapter(RecyclerViewOnItemClickListener mRecyclerViewOnItemClickListener, ArrayList activityArrayList) {
+    public ActivitiesRecyclerViewAdapter(RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList activityArrayList) {
         this.mActivitiesDataset = activityArrayList;
-        this.mRecyclerViewOnItemClickListener = mRecyclerViewOnItemClickListener;
+        this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -85,12 +85,12 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<Activiti
 
         @Override
         public void onClick(View v) {
-            mRecyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListenerInterface.onClick(v, getAdapterPosition());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            mRecyclerViewOnItemClickListener.onLongClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListenerInterface.onLongClick(v, getAdapterPosition());
             return true;
         }
     }

@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class HomeworksRecyclerViewAdapter extends RecyclerView.Adapter<HomeworksRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Homework> mHomeworksDataset;
-    private RecyclerViewOnItemClickListener mRecyclerViewOnItemClickListener;
+    private RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
     private SparseBooleanArray mSelectedItems;
 
-    public HomeworksRecyclerViewAdapter(RecyclerViewOnItemClickListener mRecyclerViewOnItemClickListener, ArrayList<Homework> homeworkList) {
+    public HomeworksRecyclerViewAdapter(RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<Homework> homeworkList) {
         this.mHomeworksDataset = homeworkList;
-        this.mRecyclerViewOnItemClickListener = mRecyclerViewOnItemClickListener;
+        this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -85,12 +85,12 @@ public class HomeworksRecyclerViewAdapter extends RecyclerView.Adapter<Homeworks
 
         @Override
         public void onClick(View v) {
-            mRecyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListenerInterface.onClick(v, getAdapterPosition());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            mRecyclerViewOnItemClickListener.onLongClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListenerInterface.onLongClick(v, getAdapterPosition());
             return true;
         }
     }

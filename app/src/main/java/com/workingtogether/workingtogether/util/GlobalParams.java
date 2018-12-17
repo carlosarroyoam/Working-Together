@@ -1,7 +1,6 @@
 package com.workingtogether.workingtogether.util;
 
 public class GlobalParams {
-    public static String DB_NAME = "working_together.db";
 
     public static String HOMEWORK = "HOMEWORK";
     public static String ACTIVITY = "ACTIVITY";

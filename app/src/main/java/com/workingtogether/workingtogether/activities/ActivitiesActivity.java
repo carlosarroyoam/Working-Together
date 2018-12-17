@@ -19,13 +19,13 @@ import android.widget.RelativeLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ActivitiesRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListener;
+import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListenerInterface;
 import com.workingtogether.workingtogether.models.Activity;
 import com.workingtogether.workingtogether.models.dao.ActivityDAO;
 
 import java.util.ArrayList;
 
-public class ActivitiesActivity extends AppCompatActivity implements RecyclerViewOnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class ActivitiesActivity extends AppCompatActivity implements RecyclerViewOnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private ActivitiesRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

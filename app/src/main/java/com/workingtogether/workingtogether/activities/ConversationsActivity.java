@@ -20,7 +20,7 @@ import android.widget.RelativeLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ConversationsRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListener;
+import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListenerInterface;
 import com.workingtogether.workingtogether.models.Conversation;
 import com.workingtogether.workingtogether.models.dao.ConversationsDAO;
 import com.workingtogether.workingtogether.models.dao.MessagesDAO;
@@ -28,7 +28,7 @@ import com.workingtogether.workingtogether.util.GlobalParams;
 
 import java.util.ArrayList;
 
-public class ConversationsActivity extends AppCompatActivity implements RecyclerViewOnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class ConversationsActivity extends AppCompatActivity implements RecyclerViewOnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private ConversationsRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

@@ -20,14 +20,14 @@ import android.widget.RelativeLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.NotificationsRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListener;
+import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListenerInterface;
 import com.workingtogether.workingtogether.firebase.Notification;
 import com.workingtogether.workingtogether.models.dao.NotificationsDAO;
 import com.workingtogether.workingtogether.parent.ParentNotes;
 
 import java.util.ArrayList;
 
-public class NotificationsTrayActivity extends AppCompatActivity implements RecyclerViewOnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class NotificationsTrayActivity extends AppCompatActivity implements RecyclerViewOnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private NotificationsRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

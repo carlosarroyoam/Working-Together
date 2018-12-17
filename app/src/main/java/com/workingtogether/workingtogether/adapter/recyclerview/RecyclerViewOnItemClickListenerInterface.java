@@ -2,7 +2,7 @@ package com.workingtogether.workingtogether.adapter.recyclerview;
 
 import android.view.View;
 
-public interface RecyclerViewOnItemClickListener {
+public interface RecyclerViewOnItemClickListenerInterface {
 
     void onClick(View v, int position);
 

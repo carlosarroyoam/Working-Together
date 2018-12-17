@@ -15,12 +15,12 @@ import java.util.ArrayList;
 
 public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRecyclerViewAdapter.ViewHolder> {
     private ArrayList<User> mContactsDataset;
-    private RecyclerViewOnItemClickListener mRecyclerViewOnItemClickListener;
+    private RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
     private SparseBooleanArray mSelectedItems;
 
-    public ContactsRecyclerViewAdapter(RecyclerViewOnItemClickListener mRecyclerViewOnItemClickListener, ArrayList<User> conversationArrayList) {
+    public ContactsRecyclerViewAdapter(RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<User> conversationArrayList) {
         this.mContactsDataset = conversationArrayList;
-        this.mRecyclerViewOnItemClickListener = mRecyclerViewOnItemClickListener;
+        this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -89,7 +89,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
 
         @Override
         public void onClick(View v) {
-            mRecyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListenerInterface.onClick(v, getAdapterPosition());
         }
 
     }

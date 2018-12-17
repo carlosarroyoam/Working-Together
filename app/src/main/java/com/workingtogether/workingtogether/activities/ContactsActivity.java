@@ -12,7 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ContactsRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListener;
+import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListenerInterface;
 import com.workingtogether.workingtogether.models.Conversation;
 import com.workingtogether.workingtogether.models.SessionApp;
 import com.workingtogether.workingtogether.models.User;
@@ -24,7 +24,7 @@ import com.workingtogether.workingtogether.util.GlobalParams;
 
 import java.util.ArrayList;
 
-public class ContactsActivity extends AppCompatActivity implements RecyclerViewOnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
+public class ContactsActivity extends AppCompatActivity implements RecyclerViewOnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private ContactsRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

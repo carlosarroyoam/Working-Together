@@ -23,14 +23,14 @@ import java.util.ArrayList;
 
 public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<ConversationsRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Conversation> mConversationsDataset;
-    private RecyclerViewOnItemClickListener mRecyclerViewOnItemClickListener;
+    private RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
     private SparseBooleanArray mSelectedItems;
     private Context mContext;
 
-    public ConversationsRecyclerViewAdapter(Context context, RecyclerViewOnItemClickListener mRecyclerViewOnItemClickListener, ArrayList<Conversation> conversationArrayList) {
+    public ConversationsRecyclerViewAdapter(Context context, RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<Conversation> conversationArrayList) {
         this.mContext = context;
         this.mConversationsDataset = conversationArrayList;
-        this.mRecyclerViewOnItemClickListener = mRecyclerViewOnItemClickListener;
+        this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -126,12 +126,12 @@ public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<Conve
 
         @Override
         public void onClick(View v) {
-            mRecyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListenerInterface.onClick(v, getAdapterPosition());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            mRecyclerViewOnItemClickListener.onLongClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListenerInterface.onLongClick(v, getAdapterPosition());
             return true;
         }
     }
