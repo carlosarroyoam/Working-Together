@@ -1,14 +1,13 @@
 package com.workingtogether.workingtogether;
 
 import android.content.Intent;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
+import android.support.v7.app.AppCompatActivity;
 
-import com.google.firebase.iid.FirebaseInstanceId;
-import com.google.firebase.iid.FirebaseInstanceIdService;
-import com.workingtogether.workingtogether.db.SessionDB;
-import com.workingtogether.workingtogether.util.LocalParams;
+import com.workingtogether.workingtogether.activities.DashboardActivity;
+import com.workingtogether.workingtogether.activities.SigninActivity;
+import com.workingtogether.workingtogether.models.dao.SessionDAO;
+import com.workingtogether.workingtogether.util.GlobalParams;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -27,12 +26,12 @@ public class SplashScreen extends AppCompatActivity {
     }
 
     private void isUserlogged() {
-        SessionDB sessionDB = new SessionDB(this);
-        if (sessionDB.isUserlogged()) {
-            startActivity(new Intent(this, Dashboard.class));
+        SessionDAO sessionDAO = new SessionDAO(this);
+        if (sessionDAO.isUserlogged()) {
+            startActivity(new Intent(this, DashboardActivity.class));
             finish();
         } else {
-            startActivity(new Intent(this, Signin.class));
+            startActivity(new Intent(this, SigninActivity.class));
             finish();
         }
     }
@@ -40,7 +39,7 @@ public class SplashScreen extends AppCompatActivity {
     private void createDataBase() {
         String DB_PATH = this.getApplicationInfo().dataDir + "/databases";
         File dbFolder = new File(DB_PATH);
-        File db = new File(DB_PATH + "/" + LocalParams.DB_NAME);
+        File db = new File(DB_PATH + "/" + GlobalParams.DB_NAME);
 
         InputStream myInput = null;
         OutputStream myOutput = null;
@@ -53,8 +52,8 @@ public class SplashScreen extends AppCompatActivity {
                 dbFolder.mkdir();
             }
             if (!db.exists()) {
-                myInput = this.getAssets().open(LocalParams.DB_NAME);
-                myOutput = new FileOutputStream(DB_PATH + "/" + LocalParams.DB_NAME);
+                myInput = this.getAssets().open(GlobalParams.DB_NAME);
+                myOutput = new FileOutputStream(DB_PATH + "/" + GlobalParams.DB_NAME);
 
                 while ((length = myInput.read(buffer)) > 0) {
                     myOutput.write(buffer, 0, length);

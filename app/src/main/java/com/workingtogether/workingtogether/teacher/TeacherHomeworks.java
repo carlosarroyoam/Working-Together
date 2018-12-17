@@ -16,11 +16,10 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.db.HomeworksDB;
-import com.workingtogether.workingtogether.util.DateUtils;
+import com.workingtogether.workingtogether.models.dao.HomeworksDAO;
+import com.workingtogether.workingtogether.util.Util;
 import com.workingtogether.workingtogether.util.firebaseConsoleWS;
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -128,7 +127,7 @@ public class TeacherHomeworks extends AppCompatActivity {
     }
 
     public void sendHomework(View view) {
-        String dateTime = DateUtils.getDateTime();
+        String dateTime = Util.Date.getDateTime();
 
         String title = titleTextInputLayout.getEditText().getText().toString();
         String description = descTextInputLayout.getEditText().getText().toString();
@@ -141,7 +140,7 @@ public class TeacherHomeworks extends AppCompatActivity {
             if (!description.trim().equals("")) {
 
                 if (!deliverDate.trim().equals("")) {
-                    HomeworksDB homeworksDB = new HomeworksDB(this);
+                    HomeworksDAO homeworksDB = new HomeworksDAO(this);
                     homeworksDB.insertHomework(title, description, deliverDate, dateTime);
 
                     //TODO reemplazar por un servicio de un servidor propio

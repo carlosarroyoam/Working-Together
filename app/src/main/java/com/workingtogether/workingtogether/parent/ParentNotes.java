@@ -12,9 +12,9 @@ import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.adapter.ParentsNotesRecyclerViewAdapter;
-import com.workingtogether.workingtogether.db.NotesDB;
-import com.workingtogether.workingtogether.obj.Note;
+import com.workingtogether.workingtogether.adapter.recyclerview.ParentsNotesRecyclerViewAdapter;
+import com.workingtogether.workingtogether.models.Note;
+import com.workingtogether.workingtogether.models.dao.NotesDAO;
 
 import java.util.ArrayList;
 
@@ -97,8 +97,8 @@ public class ParentNotes extends AppCompatActivity {
     }
 
     private ArrayList<Note> loadNotesList() {
-        NotesDB notesDB = new NotesDB(this);
-        ArrayList<Note> notesArrayList = notesDB.getAllNotes();
+        NotesDAO notesDAO = new NotesDAO(this);
+        ArrayList<Note> notesArrayList = notesDAO.getAllNotes();
         return notesArrayList;
     }
 

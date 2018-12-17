@@ -22,96 +22,91 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Signin"
+            android:name=".activities.SigninActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signin_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".Signup"
+            android:name=".activities.SignupActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signup_name"
-            android:parentActivityName=".Signin"
+            android:parentActivityName=".activities.SigninActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".Dashboard"
+            android:name=".activities.DashboardActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_dashboard_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".NotificationsTray"
+            android:name=".activities.NotificationsTrayActivity"
             android:label="@string/layout_notifications_tray_name" />
         <activity
-            android:name=".Homeworks"
+            android:name=".activities.HomeworksActivity"
             android:label="@string/layout_homeworks_name"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".activities.DashboardActivity" />
         <activity
-            android:name=".HomeworkDetails"
-            android:parentActivityName=".Homeworks" />
+            android:name=".activities.HomeworkDetailsActivity"
+            android:parentActivityName=".activities.HomeworksActivity" />
         <activity
-            android:name=".Conversations"
+            android:name=".activities.ConversationsActivity"
             android:label="@string/layout_messages_name"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".activities.DashboardActivity" />
         <activity
-            android:name=".Contacts"
+            android:name=".activities.ContactsActivity"
             android:label="@string/layout_contacts_name"
-            android:parentActivityName=".Conversations" />
+            android:parentActivityName=".activities.ConversationsActivity" />
         <activity
-            android:name=".ConversationDetails"
-            android:parentActivityName=".Conversations" />
+            android:name=".activities.ConversationDetailsActivity"
+            android:parentActivityName=".activities.ConversationsActivity" />
         <activity
             android:name=".parent.ParentNotes"
             android:label="@string/layout_parent_notes_name"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".activities.DashboardActivity" />
         <activity
             android:name=".parent.ParentStudents"
             android:label="@string/layout_parent_students_name"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".activities.DashboardActivity" />
         <activity
-            android:name=".Activities"
+            android:name=".activities.ActivitiesActivity"
             android:label="@string/layout_activities_name"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".activities.DashboardActivity" />
         <activity
-            android:name=".ActivityDetails"
-            android:parentActivityName=".Activities" />
+            android:name=".activities.DetailsActivity"
+            android:parentActivityName=".activities.ActivitiesActivity" />
         <activity
             android:name=".parent.ParentSemaphore"
             android:label="@string/layout_parent_semaphore_name"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".activities.DashboardActivity" />
         <activity
             android:name=".teacher.TeacherHomeworks"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_teacher_homeworks_name"
-            android:parentActivityName=".Dashboard"
+            android:parentActivityName=".activities.DashboardActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".teacher.TeacherStudents"
             android:label="@string/layout_teacher_students_name"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".activities.DashboardActivity" />
         <activity
             android:name=".teacher.TeacherActivities"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_teacher_activities_name"
-            android:parentActivityName=".Dashboard"
+            android:parentActivityName=".activities.DashboardActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity
             android:name=".teacher.TeacherNotes"
             android:label="@string/layout_teacher_notes_name"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".activities.DashboardActivity" />
         <activity
-            android:name=".TechnicalSupport"
+            android:name=".activities.TechnicalSupportActivity"
             android:label="@string/layout_support_name"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".activities.DashboardActivity" />
         <activity
-            android:name=".About"
+            android:name=".activities.AboutActivity"
             android:label="@string/layout_about_name"
-            android:parentActivityName=".Dashboard" />
+            android:parentActivityName=".activities.DashboardActivity" />
 
-        <service android:name=".firebase.FirebaseInstanceServiceId">
-            <intent-filter>
-                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
-            </intent-filter>
-        </service>
         <service android:name=".firebase.FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />

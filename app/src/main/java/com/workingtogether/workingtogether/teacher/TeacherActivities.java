@@ -24,8 +24,8 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.db.ActivityDB;
-import com.workingtogether.workingtogether.util.DateUtils;
+import com.workingtogether.workingtogether.models.dao.ActivityDAO;
+import com.workingtogether.workingtogether.util.Util;
 import com.workingtogether.workingtogether.util.firebaseConsoleWS;
 
 import org.json.JSONException;
@@ -139,7 +139,7 @@ public class TeacherActivities extends AppCompatActivity {
     }
 
     public void sendHomework(View view) {
-        String dateTime = DateUtils.getDateTime();
+        String dateTime = Util.Date.getDateTime();
 
         String title = titleTextInputLayout.getEditText().getText().toString();
         String description = descTextInputLayout.getEditText().getText().toString();
@@ -153,8 +153,8 @@ public class TeacherActivities extends AppCompatActivity {
             if (!description.trim().equals("")) {
 
                 if (!deliverDate.trim().equals("")) {
-                    ActivityDB activityDB = new ActivityDB(this);
-                    activityDB.insertActivity(title, description, url, deliverDate, dateTime);
+                    ActivityDAO activityDAO = new ActivityDAO(this);
+                    activityDAO.insertActivity(title, description, url, deliverDate, dateTime);
 
                     //TODO reemplazar por un servicio de un servidor propio
                     StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENTUSER\",\"NOTIFICATIONTYPE\":\"ACTIVITYNOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"" + title + "\",\"DESCRIPTION\":\"" + title + "\",\"URL\":\"" + url + "\",\"DELIVERDATE\":\"" + deliverDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");
