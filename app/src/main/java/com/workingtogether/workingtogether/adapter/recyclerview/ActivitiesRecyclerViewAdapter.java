@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.models.Activity;
+import com.workingtogether.workingtogether.entity.Activity;
 
 import java.util.ArrayList;
 
@@ -17,9 +17,9 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<Activiti
     private RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
     private SparseBooleanArray mSelectedItems;
 
-    public ActivitiesRecyclerViewAdapter(RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList activityArrayList) {
+    public ActivitiesRecyclerViewAdapter(RecyclerViewOnItemClickListenerInterface recyclerViewOnItemClickListenerInterface, ArrayList activityArrayList) {
         this.mActivitiesDataset = activityArrayList;
-        this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;
+        this.mRecyclerViewOnItemClickListenerInterface = recyclerViewOnItemClickListenerInterface;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -42,17 +42,17 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<Activiti
         return mActivitiesDataset.size();
     }
 
-    public void clearSelections() {
+    public void clearItemSelection() {
         mSelectedItems.clear();
         notifyDataSetChanged();
     }
 
-    public void toggleSelection(int pos) {
-        if (mSelectedItems.get(pos, false)) {
+    public void toggleItemSelectionState(int pos) {
+        if (mSelectedItems.get(pos, false))
             mSelectedItems.delete(pos);
-        } else {
+        else
             mSelectedItems.put(pos, true);
-        }
+
         notifyItemChanged(pos);
     }
 
@@ -60,7 +60,7 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<Activiti
         return mSelectedItems.size();
     }
 
-    public ArrayList getmSelectedItems() {
+    public ArrayList getSelectedItems() {
         ArrayList items = new ArrayList<>(mSelectedItems.size());
         for (int i = 0; i < mSelectedItems.size(); i++) {
             items.add(mActivitiesDataset.get(i));

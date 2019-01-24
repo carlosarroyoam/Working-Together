@@ -10,13 +10,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.models.Conversation;
-import com.workingtogether.workingtogether.models.Message;
-import com.workingtogether.workingtogether.models.SessionApp;
-import com.workingtogether.workingtogether.models.User;
-import com.workingtogether.workingtogether.models.dao.MessagesDAO;
-import com.workingtogether.workingtogether.models.dao.SessionDAO;
-import com.workingtogether.workingtogether.models.dao.UserDAO;
+import com.workingtogether.workingtogether.entity.Conversation;
+import com.workingtogether.workingtogether.entity.Message;
+import com.workingtogether.workingtogether.entity.SessionApp;
+import com.workingtogether.workingtogether.entity.User;
+import com.workingtogether.workingtogether.entity.dao.MessagesDAO;
+import com.workingtogether.workingtogether.entity.dao.SessionDAO;
+import com.workingtogether.workingtogether.entity.dao.UserDAO;
 import com.workingtogether.workingtogether.util.Util;
 
 import java.util.ArrayList;
@@ -57,7 +57,7 @@ public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<Conve
         holder.itemView.setActivated(mSelectedItems.get(position, false)); //Cambiar estado a activado en items seleccionados
 
         if (message.getSENDSTATE() == 1) {
-            if (message.getSENDDATE().substring(0, 9).equals(Util.Date.getDateTime().substring(0, 9)))
+            if (message.getSENDDATE().substring(0, 9).equals(Util.Dates.getDateTime().substring(0, 9)))
                 holder.mLastMessageDate.setText(message.getSENDDATE().substring(11, 16));
             else
                 holder.mLastMessageDate.setText(message.getSENDDATE().substring(0, 10));

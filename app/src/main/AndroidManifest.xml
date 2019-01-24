@@ -60,11 +60,11 @@
             android:name=".activities.ConversationDetailsActivity"
             android:parentActivityName=".activities.ConversationsActivity" />
         <activity
-            android:name=".parent.ParentNotes"
+            android:name=".activities.parent.ParentNotes"
             android:label="@string/layout_parent_notes_name"
             android:parentActivityName=".activities.DashboardActivity" />
         <activity
-            android:name=".parent.ParentStudents"
+            android:name=".activities.parent.ParentStudents"
             android:label="@string/layout_parent_students_name"
             android:parentActivityName=".activities.DashboardActivity" />
         <activity
@@ -75,27 +75,27 @@
             android:name=".activities.DetailsActivity"
             android:parentActivityName=".activities.ActivitiesActivity" />
         <activity
-            android:name=".parent.ParentSemaphore"
+            android:name=".activities.parent.ParentSemaphore"
             android:label="@string/layout_parent_semaphore_name"
             android:parentActivityName=".activities.DashboardActivity" />
         <activity
-            android:name=".teacher.TeacherHomeworks"
+            android:name=".activities.teacher.TeacherHomeworks"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_teacher_homeworks_name"
             android:parentActivityName=".activities.DashboardActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".teacher.TeacherStudents"
+            android:name=".activities.teacher.TeacherStudents"
             android:label="@string/layout_teacher_students_name"
             android:parentActivityName=".activities.DashboardActivity" />
         <activity
-            android:name=".teacher.TeacherActivities"
+            android:name=".activities.teacher.TeacherActivities"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_teacher_activities_name"
             android:parentActivityName=".activities.DashboardActivity"
             android:windowSoftInputMode="adjustNothing" />
         <activity
-            android:name=".teacher.TeacherNotes"
+            android:name=".activities.teacher.TeacherNotes"
             android:label="@string/layout_teacher_notes_name"
             android:parentActivityName=".activities.DashboardActivity" />
         <activity

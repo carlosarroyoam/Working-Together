@@ -5,8 +5,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.models.Homework;
-import com.workingtogether.workingtogether.models.dao.HomeworksDAO;
+import com.workingtogether.workingtogether.entity.Homework;
+import com.workingtogether.workingtogether.entity.dao.HomeworksDAO;
 import com.workingtogether.workingtogether.util.GlobalParams;
 
 public class HomeworkDetailsActivity extends AppCompatActivity {

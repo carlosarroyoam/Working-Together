@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.models.Note;
+import com.workingtogether.workingtogether.entity.Note;
 
 import java.util.ArrayList;
 

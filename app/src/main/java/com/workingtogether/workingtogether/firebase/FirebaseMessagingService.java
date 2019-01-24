@@ -4,16 +4,16 @@ import android.content.Intent;
 import android.util.Log;
 
 import com.google.firebase.messaging.RemoteMessage;
-import com.workingtogether.workingtogether.models.Conversation;
-import com.workingtogether.workingtogether.models.SessionApp;
-import com.workingtogether.workingtogether.models.User;
-import com.workingtogether.workingtogether.models.dao.ActivityDAO;
-import com.workingtogether.workingtogether.models.dao.ConversationsDAO;
-import com.workingtogether.workingtogether.models.dao.HomeworksDAO;
-import com.workingtogether.workingtogether.models.dao.MessagesDAO;
-import com.workingtogether.workingtogether.models.dao.NotificationsDAO;
-import com.workingtogether.workingtogether.models.dao.SessionDAO;
-import com.workingtogether.workingtogether.models.dao.UserDAO;
+import com.workingtogether.workingtogether.entity.Conversation;
+import com.workingtogether.workingtogether.entity.SessionApp;
+import com.workingtogether.workingtogether.entity.User;
+import com.workingtogether.workingtogether.entity.dao.ActivityDAO;
+import com.workingtogether.workingtogether.entity.dao.ConversationsDAO;
+import com.workingtogether.workingtogether.entity.dao.HomeworksDAO;
+import com.workingtogether.workingtogether.entity.dao.MessagesDAO;
+import com.workingtogether.workingtogether.entity.dao.NotificationsDAO;
+import com.workingtogether.workingtogether.entity.dao.SessionDAO;
+import com.workingtogether.workingtogether.entity.dao.UserDAO;
 import com.workingtogether.workingtogether.util.GlobalParams;
 import com.workingtogether.workingtogether.util.Util;
 
@@ -91,7 +91,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
     private void sendNotificationToDatabase(String TITLE, String DESCRIPTION, String NOTIFICATIONTYPE, int UIDRESOURSE) {
         NotificationsDAO notificationsDB = new NotificationsDAO(this);
-        notificationsDB.insertNotification(TITLE, DESCRIPTION, Util.Date.getDateTime(), NOTIFICATIONTYPE, UIDRESOURSE);
+        notificationsDB.insertNotification(TITLE, DESCRIPTION, Util.Dates.getDateTime(), NOTIFICATIONTYPE, UIDRESOURSE);
     }
 
     private void sendHomeworkToDatabase(JSONObject json) throws JSONException {

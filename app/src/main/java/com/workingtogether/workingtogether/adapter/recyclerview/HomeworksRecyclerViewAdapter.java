@@ -8,7 +8,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.models.Homework;
+import com.workingtogether.workingtogether.entity.Homework;
 
 import java.util.ArrayList;
 

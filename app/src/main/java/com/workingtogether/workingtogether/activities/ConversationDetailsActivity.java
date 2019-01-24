@@ -12,14 +12,14 @@ import android.widget.ListView;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.list.ConversationDetailListAdapter;
-import com.workingtogether.workingtogether.models.Conversation;
-import com.workingtogether.workingtogether.models.Message;
-import com.workingtogether.workingtogether.models.SessionApp;
-import com.workingtogether.workingtogether.models.User;
-import com.workingtogether.workingtogether.models.dao.ConversationsDAO;
-import com.workingtogether.workingtogether.models.dao.MessagesDAO;
-import com.workingtogether.workingtogether.models.dao.SessionDAO;
-import com.workingtogether.workingtogether.models.dao.UserDAO;
+import com.workingtogether.workingtogether.entity.Conversation;
+import com.workingtogether.workingtogether.entity.Message;
+import com.workingtogether.workingtogether.entity.SessionApp;
+import com.workingtogether.workingtogether.entity.User;
+import com.workingtogether.workingtogether.entity.dao.ConversationsDAO;
+import com.workingtogether.workingtogether.entity.dao.MessagesDAO;
+import com.workingtogether.workingtogether.entity.dao.SessionDAO;
+import com.workingtogether.workingtogether.entity.dao.UserDAO;
 import com.workingtogether.workingtogether.util.GlobalParams;
 import com.workingtogether.workingtogether.util.Util;
 import com.workingtogether.workingtogether.util.firebaseConsoleWS;
@@ -138,7 +138,7 @@ public class ConversationDetailsActivity extends AppCompatActivity {
 
     private void firebaseSend(int UIDUSERFROM, int UIDUSERTO, String DATA) {
         //TODO reemplazar por un servicio de un servidor propio
-        StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENTUSER\",\"NOTIFICATIONTYPE\":\"MESSAGENOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"URL\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"DATA\":\"" + DATA + "\",\"UIDUSERFROM\":\"" + UIDUSERFROM + "\",\"UIDUSERTO\":\"" + UIDUSERTO + "\",\"SENDDATE\":\"" + Util.Date.getDateTime() + "\"}}}");
+        StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENTUSER\",\"NOTIFICATIONTYPE\":\"MESSAGENOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"URL\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"DATA\":\"" + DATA + "\",\"UIDUSERFROM\":\"" + UIDUSERFROM + "\",\"UIDUSERTO\":\"" + UIDUSERTO + "\",\"SENDDATE\":\"" + Util.Dates.getDateTime() + "\"}}}");
 
         try {
             JSONObject jsonArray = new JSONObject(String.valueOf(json));
@@ -153,7 +153,7 @@ public class ConversationDetailsActivity extends AppCompatActivity {
 
     private void insertMessage(int UIDCONVERSATION, int UIDUSERFROM, int UIDUSERTO, String DATA) {
         MessagesDAO messagesDAO = new MessagesDAO(this);
-        messagesDAO.insertMessage(UIDCONVERSATION, UIDUSERFROM, UIDUSERTO, DATA, Util.Date.getDateTime());
+        messagesDAO.insertMessage(UIDCONVERSATION, UIDUSERFROM, UIDUSERTO, DATA, Util.Dates.getDateTime());
     }
 
     private void updateMessagesList() {

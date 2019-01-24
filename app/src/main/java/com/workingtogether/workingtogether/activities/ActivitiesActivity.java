@@ -20,8 +20,8 @@ import android.widget.RelativeLayout;
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ActivitiesRecyclerViewAdapter;
 import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListenerInterface;
-import com.workingtogether.workingtogether.models.Activity;
-import com.workingtogether.workingtogether.models.dao.ActivityDAO;
+import com.workingtogether.workingtogether.entity.Activity;
+import com.workingtogether.workingtogether.entity.dao.ActivityDAO;
 
 import java.util.ArrayList;
 
@@ -92,7 +92,7 @@ public class ActivitiesActivity extends AppCompatActivity implements RecyclerVie
     }
 
     private void toggleSelection(int position) {
-        mAdapter.toggleSelection(position);
+        mAdapter.toggleItemSelectionState(position);
         int count = mAdapter.getSelectedItemCount();
 
         if (count == 0) {
@@ -175,7 +175,7 @@ public class ActivitiesActivity extends AppCompatActivity implements RecyclerVie
         public boolean onActionItemClicked(ActionMode mode, MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.action_delete:
-                    showDeleteDialog(mAdapter.getmSelectedItems());
+                    showDeleteDialog(mAdapter.getSelectedItems());
                     mode.finish();
                     return true;
 
@@ -186,7 +186,7 @@ public class ActivitiesActivity extends AppCompatActivity implements RecyclerVie
 
         @Override
         public void onDestroyActionMode(ActionMode mode) {
-            mAdapter.clearSelections();
+            mAdapter.clearItemSelection();
             swipeRefreshLayout.setEnabled(true);
             actionMode = null;
             mRecyclerView.post(new Runnable() {

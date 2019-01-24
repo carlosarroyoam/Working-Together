@@ -14,16 +14,16 @@ import com.workingtogether.workingtogether.activities.ActivitiesActivity;
 import com.workingtogether.workingtogether.activities.ConversationsActivity;
 import com.workingtogether.workingtogether.activities.HomeworksActivity;
 import com.workingtogether.workingtogether.firebase.Notification;
-import com.workingtogether.workingtogether.parent.ParentNotes;
+import com.workingtogether.workingtogether.activities.parent.ParentNotes;
 import com.workingtogether.workingtogether.util.Util;
 
 import java.util.ArrayList;
 
 public class NotificationsDrawerAdapter extends BaseAdapter {
     private Context mContext;
-    private ArrayList<com.workingtogether.workingtogether.models.Notification> mNotificationDataset;
+    private ArrayList<com.workingtogether.workingtogether.entity.Notification> mNotificationDataset;
 
-    public NotificationsDrawerAdapter(Context context, ArrayList<com.workingtogether.workingtogether.models.Notification> notificationArrayList) {
+    public NotificationsDrawerAdapter(Context context, ArrayList<com.workingtogether.workingtogether.entity.Notification> notificationArrayList) {
         this.mContext = context;
         this.mNotificationDataset = notificationArrayList;
     }
@@ -62,7 +62,7 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
         mDescription.setText(mNotificationDataset.get(position).getDESCRIPTION());
 
 
-        if (mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(Util.Date.getDateTime().substring(0, 9)))
+        if (mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(Util.Dates.getDateTime().substring(0, 9)))
             mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE().substring(11, 16));
         else
             mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 10));

@@ -22,8 +22,8 @@ import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.NotificationsRecyclerViewAdapter;
 import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListenerInterface;
 import com.workingtogether.workingtogether.firebase.Notification;
-import com.workingtogether.workingtogether.models.dao.NotificationsDAO;
-import com.workingtogether.workingtogether.parent.ParentNotes;
+import com.workingtogether.workingtogether.entity.dao.NotificationsDAO;
+import com.workingtogether.workingtogether.activities.parent.ParentNotes;
 
 import java.util.ArrayList;
 
@@ -34,7 +34,7 @@ public class NotificationsTrayActivity extends AppCompatActivity implements Recy
     private SwipeRefreshLayout swipeRefreshLayout;
     private NotificationsTrayActivity.ActionModeCallback actionModeCallback;
     private ActionMode actionMode;
-    private ArrayList<com.workingtogether.workingtogether.models.Notification> mDataset;
+    private ArrayList<com.workingtogether.workingtogether.entity.Notification> mDataset;
     private RelativeLayout emptyTrayLayout;
     private MyReceiver myReceiver;
 
@@ -113,9 +113,9 @@ public class NotificationsTrayActivity extends AppCompatActivity implements Recy
 
     }
 
-    private ArrayList<com.workingtogether.workingtogether.models.Notification> loadNotificationsList() {
+    private ArrayList<com.workingtogether.workingtogether.entity.Notification> loadNotificationsList() {
         NotificationsDAO notificationsDB = new NotificationsDAO(this);
-        ArrayList<com.workingtogether.workingtogether.models.Notification> notificationArrayList = notificationsDB.getAllNotifications();
+        ArrayList<com.workingtogether.workingtogether.entity.Notification> notificationArrayList = notificationsDB.getAllNotifications();
         return notificationArrayList;
     }
 
@@ -207,7 +207,7 @@ public class NotificationsTrayActivity extends AppCompatActivity implements Recy
 
     }
 
-    private void deleteNotifications(ArrayList<com.workingtogether.workingtogether.models.Notification> selectedItems) {
+    private void deleteNotifications(ArrayList<com.workingtogether.workingtogether.entity.Notification> selectedItems) {
         NotificationsDAO homeworksDB = new NotificationsDAO(getApplicationContext());
         for (int i = 0; i < selectedItems.size(); i++) {
             homeworksDB.deleteNotification(selectedItems.get(i).getUIDNOTIFICATION());
@@ -215,7 +215,7 @@ public class NotificationsTrayActivity extends AppCompatActivity implements Recy
         }
     }
 
-    private void showDeleteDialog(final ArrayList<com.workingtogether.workingtogether.models.Notification> selectedItems) {
+    private void showDeleteDialog(final ArrayList<com.workingtogether.workingtogether.entity.Notification> selectedItems) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
         alertDialogBuilder.setTitle("Eliminar");
         alertDialogBuilder

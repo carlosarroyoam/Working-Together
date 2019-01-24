@@ -20,8 +20,8 @@ import android.widget.RelativeLayout;
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.HomeworksRecyclerViewAdapter;
 import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListenerInterface;
-import com.workingtogether.workingtogether.models.Homework;
-import com.workingtogether.workingtogether.models.dao.HomeworksDAO;
+import com.workingtogether.workingtogether.entity.Homework;
+import com.workingtogether.workingtogether.entity.dao.HomeworksDAO;
 import com.workingtogether.workingtogether.util.GlobalParams;
 
 import java.util.ArrayList;

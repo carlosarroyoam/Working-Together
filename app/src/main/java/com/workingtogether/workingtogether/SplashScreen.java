@@ -7,7 +7,7 @@ import android.support.v7.app.AppCompatActivity;
 import com.workingtogether.workingtogether.activities.DashboardActivity;
 import com.workingtogether.workingtogether.activities.SigninActivity;
 import com.workingtogether.workingtogether.db.DatabaseSchema;
-import com.workingtogether.workingtogether.models.dao.SessionDAO;
+import com.workingtogether.workingtogether.entity.dao.SessionDAO;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -38,7 +38,7 @@ public class SplashScreen extends AppCompatActivity {
 
     private void createDataBase() {
         String databasePath = this.getApplicationInfo().dataDir + "/databases";
-        File dbFolder = new File(databasePath);
+        File databaseFolder = new File(databasePath);
         File database = new File(databasePath + "/" + DatabaseSchema.DATABASE_NAME);
 
         InputStream inputStream = null;
@@ -47,8 +47,8 @@ public class SplashScreen extends AppCompatActivity {
         int length;
 
         try {
-            if (!dbFolder.exists()) {
-                dbFolder.mkdir();
+            if (!databaseFolder.exists()) {
+                databaseFolder.mkdir();
             }
             if (!database.exists()) {
                 inputStream = this.getAssets().open(DatabaseSchema.DATABASE_NAME);

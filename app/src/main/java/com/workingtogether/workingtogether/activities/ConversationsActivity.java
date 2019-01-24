@@ -21,9 +21,9 @@ import android.widget.RelativeLayout;
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ConversationsRecyclerViewAdapter;
 import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListenerInterface;
-import com.workingtogether.workingtogether.models.Conversation;
-import com.workingtogether.workingtogether.models.dao.ConversationsDAO;
-import com.workingtogether.workingtogether.models.dao.MessagesDAO;
+import com.workingtogether.workingtogether.entity.Conversation;
+import com.workingtogether.workingtogether.entity.dao.ConversationsDAO;
+import com.workingtogether.workingtogether.entity.dao.MessagesDAO;
 import com.workingtogether.workingtogether.util.GlobalParams;
 
 import java.util.ArrayList;

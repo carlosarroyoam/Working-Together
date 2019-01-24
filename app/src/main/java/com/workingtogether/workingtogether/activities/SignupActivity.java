@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.pager.SignupPagerAdapter;
+import com.workingtogether.workingtogether.util.Util;
 
 public class SignupActivity extends AppCompatActivity {
     private ViewPager view_pager;
@@ -48,25 +49,20 @@ public class SignupActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Aun no creamos tu cuenta");
-        alertDialogBuilder
-                .setMessage("¿Estas seguro que quieres cancelar?")
-                .setCancelable(false)
-                .setPositiveButton("Si", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+        Util.AleretDialogs.confirmationDialog(this, "Aun no creamos tu cuenta", "¿Estas seguro que quieres cancelar?",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                         startActivity(new Intent(getApplicationContext(), SigninActivity.class));
                         finish();
                     }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
+                },
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();
                     }
                 });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
     }
 
     public void addDotsIndicator(int position) {

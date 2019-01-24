@@ -9,7 +9,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.models.User;
+import com.workingtogether.workingtogether.entity.User;
 
 import java.util.ArrayList;
 

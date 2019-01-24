@@ -1,18 +1,17 @@
 package com.workingtogether.workingtogether.activities;
 
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.models.User;
-import com.workingtogether.workingtogether.models.dao.SessionDAO;
-import com.workingtogether.workingtogether.models.dao.UserDAO;
+import com.workingtogether.workingtogether.entity.User;
+import com.workingtogether.workingtogether.entity.dao.SessionDAO;
+import com.workingtogether.workingtogether.entity.dao.UserDAO;
+import com.workingtogether.workingtogether.util.Util;
 
 public class SigninActivity extends AppCompatActivity {
 
@@ -41,37 +40,22 @@ public class SigninActivity extends AppCompatActivity {
 
                 } else {
                     dialogMessage = "Contraseña o usuario incorrecto";
-                    incorrectLoginDialog(dialogMessage);
+                    Util.AleretDialogs.informationDialog(this, "Working Together", dialogMessage);
                 }
             } else {
                 dialogMessage = "Ingresa tu contraseña";
-                incorrectLoginDialog(dialogMessage);
+                Util.AleretDialogs.informationDialog(this, "Working Together", dialogMessage);
             }
+
         } else {
             dialogMessage = "Ingresa tu correo electrónico";
-            incorrectLoginDialog(dialogMessage);
+            Util.AleretDialogs.informationDialog(this, "Working Together", dialogMessage);
         }
     }
 
     private void addSession(int UIDUSER, String TYPEUSER) {
         SessionDAO sessionDAO = new SessionDAO(this);
         sessionDAO.addSession(UIDUSER, TYPEUSER);
-    }
-
-    private void incorrectLoginDialog(String dialogMessage) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Working Together");
-        alertDialogBuilder
-                .setMessage(dialogMessage)
-                .setCancelable(false)
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        dialog.dismiss();
-                    }
-                });
-
-        AlertDialog alertDialog = alertDialogBuilder.create();
-        alertDialog.show();
     }
 
     public void forgotPassword(View view) {

@@ -15,11 +15,11 @@ import com.workingtogether.workingtogether.util.Util;
 import java.util.ArrayList;
 
 public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<NotificationsRecyclerViewAdapter.ViewHolder> {
-    private ArrayList<com.workingtogether.workingtogether.models.Notification> mNotificationDataset;
+    private ArrayList<com.workingtogether.workingtogether.entity.Notification> mNotificationDataset;
     private RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
     private SparseBooleanArray mSelectedItems;
 
-    public NotificationsRecyclerViewAdapter(RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<com.workingtogether.workingtogether.models.Notification> notificationArrayList) {
+    public NotificationsRecyclerViewAdapter(RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<com.workingtogether.workingtogether.entity.Notification> notificationArrayList) {
         this.mNotificationDataset = notificationArrayList;
         this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;
         this.mSelectedItems = new SparseBooleanArray();
@@ -38,7 +38,7 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
         holder.mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE());
         holder.itemView.setActivated(mSelectedItems.get(position, false)); //Cambiar estado a activado en items seleccionados
 
-        if (mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(Util.Date.getDateTime().substring(0, 9)))
+        if (mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(Util.Dates.getDateTime().substring(0, 9)))
             holder.mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE().substring(11, 16));
         else
             holder.mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 10));
@@ -77,8 +77,8 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
         return mSelectedItems.size();
     }
 
-    public ArrayList<com.workingtogether.workingtogether.models.Notification> getmSelectedItems() {
-        ArrayList<com.workingtogether.workingtogether.models.Notification> items = new ArrayList<>(mSelectedItems.size());
+    public ArrayList<com.workingtogether.workingtogether.entity.Notification> getmSelectedItems() {
+        ArrayList<com.workingtogether.workingtogether.entity.Notification> items = new ArrayList<>(mSelectedItems.size());
         for (int i = 0; i < mSelectedItems.size(); i++) {
             items.add(mNotificationDataset.get(i));
         }
