@@ -1,7 +1,8 @@
 package com.workingtogether.workingtogether.adapter.recyclerview;
 
 import android.content.Context;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -23,11 +24,11 @@ import java.util.ArrayList;
 
 public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<ConversationsRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Conversation> mConversationsDataset;
-    private RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
+    private OnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
     private SparseBooleanArray mSelectedItems;
     private Context mContext;
 
-    public ConversationsRecyclerViewAdapter(Context context, RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<Conversation> conversationArrayList) {
+    public ConversationsRecyclerViewAdapter(Context context, OnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<Conversation> conversationArrayList) {
         this.mContext = context;
         this.mConversationsDataset = conversationArrayList;
         this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;

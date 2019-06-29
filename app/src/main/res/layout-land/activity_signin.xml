@@ -14,7 +14,7 @@
         android:padding="@dimen/padding"
         tools:context=".Signin">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="@dimen/margin"
@@ -45,9 +45,10 @@
                     android:layout_below="@+id/image"
                     android:text="@string/txt_signin_msg"
                     android:textAlignment="center"
-                    android:textSize="@dimen/txt_subtitle_text_size" />
+                    android:textSize="@dimen/txt_subtitle_text_size"
+                    android:textStyle="bold" />
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/activity_signin_user_etxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -62,9 +63,9 @@
                         android:inputType="textEmailAddress"
                         android:textSize="@dimen/etxt_text_size" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/activity_signin_pass_etxt"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -79,7 +80,7 @@
                         android:inputType="textPassword"
                         android:textSize="@dimen/etxt_text_size" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
                     android:id="@+id/activity_signin_signin_btn"
@@ -91,7 +92,6 @@
                     android:background="@drawable/positive_button_shape"
                     android:onClick="signin"
                     android:text="@string/btn_signin"
-                    android:textAllCaps="false"
                     android:textColor="@color/white"
                     android:textSize="@dimen/btn_text_size" />
 
@@ -125,7 +125,7 @@
 
             </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 

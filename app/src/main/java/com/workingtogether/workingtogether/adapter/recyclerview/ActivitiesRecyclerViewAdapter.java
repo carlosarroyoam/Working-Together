@@ -1,6 +1,6 @@
 package com.workingtogether.workingtogether.adapter.recyclerview;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,12 +14,12 @@ import java.util.ArrayList;
 
 public class ActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<ActivitiesRecyclerViewAdapter.ViewHolder> {
     private ArrayList mActivitiesDataset;
-    private RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
+    private OnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
     private SparseBooleanArray mSelectedItems;
 
-    public ActivitiesRecyclerViewAdapter(RecyclerViewOnItemClickListenerInterface recyclerViewOnItemClickListenerInterface, ArrayList activityArrayList) {
+    public ActivitiesRecyclerViewAdapter(OnItemClickListenerInterface onItemClickListenerInterface, ArrayList activityArrayList) {
         this.mActivitiesDataset = activityArrayList;
-        this.mRecyclerViewOnItemClickListenerInterface = recyclerViewOnItemClickListenerInterface;
+        this.mRecyclerViewOnItemClickListenerInterface = onItemClickListenerInterface;
         this.mSelectedItems = new SparseBooleanArray();
     }
 

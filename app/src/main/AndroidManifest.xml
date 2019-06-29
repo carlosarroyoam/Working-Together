@@ -12,102 +12,122 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
+
         <activity
             android:name=".SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <activity
             android:name=".activities.SigninActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signin_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
+
         <activity
             android:name=".activities.SignupActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signup_name"
             android:parentActivityName=".activities.SigninActivity"
             android:windowSoftInputMode="adjustNothing" />
+
         <activity
             android:name=".activities.DashboardActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_dashboard_name"
             android:theme="@style/AppTheme.NoActionBar" />
+
         <activity
             android:name=".activities.NotificationsTrayActivity"
             android:label="@string/layout_notifications_tray_name" />
+
         <activity
             android:name=".activities.HomeworksActivity"
             android:label="@string/layout_homeworks_name"
             android:parentActivityName=".activities.DashboardActivity" />
+
         <activity
             android:name=".activities.HomeworkDetailsActivity"
             android:parentActivityName=".activities.HomeworksActivity" />
+
         <activity
             android:name=".activities.ConversationsActivity"
             android:label="@string/layout_messages_name"
             android:parentActivityName=".activities.DashboardActivity" />
+
         <activity
             android:name=".activities.ContactsActivity"
             android:label="@string/layout_contacts_name"
             android:parentActivityName=".activities.ConversationsActivity" />
+
         <activity
             android:name=".activities.ConversationDetailsActivity"
             android:parentActivityName=".activities.ConversationsActivity" />
+
         <activity
             android:name=".activities.parent.ParentNotes"
             android:label="@string/layout_parent_notes_name"
             android:parentActivityName=".activities.DashboardActivity" />
+
         <activity
             android:name=".activities.parent.ParentStudents"
             android:label="@string/layout_parent_students_name"
             android:parentActivityName=".activities.DashboardActivity" />
+
         <activity
             android:name=".activities.ActivitiesActivity"
             android:label="@string/layout_activities_name"
             android:parentActivityName=".activities.DashboardActivity" />
+
         <activity
             android:name=".activities.DetailsActivity"
             android:parentActivityName=".activities.ActivitiesActivity" />
+
         <activity
             android:name=".activities.parent.ParentSemaphore"
             android:label="@string/layout_parent_semaphore_name"
             android:parentActivityName=".activities.DashboardActivity" />
+
         <activity
             android:name=".activities.teacher.TeacherHomeworks"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_teacher_homeworks_name"
             android:parentActivityName=".activities.DashboardActivity"
             android:windowSoftInputMode="adjustNothing" />
+
         <activity
             android:name=".activities.teacher.TeacherStudents"
             android:label="@string/layout_teacher_students_name"
             android:parentActivityName=".activities.DashboardActivity" />
+
         <activity
             android:name=".activities.teacher.TeacherActivities"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_teacher_activities_name"
             android:parentActivityName=".activities.DashboardActivity"
             android:windowSoftInputMode="adjustNothing" />
+
         <activity
             android:name=".activities.teacher.TeacherNotes"
             android:label="@string/layout_teacher_notes_name"
             android:parentActivityName=".activities.DashboardActivity" />
+
         <activity
             android:name=".activities.TechnicalSupportActivity"
             android:label="@string/layout_support_name"
             android:parentActivityName=".activities.DashboardActivity" />
+
         <activity
             android:name=".activities.AboutActivity"
             android:label="@string/layout_about_name"
             android:parentActivityName=".activities.DashboardActivity" />
 
-        <service android:name=".firebase.FirebaseMessagingService">
+        <service android:name=".firebase.FirebaseMessagingServiceImplementation">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

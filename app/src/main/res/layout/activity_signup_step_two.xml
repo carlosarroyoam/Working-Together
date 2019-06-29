@@ -19,11 +19,11 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:layout_margin="@dimen/half_margin"
-            android:text="Dos"
+            android:text="Segundo paso"
             android:textAlignment="center"
             android:textSize="@dimen/txt_title_text_size" />
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_signup_name_etxt"
             android:layout_width="@dimen/etxt_width"
             android:layout_height="wrap_content"
@@ -39,9 +39,9 @@
                 android:inputType="textPersonName"
                 android:textSize="@dimen/etxt_text_size" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_signup_lastname_etxt"
             android:layout_width="@dimen/etxt_width"
             android:layout_height="wrap_content"
@@ -57,9 +57,9 @@
                 android:inputType="textPersonName"
                 android:textSize="@dimen/etxt_text_size" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_signup_email_etxt"
             android:layout_width="@dimen/etxt_width"
             android:layout_height="wrap_content"
@@ -75,9 +75,9 @@
                 android:inputType="textEmailAddress"
                 android:textSize="@dimen/etxt_text_size" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_signin_pass_etxt"
             android:layout_width="@dimen/etxt_width"
             android:layout_height="wrap_content"
@@ -94,9 +94,9 @@
                 android:inputType="textPassword"
                 android:textSize="@dimen/etxt_text_size" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
-        <android.support.design.widget.TextInputLayout
+        <com.google.android.material.textfield.TextInputLayout
             android:id="@+id/activity_signin_confirm_pass_etxt"
             android:layout_width="@dimen/etxt_width"
             android:layout_height="wrap_content"
@@ -113,7 +113,7 @@
                 android:inputType="textPassword"
                 android:textSize="@dimen/etxt_text_size" />
 
-        </android.support.design.widget.TextInputLayout>
+        </com.google.android.material.textfield.TextInputLayout>
 
     </RelativeLayout>
 

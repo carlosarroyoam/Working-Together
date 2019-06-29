@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.workingtogether.workingtogether.db.SQLiteOpenHelper;
+import com.workingtogether.workingtogether.database.SQLiteOpenHelper;
 import com.workingtogether.workingtogether.entity.Notification;
 
 import java.util.ArrayList;
@@ -25,7 +25,7 @@ public class NotificationsDAO {
         ArrayList<Notification> notificationList = new ArrayList<>();
 
         sqLiteOpenHelper.openDatabase();
-        StringBuilder query = new StringBuilder("SELECT UIDNOTIFICATION, TITLE, DESCRIPTION, DATE, NOTIFICATIONTYPE, UIDRESOURSE" +
+        StringBuilder query = new StringBuilder("SELECT UIDNOTIFICATION, TITLE, DESCRIPTION, DATE, NOTIFICATION_TYPE, UIDRESOURSE" +
                 " FROM NOTIFICATIONS" +
                 " ORDER BY DATE DESC");
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
@@ -50,7 +50,7 @@ public class NotificationsDAO {
         ArrayList<Notification> notificationList = new ArrayList<>();
 
         sqLiteOpenHelper.openDatabase();
-        StringBuilder query = new StringBuilder("SELECT UIDNOTIFICATION, TITLE, DESCRIPTION, DATE, NOTIFICATIONTYPE, UIDRESOURSE" +
+        StringBuilder query = new StringBuilder("SELECT UIDNOTIFICATION, TITLE, DESCRIPTION, DATE, NOTIFICATION_TYPE, UIDRESOURSE" +
                 " FROM NOTIFICATIONS" +
                 " ORDER BY DATE DESC LIMIT 10");
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
@@ -75,7 +75,7 @@ public class NotificationsDAO {
         Notification notification = new Notification();
         sqLiteOpenHelper.openDatabase();
         String[] selectArgs = {Integer.toString(UIDHOMEWORK)};
-        StringBuilder query = new StringBuilder("SELECT UIDNOTIFICATION, TITLE, DESCRIPTION, DATE, NOTIFICATIONTYPE, UIDRESOURSE" +
+        StringBuilder query = new StringBuilder("SELECT UIDNOTIFICATION, TITLE, DESCRIPTION, DATE, NOTIFICATION_TYPE, UIDRESOURSE" +
                 " FROM NOTIFICATION" +
                 " WHERE UIDNOTIFICATION = ?");
         Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);

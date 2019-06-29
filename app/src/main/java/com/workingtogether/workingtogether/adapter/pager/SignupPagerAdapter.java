@@ -1,7 +1,8 @@
 package com.workingtogether.workingtogether.adapter.pager;
 
 import android.content.Context;
-import android.support.v4.view.PagerAdapter;
+
+import androidx.viewpager.widget.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,7 +12,6 @@ import com.workingtogether.workingtogether.R;
 
 public class SignupPagerAdapter extends PagerAdapter {
     private Context context;
-    private LayoutInflater layoutInflater;
     private int[] slide_layouts = {
             R.layout.activity_signup_step_one,
             R.layout.activity_signup_step_two,
@@ -34,7 +34,7 @@ public class SignupPagerAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.activity_signup_slide, container, false);
 
         ViewStub stub = view.findViewById(R.id.layout_loader);

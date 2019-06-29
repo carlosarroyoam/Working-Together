@@ -1,36 +1,35 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="@dimen/padding"
     android:fillViewport="true">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:padding="@dimen/half_padding"
-        tools:context=".activities.parent.ParentDashboard">
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
 
         <GridLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_gravity="fill"
-            android:columnCount="3"
-            android:rowCount="2"
+            android:columnCount="2"
             android:orientation="horizontal">
 
             <!-- Column 1 : Homeworks -->
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/half_margin"
                 android:layout_columnWeight="1"
+                android:layout_margin="@dimen/half_margin"
                 android:layout_rowWeight="0"
+                android:onClick="homeworksActivity"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="8dp"
-                android:onClick="homeworksActivity">
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -43,7 +42,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_homeworks" />
+                        app:srcCompat="@drawable/ic_homeworks" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -58,18 +57,18 @@
 
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <!-- Column 2 : Semaphore -->
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/half_margin"
                 android:layout_columnWeight="1"
+                android:layout_margin="@dimen/half_margin"
                 android:layout_rowWeight="0"
+                android:onClick="semaphoreActivity"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="8dp"
-                android:onClick="semaphoreActivity">
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -82,7 +81,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_semaphore" />
+                        app:srcCompat="@drawable/ic_semaphore" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -97,18 +96,18 @@
 
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <!-- Column 3 : Activities -->
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/half_margin"
                 android:layout_columnWeight="1"
+                android:layout_margin="@dimen/half_margin"
                 android:layout_rowWeight="0"
+                android:onClick="activitiesActivity"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="8dp"
-                android:onClick="activitiesActivity">
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -121,7 +120,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_activities" />
+                        app:srcCompat="@drawable/ic_activities" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -136,18 +135,18 @@
 
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
 
             <!-- Column 4 : Grades -->
-            <android.support.v7.widget.CardView
+            <androidx.cardview.widget.CardView
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_margin="@dimen/half_margin"
                 android:layout_columnWeight="1"
+                android:layout_margin="@dimen/half_margin"
                 android:layout_rowWeight="0"
+                android:onClick="notesActivity"
                 app:cardCornerRadius="8dp"
-                app:cardElevation="8dp"
-                android:onClick="gradesActivity">
+                app:cardElevation="8dp">
 
                 <LinearLayout
                     android:layout_width="wrap_content"
@@ -160,7 +159,7 @@
                         android:layout_height="@dimen/dashboard_squared_icon_size"
                         android:layout_gravity="center_horizontal"
                         android:layout_margin="@dimen/half_margin"
-                        android:src="@drawable/ic_notes" />
+                        app:srcCompat="@drawable/ic_notes" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -175,10 +174,49 @@
 
                 </LinearLayout>
 
-            </android.support.v7.widget.CardView>
+            </androidx.cardview.widget.CardView>
+
+            <!-- Column 5 : Conversation -->
+            <androidx.cardview.widget.CardView
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_columnWeight="1"
+                android:layout_margin="@dimen/half_margin"
+                android:layout_rowWeight="0"
+                android:onClick="messagesActivity"
+                app:cardCornerRadius="8dp"
+                app:cardElevation="8dp">
+
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal|center_vertical"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:layout_width="@dimen/dashboard_squared_icon_size"
+                        android:layout_height="@dimen/dashboard_squared_icon_size"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_margin="@dimen/half_margin"
+                        app:srcCompat="@drawable/ic_message" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center"
+                        android:layout_margin="@dimen/half_margin"
+                        android:text="@string/layout_messages_name"
+                        android:textAlignment="center"
+                        android:textColor="@android:color/black"
+                        android:textSize="@dimen/txt_text_size"
+                        android:textStyle="bold" />
+
+                </LinearLayout>
+
+            </androidx.cardview.widget.CardView>
 
         </GridLayout>
 
-    </RelativeLayout>
+</RelativeLayout>
 
 </ScrollView>

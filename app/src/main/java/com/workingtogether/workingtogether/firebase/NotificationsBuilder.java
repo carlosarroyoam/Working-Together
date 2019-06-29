@@ -5,8 +5,9 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.Intent;
 import android.media.RingtoneManager;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.content.ContextCompat;
+
+import androidx.core.app.NotificationCompat;
+import androidx.core.content.ContextCompat;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.activities.ActivitiesActivity;
@@ -14,10 +15,10 @@ import com.workingtogether.workingtogether.activities.ConversationsActivity;
 import com.workingtogether.workingtogether.activities.DashboardActivity;
 import com.workingtogether.workingtogether.activities.HomeworksActivity;
 
-public class Notification {
+public class NotificationsBuilder {
 
     //NOTIFICATION TYPE
-    public static String NOTIFICATIONTYPE = "NOTIFICATIONTYPE";
+    public static String NOTIFICATION_TYPE = "NOTIFICATION_TYPE";
     public static String HOMEWORKNOTIFICATION = "HOMEWORKNOTIFICATION";
     public static String ACTIVITYNOTIFICATION = "ACTIVITYNOTIFICATION";
     public static String NOTESNOTIFICATION = "NOTESNOTIFICATION";

@@ -1,6 +1,6 @@
 package com.workingtogether.workingtogether.adapter.recyclerview;
 
-import android.support.v7.widget.RecyclerView;
+import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,19 +9,19 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.firebase.Notification;
+import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 import com.workingtogether.workingtogether.util.Util;
 
 import java.util.ArrayList;
 
 public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<NotificationsRecyclerViewAdapter.ViewHolder> {
     private ArrayList<com.workingtogether.workingtogether.entity.Notification> mNotificationDataset;
-    private RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
+    private OnItemClickListenerInterface mOnItemClickListenerInterface;
     private SparseBooleanArray mSelectedItems;
 
-    public NotificationsRecyclerViewAdapter(RecyclerViewOnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<com.workingtogether.workingtogether.entity.Notification> notificationArrayList) {
+    public NotificationsRecyclerViewAdapter(OnItemClickListenerInterface mOnItemClickListenerInterface, ArrayList<com.workingtogether.workingtogether.entity.Notification> notificationArrayList) {
         this.mNotificationDataset = notificationArrayList;
-        this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;
+        this.mOnItemClickListenerInterface = mOnItemClickListenerInterface;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -43,13 +43,13 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
         else
             holder.mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 10));
 
-        if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.HOMEWORKNOTIFICATION)) {
+        if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {
             holder.mImg.setImageResource(R.drawable.ic_homeworks);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.ACTIVITYNOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITYNOTIFICATION)) {
             holder.mImg.setImageResource(R.drawable.ic_activities);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.NOTESNOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
             holder.mImg.setImageResource(R.drawable.ic_notes);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.MESSAGENOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.MESSAGENOTIFICATION)) {
             holder.mImg.setImageResource(R.drawable.ic_message);
         }
     }
@@ -104,12 +104,12 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
 
         @Override
         public void onClick(View v) {
-            mRecyclerViewOnItemClickListenerInterface.onClick(v, getAdapterPosition());
+            mOnItemClickListenerInterface.onClick(v, getAdapterPosition());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            mRecyclerViewOnItemClickListenerInterface.onLongClick(v, getAdapterPosition());
+            mOnItemClickListenerInterface.onLongClick(v, getAdapterPosition());
             return true;
         }
     }

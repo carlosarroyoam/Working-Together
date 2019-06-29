@@ -6,13 +6,14 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.view.ActionMode;
-import android.support.v7.widget.DividerItemDecoration;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.view.ActionMode;
+import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -20,14 +21,14 @@ import android.widget.RelativeLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.NotificationsRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.recyclerview.RecyclerViewOnItemClickListenerInterface;
-import com.workingtogether.workingtogether.firebase.Notification;
+import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListenerInterface;
+import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 import com.workingtogether.workingtogether.entity.dao.NotificationsDAO;
 import com.workingtogether.workingtogether.activities.parent.ParentNotes;
 
 import java.util.ArrayList;
 
-public class NotificationsTrayActivity extends AppCompatActivity implements RecyclerViewOnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
+public class NotificationsTrayActivity extends AppCompatActivity implements OnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private NotificationsRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;
@@ -129,13 +130,13 @@ public class NotificationsTrayActivity extends AppCompatActivity implements Recy
 
     @Override
     public void onClick(View v, int position) {
-        if (mDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.HOMEWORKNOTIFICATION)) {
+        if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {
             startActivity(new Intent(this, HomeworksActivity.class));
-        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.ACTIVITYNOTIFICATION)) {
+        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITYNOTIFICATION)) {
             startActivity(new Intent(this, ActivitiesActivity.class));
-        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.NOTESNOTIFICATION)) {
+        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
             startActivity(new Intent(this, ParentNotes.class));
-        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.NOTESNOTIFICATION)) {
+        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
             startActivity(new Intent(this, ConversationsActivity.class));
         }
     }

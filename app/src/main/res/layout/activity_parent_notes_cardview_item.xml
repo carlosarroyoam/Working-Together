@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
-    <android.support.v7.widget.CardView
+    <androidx.cardview.widget.CardView
     android:layout_width="@dimen/notes_squared_notes_cardview_size"
     android:layout_height="@dimen/notes_squared_notes_cardview_size"
     android:layout_columnWeight="1"
@@ -44,6 +44,6 @@
 
     </LinearLayout>
 
-</android.support.v7.widget.CardView>
+    </androidx.cardview.widget.CardView>
 
 </RelativeLayout>

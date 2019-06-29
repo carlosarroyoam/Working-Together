@@ -3,6 +3,7 @@ package com.workingtogether.workingtogether.firebase;
 import android.content.Intent;
 import android.util.Log;
 
+import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.workingtogether.workingtogether.entity.Conversation;
 import com.workingtogether.workingtogether.entity.SessionApp;
@@ -20,9 +21,9 @@ import com.workingtogether.workingtogether.util.Util;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.workingtogether.workingtogether.firebase.Notification.buildNotification;
+import static com.workingtogether.workingtogether.firebase.NotificationsBuilder.buildNotification;
 
-public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
+public class FirebaseMessagingServiceImplementation extends FirebaseMessagingService {
 
     @Override
     public void onNewToken(String newToken) {
@@ -44,9 +45,9 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             Log.d("Message data payload: ", remoteMessage.getData().toString());
 
             if (sessionDAO.getUserlogged().getTYPEUSER().equals(User.UserTypes.PARENTUSER)) {
-                if (!remoteMessage.getData().get(Notification.NOTIFICATIONTYPE).trim().equals("")) {
+                if (!remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).trim().equals("")) {
 
-                    if (remoteMessage.getData().get(Notification.NOTIFICATIONTYPE).equals(Notification.HOMEWORKNOTIFICATION)) {
+                    if (remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {
                         try {
                             JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("HOMEWORKCONTENT"));
                             sendHomeworkToDatabase(dataPayload);
@@ -54,7 +55,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                             e.printStackTrace();
                         }
 
-                    } else if (remoteMessage.getData().get(Notification.NOTIFICATIONTYPE).equals(Notification.ACTIVITYNOTIFICATION)) {
+                    } else if (remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).equals(NotificationsBuilder.ACTIVITYNOTIFICATION)) {
                         try {
                             JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("ACTIVITYCONTENT"));
                             sendActivityToDatabase(dataPayload);
@@ -63,7 +64,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
                         }
 
 
-                    } else if (remoteMessage.getData().get(Notification.NOTIFICATIONTYPE).equals(Notification.NOTESNOTIFICATION)) {
+                    } else if (remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).equals(NotificationsBuilder.NOTESNOTIFICATION)) {
                         try {
                             JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("NOTESCONTENT"));
                             sendNoteToDatabase(dataPayload);
@@ -73,18 +74,17 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
 
                     }
                 } else {
-                    Log.d("Notification Error: ", "No notification type specified");
+                    Log.d("NBuilder Error: ", "No notification type specified");
                 }
             }
 
-            if (remoteMessage.getData().get(Notification.NOTIFICATIONTYPE).equals(Notification.MESSAGENOTIFICATION)) {
+            if (remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).equals(NotificationsBuilder.MESSAGENOTIFICATION)) {
                 try {
                     JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("MESSAGECONTENT"));
                     sendMessageToDatabase(dataPayload);
                 } catch (JSONException e) {
                     e.printStackTrace();
                 }
-
             }
         }
     }
@@ -104,8 +104,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         HomeworksDAO homeworksDB = new HomeworksDAO(this);
         homeworksDB.insertHomework(title, description, deliverDate, publishDate);
 
-        sendNotificationToDatabase("Diana López publico una nueva tarea", title, Notification.HOMEWORKNOTIFICATION, 1);
-        buildNotification(this, title, description, Notification.HOMEWORKNOTIFICATION);
+        sendNotificationToDatabase("Diana López publico una nueva tarea", title, NotificationsBuilder.HOMEWORKNOTIFICATION, 1);
+        buildNotification(this, title, description, NotificationsBuilder.HOMEWORKNOTIFICATION);
         sendNewHomeworkBroadcastReceiver();
     }
 
@@ -126,8 +126,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         ActivityDAO activityDAO = new ActivityDAO(this);
         activityDAO.insertActivity(title, description, url, deliverDate, publishDate);
 
-        sendNotificationToDatabase("Diana López publico una nueva actividad", title, Notification.ACTIVITYNOTIFICATION, 1);
-        buildNotification(this, title, description, Notification.ACTIVITYNOTIFICATION);
+        sendNotificationToDatabase("Diana López publico una nueva actividad", title, NotificationsBuilder.ACTIVITYNOTIFICATION, 1);
+        buildNotification(this, title, description, NotificationsBuilder.ACTIVITYNOTIFICATION);
         sendNewActivityBroadcastReceiver();
     }
 
@@ -137,8 +137,7 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         sendBroadcast(intent);
     }
 
-    private void sendNoteToDatabase(JSONObject json) throws JSONException {
-
+    private void sendNoteToDatabase(JSONObject json) {
         sendNewNoteBroadcastReceiver();
     }
 
@@ -171,8 +170,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             UserDAO userDAO = new UserDAO(this);
             User userFrom = userDAO.getUserDetails(UIDUSERFROM);
 
-            sendNotificationToDatabase("Tienes un nuevo mensaje de " + userFrom.getNAME() + " " + userFrom.getLASTNAME(), data, Notification.MESSAGENOTIFICATION, 1);
-            buildNotification(this, "Tienes un nuevo mensaje de " + userFrom.getNAME() + " " + userFrom.getLASTNAME(), data, Notification.MESSAGENOTIFICATION);
+            sendNotificationToDatabase("Tienes un nuevo mensaje de " + userFrom.getNAME() + " " + userFrom.getLASTNAME(), data, NotificationsBuilder.MESSAGENOTIFICATION, 1);
+            buildNotification(this, "Tienes un nuevo mensaje de " + userFrom.getNAME() + " " + userFrom.getLASTNAME(), data, NotificationsBuilder.MESSAGENOTIFICATION);
             sendNewMessageBroadcastReceiver();
         }
     }

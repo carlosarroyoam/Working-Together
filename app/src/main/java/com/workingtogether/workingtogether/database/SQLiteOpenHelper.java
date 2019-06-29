@@ -1,4 +1,4 @@
-package com.workingtogether.workingtogether.db;
+package com.workingtogether.workingtogether.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,12 +15,10 @@ public class SQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-
     }
 
     public void openDatabase() {

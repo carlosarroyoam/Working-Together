@@ -4,9 +4,11 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.support.design.widget.TextInputLayout;
-import android.support.v7.app.AlertDialog;
-import android.support.v7.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputLayout;
+
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -144,7 +146,7 @@ public class TeacherHomeworks extends AppCompatActivity {
                     homeworksDB.insertHomework(title, description, deliverDate, dateTime);
 
                     //TODO reemplazar por un servicio de un servidor propio
-                    StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENTUSER\",\"NOTIFICATIONTYPE\":\"HOMEWORKNOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\" " + title +"\",\"DESCRIPTION\":\"" + description +"\",\"DELIVERDATE\":\"" + deliverDate +"\",\"PUBLISHDATE\":\"" + dateTime +"\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");
+                    StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENTUSER\",\"NOTIFICATION_TYPE\":\"HOMEWORKNOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\" " + title + "\",\"DESCRIPTION\":\"" + description + "\",\"DELIVERDATE\":\"" + deliverDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");
 
                     try {
                         JSONObject jsonArray = new JSONObject(String.valueOf(json));

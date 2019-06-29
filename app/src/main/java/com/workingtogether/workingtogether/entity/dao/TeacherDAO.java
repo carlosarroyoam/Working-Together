@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.workingtogether.workingtogether.db.SQLiteOpenHelper;
+import com.workingtogether.workingtogether.database.SQLiteOpenHelper;
 import com.workingtogether.workingtogether.entity.Teacher;
 
 import java.util.ArrayList;

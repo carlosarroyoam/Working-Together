@@ -1,6 +1,6 @@
 package com.workingtogether.workingtogether.activities.teacher;
 
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 
 import com.workingtogether.workingtogether.R;

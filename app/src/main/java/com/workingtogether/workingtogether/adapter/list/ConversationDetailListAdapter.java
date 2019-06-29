@@ -58,15 +58,15 @@ public class ConversationDetailListAdapter extends BaseAdapter {
 
         if (userLogged.getUIDUSER() == mMessagesDataset.get(position).getUIDUSERFROM()) {
             convertView = messageInflater.inflate(R.layout.layout_my_message, null);
-            holder.messageBody = convertView.findViewById(R.id.message_body);
+            holder.mMessageBody = convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
-            holder.messageBody.setText(message.getDATA());
+            holder.mMessageBody.setText(message.getDATA());
         } else {
             convertView = messageInflater.inflate(R.layout.layout_their_message, null);
-            holder.messageBody = convertView.findViewById(R.id.message_body);
+            holder.mMessageBody = convertView.findViewById(R.id.message_body);
             convertView.setTag(holder);
 
-            holder.messageBody.setText(message.getDATA());
+            holder.mMessageBody.setText(message.getDATA());
 
             holder.mImg = convertView.findViewById(R.id.contact_profile_picture);
             if (userLogged.getTYPEUSER().equals(User.UserTypes.PARENTUSER)) {
@@ -91,7 +91,7 @@ public class ConversationDetailListAdapter extends BaseAdapter {
 
     private class MessageViewHolder {
         public ImageView mImg;
-        public TextView messageBody;
+        public TextView mMessageBody;
         public TextView mDate;
     }
 

@@ -13,7 +13,7 @@ import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.activities.ActivitiesActivity;
 import com.workingtogether.workingtogether.activities.ConversationsActivity;
 import com.workingtogether.workingtogether.activities.HomeworksActivity;
-import com.workingtogether.workingtogether.firebase.Notification;
+import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 import com.workingtogether.workingtogether.activities.parent.ParentNotes;
 import com.workingtogether.workingtogether.util.Util;
 
@@ -68,26 +68,26 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
             mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 10));
 
 
-        if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.HOMEWORKNOTIFICATION)) {
+        if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {
             mImg.setImageResource(R.drawable.ic_homeworks);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.ACTIVITYNOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITYNOTIFICATION)) {
             mImg.setImageResource(R.drawable.ic_activities);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.NOTESNOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
             mImg.setImageResource(R.drawable.ic_notes);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.MESSAGENOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.MESSAGENOTIFICATION)) {
             mImg.setImageResource(R.drawable.ic_message);
         }
 
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.HOMEWORKNOTIFICATION)) {
+                if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {
                     mContext.startActivity(new Intent(mContext, HomeworksActivity.class));
-                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.ACTIVITYNOTIFICATION)) {
+                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITYNOTIFICATION)) {
                     mContext.startActivity(new Intent(mContext, ActivitiesActivity.class));
-                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.NOTESNOTIFICATION)) {
+                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
                     mContext.startActivity(new Intent(mContext, ParentNotes.class));
-                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(Notification.NOTESNOTIFICATION)) {
+                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
                     mContext.startActivity(new Intent(mContext, ConversationsActivity.class));
                 }
             }

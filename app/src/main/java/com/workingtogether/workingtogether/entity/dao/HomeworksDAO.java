@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.workingtogether.workingtogether.db.SQLiteOpenHelper;
+import com.workingtogether.workingtogether.database.SQLiteOpenHelper;
 import com.workingtogether.workingtogether.entity.Homework;
 
 import java.util.ArrayList;

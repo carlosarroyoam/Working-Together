@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true">
@@ -14,7 +15,7 @@
         android:background="@color/colorPrimary"
         tools:context=".activities.teacher.TeacherHomeworks">
 
-        <android.support.v7.widget.CardView
+        <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:layout_centerHorizontal="true"
@@ -41,7 +42,7 @@
                     android:textAlignment="center"
                     android:textSize="@dimen/txt_text_size" />
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/activity_teacher_activities_title_etxt"
                     android:layout_width="@dimen/etxt_width"
                     android:layout_height="wrap_content"
@@ -57,9 +58,9 @@
                         android:inputType="textEmailAddress"
                         android:textSize="@dimen/etxt_text_size" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/activity_teacher_activities_description_etxt"
                     android:layout_width="@dimen/etxt_width"
                     android:layout_height="wrap_content"
@@ -76,9 +77,9 @@
                         android:textAlignment="viewStart"
                         android:textSize="@dimen/etxt_text_size" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/activity_teacher_activities_url"
                     android:layout_width="@dimen/etxt_width"
                     android:layout_height="wrap_content"
@@ -99,9 +100,9 @@
                         android:onClick="attachURL"
                         android:textSize="@dimen/etxt_text_size" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
-                <android.support.design.widget.TextInputLayout
+                <com.google.android.material.textfield.TextInputLayout
                     android:id="@+id/activity_teacher_activities_deliver_date"
                     android:layout_width="@dimen/etxt_width"
                     android:layout_height="wrap_content"
@@ -122,7 +123,7 @@
                         android:onClick="openCalendar"
                         android:textSize="@dimen/etxt_text_size" />
 
-                </android.support.design.widget.TextInputLayout>
+                </com.google.android.material.textfield.TextInputLayout>
 
                 <LinearLayout
                     android:id="@+id/linearlayout"
@@ -149,7 +150,7 @@
                         android:layout_height="@dimen/add_layouts_squared_icon_size"
                         android:layout_marginRight="@dimen/margin"
                         android:gravity="right"
-                        android:src="@drawable/ic_attach_file_24dp"
+                        app:srcCompat="@drawable/ic_attach_file_24dp"
                         android:tint="@color/colorPrimary" />
 
 
@@ -191,7 +192,7 @@
 
             </RelativeLayout>
 
-        </android.support.v7.widget.CardView>
+        </androidx.cardview.widget.CardView>
 
     </RelativeLayout>
 

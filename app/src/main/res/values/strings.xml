@@ -63,6 +63,7 @@
     <string name="txt_about_msg">Acerca de</string>
     <string name="txt_about_copyright_msg">©2018 WORKING TOGETHER. TODOS LOS DERECHOS RESERVADOS.</string>
     <string name="txt_signup_msg">Crea tu cuenta gratuita</string>
+    <string name="txt_signup_msg_2">Comenzemos, antes que nada necesitamos algunos datos para crear tu cuenta, nosotros te guiaremos, primero necesitamos saber que tipo de cuenta vas a crear:</string>
     <string name="txt_no_account_msg">¿Aun no tienes cuenta? Crea una gratis</string>
 
     <string name="semaphore_red_status_name">Rojo</string>
@@ -73,7 +74,7 @@
     <string name="semaphore_green_status_msg">Tu desempeño ha sido muy bueno, muchas felicidades.</string>
 
     <string name="dialog_attach_url_confirm_button">Adjuntar URL</string>
-    <string name="dialog_attach_url_msg">Escribe la dirección de la pagina Web que quieres adjuntar</string>
+    <string name="dialog_attach_url_msg">Escribe la dirección de la pagina web que quieres adjuntar</string>
 
     <string name="write_message_chart">Escribe un mensaje</string>
 
