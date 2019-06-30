@@ -27,11 +27,11 @@ public class UserDAO {
                 " WHERE EMAIL = ?");
         Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);
         while (cursor.moveToNext()) {
-            user.setUIDUSER(cursor.getInt(0));
-            user.setNAME(cursor.getString(1));
-            user.setLASTNAME(cursor.getString(2));
-            user.setEMAIL(cursor.getString(3));
-            user.setUSERTYPE(cursor.getString(4));
+            user.setId(cursor.getInt(0));
+            user.setFirstName(cursor.getString(1));
+            user.setLastName(cursor.getString(2));
+            user.setEmail(cursor.getString(3));
+            user.setUserType(cursor.getString(4));
         }
         cursor.close();
         sqLiteOpenHelper.closeDatabase();
@@ -49,11 +49,11 @@ public class UserDAO {
                 " WHERE UIDPARENT = ?");
         Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);
         while (cursor.moveToNext()) {
-            user.setUIDUSER(cursor.getInt(0));
-            user.setNAME(cursor.getString(1));
-            user.setLASTNAME(cursor.getString(2));
-            user.setEMAIL(cursor.getString(3));
-            user.setUSERTYPE(cursor.getString(4));
+            user.setId(cursor.getInt(0));
+            user.setFirstName(cursor.getString(1));
+            user.setLastName(cursor.getString(2));
+            user.setEmail(cursor.getString(3));
+            user.setUserType(cursor.getString(4));
         }
         cursor.close();
         sqLiteOpenHelper.closeDatabase();

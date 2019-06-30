@@ -18,7 +18,7 @@ import com.workingtogether.workingtogether.entity.User;
 import com.workingtogether.workingtogether.entity.dao.MessagesDAO;
 import com.workingtogether.workingtogether.entity.dao.SessionDAO;
 import com.workingtogether.workingtogether.entity.dao.UserDAO;
-import com.workingtogether.workingtogether.util.Util;
+import com.workingtogether.workingtogether.util.DatesUtils;
 
 import java.util.ArrayList;
 
@@ -43,22 +43,22 @@ public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<Conve
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        Message message = getLastMessage(mConversationsDataset.get(position).getUIDCONVERSATION());
-        User conversationUser = getUser(mConversationsDataset.get(position).getUIDUSER());
+        Message message = getLastMessage(mConversationsDataset.get(position).getId());
+        User conversationUser = getUser(mConversationsDataset.get(position).getIdUser());
         SessionDAO sessionDAO = new SessionDAO(mContext);
 
         SessionApp userLogged = sessionDAO.getUserlogged();
 
-        holder.mContactName.setText(conversationUser.getNAME() + " " + conversationUser.getLASTNAME());
-        if (userLogged.getUIDUSER() == conversationUser.getUIDUSER())
+        holder.mContactName.setText(conversationUser.getFirstName() + " " + conversationUser.getLastName());
+        if (userLogged.getUIDUSER() == conversationUser.getId())
             holder.mLastMessageContent.setText("Tu: " + message.getDATA());
         else
             holder.mLastMessageContent.setText(message.getDATA());
 
         holder.itemView.setActivated(mSelectedItems.get(position, false)); //Cambiar estado a activado en items seleccionados
 
-        if (message.getSENDSTATE() == 1) {
-            if (message.getSENDDATE().substring(0, 9).equals(Util.Dates.getDateTime().substring(0, 9)))
+        if (message.getSENDSTATE()) {
+            if (message.getSENDDATE().substring(0, 9).equals(DatesUtils.getDateTime().substring(0, 9)))
                 holder.mLastMessageDate.setText(message.getSENDDATE().substring(11, 16));
             else
                 holder.mLastMessageDate.setText(message.getSENDDATE().substring(0, 10));

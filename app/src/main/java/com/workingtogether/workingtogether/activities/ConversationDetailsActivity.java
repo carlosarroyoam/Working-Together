@@ -22,7 +22,7 @@ import com.workingtogether.workingtogether.entity.dao.MessagesDAO;
 import com.workingtogether.workingtogether.entity.dao.SessionDAO;
 import com.workingtogether.workingtogether.entity.dao.UserDAO;
 import com.workingtogether.workingtogether.util.GlobalParams;
-import com.workingtogether.workingtogether.util.Util;
+import com.workingtogether.workingtogether.util.DatesUtils;
 import com.workingtogether.workingtogether.util.firebaseConsoleWS;
 
 import org.json.JSONException;
@@ -47,7 +47,7 @@ public class ConversationDetailsActivity extends AppCompatActivity {
         messageEditText = findViewById(R.id.editText);
 
         User conversationUser = getUser();
-        getSupportActionBar().setTitle(conversationUser.getNAME() + " " + conversationUser.getLASTNAME());
+        getSupportActionBar().setTitle(conversationUser.getFirstName() + " " + conversationUser.getLastName());
 
         UIDCONVERSATION = getConversationId();
 
@@ -121,15 +121,15 @@ public class ConversationDetailsActivity extends AppCompatActivity {
 
         if (!messageEditText.getText().toString().trim().equals("")) {
             if (UIDCONVERSATION > 0) {
-                insertMessage(UIDCONVERSATION, usuarioLogeado.getUIDUSER(), conversationUser.getUIDUSER(), messageEditText.getText().toString());
-                firebaseSend(usuarioLogeado.getUIDUSER(), conversationUser.getUIDUSER(), messageEditText.getText().toString());
+                insertMessage(UIDCONVERSATION, usuarioLogeado.getUIDUSER(), conversationUser.getId(), messageEditText.getText().toString());
+                firebaseSend(usuarioLogeado.getUIDUSER(), conversationUser.getId(), messageEditText.getText().toString());
             } else {
                 ConversationsDAO conversationsDAO = new ConversationsDAO(this);
-                conversationsDAO.insertConversation(conversationUser.getUIDUSER());
-                Conversation conversation = conversationsDAO.getConversationByContactId(conversationUser.getUIDUSER());
-                insertMessage(conversation.getUIDCONVERSATION(), usuarioLogeado.getUIDUSER(), conversationUser.getUIDUSER(), messageEditText.getText().toString());
-                firebaseSend(usuarioLogeado.getUIDUSER(), conversationUser.getUIDUSER(), messageEditText.getText().toString());
-                UIDCONVERSATION = conversation.getUIDCONVERSATION();
+                conversationsDAO.insertConversation(conversationUser.getId());
+                Conversation conversation = conversationsDAO.getConversationByContactId(conversationUser.getId());
+                insertMessage(conversation.getId(), usuarioLogeado.getUIDUSER(), conversationUser.getId(), messageEditText.getText().toString());
+                firebaseSend(usuarioLogeado.getUIDUSER(), conversationUser.getId(), messageEditText.getText().toString());
+                UIDCONVERSATION = conversation.getId();
             }
 
             messageEditText.setText("");
@@ -139,7 +139,7 @@ public class ConversationDetailsActivity extends AppCompatActivity {
 
     private void firebaseSend(int UIDUSERFROM, int UIDUSERTO, String DATA) {
         //TODO reemplazar por un servicio de un servidor propio
-        StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENTUSER\",\"NOTIFICATION_TYPE\":\"MESSAGENOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"URL\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"DATA\":\"" + DATA + "\",\"UIDUSERFROM\":\"" + UIDUSERFROM + "\",\"UIDUSERTO\":\"" + UIDUSERTO + "\",\"SENDDATE\":\"" + Util.Dates.getDateTime() + "\"}}}");
+        StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENT_USER\",\"NOTIFICATION_TYPE\":\"MESSAGENOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"URL\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"DATA\":\"" + DATA + "\",\"UIDUSERFROM\":\"" + UIDUSERFROM + "\",\"UIDUSERTO\":\"" + UIDUSERTO + "\",\"SENDDATE\":\"" + DatesUtils.getDateTime() + "\"}}}");
 
         try {
             JSONObject jsonArray = new JSONObject(String.valueOf(json));
@@ -154,7 +154,7 @@ public class ConversationDetailsActivity extends AppCompatActivity {
 
     private void insertMessage(int UIDCONVERSATION, int UIDUSERFROM, int UIDUSERTO, String DATA) {
         MessagesDAO messagesDAO = new MessagesDAO(this);
-        messagesDAO.insertMessage(UIDCONVERSATION, UIDUSERFROM, UIDUSERTO, DATA, Util.Dates.getDateTime());
+        messagesDAO.insertMessage(UIDCONVERSATION, UIDUSERFROM, UIDUSERTO, DATA, DatesUtils.getDateTime());
     }
 
     private void updateMessagesList() {

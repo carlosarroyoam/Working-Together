@@ -1,49 +1,59 @@
 package com.workingtogether.workingtogether.entity;
 
 public class Homework {
-    private int UIDHOMEWORK;
-    private String TITLE;
-    private String DESCRIPTION;
-    private String DELIVERDATE;
-    private String PUBLISHDATE;
+    private int id;
+    private String title;
+    private String description;
+    private String created_at;
+    private String updated_at;
+    private String delivery_date;
 
-    public int getUIDHOMEWORK() {
-        return UIDHOMEWORK;
+    public int getId() {
+        return id;
     }
 
-    public void setUIDHOMEWORK(int UIDHOMEWORK) {
-        this.UIDHOMEWORK = UIDHOMEWORK;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getTITLE() {
-        return TITLE;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTITLE(String TITLE) {
-        this.TITLE = TITLE;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDESCRIPTION() {
-        return DESCRIPTION;
+    public String getDescription() {
+        return description;
     }
 
-    public void setDESCRIPTION(String DESCRIPTION) {
-        this.DESCRIPTION = DESCRIPTION;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public String getDELIVERDATE() {
-        return DELIVERDATE;
+    public String getCreatedAt() {
+        return created_at;
     }
 
-    public void setDELIVERDATE(String DELIVERDATE) {
-        this.DELIVERDATE = DELIVERDATE;
+    public void setCreatedAt(String deliverdate) {
+        this.created_at = deliverdate;
     }
 
-    public String getPUBLISHDATE() {
-        return PUBLISHDATE;
+    public String getUpdatedAt() {
+        return updated_at;
     }
 
-    public void setPUBLISHDATE(String PUBLISHDATE) {
-        this.PUBLISHDATE = PUBLISHDATE;
+    public void setUpdatedAt(String updated_at) {
+        this.updated_at = updated_at;
     }
+
+    public String getDeliveryDate() {
+        return delivery_date;
+    }
+
+    public void setDeliveryDate(String delivered_at) {
+        this.delivery_date = delivered_at;
+    }
+    
 }

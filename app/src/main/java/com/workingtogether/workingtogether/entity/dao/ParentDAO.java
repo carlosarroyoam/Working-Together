@@ -26,11 +26,11 @@ public class ParentDAO {
                 " FROM PARENTS");
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
         while (cursor.moveToNext()) {
-            parent.setUIDUSER(cursor.getInt(0));
-            parent.setNAME(cursor.getString(1));
-            parent.setLASTNAME(cursor.getString(2));
-            parent.setEMAIL(cursor.getString(3));
-            parent.setUSERTYPE(cursor.getString(4));
+            parent.setId(cursor.getInt(0));
+            parent.setFirstName(cursor.getString(1));
+            parent.setLastName(cursor.getString(2));
+            parent.setEmail(cursor.getString(3));
+            parent.setUserType(cursor.getString(4));
 
             parentsArrayList.add(parent);
         }
@@ -48,11 +48,11 @@ public class ParentDAO {
                 " WHERE UIDPARENT = ?");
         Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);
         while (cursor.moveToNext()) {
-            parent.setUIDUSER(cursor.getInt(0));
-            parent.setNAME(cursor.getString(1));
-            parent.setLASTNAME(cursor.getString(2));
-            parent.setEMAIL(cursor.getString(3));
-            parent.setUSERTYPE(cursor.getString(4));
+            parent.setId(cursor.getInt(0));
+            parent.setFirstName(cursor.getString(1));
+            parent.setLastName(cursor.getString(2));
+            parent.setEmail(cursor.getString(3));
+            parent.setUserType(cursor.getString(4));
         }
         cursor.close();
         sqLiteOpenHelper.closeDatabase();

@@ -31,8 +31,8 @@ public class ConversationsDAO {
         while (cursor.moveToNext()) {
             Conversation conversation = new Conversation();
 
-            conversation.setUIDCONVERSATION(cursor.getInt(0));
-            conversation.setUIDUSER(cursor.getInt(1));
+            conversation.setId(cursor.getInt(0));
+            conversation.setIdUser(cursor.getInt(1));
 
             conversationList.add(conversation);
         }
@@ -50,8 +50,8 @@ public class ConversationsDAO {
                 " WHERE UIDCONVERSATION = ?");
         Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);
         while (cursor.moveToNext()) {
-            conversation.setUIDCONVERSATION(cursor.getInt(0));
-            conversation.setUIDUSER(cursor.getInt(1));
+            conversation.setId(cursor.getInt(0));
+            conversation.setIdUser(cursor.getInt(1));
         }
         cursor.close();
         sqLiteOpenHelper.closeDatabase();
@@ -67,8 +67,8 @@ public class ConversationsDAO {
                 " WHERE UIDUSER = ?");
         Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);
         while (cursor.moveToNext()) {
-            conversation.setUIDCONVERSATION(cursor.getInt(0));
-            conversation.setUIDUSER(cursor.getInt(1));
+            conversation.setId(cursor.getInt(0));
+            conversation.setIdUser(cursor.getInt(1));
         }
         cursor.close();
         sqLiteOpenHelper.closeDatabase();

@@ -18,8 +18,10 @@ import android.widget.DatePicker;
 import android.widget.Toast;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.entity.dao.HomeworksDAO;
-import com.workingtogether.workingtogether.util.Util;
+import com.workingtogether.workingtogether.entity.Activity;
+import com.workingtogether.workingtogether.entity.Homework;
+import com.workingtogether.workingtogether.entity.dao.HomeworksDAOImplementation;
+import com.workingtogether.workingtogether.util.DatesUtils;
 import com.workingtogether.workingtogether.util.firebaseConsoleWS;
 
 import org.json.JSONException;
@@ -129,24 +131,27 @@ public class TeacherHomeworks extends AppCompatActivity {
     }
 
     public void sendHomework(View view) {
-        String dateTime = Util.Dates.getDateTime();
+        String dateTime = DatesUtils.getDateTime();
 
         String title = titleTextInputLayout.getEditText().getText().toString();
         String description = descTextInputLayout.getEditText().getText().toString();
-        String deliverDate = delDateTextInputLayout.getEditText().getText().toString();
+        String deliveryDate = delDateTextInputLayout.getEditText().getText().toString();
 
-        String dialogMessage = "";
 
         if (!title.trim().equals("")) {
 
             if (!description.trim().equals("")) {
 
-                if (!deliverDate.trim().equals("")) {
-                    HomeworksDAO homeworksDB = new HomeworksDAO(this);
-                    homeworksDB.insertHomework(title, description, deliverDate, dateTime);
+                if (!deliveryDate.trim().equals("")) {
+                    Homework homework = new Homework();
+                    homework.setTitle(title);
+                    homework.setTitle(description);
+                    homework.setDeliveryDate(deliveryDate);
+
+                    HomeworksDAOImplementation.getInstance(this).create(homework);
 
                     //TODO reemplazar por un servicio de un servidor propio
-                    StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENTUSER\",\"NOTIFICATION_TYPE\":\"HOMEWORKNOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\" " + title + "\",\"DESCRIPTION\":\"" + description + "\",\"DELIVERDATE\":\"" + deliverDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");
+                    StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENT_USER\",\"NOTIFICATION_TYPE\":\"HOMEWORKNOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\" " + title + "\",\"DESCRIPTION\":\"" + description + "\",\"DELIVERDATE\":\"" + deliveryDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");
 
                     try {
                         JSONObject jsonArray = new JSONObject(String.valueOf(json));
@@ -157,32 +162,25 @@ public class TeacherHomeworks extends AppCompatActivity {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 } else {
-                    dialogMessage = "Selecciona una fecha de entrega";
-                    incorrectFormDialog(dialogMessage);
+                    incorrectFormDialog(getResources().getString(R.string.select_delivery_date_msg));
                 }
-
             } else {
-                dialogMessage = "Ingresa una descripción para la tarea";
-                incorrectFormDialog(dialogMessage);
+                incorrectFormDialog(getResources().getString(R.string.insert_description_msg));
             }
-
         } else {
-            dialogMessage = "Ingresa un titulo para la tarea";
-            incorrectFormDialog(dialogMessage);
+            incorrectFormDialog(getResources().getString(R.string.insert__title_msg));
+
         }
-
-
     }
 
     private void incorrectFormDialog(String dialogMessage) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Working Together");
+        alertDialogBuilder.setTitle(getResources().getString(R.string.app_name));
         alertDialogBuilder
                 .setMessage(dialogMessage)
                 .setCancelable(false)
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.positive_button), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
                     }
@@ -194,11 +192,11 @@ public class TeacherHomeworks extends AppCompatActivity {
 
     private void succesDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Working Together");
+        alertDialogBuilder.setTitle(getResources().getString(R.string.app_name));
         alertDialogBuilder
-                .setMessage("La tarea se publico con exito")
+                .setMessage(getResources().getString(R.string.successful_published_homework_msg))
                 .setCancelable(false)
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.positive_button), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
                     }

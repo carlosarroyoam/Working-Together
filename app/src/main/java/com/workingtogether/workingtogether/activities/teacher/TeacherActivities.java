@@ -2,7 +2,6 @@ package com.workingtogether.workingtogether.activities.teacher;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -16,7 +15,6 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.EditText;
@@ -26,8 +24,10 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.entity.dao.ActivityDAO;
-import com.workingtogether.workingtogether.util.Util;
+import com.workingtogether.workingtogether.entity.Activity;
+import com.workingtogether.workingtogether.entity.dao.ActivityDAOImplementation;
+import com.workingtogether.workingtogether.util.KeyboardUtils;
+import com.workingtogether.workingtogether.util.DatesUtils;
 import com.workingtogether.workingtogether.util.firebaseConsoleWS;
 
 import org.json.JSONException;
@@ -104,7 +104,7 @@ public class TeacherActivities extends AppCompatActivity {
     }
 
     public void openCalendar(View view) {
-        hideKeyboard();
+        KeyboardUtils.hideKeyboard(this);
 
         int day, month, year;
         Calendar c = Calendar.getInstance();
@@ -132,34 +132,26 @@ public class TeacherActivities extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    private void hideKeyboard() {
-        View view = this.getCurrentFocus();
-        if (view != null) {
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
-        }
-    }
-
     public void sendHomework(View view) {
-        String dateTime = Util.Dates.getDateTime();
+        String dateTime = DatesUtils.getDateTime();
 
         String title = titleTextInputLayout.getEditText().getText().toString();
         String description = descTextInputLayout.getEditText().getText().toString();
         String url = urlTextInputLayout.getEditText().getText().toString();
-        String deliverDate = delDateTextInputLayout.getEditText().getText().toString();
-
-        String dialogMessage = "";
+        String deliveryDate = delDateTextInputLayout.getEditText().getText().toString();
 
         if (!title.trim().equals("")) {
-
             if (!description.trim().equals("")) {
+                if (!deliveryDate.trim().equals("")) {
+                    Activity activity = new Activity();
+                    activity.setTitle(title);
+                    activity.setTitle(description);
+                    activity.setDeliveryDate(deliveryDate);
 
-                if (!deliverDate.trim().equals("")) {
-                    ActivityDAO activityDAO = new ActivityDAO(this);
-                    activityDAO.insertActivity(title, description, url, deliverDate, dateTime);
+                    ActivityDAOImplementation.getInstance(this).create(activity);
 
                     //TODO reemplazar por un servicio de un servidor propio
-                    StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENTUSER\",\"NOTIFICATION_TYPE\":\"ACTIVITYNOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"" + title + "\",\"DESCRIPTION\":\"" + title + "\",\"URL\":\"" + url + "\",\"DELIVERDATE\":\"" + deliverDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");
+                    StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENT_USER\",\"NOTIFICATION_TYPE\":\"ACTIVITYNOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"" + title + "\",\"DESCRIPTION\":\"" + title + "\",\"URL\":\"" + url + "\",\"DELIVERDATE\":\"" + deliveryDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");
 
                     try {
                         JSONObject jsonArray = new JSONObject(String.valueOf(json));
@@ -172,28 +164,23 @@ public class TeacherActivities extends AppCompatActivity {
                     }
 
                 } else {
-                    dialogMessage = "Selecciona una fecha de entrega";
-                    incorrectFormDialog(dialogMessage);
+                    incorrectFormDialog(getResources().getString(R.string.select_delivery_date_msg));
                 }
-
             } else {
-                dialogMessage = "Ingresa una descripción para la actividad";
-                incorrectFormDialog(dialogMessage);
+                incorrectFormDialog(getResources().getString(R.string.insert_description_msg));
             }
-
         } else {
-            dialogMessage = "Ingresa un titulo para la actividad";
-            incorrectFormDialog(dialogMessage);
+            incorrectFormDialog(getResources().getString(R.string.insert__title_msg));
         }
     }
 
     private void incorrectFormDialog(String dialogMessage) {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Working Together");
+        alertDialogBuilder.setTitle(getResources().getString(R.string.app_name));
         alertDialogBuilder
                 .setMessage(dialogMessage)
                 .setCancelable(false)
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.positive_button), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         dialog.dismiss();
                     }
@@ -205,11 +192,11 @@ public class TeacherActivities extends AppCompatActivity {
 
     private void succesDialog() {
         AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        alertDialogBuilder.setTitle("Working Together");
+        alertDialogBuilder.setTitle(getResources().getString(R.string.app_name));
         alertDialogBuilder
-                .setMessage("La tarea se publico con exito")
+                .setMessage(getResources().getString(R.string.successful_published_activity_msg))
                 .setCancelable(false)
-                .setPositiveButton("Aceptar", new DialogInterface.OnClickListener() {
+                .setPositiveButton(getResources().getString(R.string.positive_button), new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         finish();
                     }
@@ -221,7 +208,7 @@ public class TeacherActivities extends AppCompatActivity {
 
 
     public void attachURL(View view) {
-        hideKeyboard();
+        KeyboardUtils.hideKeyboard(this);
 
         final Dialog dialog = new Dialog(this);
         //dialog.requestWindowFeature(Window.FEATURE_NO_TITLE);
@@ -254,7 +241,8 @@ public class TeacherActivities extends AppCompatActivity {
     }
 
     public void attachFile(View view) {
-        hideKeyboard();
+        KeyboardUtils.hideKeyboard(this);
+
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
         startActivityForResult(intent, PICKFILE_REQUEST_CODE);

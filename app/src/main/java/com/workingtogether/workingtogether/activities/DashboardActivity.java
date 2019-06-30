@@ -217,14 +217,14 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         SessionDAO sessionDAO = new SessionDAO(this);
         SessionApp sessionApp = sessionDAO.getUserlogged();
 
-        if (sessionApp.getTYPEUSER().equals(User.UserTypes.PARENTUSER)) {
+        if (sessionApp.getTYPEUSER().equals(User.UserTypes.PARENT_USER)) {
             ParentDAO parentDAO = new ParentDAO(this);
             Parent parentInfo = parentDAO.getParentById(sessionApp.getUIDUSER());
-            setNavDrawerInfo(User.UserTypes.PARENTUSER, parentInfo.getNAME() + " " + parentInfo.getLASTNAME(), parentInfo.getEMAIL());
-        } else if (sessionApp.getTYPEUSER().equals(User.UserTypes.TEACHERUSER)) {
+            setNavDrawerInfo(User.UserTypes.PARENT_USER, parentInfo.getFirstName() + " " + parentInfo.getLastName(), parentInfo.getEmail());
+        } else if (sessionApp.getTYPEUSER().equals(User.UserTypes.TEACHER_USER)) {
             TeacherDAO teacherDAO = new TeacherDAO(this);
             Teacher teacherInfo = teacherDAO.getTeacherById(sessionApp.getUIDUSER());
-            setNavDrawerInfo(User.UserTypes.TEACHERUSER, teacherInfo.getNAME() + " " + teacherInfo.getLASTNAME(), teacherInfo.getEMAIL());
+            setNavDrawerInfo(User.UserTypes.TEACHER_USER, teacherInfo.getFirstName() + " " + teacherInfo.getLastName(), teacherInfo.getEmail());
         }
     }
 
@@ -237,9 +237,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
         TextView nav_mail = navView.findViewById(R.id.nav_drawer_email);
         nav_mail.setText(mail);
 
-        if (typeUser.equals(User.UserTypes.PARENTUSER)) {
+        if (typeUser.equals(User.UserTypes.PARENT_USER)) {
             nav_picture.setImageResource(R.drawable.ic_student);
-        } else if (typeUser.equals(User.UserTypes.TEACHERUSER)) {
+        } else if (typeUser.equals(User.UserTypes.TEACHER_USER)) {
             nav_picture.setImageResource(R.drawable.ic_teacher);
         }
 
@@ -252,9 +252,9 @@ public class DashboardActivity extends AppCompatActivity implements NavigationVi
 
         ViewStub stub = findViewById(R.id.dashboard_layout_loader);
 
-        if (sessionApp.getTYPEUSER().equals(User.UserTypes.PARENTUSER))
+        if (sessionApp.getTYPEUSER().equals(User.UserTypes.PARENT_USER))
             stub.setLayoutResource(R.layout.activity_dashboard__parent_content);
-        if (sessionApp.getTYPEUSER().equals(User.UserTypes.TEACHERUSER))
+        if (sessionApp.getTYPEUSER().equals(User.UserTypes.TEACHER_USER))
             stub.setLayoutResource(R.layout.activity_dashboard__teacher_content);
         stub.inflate();
     }

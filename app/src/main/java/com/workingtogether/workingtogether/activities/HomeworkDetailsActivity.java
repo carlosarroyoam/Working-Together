@@ -7,7 +7,7 @@ import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.entity.Homework;
-import com.workingtogether.workingtogether.entity.dao.HomeworksDAO;
+import com.workingtogether.workingtogether.entity.dao.HomeworksDAOImplementation;
 import com.workingtogether.workingtogether.util.GlobalParams;
 
 public class HomeworkDetailsActivity extends AppCompatActivity {
@@ -26,10 +26,10 @@ public class HomeworkDetailsActivity extends AppCompatActivity {
 
         homework = getHomework();
 
-        title.setText(homework.getTITLE());
-        desc.setText(homework.getDESCRIPTION());
-        deliverdate.setText("Fecha de entrega: " + homework.getDELIVERDATE());
-        publishdate.setText(homework.getPUBLISHDATE());
+        title.setText(homework.getTitle());
+        desc.setText(homework.getDescription());
+        deliverdate.setText("Fecha de entrega: " + homework.getDeliveryDate());
+        publishdate.setText(homework.getCreatedAt());
     }
 
     @Override
@@ -44,8 +44,7 @@ public class HomeworkDetailsActivity extends AppCompatActivity {
     }
 
     private Homework getHomework() {
-        HomeworksDAO homeworksDB = new HomeworksDAO(this);
-        Homework homework = homeworksDB.getHomeworkById(getIntent().getIntExtra(GlobalParams.UIDHOMEWORK, 0));
+        Homework homework = HomeworksDAOImplementation.getInstance(this).get(getIntent().getIntExtra(GlobalParams.UIDHOMEWORK, 0));
         return homework;
     }
 }

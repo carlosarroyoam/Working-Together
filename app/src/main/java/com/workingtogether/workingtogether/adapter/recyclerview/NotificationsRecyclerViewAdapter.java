@@ -10,7 +10,7 @@ import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
-import com.workingtogether.workingtogether.util.Util;
+import com.workingtogether.workingtogether.util.DatesUtils;
 
 import java.util.ArrayList;
 
@@ -35,13 +35,13 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
     public void onBindViewHolder(ViewHolder holder, int position) {
         holder.mTitle.setText(mNotificationDataset.get(position).getTITLE());
         holder.mDescription.setText(mNotificationDataset.get(position).getDESCRIPTION());
-        holder.mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE());
+        holder.mDeliverDate.setText(mNotificationDataset.get(position).getCreatedAt());
         holder.itemView.setActivated(mSelectedItems.get(position, false)); //Cambiar estado a activado en items seleccionados
 
-        if (mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(Util.Dates.getDateTime().substring(0, 9)))
-            holder.mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE().substring(11, 16));
+        if (mNotificationDataset.get(position).getCreatedAt().substring(0, 9).equals(DatesUtils.getDateTime().substring(0, 9)))
+            holder.mDeliverDate.setText(mNotificationDataset.get(position).getCreatedAt().substring(11, 16));
         else
-            holder.mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 10));
+            holder.mDeliverDate.setText(mNotificationDataset.get(position).getCreatedAt().substring(0, 10));
 
         if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {
             holder.mImg.setImageResource(R.drawable.ic_homeworks);

@@ -31,9 +31,9 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<Activiti
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mTitle.setText(((Activity) mActivitiesDataset.get(position)).getTITLE());
-        holder.mDescription.setText(((Activity) mActivitiesDataset.get(position)).getDESCRIPTION());
-        holder.mDeliverDate.setText(((Activity) mActivitiesDataset.get(position)).getDELIVERDATE());
+        holder.mTitle.setText(((Activity) mActivitiesDataset.get(position)).getTitle());
+        holder.mDescription.setText(((Activity) mActivitiesDataset.get(position)).getDescription());
+        holder.mDeliverDate.setText(((Activity) mActivitiesDataset.get(position)).getDeliveryDate());
         holder.itemView.setActivated(mSelectedItems.get(position, false)); //Cambiar estado a activado en items seleccionados
     }
 

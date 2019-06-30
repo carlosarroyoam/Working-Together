@@ -5,7 +5,8 @@ public class Notification {
     private String TITLE;
     private String DESCRIPTION;
     private String NOTIFICATIONTYPE;
-    private String PUBLISHDATE;
+    private String created_at;
+    private String updated_at;
     private int UIDRESOURSE;
 
     public int getUIDNOTIFICATION() {
@@ -40,12 +41,20 @@ public class Notification {
         this.NOTIFICATIONTYPE = NOTIFICATIONTYPE;
     }
 
-    public String getPUBLISHDATE() {
-        return PUBLISHDATE;
+    public String getCreatedAt() {
+        return created_at;
     }
 
-    public void setPUBLISHDATE(String PUBLISHDATE) {
-        this.PUBLISHDATE = PUBLISHDATE;
+    public void setCreatedAt(String PUBLISHDATE) {
+        this.created_at = PUBLISHDATE;
+    }
+
+    public String getUpdatedAt() {
+        return updated_at;
+    }
+
+    public void setUpdatedAt(String updated_at) {
+        this.updated_at = updated_at;
     }
 
     public int getUIDRESOURSE() {

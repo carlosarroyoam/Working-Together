@@ -14,7 +14,7 @@ import com.workingtogether.workingtogether.entity.Message;
 import com.workingtogether.workingtogether.entity.SessionApp;
 import com.workingtogether.workingtogether.entity.User;
 import com.workingtogether.workingtogether.entity.dao.SessionDAO;
-import com.workingtogether.workingtogether.util.Util;
+import com.workingtogether.workingtogether.util.DatesUtils;
 
 import java.util.ArrayList;
 
@@ -69,17 +69,17 @@ public class ConversationDetailListAdapter extends BaseAdapter {
             holder.mMessageBody.setText(message.getDATA());
 
             holder.mImg = convertView.findViewById(R.id.contact_profile_picture);
-            if (userLogged.getTYPEUSER().equals(User.UserTypes.PARENTUSER)) {
+            if (userLogged.getTYPEUSER().equals(User.UserTypes.PARENT_USER)) {
                 holder.mImg.setImageResource(R.drawable.ic_teacher);
-            } else if (userLogged.getTYPEUSER().equals(User.UserTypes.TEACHERUSER)) {
+            } else if (userLogged.getTYPEUSER().equals(User.UserTypes.TEACHER_USER)) {
                 holder.mImg.setImageResource(R.drawable.ic_student);
             }
         }
 
-        if (mMessagesDataset.get(position).getSENDSTATE() == 1) {
+        if (mMessagesDataset.get(position).getSENDSTATE()) {
             holder.mDate = convertView.findViewById(R.id.message_date);
 
-            if (mMessagesDataset.get(position).getSENDDATE().substring(0, 9).equals(Util.Dates.getDateTime().substring(0, 9)))
+            if (mMessagesDataset.get(position).getSENDDATE().substring(0, 9).equals(DatesUtils.getDateTime().substring(0, 9)))
                 holder.mDate.setText(mMessagesDataset.get(position).getSENDDATE().substring(11, 16));
             else
                 holder.mDate.setText(mMessagesDataset.get(position).getSENDDATE());

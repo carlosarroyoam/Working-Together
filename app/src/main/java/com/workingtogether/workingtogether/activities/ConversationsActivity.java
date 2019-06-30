@@ -135,8 +135,8 @@ public class ConversationsActivity extends AppCompatActivity implements OnItemCl
     @Override
     public void onClick(View v, int position) {
         Intent intent = new Intent(this, ConversationDetailsActivity.class);
-        intent.putExtra(GlobalParams.UIDCONVERSATION, mDataset.get(position).getUIDCONVERSATION());
-        intent.putExtra(GlobalParams.UIDUSER, mDataset.get(position).getUIDUSER());
+        intent.putExtra(GlobalParams.UIDCONVERSATION, mDataset.get(position).getId());
+        intent.putExtra(GlobalParams.UIDUSER, mDataset.get(position).getIdUser());
         startActivity(intent);
     }
 
@@ -215,8 +215,8 @@ public class ConversationsActivity extends AppCompatActivity implements OnItemCl
         ConversationsDAO conversationsDAO = new ConversationsDAO(getApplicationContext());
         for (int i = 0; i < selectedItems.size(); i++) {
             MessagesDAO messagesDAO = new MessagesDAO(this);
-            messagesDAO.deleteMessages(selectedItems.get(i).getUIDCONVERSATION());
-            conversationsDAO.deleteConversation(selectedItems.get(i).getUIDCONVERSATION());
+            messagesDAO.deleteMessages(selectedItems.get(i).getId());
+            conversationsDAO.deleteConversation(selectedItems.get(i).getId());
             updateConversationsList();
         }
     }

@@ -13,7 +13,7 @@ import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.entity.User;
 import com.workingtogether.workingtogether.entity.dao.SessionDAO;
 import com.workingtogether.workingtogether.entity.dao.UserDAO;
-import com.workingtogether.workingtogether.util.Util;
+import com.workingtogether.workingtogether.util.AlertDialogsUtils;
 
 public class SigninActivity extends AppCompatActivity {
 
@@ -29,29 +29,24 @@ public class SigninActivity extends AppCompatActivity {
 
         String email = userWrapper.getEditText().getText().toString();
         String password = passwordWrapper.getEditText().getText().toString();
-        String dialogMessage = "";
 
         if (!email.trim().equals("")) {
             if (!password.trim().equals("")) {
                 UserDAO userDAO = new UserDAO(this);
                 if (userDAO.verifyLogin(email, password)) {
                     User user = userDAO.getUserDetails(email);
-                    addSession(user.getUIDUSER(), user.getUSERTYPE());
+                    addSession(user.getId(), user.getUserType());
                     startActivity(new Intent(this, DashboardActivity.class));
                     finish();
 
                 } else {
-                    dialogMessage = "Contraseña o usuario incorrecto";
-                    Util.AleretDialogs.informationDialog(this, "Working Together", dialogMessage);
+                    AlertDialogsUtils.informationDialog(this, getResources().getString(R.string.app_name), getResources().getString(R.string.wrong_user_msg), getResources().getString(R.string.positive_button));
                 }
             } else {
-                dialogMessage = "Ingresa tu contraseña";
-                Util.AleretDialogs.informationDialog(this, "Working Together", dialogMessage);
+                AlertDialogsUtils.informationDialog(this, getResources().getString(R.string.app_name), getResources().getString(R.string.insert_password_msg), getResources().getString(R.string.positive_button));
             }
-
         } else {
-            dialogMessage = "Ingresa tu correo electrónico";
-            Util.AleretDialogs.informationDialog(this, "Working Together", dialogMessage);
+            AlertDialogsUtils.informationDialog(this, getResources().getString(R.string.app_name), getResources().getString(R.string.insert_mail_msg), getResources().getString(R.string.positive_button));
         }
     }
 
@@ -61,7 +56,7 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     public void forgotPassword(View view) {
-        Toast.makeText(this, "Olvidaste tu contrasena?", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, getResources().getString(R.string.forgot_password_msg), Toast.LENGTH_SHORT).show();
     }
 
     public void signup(View view) {

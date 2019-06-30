@@ -15,7 +15,7 @@ import com.workingtogether.workingtogether.activities.ConversationsActivity;
 import com.workingtogether.workingtogether.activities.HomeworksActivity;
 import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 import com.workingtogether.workingtogether.activities.parent.ParentNotes;
-import com.workingtogether.workingtogether.util.Util;
+import com.workingtogether.workingtogether.util.DatesUtils;
 
 import java.util.ArrayList;
 
@@ -62,10 +62,10 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
         mDescription.setText(mNotificationDataset.get(position).getDESCRIPTION());
 
 
-        if (mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 9).equals(Util.Dates.getDateTime().substring(0, 9)))
-            mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE().substring(11, 16));
+        if (mNotificationDataset.get(position).getCreatedAt().substring(0, 9).equals(DatesUtils.getDateTime().substring(0, 9)))
+            mDeliverDate.setText(mNotificationDataset.get(position).getCreatedAt().substring(11, 16));
         else
-            mDeliverDate.setText(mNotificationDataset.get(position).getPUBLISHDATE().substring(0, 10));
+            mDeliverDate.setText(mNotificationDataset.get(position).getCreatedAt().substring(0, 10));
 
 
         if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {

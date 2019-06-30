@@ -25,7 +25,7 @@
     <string name="btn_signup">Crear cuenta</string>
     <string name="btn_send">Enviar</string>
     <string name="btn_support">Enviar correo</string>
-    <string name="btn_forgot_password">¿Olvidaste tu contraseña?</string>
+    <string name="forgot_password_msg">¿Olvidaste tu contraseña?</string>
     <string name="btn_parent_account">Soy un Familiar</string>
     <string name="btn_teacher_account">Soy un Profesor</string>
 
@@ -80,4 +80,18 @@
 
     <string name="action_delete">Eliminar</string>
 
+    <!-- Dialogs -->
+    <string name="positive_button">Aceptar</string>
+    <string name="negative_button">Cancelar</string>
+
+    <string name="successful_published_homework_msg">"La tarea se publico con exito"</string>
+    <string name="successful_published_activity_msg">"La actividad se publico con exito"</string>
+
+    <string name="wrong_user_msg">Contraseña o usuario incorrecto</string>
+    <string name="insert_password_msg">Ingresa tu contraseña</string>
+    <string name="insert_mail_msg">Ingresa tu correo electrónico</string>
+
+    <string name="select_delivery_date_msg">Selecciona una fecha de entrega</string>
+    <string name="insert_description_msg">Ingresa una descripción</string>
+    <string name="insert__title_msg">Ingresa un titulo</string>
 </resources>

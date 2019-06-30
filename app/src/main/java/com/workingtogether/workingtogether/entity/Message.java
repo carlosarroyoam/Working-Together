@@ -6,12 +6,14 @@ public class Message {
     private int UIDUSERFROM;
     private int UIDUSERTO;
     private String DATA;
+    private String created_at;
+    private String updated_at;
     private String SENDDATE;
     private String DELIVERDATE;
     private String READEDDATE;
-    private int SENDSTATE;
-    private int DELIVERSTATE;
-    private int READEDSTATE;
+    private boolean SENDSTATE;
+    private boolean DELIVERSTATE;
+    private boolean READEDSTATE;
 
     public int getUIDMESSAGE() {
         return UIDMESSAGE;
@@ -53,6 +55,22 @@ public class Message {
         this.DATA = DATA;
     }
 
+    public String getCreated_at() {
+        return created_at;
+    }
+
+    public void setCreated_at(String created_at) {
+        this.created_at = created_at;
+    }
+
+    public String getUpdated_at() {
+        return updated_at;
+    }
+
+    public void setUpdated_at(String updated_at) {
+        this.updated_at = updated_at;
+    }
+
     public String getSENDDATE() {
         return SENDDATE;
     }
@@ -77,27 +95,27 @@ public class Message {
         this.READEDDATE = READEDDATE;
     }
 
-    public int getSENDSTATE() {
+    public boolean getSENDSTATE() {
         return SENDSTATE;
     }
 
-    public void setSENDSTATE(int SENDSTATE) {
+    public void setSENDSTATE(boolean SENDSTATE) {
         this.SENDSTATE = SENDSTATE;
     }
 
-    public int getDELIVERSTATE() {
+    public boolean getDELIVERSTATE() {
         return DELIVERSTATE;
     }
 
-    public void setDELIVERSTATE(int DELIVERSTATE) {
+    public void setDELIVERSTATE(boolean DELIVERSTATE) {
         this.DELIVERSTATE = DELIVERSTATE;
     }
 
-    public int getREADEDSTATE() {
+    public boolean getREADEDSTATE() {
         return READEDSTATE;
     }
 
-    public void setREADEDSTATE(int READEDSTATE) {
+    public void setREADEDSTATE(boolean READEDSTATE) {
         this.READEDSTATE = READEDSTATE;
     }
 }

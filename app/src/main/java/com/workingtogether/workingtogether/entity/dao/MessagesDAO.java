@@ -42,9 +42,9 @@ public class MessagesDAO {
             message.setSENDDATE(cursor.getString(5));
             message.setDELIVERDATE(cursor.getString(6));
             message.setREADEDDATE(cursor.getString(7));
-            message.setSENDSTATE(cursor.getInt(8));
-            message.setDELIVERSTATE(cursor.getInt(9));
-            message.setREADEDSTATE(cursor.getInt(10));
+            message.setSENDSTATE(cursor.getInt(8) > 0 ? true : false);
+            message.setDELIVERSTATE(cursor.getInt(9) > 0 ? true : false);
+            message.setREADEDSTATE(cursor.getInt(10) > 0 ? true : false);
 
             messageArrayList.add(message);
         }
@@ -74,9 +74,9 @@ public class MessagesDAO {
             message.setSENDDATE(cursor.getString(5));
             message.setDELIVERDATE(cursor.getString(6));
             message.setREADEDDATE(cursor.getString(7));
-            message.setSENDSTATE(cursor.getInt(8));
-            message.setDELIVERSTATE(cursor.getInt(9));
-            message.setREADEDSTATE(cursor.getInt(10));
+            message.setSENDSTATE(cursor.getInt(8) > 0 ? true : false);
+            message.setDELIVERSTATE(cursor.getInt(9) > 0 ? true : false);
+            message.setREADEDSTATE(cursor.getInt(10) > 0 ? true : false);
 
         }
         cursor.close();

@@ -32,13 +32,13 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
 
     @Override
     public void onBindViewHolder(ViewHolder holder, int position) {
-        holder.mContactName.setText(mContactsDataset.get(position).getNAME() + " " + mContactsDataset.get(position).getLASTNAME());
-        holder.mContactMail.setText(mContactsDataset.get(position).getEMAIL());
+        holder.mContactName.setText(mContactsDataset.get(position).getFirstName() + " " + mContactsDataset.get(position).getLastName());
+        holder.mContactMail.setText(mContactsDataset.get(position).getEmail());
         holder.itemView.setActivated(mSelectedItems.get(position, false)); //Cambiar estado a activado en items seleccionados
 
-        if (mContactsDataset.get(position).getUSERTYPE().equals(User.UserTypes.TEACHERUSER))
+        if (mContactsDataset.get(position).getUserType().equals(User.UserTypes.TEACHER_USER))
             holder.mImg.setImageResource(R.drawable.ic_teacher);
-        if (mContactsDataset.get(position).getUSERTYPE().equals(User.UserTypes.PARENTUSER))
+        if (mContactsDataset.get(position).getUserType().equals(User.UserTypes.PARENT_USER))
             holder.mImg.setImageResource(R.drawable.ic_student);
     }
 

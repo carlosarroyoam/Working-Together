@@ -35,7 +35,7 @@ public class NotificationsDAO {
             notification.setUIDNOTIFICATION(cursor.getInt(0));
             notification.setTITLE(cursor.getString(1));
             notification.setDESCRIPTION(cursor.getString(2));
-            notification.setPUBLISHDATE(cursor.getString(3));
+            notification.setCreatedAt(cursor.getString(3));
             notification.setNOTIFICATIONTYPE(cursor.getString(4));
             notification.setUIDRESOURSE(cursor.getInt(5));
 
@@ -60,7 +60,7 @@ public class NotificationsDAO {
             notification.setUIDNOTIFICATION(cursor.getInt(0));
             notification.setTITLE(cursor.getString(1));
             notification.setDESCRIPTION(cursor.getString(2));
-            notification.setPUBLISHDATE(cursor.getString(3));
+            notification.setCreatedAt(cursor.getString(3));
             notification.setNOTIFICATIONTYPE(cursor.getString(4));
             notification.setUIDRESOURSE(cursor.getInt(5));
 
@@ -83,7 +83,7 @@ public class NotificationsDAO {
             notification.setUIDNOTIFICATION(cursor.getInt(0));
             notification.setTITLE(cursor.getString(1));
             notification.setDESCRIPTION(cursor.getString(2));
-            notification.setPUBLISHDATE(cursor.getString(3));
+            notification.setCreatedAt(cursor.getString(3));
             notification.setNOTIFICATIONTYPE(cursor.getString(4));
             notification.setUIDRESOURSE(cursor.getInt(5));
         }

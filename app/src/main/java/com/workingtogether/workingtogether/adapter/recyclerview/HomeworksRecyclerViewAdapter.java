@@ -31,9 +31,9 @@ public class HomeworksRecyclerViewAdapter extends RecyclerView.Adapter<Homeworks
 
     @Override
     public void onBindViewHolder(ViewHolder holder, final int position) {
-        holder.mTitle.setText(mHomeworksDataset.get(position).getTITLE());
-        holder.mDescription.setText(mHomeworksDataset.get(position).getDESCRIPTION());
-        holder.mDeliverDate.setText("Fecha de entrega: " + mHomeworksDataset.get(position).getDELIVERDATE());
+        holder.mTitle.setText(mHomeworksDataset.get(position).getTitle());
+        holder.mDescription.setText(mHomeworksDataset.get(position).getDescription());
+        holder.mDeliverDate.setText("Fecha de entrega: " + mHomeworksDataset.get(position).getDeliveryDate());
         holder.itemView.setActivated(mSelectedItems.get(position, false)); //Cambiar estado a activado en items seleccionados
     }
 

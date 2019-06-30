@@ -6,7 +6,6 @@ import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
@@ -17,7 +16,8 @@ import android.widget.Toast;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.pager.SignupPagerAdapter;
-import com.workingtogether.workingtogether.util.Util;
+import com.workingtogether.workingtogether.util.AlertDialogsUtils;
+import com.workingtogether.workingtogether.util.DatesUtils;
 
 public class SignupActivity extends AppCompatActivity {
     private ViewPager view_pager;
@@ -50,15 +50,17 @@ public class SignupActivity extends AppCompatActivity {
 
     @Override
     public void onBackPressed() {
-        Util.AleretDialogs.confirmationDialog(this, "Aun no creamos tu cuenta", "¿Estas seguro que quieres cancelar?",
-                new DialogInterface.OnClickListener() {
+        AlertDialogsUtils.confirmationDialog(this,
+                "Aun no creamos tu cuenta",
+                "¿Estas seguro que quieres cancelar?",
+                getResources().getString(R.string.positive_button), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         startActivity(new Intent(getApplicationContext(), SigninActivity.class));
                         finish();
                     }
                 },
-                new DialogInterface.OnClickListener() {
+                getResources().getString(R.string.positive_button), new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
                         dialog.cancel();

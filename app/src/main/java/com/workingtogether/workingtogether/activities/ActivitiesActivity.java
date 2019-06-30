@@ -22,9 +22,10 @@ import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ActivitiesRecyclerViewAdapter;
 import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListenerInterface;
 import com.workingtogether.workingtogether.entity.Activity;
-import com.workingtogether.workingtogether.entity.dao.ActivityDAO;
+import com.workingtogether.workingtogether.entity.dao.ActivityDAOImplementation;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class ActivitiesActivity extends AppCompatActivity implements OnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
@@ -144,9 +145,8 @@ public class ActivitiesActivity extends AppCompatActivity implements OnItemClick
 
     }
 
-    private ArrayList<Activity> loadActivitiesList() {
-        ActivityDAO activityDAO = new ActivityDAO(this);
-        ArrayList<Activity> activityArrayList = activityDAO.getAllActivities();
+    private List<Activity> loadActivitiesList() {
+        List<Activity> activityArrayList = ActivityDAOImplementation.getInstance(this).getAll();
         return activityArrayList;
     }
 
@@ -202,9 +202,8 @@ public class ActivitiesActivity extends AppCompatActivity implements OnItemClick
     }
 
     private void deleteHomeworks(ArrayList<Activity> selectedItems) {
-        ActivityDAO activityDAO = new ActivityDAO(getApplicationContext());
         for (int i = 0; i < selectedItems.size(); i++) {
-            activityDAO.deleteActivity(selectedItems.get(i).getUIDACTIVITY());
+            ActivityDAOImplementation.getInstance(this).delete(selectedItems.get(i));
             updateActivitiesList();
         }
     }

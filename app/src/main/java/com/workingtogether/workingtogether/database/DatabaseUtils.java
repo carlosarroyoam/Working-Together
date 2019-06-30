@@ -11,7 +11,7 @@ import java.io.OutputStream;
 public class DatabaseUtils {
 
     /**
-     * Copy database file from app/assets to application's directory in device storage.
+     * Copy database file from app/assets to application's private folder in device storage.
      * Database will only be copied if it doesn't exists.
      *
      * @param context

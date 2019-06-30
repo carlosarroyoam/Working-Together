@@ -26,11 +26,11 @@ public class TeacherDAO {
                 " FROM TEACHERS");
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
         while (cursor.moveToNext()) {
-            teacher.setUIDUSER(cursor.getInt(0));
-            teacher.setNAME(cursor.getString(1));
-            teacher.setLASTNAME(cursor.getString(2));
-            teacher.setEMAIL(cursor.getString(3));
-            teacher.setUSERTYPE(cursor.getString(4));
+            teacher.setId(cursor.getInt(0));
+            teacher.setFirstName(cursor.getString(1));
+            teacher.setLastName(cursor.getString(2));
+            teacher.setEmail(cursor.getString(3));
+            teacher.setUserType(cursor.getString(4));
 
             teachersArrayList.add(teacher);
         }
@@ -48,11 +48,11 @@ public class TeacherDAO {
                 " WHERE UIDTEACHER = ?");
         Cursor cursor = mDatabase.rawQuery(query.toString(), selectArgs);
         while (cursor.moveToNext()) {
-            teacher.setUIDUSER(cursor.getInt(0));
-            teacher.setNAME(cursor.getString(1));
-            teacher.setLASTNAME(cursor.getString(2));
-            teacher.setEMAIL(cursor.getString(3));
-            teacher.setUSERTYPE(cursor.getString(4));
+            teacher.setId(cursor.getInt(0));
+            teacher.setFirstName(cursor.getString(1));
+            teacher.setLastName(cursor.getString(2));
+            teacher.setEmail(cursor.getString(3));
+            teacher.setUserType(cursor.getString(4));
         }
         cursor.close();
         sqLiteOpenHelper.closeDatabase();

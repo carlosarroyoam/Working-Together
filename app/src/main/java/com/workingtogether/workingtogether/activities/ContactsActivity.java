@@ -98,10 +98,10 @@ public class ContactsActivity extends AppCompatActivity implements OnItemClickLi
         SessionDAO sessionDAO = new SessionDAO(this);
         SessionApp sessionApp = sessionDAO.getUserlogged();
 
-        if (sessionApp.getTYPEUSER().equals(User.UserTypes.PARENTUSER)) {
+        if (sessionApp.getTYPEUSER().equals(User.UserTypes.PARENT_USER)) {
             TeacherDAO teacherDAO = new TeacherDAO(this);
             contactsArrayList.addAll(teacherDAO.getTeachers());
-        } else if (sessionApp.getTYPEUSER().equals(User.UserTypes.TEACHERUSER)) {
+        } else if (sessionApp.getTYPEUSER().equals(User.UserTypes.TEACHER_USER)) {
             ParentDAO parentDAO = new ParentDAO(this);
             contactsArrayList.addAll(parentDAO.getParents());
         }
@@ -120,14 +120,14 @@ public class ContactsActivity extends AppCompatActivity implements OnItemClickLi
 
     @Override
     public void onClick(View v, int position) {
-        Conversation conversation = getConversation(mDataset.get(position).getUIDUSER());
+        Conversation conversation = getConversation(mDataset.get(position).getId());
         Intent intent = new Intent(this, ConversationDetailsActivity.class);
 
-        if (conversation.getUIDCONVERSATION() > 0) {
-            intent.putExtra(GlobalParams.UIDCONVERSATION, conversation.getUIDCONVERSATION());
-            intent.putExtra(GlobalParams.UIDUSER, conversation.getUIDUSER());
+        if (conversation.getId() > 0) {
+            intent.putExtra(GlobalParams.UIDCONVERSATION, conversation.getId());
+            intent.putExtra(GlobalParams.UIDUSER, conversation.getIdUser());
         } else {
-            intent.putExtra(GlobalParams.UIDUSER, mDataset.get(position).getUIDUSER());
+            intent.putExtra(GlobalParams.UIDUSER, mDataset.get(position).getId());
         }
 
         startActivity(intent);
