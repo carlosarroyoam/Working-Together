@@ -4,11 +4,6 @@ import android.app.DatePickerDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.os.Bundle;
-
-import com.google.android.material.textfield.TextInputLayout;
-
-import androidx.appcompat.app.AlertDialog;
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -17,8 +12,11 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.DatePicker;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AlertDialog;
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputLayout;
 import com.workingtogether.workingtogether.R;
-import com.workingtogether.workingtogether.entity.Activity;
 import com.workingtogether.workingtogether.entity.Homework;
 import com.workingtogether.workingtogether.entity.dao.HomeworksDAOImplementation;
 import com.workingtogether.workingtogether.util.DatesUtils;
@@ -151,7 +149,7 @@ public class TeacherHomeworks extends AppCompatActivity {
                     HomeworksDAOImplementation.getInstance(this).create(homework);
 
                     //TODO reemplazar por un servicio de un servidor propio
-                    StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENT_USER\",\"NOTIFICATION_TYPE\":\"HOMEWORKNOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\" " + title + "\",\"DESCRIPTION\":\"" + description + "\",\"DELIVERDATE\":\"" + deliveryDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");
+                    StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENT_USER\",\"NOTIFICATION_TYPE\":\"HOMEWORK_NOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\" " + title + "\",\"DESCRIPTION\":\"" + description + "\",\"DELIVERDATE\":\"" + deliveryDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");
 
                     try {
                         JSONObject jsonArray = new JSONObject(String.valueOf(json));

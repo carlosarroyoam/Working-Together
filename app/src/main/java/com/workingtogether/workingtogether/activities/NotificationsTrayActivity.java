@@ -6,25 +6,25 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.RelativeLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.workingtogether.workingtogether.R;
+import com.workingtogether.workingtogether.activities.parent.ParentNotes;
 import com.workingtogether.workingtogether.adapter.recyclerview.NotificationsRecyclerViewAdapter;
 import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListenerInterface;
-import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 import com.workingtogether.workingtogether.entity.dao.NotificationsDAO;
-import com.workingtogether.workingtogether.activities.parent.ParentNotes;
+import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 
 import java.util.ArrayList;
 
@@ -130,13 +130,13 @@ public class NotificationsTrayActivity extends AppCompatActivity implements OnIt
 
     @Override
     public void onClick(View v, int position) {
-        if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {
+        if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORK_NOTIFICATION)) {
             startActivity(new Intent(this, HomeworksActivity.class));
-        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITYNOTIFICATION)) {
+        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITY_NOTIFICATION)) {
             startActivity(new Intent(this, ActivitiesActivity.class));
-        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
+        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
             startActivity(new Intent(this, ParentNotes.class));
-        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
+        } else if (mDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
             startActivity(new Intent(this, ConversationsActivity.class));
         }
     }

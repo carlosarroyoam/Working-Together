@@ -13,8 +13,8 @@ import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.activities.ActivitiesActivity;
 import com.workingtogether.workingtogether.activities.ConversationsActivity;
 import com.workingtogether.workingtogether.activities.HomeworksActivity;
-import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 import com.workingtogether.workingtogether.activities.parent.ParentNotes;
+import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 import com.workingtogether.workingtogether.util.DatesUtils;
 
 import java.util.ArrayList;
@@ -68,26 +68,26 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
             mDeliverDate.setText(mNotificationDataset.get(position).getCreatedAt().substring(0, 10));
 
 
-        if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {
+        if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORK_NOTIFICATION)) {
             mImg.setImageResource(R.drawable.ic_homeworks);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITYNOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITY_NOTIFICATION)) {
             mImg.setImageResource(R.drawable.ic_activities);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
             mImg.setImageResource(R.drawable.ic_notes);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.MESSAGENOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.MESSAGE_NOTIFICATION)) {
             mImg.setImageResource(R.drawable.ic_message);
         }
 
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {
+                if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORK_NOTIFICATION)) {
                     mContext.startActivity(new Intent(mContext, HomeworksActivity.class));
-                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITYNOTIFICATION)) {
+                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITY_NOTIFICATION)) {
                     mContext.startActivity(new Intent(mContext, ActivitiesActivity.class));
-                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
+                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
                     mContext.startActivity(new Intent(mContext, ParentNotes.class));
-                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
+                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
                     mContext.startActivity(new Intent(mContext, ConversationsActivity.class));
                 }
             }

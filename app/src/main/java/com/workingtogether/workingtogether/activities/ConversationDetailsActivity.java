@@ -5,11 +5,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
-
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.list.ConversationDetailListAdapter;
@@ -21,8 +21,8 @@ import com.workingtogether.workingtogether.entity.dao.ConversationsDAO;
 import com.workingtogether.workingtogether.entity.dao.MessagesDAO;
 import com.workingtogether.workingtogether.entity.dao.SessionDAO;
 import com.workingtogether.workingtogether.entity.dao.UserDAO;
-import com.workingtogether.workingtogether.util.GlobalParams;
 import com.workingtogether.workingtogether.util.DatesUtils;
+import com.workingtogether.workingtogether.util.GlobalParams;
 import com.workingtogether.workingtogether.util.firebaseConsoleWS;
 
 import org.json.JSONException;
@@ -139,7 +139,7 @@ public class ConversationDetailsActivity extends AppCompatActivity {
 
     private void firebaseSend(int UIDUSERFROM, int UIDUSERTO, String DATA) {
         //TODO reemplazar por un servicio de un servidor propio
-        StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENT_USER\",\"NOTIFICATION_TYPE\":\"MESSAGENOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"URL\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"DATA\":\"" + DATA + "\",\"UIDUSERFROM\":\"" + UIDUSERFROM + "\",\"UIDUSERTO\":\"" + UIDUSERTO + "\",\"SENDDATE\":\"" + DatesUtils.getDateTime() + "\"}}}");
+        StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENT_USER\",\"NOTIFICATION_TYPE\":\"MESSAGE_NOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"URL\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"DATA\":\"" + DATA + "\",\"UIDUSERFROM\":\"" + UIDUSERFROM + "\",\"UIDUSERTO\":\"" + UIDUSERTO + "\",\"SENDDATE\":\"" + DatesUtils.getDateTime() + "\"}}}");
 
         try {
             JSONObject jsonArray = new JSONObject(String.valueOf(json));

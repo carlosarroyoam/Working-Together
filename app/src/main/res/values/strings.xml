@@ -94,4 +94,9 @@
     <string name="select_delivery_date_msg">Selecciona una fecha de entrega</string>
     <string name="insert_description_msg">Ingresa una descripción</string>
     <string name="insert__title_msg">Ingresa un titulo</string>
+
+    <!-- Notifications Channels -->
+    <string name="homeworks_channel_name">Taraeas</string>
+    <string name="homeworks_channel_description">Tareas</string>
+
 </resources>

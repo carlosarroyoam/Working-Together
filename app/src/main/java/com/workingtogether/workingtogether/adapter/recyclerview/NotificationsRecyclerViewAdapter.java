@@ -1,12 +1,13 @@
 package com.workingtogether.workingtogether.adapter.recyclerview;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
@@ -43,13 +44,13 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
         else
             holder.mDeliverDate.setText(mNotificationDataset.get(position).getCreatedAt().substring(0, 10));
 
-        if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORKNOTIFICATION)) {
+        if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORK_NOTIFICATION)) {
             holder.mImg.setImageResource(R.drawable.ic_homeworks);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITYNOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITY_NOTIFICATION)) {
             holder.mImg.setImageResource(R.drawable.ic_activities);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTESNOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
             holder.mImg.setImageResource(R.drawable.ic_notes);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.MESSAGENOTIFICATION)) {
+        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.MESSAGE_NOTIFICATION)) {
             holder.mImg.setImageResource(R.drawable.ic_message);
         }
     }
