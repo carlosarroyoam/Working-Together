@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 
+import androidx.annotation.NonNull;
 import androidx.viewpager.widget.PagerAdapter;
 
 import com.workingtogether.workingtogether.R;
@@ -14,15 +15,15 @@ import com.workingtogether.workingtogether.R;
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class SignupPagerAdapter extends PagerAdapter {
-    private Context context;
+    private Context mContext;
     private int[] slide_layouts = {
             R.layout.activity_signup_step_one,
             R.layout.activity_signup_step_two,
             R.layout.activity_signup_step_three
     };
 
-    public SignupPagerAdapter(Context context) {
-        this.context = context;
+    public SignupPagerAdapter(Context mContext) {
+        this.mContext = mContext.getApplicationContext();
     }
 
     @Override
@@ -31,20 +32,21 @@ public class SignupPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public boolean isViewFromObject(View view, Object object) {
+    public boolean isViewFromObject(@NonNull View view, @NonNull Object object) {
         return view == object;
     }
 
+    @NonNull
     @Override
-    public Object instantiateItem(ViewGroup container, int position) {
-        LayoutInflater layoutInflater = (LayoutInflater) context.getSystemService(context.LAYOUT_INFLATER_SERVICE);
+    public Object instantiateItem(@NonNull ViewGroup container, int position) {
+        LayoutInflater layoutInflater = (LayoutInflater) mContext.getSystemService(mContext.LAYOUT_INFLATER_SERVICE);
         View view = layoutInflater.inflate(R.layout.activity_signup_slide, container, false);
 
         ViewStub stub = view.findViewById(R.id.layout_loader);
         stub.setLayoutResource(slide_layouts[position]);
         View inflated = stub.inflate();
 
-        //Si el View tiene elementos hijos primero eliminalos
+        // if View has children elements then delete them first
         if (inflated.getParent() != null)
             ((ViewGroup) inflated.getParent()).removeView(inflated);
 
@@ -54,12 +56,12 @@ public class SignupPagerAdapter extends PagerAdapter {
     }
 
     @Override
-    public int getItemPosition(Object object) {
+    public int getItemPosition(@NonNull Object object) {
         return POSITION_NONE;
     }
 
     @Override
-    public void destroyItem(ViewGroup container, int position, Object object) {
+    public void destroyItem(@NonNull ViewGroup container, int position, @NonNull Object object) {
         container.removeView((View) object);
     }
 

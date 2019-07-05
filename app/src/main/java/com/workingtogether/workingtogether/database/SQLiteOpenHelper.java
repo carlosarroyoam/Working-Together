@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
  */
 public class SQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelper {
 
+    private static SQLiteOpenHelper sqLiteOpenHelperInstance;
+
     private static final String SQL_CREATE_ACTIVITIES_TABLE =
             "CREATE TABLE " + DatabaseSchema.ActivitiesTable.TABLE_NAME + " (" +
                     DatabaseSchema.ActivitiesTable.Cols.UUID + " INTEGER PRIMARY KEY," +
@@ -32,7 +34,14 @@ public class SQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelper {
     private static final String SQL_DELETE_HOMEWORKS_TABLE =
             "DROP TABLE IF EXISTS " + DatabaseSchema.HomeworksTable.TABLE_NAME;
 
-    public SQLiteOpenHelper(Context context) {
+    public static synchronized SQLiteOpenHelper getInstance(Context context) {
+        if (sqLiteOpenHelperInstance == null) {
+            sqLiteOpenHelperInstance = new SQLiteOpenHelper(context.getApplicationContext());
+        }
+        return sqLiteOpenHelperInstance;
+    }
+
+    private SQLiteOpenHelper(Context context) {
         super(context, context.getApplicationInfo().dataDir + "/databases/" + DatabaseSchema.DATABASE_NAME, null, DatabaseSchema.DB_VERSION);
     }
 

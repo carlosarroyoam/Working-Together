@@ -13,11 +13,11 @@ import java.util.ArrayList;
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class ParentDAO {
-    SQLiteOpenHelper sqLiteOpenHelper;
-    SQLiteDatabase mDatabase;
+    private SQLiteOpenHelper sqLiteOpenHelper;
+    private SQLiteDatabase mDatabase;
 
     public ParentDAO(Context context) {
-        sqLiteOpenHelper = new SQLiteOpenHelper(context);
+        sqLiteOpenHelper = null;
         mDatabase = sqLiteOpenHelper.getWritableDatabase();
     }
 

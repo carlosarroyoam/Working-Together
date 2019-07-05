@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding"
-    tools:context=".activities.parent.ParentSemaphore">
+    tools:mContext=".activities.parent.ParentSemaphore">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -16,9 +16,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/padding">
@@ -27,13 +25,14 @@
                 android:id="@+id/activity_parent_semaphore_img"
                 android:layout_width="@dimen/semaphore_icon_size"
                 android:layout_height="@dimen/semaphore_icon_size"
+                android:contentDescription=""
                 app:srcCompat="@drawable/ic_semaphore" />
 
             <TextView
                 android:id="@+id/activity_parent_semaphore_status_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/activity_parent_semaphore_img"
+                android:layout_toEndOf="@id/activity_parent_semaphore_img"
                 android:text="@string/semaphore_green_status_name"
                 android:textSize="@dimen/txt_title_text_size"
                 android:textStyle="bold" />
@@ -42,7 +41,7 @@
                 android:id="@+id/activity_parent_semaphore_msg_txt"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_toRightOf="@id/activity_parent_semaphore_img"
+                android:layout_toEndOf="@id/activity_parent_semaphore_img"
                 android:layout_below="@+id/activity_parent_semaphore_status_txt"
                 android:text="@string/semaphore_green_status_msg"
                 android:textSize="@dimen/txt_subtitle_text_size"

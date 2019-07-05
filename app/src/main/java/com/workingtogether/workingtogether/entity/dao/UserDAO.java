@@ -11,11 +11,12 @@ import com.workingtogether.workingtogether.entity.User;
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class UserDAO {
-    SQLiteOpenHelper sqLiteOpenHelper;
-    SQLiteDatabase mDatabase;
+
+    private SQLiteOpenHelper sqLiteOpenHelper;
+    private SQLiteDatabase mDatabase;
 
     public UserDAO(Context context) {
-        sqLiteOpenHelper = new SQLiteOpenHelper(context);
+        sqLiteOpenHelper = null;
         mDatabase = sqLiteOpenHelper.getWritableDatabase();
     }
 

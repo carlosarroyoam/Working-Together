@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:padding="@dimen/double_padding"
-    tools:context=".activities.HomeworkDetailsActivity">
+    tools:mContext=".activities.HomeworkDetailsActivity">
 
     <ImageView
         android:id="@+id/img"
@@ -14,6 +14,7 @@
         android:layout_height="@dimen/emty_tray_squared_icon_size"
         android:layout_centerHorizontal="true"
         android:layout_margin="@dimen/half_margin"
+        android:contentDescription=""
         app:srcCompat="@drawable/ic_homeworks" />
 
     <TextView
@@ -45,7 +46,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:layout_marginLeft="@dimen/half_margin"
+        android:layout_marginStart="@dimen/half_margin"
         android:text="12/10/2018"
         android:textAlignment="viewEnd"
         android:textColor="@color/gray"
@@ -56,7 +57,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
-        android:layout_marginLeft="@dimen/half_margin"
+        android:layout_marginStart="@dimen/half_margin"
         android:text="12/10/2018"
         android:textAlignment="viewEnd"
         android:textColor="@color/gray"

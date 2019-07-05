@@ -27,116 +27,110 @@ import java.util.Random;
 public class NotificationsBuilder {
 
     // Notifications types
-    public static final String NOTIFICATION_TYPE = "notification_type";
+    static final String NOTIFICATION_TYPE = "notification_type";
     public static final String HOMEWORK_NOTIFICATION = "homework_notification";
     public static final String ACTIVITY_NOTIFICATION = "activity_notification";
     public static final String NOTES_NOTIFICATION = "notes_notification";
     public static final String MESSAGE_NOTIFICATION = "message_notification";
 
     // Channel ids
-    public static final String HOMEWORK_NOTIFICATION_CHANNEL = "homework_notification_channel";
-    public static final String ACTIVITY_NOTIFICATION_CHANNEL = "activity_notification_channel";
-    public static final String NOTES_NOTIFICATION_CHANNEL = "notes_notification_channel";
-    public static final String MESSAGE_NOTIFICATION_CHANNEL = "message_notification_channel";
-    public static final String DEFAULT_NOTIFICATION_CHANNEL = "default_notification_channel";
+    private static final String HOMEWORK_NOTIFICATION_CHANNEL = "homework_notification_channel";
+    private static final String ACTIVITY_NOTIFICATION_CHANNEL = "activity_notification_channel";
+    private static final String NOTES_NOTIFICATION_CHANNEL = "notes_notification_channel";
+    private static final String MESSAGE_NOTIFICATION_CHANNEL = "message_notification_channel";
+    private static final String DEFAULT_NOTIFICATION_CHANNEL = "default_notification_channel";
 
-    public static void buildNotification(Context context, String title, String body, String notificationType) {
-        PendingIntent pendingIntent = PendingIntent.getActivity(context, 0, setIntentType(context, notificationType), PendingIntent.FLAG_ONE_SHOT);
+    static void buildNotification(Context context, String title, String body, String notificationType) {
+        PendingIntent pendingIntent = PendingIntent.getActivity(context.getApplicationContext(), 0, getIntentType(context, notificationType), PendingIntent.FLAG_ONE_SHOT);
 
-        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context, getChannerId(notificationType))
+        NotificationCompat.Builder notificationBuilder = new NotificationCompat.Builder(context.getApplicationContext(), getChannelId(notificationType))
                 .setSmallIcon(R.drawable.ic_notification)
                 .setContentTitle(title)
                 .setContentText(body)
                 .setStyle(new NotificationCompat.BigTextStyle()
                         .bigText(body))
-                .setColor(ContextCompat.getColor(context, R.color.orange))
+                .setColor(ContextCompat.getColor(context.getApplicationContext(), R.color.orange))
                 .setSound(RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION))
                 .setPriority(NotificationCompat.PRIORITY_DEFAULT)
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
-        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context);
+        NotificationManagerCompat notificationManager = NotificationManagerCompat.from(context.getApplicationContext());
         notificationManager.notify(generateNotificationId(), notificationBuilder.build());
     }
 
-    private static String getChannerId(String notificationType) {
-        if (notificationType.equals(HOMEWORK_NOTIFICATION)) {
-            return HOMEWORK_NOTIFICATION_CHANNEL;
+    private static int generateNotificationId() {
+        return (100 + new Random().nextInt(500 - 100)) + 1;
+    }
 
-        } else if (notificationType.equals(ACTIVITY_NOTIFICATION)) {
-            return ACTIVITY_NOTIFICATION_CHANNEL;
+    private static String getChannelId(String notificationType) {
+        switch (notificationType) {
+            case HOMEWORK_NOTIFICATION:
+                return HOMEWORK_NOTIFICATION_CHANNEL;
 
-        } else if (notificationType.equals(NOTES_NOTIFICATION)) {
-            return NOTES_NOTIFICATION_CHANNEL;
+            case ACTIVITY_NOTIFICATION:
+                return ACTIVITY_NOTIFICATION_CHANNEL;
 
-        } else if (notificationType.equals(MESSAGE_NOTIFICATION)) {
-            return MESSAGE_NOTIFICATION_CHANNEL;
+            case NOTES_NOTIFICATION:
+                return NOTES_NOTIFICATION_CHANNEL;
 
+            case MESSAGE_NOTIFICATION:
+                return MESSAGE_NOTIFICATION_CHANNEL;
         }
 
         return DEFAULT_NOTIFICATION_CHANNEL;
     }
 
-    static int generateNotificationId() {
-        return (100 + new Random().nextInt(500 - 100)) + 1;
-    }
+    private static Intent getIntentType(Context context, String notificationType) {
+        Context applicationContext = context.getApplicationContext();
 
-    private static Intent setIntentType(Context context, String notificationType) {
-        Intent intent;
+        switch (notificationType) {
+            case HOMEWORK_NOTIFICATION:
+                return new Intent(applicationContext, HomeworksActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        if (notificationType.equals(HOMEWORK_NOTIFICATION)) {
-            intent = new Intent(context, HomeworksActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            return intent;
+            case ACTIVITY_NOTIFICATION:
+                return new Intent(applicationContext, ActivitiesActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        } else if (notificationType.equals(ACTIVITY_NOTIFICATION)) {
-            intent = new Intent(context, ActivitiesActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            return intent;
+            case NOTES_NOTIFICATION:
+                return new Intent(applicationContext, ParentNotes.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-        } else if (notificationType.equals(NOTES_NOTIFICATION)) {
-            intent = new Intent(context, ParentNotes.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            return intent;
-
-        } else if (notificationType.equals(MESSAGE_NOTIFICATION)) {
-            intent = new Intent(context, ConversationsActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
-            return intent;
-
+            case MESSAGE_NOTIFICATION:
+                return new Intent(applicationContext, ConversationsActivity.class).setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         }
 
-        return new Intent(context, DashboardActivity.class);
+        return new Intent(applicationContext, DashboardActivity.class);
     }
 
     public static void createNotificationChannels(Context context) {
+        Context applicationContext = context.getApplicationContext();
+
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             NotificationChannel homeworksNotificationChannel = new NotificationChannel(HOMEWORK_NOTIFICATION_CHANNEL,
-                    context.getResources().getString(R.string.homeworks_channel_name),
+                    applicationContext.getResources().getString(R.string.homeworks_channel_name),
                     NotificationManager.IMPORTANCE_DEFAULT);
-            homeworksNotificationChannel.setDescription(context.getResources().getString(R.string.homeworks_channel_description));
+            homeworksNotificationChannel.setDescription(applicationContext.getResources().getString(R.string.homeworks_channel_description));
 
             NotificationChannel activitiesNotificationChannel = new NotificationChannel(HOMEWORK_NOTIFICATION_CHANNEL,
-                    context.getResources().getString(R.string.homeworks_channel_name),
+                    applicationContext.getResources().getString(R.string.homeworks_channel_name),
                     NotificationManager.IMPORTANCE_DEFAULT);
-            activitiesNotificationChannel.setDescription(context.getResources().getString(R.string.homeworks_channel_description));
+            activitiesNotificationChannel.setDescription(applicationContext.getResources().getString(R.string.homeworks_channel_description));
 
             NotificationChannel notesNotificationChannel = new NotificationChannel(HOMEWORK_NOTIFICATION_CHANNEL,
-                    context.getResources().getString(R.string.homeworks_channel_name),
+                    applicationContext.getResources().getString(R.string.homeworks_channel_name),
                     NotificationManager.IMPORTANCE_HIGH);
-            notesNotificationChannel.setDescription(context.getResources().getString(R.string.homeworks_channel_description));
+            notesNotificationChannel.setDescription(applicationContext.getResources().getString(R.string.homeworks_channel_description));
 
             NotificationChannel messagesNotificationChannel = new NotificationChannel(HOMEWORK_NOTIFICATION_CHANNEL,
-                    context.getResources().getString(R.string.homeworks_channel_name),
+                    applicationContext.getResources().getString(R.string.homeworks_channel_name),
                     NotificationManager.IMPORTANCE_HIGH);
-            messagesNotificationChannel.setDescription(context.getResources().getString(R.string.homeworks_channel_description));
+            messagesNotificationChannel.setDescription(applicationContext.getResources().getString(R.string.homeworks_channel_description));
 
             NotificationChannel defaultNotificationChannel = new NotificationChannel(HOMEWORK_NOTIFICATION_CHANNEL,
-                    context.getResources().getString(R.string.homeworks_channel_name),
+                    applicationContext.getResources().getString(R.string.homeworks_channel_name),
                     NotificationManager.IMPORTANCE_DEFAULT);
-            defaultNotificationChannel.setDescription(context.getResources().getString(R.string.homeworks_channel_description));
+            defaultNotificationChannel.setDescription(applicationContext.getResources().getString(R.string.homeworks_channel_description));
 
-            NotificationManager notificationManager = context.getSystemService(NotificationManager.class);
+            NotificationManager notificationManager = applicationContext.getSystemService(NotificationManager.class);
             notificationManager.createNotificationChannel(homeworksNotificationChannel);
             notificationManager.createNotificationChannel(activitiesNotificationChannel);
             notificationManager.createNotificationChannel(notesNotificationChannel);

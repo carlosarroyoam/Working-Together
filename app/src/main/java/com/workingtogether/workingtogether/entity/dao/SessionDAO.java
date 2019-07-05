@@ -15,11 +15,11 @@ import com.workingtogether.workingtogether.entity.SessionApp;
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class SessionDAO {
-    SQLiteOpenHelper sqLiteOpenHelper;
-    SQLiteDatabase mDatabase;
+    private SQLiteOpenHelper sqLiteOpenHelper;
+    private SQLiteDatabase mDatabase;
 
     public SessionDAO(Context context) {
-        sqLiteOpenHelper = new SQLiteOpenHelper(context);
+        sqLiteOpenHelper = null;
         mDatabase = sqLiteOpenHelper.getWritableDatabase();
     }
 
@@ -27,10 +27,9 @@ public class SessionDAO {
         
         String[] selectArgs = {Integer.toString(1)};
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM SESSION WHERE SESSTATE = ?", selectArgs);
-        if (cursor.moveToFirst())
-            return true;
-        
-        return false;
+
+        return cursor.moveToFirst();
+
     }
 
     public SessionApp getUserlogged() {
@@ -43,7 +42,7 @@ public class SessionDAO {
             sessionApp.setTYPEUSER(cursor.getString(1));
             sessionApp.setSESSTATE(cursor.getInt(2));
         }
-        
+        cursor.close();
 
         return sessionApp;
     }
@@ -62,14 +61,11 @@ public class SessionDAO {
         } catch (SQLiteException e) {
             Log.d("Exception: ", e.getMessage());
 
-        } finally {
-            
-
         }
 
     }
 
-    public void updateSession(int UIDUSER, int SESSTATE) {
+    private void updateSession(int UIDUSER, int SESSTATE) {
         ContentValues contentValues = new ContentValues();
         contentValues.put("SESSTATE", SESSTATE);
         String[] whereArgs = {Integer.toString(UIDUSER)};

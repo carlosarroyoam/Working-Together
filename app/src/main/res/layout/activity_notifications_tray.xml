@@ -5,15 +5,14 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    tools:context=".activities.NotificationsTrayActivity">
+    tools:mContext=".activities.NotificationsTrayActivity">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:tools="http://schemas.android.com/tools"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
@@ -24,8 +23,7 @@
                 android:scrollbars="vertical" />
 
             <!-- Empty tray View -->
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:tools="http://schemas.android.com/tools"
+            <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/activity_notifications_empty_tray"
@@ -38,7 +36,8 @@
                     android:layout_height="@dimen/emty_tray_squared_icon_size"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/half_margin"
-                    app:srcCompat="@drawable/ic_notification" />
+                    app:srcCompat="@drawable/ic_notification"
+                    android:contentDescription="" />
 
                 <TextView
                     android:id="@+id/textview"

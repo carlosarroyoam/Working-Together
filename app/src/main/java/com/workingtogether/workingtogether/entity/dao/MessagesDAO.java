@@ -16,11 +16,12 @@ import java.util.ArrayList;
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class MessagesDAO {
-    SQLiteOpenHelper sqLiteOpenHelper;
-    SQLiteDatabase mDatabase;
+
+    private SQLiteOpenHelper sqLiteOpenHelper;
+    private SQLiteDatabase mDatabase;
 
     public MessagesDAO(Context context) {
-        sqLiteOpenHelper = new SQLiteOpenHelper(context);
+        sqLiteOpenHelper = null;
         mDatabase = sqLiteOpenHelper.getWritableDatabase();
     }
 
@@ -45,9 +46,9 @@ public class MessagesDAO {
             message.setSENDDATE(cursor.getString(5));
             message.setDELIVERDATE(cursor.getString(6));
             message.setREADEDDATE(cursor.getString(7));
-            message.setSENDSTATE(cursor.getInt(8) > 0 ? true : false);
-            message.setDELIVERSTATE(cursor.getInt(9) > 0 ? true : false);
-            message.setREADEDSTATE(cursor.getInt(10) > 0 ? true : false);
+            message.setSENDSTATE(cursor.getInt(8) > 0);
+            message.setDELIVERSTATE(cursor.getInt(9) > 0);
+            message.setREADEDSTATE(cursor.getInt(10) > 0);
 
             messageArrayList.add(message);
         }
@@ -77,9 +78,9 @@ public class MessagesDAO {
             message.setSENDDATE(cursor.getString(5));
             message.setDELIVERDATE(cursor.getString(6));
             message.setREADEDDATE(cursor.getString(7));
-            message.setSENDSTATE(cursor.getInt(8) > 0 ? true : false);
-            message.setDELIVERSTATE(cursor.getInt(9) > 0 ? true : false);
-            message.setREADEDSTATE(cursor.getInt(10) > 0 ? true : false);
+            message.setSENDSTATE(cursor.getInt(8) > 0);
+            message.setDELIVERSTATE(cursor.getInt(9) > 0);
+            message.setREADEDSTATE(cursor.getInt(10) > 0);
 
         }
         cursor.close();

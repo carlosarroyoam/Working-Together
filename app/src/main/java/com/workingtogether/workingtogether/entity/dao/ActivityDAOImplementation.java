@@ -4,6 +4,7 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.workingtogether.workingtogether.database.DatabaseSchema;
 import com.workingtogether.workingtogether.database.SQLiteOpenHelper;
@@ -18,8 +19,10 @@ import java.util.List;
  */
 public class ActivityDAOImplementation implements ActivityDAO {
 
-    SQLiteOpenHelper mSQLiteOpenHelper;
-    SQLiteDatabase mDatabase;
+    private final String TAG = this.getClass().getSimpleName();
+
+    private SQLiteOpenHelper mSQLiteOpenHelper;
+    private SQLiteDatabase mDatabase;
 
     private static ActivityDAOImplementation ActivityDAOImplementationInstance;
 
@@ -32,7 +35,7 @@ public class ActivityDAOImplementation implements ActivityDAO {
     }
 
     private ActivityDAOImplementation(Context context) {
-        mSQLiteOpenHelper = new SQLiteOpenHelper(context);
+        mSQLiteOpenHelper = SQLiteOpenHelper.getInstance(context);
     }
 
     @Override
@@ -47,9 +50,9 @@ public class ActivityDAOImplementation implements ActivityDAO {
                 DatabaseSchema.ActivitiesTable.Cols.DELIVERY_DATE
         };
         String sortOrder = DatabaseSchema.ActivitiesTable.Cols.UUID + " DESC";
-
         mDatabase = mSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = mDatabase.query(
+
+        try (Cursor cursor = mDatabase.query(
                 DatabaseSchema.ActivitiesTable.TABLE_NAME,
                 projection,
                 null,
@@ -57,24 +60,26 @@ public class ActivityDAOImplementation implements ActivityDAO {
                 null,
                 null,
                 sortOrder
-        );
+        )) {
+            if (cursor.isBeforeFirst()) {
+                activitiesList = new ArrayList<>();
 
-        if (cursor.isBeforeFirst()) {
-            activitiesList = new ArrayList<>();
+                while (cursor.moveToNext()) {
+                    Activity activity = new Activity();
+                    activity.setId(cursor.getInt(0));
+                    activity.setTitle(cursor.getString(1));
+                    activity.setDescription(cursor.getString(2));
+                    activity.setCreatedAt(cursor.getString(3));
+                    activity.setDeliveryDate(cursor.getString(4));
 
-            while (cursor.moveToNext()) {
-                Activity activity = new Activity();
-                activity.setId(cursor.getInt(0));
-                activity.setTitle(cursor.getString(1));
-                activity.setDescription(cursor.getString(2));
-                activity.setCreatedAt(cursor.getString(3));
-                activity.setDeliveryDate(cursor.getString(4));
-
-                activitiesList.add(activity);
+                    activitiesList.add(activity);
+                }
             }
+
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to get records");
         }
 
-        cursor.close();
         return activitiesList;
     }
 
@@ -94,7 +99,9 @@ public class ActivityDAOImplementation implements ActivityDAO {
         String sortOrder = DatabaseSchema.ActivitiesTable.Cols.UUID + " DESC";
 
         mDatabase = mSQLiteOpenHelper.getReadableDatabase();
-        Cursor cursor = mDatabase.query(
+
+
+        try (Cursor cursor = mDatabase.query(
                 DatabaseSchema.ActivitiesTable.TABLE_NAME,
                 projection,
                 selection,
@@ -102,19 +109,20 @@ public class ActivityDAOImplementation implements ActivityDAO {
                 null,
                 null,
                 sortOrder
-        );
+        )) {
+            while (cursor.moveToNext()) {
+                activity = new Activity();
+                activity.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.UUID)));
+                activity.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.TITLE)));
+                activity.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.DESCRIPTION)));
+                activity.setCreatedAt(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.CREATED_AT)));
+                activity.setUpdatedAt(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.UPDATED_AT)));
+                activity.setDeliveryDate(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.DELIVERY_DATE)));
+            }
 
-        while (cursor.moveToNext()) {
-            activity = new Activity();
-            activity.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.UUID)));
-            activity.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.TITLE)));
-            activity.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.DESCRIPTION)));
-            activity.setCreatedAt(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.CREATED_AT)));
-            activity.setUpdatedAt(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.UPDATED_AT)));
-            activity.setDeliveryDate(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.DELIVERY_DATE)));
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to get record by id");
         }
-
-        cursor.close();
 
         return activity;
     }
@@ -128,8 +136,19 @@ public class ActivityDAOImplementation implements ActivityDAO {
         contentValues.put(DatabaseSchema.ActivitiesTable.Cols.UPDATED_AT, activity.getUpdatedAt());
         contentValues.put(DatabaseSchema.ActivitiesTable.Cols.DELIVERY_DATE, activity.getDeliveryDate());
 
+        Long newRowId = Long.valueOf("-1");
         mDatabase = mSQLiteOpenHelper.getWritableDatabase();
-        Long newRowId = mDatabase.insert(DatabaseSchema.ActivitiesTable.TABLE_NAME, null, contentValues);
+        mDatabase.beginTransaction();
+
+        try {
+            newRowId = mDatabase.insertOrThrow(DatabaseSchema.ActivitiesTable.TABLE_NAME, null, contentValues);
+            mDatabase.setTransactionSuccessful();
+
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to insert record");
+        } finally {
+            mDatabase.endTransaction();
+        }
 
         return get(newRowId.intValue());
     }
@@ -145,25 +164,49 @@ public class ActivityDAOImplementation implements ActivityDAO {
 
         String selection = DatabaseSchema.ActivitiesTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(activity.getId())};
+        boolean thereAreUpdatedRows = false;
         mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+        mDatabase.beginTransaction();
 
-        return mDatabase.update(
-                DatabaseSchema.ActivitiesTable.TABLE_NAME,
-                contentValues,
-                selection,
-                selectionArgs) > 0;
+        try {
+            thereAreUpdatedRows = mDatabase.update(
+                    DatabaseSchema.ActivitiesTable.TABLE_NAME,
+                    contentValues,
+                    selection,
+                    selectionArgs) > 0;
+            mDatabase.setTransactionSuccessful();
+
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to update record");
+        } finally {
+            mDatabase.endTransaction();
+        }
+
+        return thereAreUpdatedRows;
     }
 
     @Override
     public boolean delete(Activity activity) {
         String selection = DatabaseSchema.ActivitiesTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(activity.getId())};
+        boolean thereAreDeletedRows = false;
         mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+        mDatabase.beginTransaction();
 
-        return mDatabase.delete(
-                DatabaseSchema.ActivitiesTable.TABLE_NAME,
-                selection,
-                selectionArgs) > 0;
+        try {
+            thereAreDeletedRows = mDatabase.delete(
+                    DatabaseSchema.ActivitiesTable.TABLE_NAME,
+                    selection,
+                    selectionArgs) > 0;
+            mDatabase.setTransactionSuccessful();
+
+        } catch (Exception e) {
+            Log.d(TAG, "Error while trying to delete record");
+        } finally {
+            mDatabase.endTransaction();
+        }
+
+        return thereAreDeletedRows;
     }
 
     @Override

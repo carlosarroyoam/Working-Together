@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="@dimen/padding"
-    tools:context=".activities.parent.ParentSemaphore">
+    tools:mContext=".activities.parent.ParentSemaphore">
 
     <androidx.cardview.widget.CardView
         android:layout_width="match_parent"
@@ -16,9 +16,7 @@
         app:cardCornerRadius="8dp"
         app:cardElevation="8dp">
 
-        <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-            xmlns:app="http://schemas.android.com/apk/res-auto"
-            xmlns:tools="http://schemas.android.com/tools"
+        <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:padding="@dimen/padding">
@@ -28,6 +26,7 @@
                 android:layout_width="@dimen/semaphore_icon_size"
                 android:layout_height="@dimen/semaphore_icon_size"
                 android:layout_centerHorizontal="true"
+                android:contentDescription=""
                 app:srcCompat="@drawable/ic_semaphore" />
 
             <TextView

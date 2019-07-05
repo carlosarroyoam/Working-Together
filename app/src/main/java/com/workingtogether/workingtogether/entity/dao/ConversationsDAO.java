@@ -16,11 +16,11 @@ import java.util.ArrayList;
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class ConversationsDAO {
-    SQLiteOpenHelper sqLiteOpenHelper;
-    SQLiteDatabase mDatabase;
+    private SQLiteOpenHelper sqLiteOpenHelper;
+    private SQLiteDatabase mDatabase;
 
     public ConversationsDAO(Context context) {
-        sqLiteOpenHelper = new SQLiteOpenHelper(context);
+        sqLiteOpenHelper = null;
         mDatabase = sqLiteOpenHelper.getWritableDatabase();
     }
 

@@ -19,10 +19,10 @@ public class DatabaseUtils {
      * Copies the database file from app/assets to application's private folder in device storage.
      * Database will only be copied only if it doesn't exists.
      *
-     * @param context
+     * @param context Context from Activity where method is called
      */
     public static void copyDatabaseToDevice(Context context) {
-        String databasePath = context.getApplicationInfo().dataDir + "/databases";
+        String databasePath = context.getApplicationContext().getApplicationInfo().dataDir + "/databases";
         File databaseFolder = new File(databasePath);
         File databaseFile = new File(databasePath + "/" + DatabaseSchema.DATABASE_NAME);
 
@@ -34,7 +34,7 @@ public class DatabaseUtils {
         }
 
         if (!databaseFile.exists()) {
-            try (InputStream inputStream = context.getAssets().open(DatabaseSchema.DATABASE_NAME);
+            try (InputStream inputStream = context.getApplicationContext().getAssets().open(DatabaseSchema.DATABASE_NAME);
                  OutputStream outputStream = new FileOutputStream(databasePath + "/" + DatabaseSchema.DATABASE_NAME)) {
 
                 while ((length = inputStream.read(buffer)) > 0) {

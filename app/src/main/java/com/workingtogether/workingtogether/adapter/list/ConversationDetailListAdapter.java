@@ -26,7 +26,7 @@ public class ConversationDetailListAdapter extends BaseAdapter {
     private ArrayList<Message> mMessagesDataset;
 
     public ConversationDetailListAdapter(Context context, ArrayList<Message> notificationArrayList) {
-        this.mContext = context;
+        this.mContext = context.getApplicationContext();
         this.mMessagesDataset = notificationArrayList;
     }
 
@@ -93,9 +93,9 @@ public class ConversationDetailListAdapter extends BaseAdapter {
     }
 
     private class MessageViewHolder {
-        public ImageView mImg;
-        public TextView mMessageBody;
-        public TextView mDate;
+        ImageView mImg;
+        TextView mMessageBody;
+        TextView mDate;
     }
 
 }

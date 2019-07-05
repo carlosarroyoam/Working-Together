@@ -15,7 +15,7 @@ public class SetupApp extends Application {
 
         if (isAppFirstRunOccurred()) {
             NotificationsBuilder.createNotificationChannels(this);
-//            markAppAsFirstRunOccurred();
+            markAppAsFirstRunOccurred();
         }
     }
 
@@ -26,7 +26,7 @@ public class SetupApp extends Application {
     }
 
     private void markAppAsFirstRunOccurred(){
-        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
-                .putBoolean("isFirstRun", false).apply();
+//        getSharedPreferences("PREFERENCE", MODE_PRIVATE).edit()
+//                .putBoolean("isFirstRun", false).apply();
     }
 }

@@ -27,7 +27,7 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
     private ArrayList<com.workingtogether.workingtogether.entity.Notification> mNotificationDataset;
 
     public NotificationsDrawerAdapter(Context context, ArrayList<com.workingtogether.workingtogether.entity.Notification> notificationArrayList) {
-        this.mContext = context;
+        this.mContext = context.getApplicationContext();
         this.mNotificationDataset = notificationArrayList;
     }
 
@@ -71,27 +71,37 @@ public class NotificationsDrawerAdapter extends BaseAdapter {
             mDeliverDate.setText(mNotificationDataset.get(position).getCreatedAt().substring(0, 10));
 
 
-        if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORK_NOTIFICATION)) {
-            mImg.setImageResource(R.drawable.ic_homeworks);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITY_NOTIFICATION)) {
-            mImg.setImageResource(R.drawable.ic_activities);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
-            mImg.setImageResource(R.drawable.ic_notes);
-        } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.MESSAGE_NOTIFICATION)) {
-            mImg.setImageResource(R.drawable.ic_message);
+        switch (mNotificationDataset.get(position).getNOTIFICATIONTYPE()) {
+            case NotificationsBuilder.HOMEWORK_NOTIFICATION:
+                mImg.setImageResource(R.drawable.ic_homeworks);
+                break;
+            case NotificationsBuilder.ACTIVITY_NOTIFICATION:
+                mImg.setImageResource(R.drawable.ic_activities);
+                break;
+            case NotificationsBuilder.NOTES_NOTIFICATION:
+                mImg.setImageResource(R.drawable.ic_notes);
+                break;
+            case NotificationsBuilder.MESSAGE_NOTIFICATION:
+                mImg.setImageResource(R.drawable.ic_message);
+                break;
         }
 
         row.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.HOMEWORK_NOTIFICATION)) {
-                    mContext.startActivity(new Intent(mContext, HomeworksActivity.class));
-                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.ACTIVITY_NOTIFICATION)) {
-                    mContext.startActivity(new Intent(mContext, ActivitiesActivity.class));
-                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
-                    mContext.startActivity(new Intent(mContext, ParentNotes.class));
-                } else if (mNotificationDataset.get(position).getNOTIFICATIONTYPE().equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
-                    mContext.startActivity(new Intent(mContext, ConversationsActivity.class));
+                switch (mNotificationDataset.get(position).getNOTIFICATIONTYPE()) {
+                    case NotificationsBuilder.HOMEWORK_NOTIFICATION:
+                        mContext.startActivity(new Intent(mContext, HomeworksActivity.class));
+                        break;
+                    case NotificationsBuilder.ACTIVITY_NOTIFICATION:
+                        mContext.startActivity(new Intent(mContext, ActivitiesActivity.class));
+                        break;
+                    case NotificationsBuilder.NOTES_NOTIFICATION:
+                        mContext.startActivity(new Intent(mContext, ParentNotes.class));
+                        break;
+                    case NotificationsBuilder.MESSAGE_NOTIFICATION:
+                        mContext.startActivity(new Intent(mContext, ConversationsActivity.class));
+                        break;
                 }
             }
         });

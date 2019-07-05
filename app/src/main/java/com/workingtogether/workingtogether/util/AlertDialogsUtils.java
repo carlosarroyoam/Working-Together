@@ -11,7 +11,7 @@ import androidx.appcompat.app.AlertDialog;
 public class AlertDialogsUtils {
 
     public static void informationDialog(Context context, String dialogTitle, String dialogMessage, String positiveButtonMessage) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context.getApplicationContext());
         alertDialogBuilder.setTitle(dialogTitle);
         alertDialogBuilder
                 .setMessage(dialogMessage)
@@ -27,7 +27,7 @@ public class AlertDialogsUtils {
     }
 
     public static void confirmationDialog(Context context, String dialogTitle, String dialogMessage, String positiveButtonMessage, DialogInterface.OnClickListener positiveButtonOnClick, String negativeButtonMessage, DialogInterface.OnClickListener negativeButtonOnClick) {
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context);
+        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(context.getApplicationContext());
         alertDialogBuilder.setTitle(dialogTitle);
         alertDialogBuilder
                 .setMessage(dialogMessage)

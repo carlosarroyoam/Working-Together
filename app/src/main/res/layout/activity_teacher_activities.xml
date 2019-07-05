@@ -6,14 +6,12 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/relativelayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        tools:context=".activities.teacher.TeacherHomeworks">
+        tools:mContext=".activities.teacher.TeacherHomeworks">
 
         <androidx.cardview.widget.CardView
             android:layout_width="wrap_content"
@@ -24,9 +22,7 @@
             app:cardCornerRadius="8dp"
             app:cardElevation="8dp">
 
-            <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-                xmlns:app="http://schemas.android.com/apk/res-auto"
-                xmlns:tools="http://schemas.android.com/tools"
+            <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:padding="@dimen/padding">
@@ -35,7 +31,6 @@
                     android:id="@+id/textview"
                     android:layout_width="@dimen/txt_width"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/image"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/half_margin"
                     android:text="@string/txt_create_activity_msg"
@@ -56,7 +51,8 @@
                         android:hint="@string/etxt_title"
                         android:imeOptions="flagNoExtractUi"
                         android:inputType="textEmailAddress"
-                        android:textSize="@dimen/etxt_text_size" />
+                        android:textSize="@dimen/etxt_text_size"
+                        android:importantForAutofill="no" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -75,7 +71,8 @@
                         android:imeOptions="flagNoExtractUi"
                         android:inputType="text|textMultiLine"
                         android:textAlignment="viewStart"
-                        android:textSize="@dimen/etxt_text_size" />
+                        android:textSize="@dimen/etxt_text_size"
+                        android:importantForAutofill="no" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -90,12 +87,13 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_link_24dp"
+                        android:drawableStart="@drawable/ic_link_24dp"
                         android:drawablePadding="@dimen/padding"
                         android:drawableTint="@color/colorPrimary"
                         android:focusable="false"
                         android:hint="@string/etxt_attach_url"
                         android:imeOptions="flagNoExtractUi"
+                        android:importantForAutofill="no"
                         android:inputType="date"
                         android:onClick="attachURL"
                         android:textSize="@dimen/etxt_text_size" />
@@ -113,7 +111,7 @@
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:drawableLeft="@drawable/ic_calendar_24dp"
+                        android:drawableStart="@drawable/ic_calendar_24dp"
                         android:drawablePadding="@dimen/padding"
                         android:drawableTint="@color/colorPrimary"
                         android:focusable="false"
@@ -121,7 +119,8 @@
                         android:imeOptions="flagNoExtractUi"
                         android:inputType="date"
                         android:onClick="openCalendar"
-                        android:textSize="@dimen/etxt_text_size" />
+                        android:textSize="@dimen/etxt_text_size"
+                        android:importantForAutofill="no" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -132,15 +131,13 @@
                     android:layout_below="@id/activity_teacher_activities_deliver_date"
                     android:layout_marginTop="@dimen/margin"
                     android:layout_marginBottom="@dimen/margin"
-                    android:orientation="horizontal"
-                    android:gravity="right"
-                    android:onClick="attachFile">
+                    android:gravity="end"
+                    android:onClick="attachFile"
+                    android:orientation="horizontal">
 
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_below="@+id/image"
-                        android:layout_centerHorizontal="true"
                         android:text="@string/etxt_attach_file"
                         android:textSize="@dimen/txt_text_size" />
 
@@ -148,14 +145,15 @@
                         android:id="@+id/activity_teacher_activities_attach_btn"
                         android:layout_width="@dimen/add_layouts_squared_icon_size"
                         android:layout_height="@dimen/add_layouts_squared_icon_size"
-                        android:layout_marginRight="@dimen/margin"
-                        android:gravity="right"
-                        app:srcCompat="@drawable/ic_attach_file_24dp"
-                        android:tint="@color/colorPrimary" />
-
+                        android:layout_marginEnd="@dimen/margin"
+                        android:contentDescription=""
+                        android:gravity="end"
+                        android:tint="@color/colorPrimary"
+                        app:srcCompat="@drawable/ic_attach_file_24dp" />
 
 
                 </LinearLayout>
+
                 <LinearLayout
                     android:id="@+id/linearlayout_attached_files"
                     android:layout_width="@dimen/etxt_width"
@@ -171,10 +169,10 @@
                     android:id="@+id/activity_teacher_activities_send_btn"
                     android:layout_width="@dimen/btn_width"
                     android:layout_height="wrap_content"
-                    android:layout_centerHorizontal="true"
                     android:layout_alignParentBottom="true"
-                    android:layout_marginBottom="@dimen/half_margin"
+                    android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/double_margin"
+                    android:layout_marginBottom="@dimen/half_margin"
                     android:background="@drawable/positive_button_shape"
                     android:onClick="sendHomework"
                     android:text="@string/btn_send"
@@ -186,9 +184,9 @@
                     android:id="@+id/space"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="@dimen/double_margin"
                     android:layout_below="@+id/linearlayout_attached_files"
-                    android:layout_centerHorizontal="true"/>
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/double_margin" />
 
             </RelativeLayout>
 
