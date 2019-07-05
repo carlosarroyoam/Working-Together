@@ -1,6 +1,7 @@
 package com.workingtogether.workingtogether.entity;
 
 public class SessionApp {
+
     private int UIDUSER;
     private int SESSTATE;
     private String TYPEUSER;
@@ -28,4 +29,5 @@ public class SessionApp {
     public void setTYPEUSER(String TYPEUSER) {
         this.TYPEUSER = TYPEUSER;
     }
+
 }

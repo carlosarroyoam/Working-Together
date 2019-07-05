@@ -18,7 +18,6 @@ public class UserDAO {
 
     public User getUserDetails(String mail) {
         User user = new User();
-        sqLiteOpenHelper.openDatabase();
         String[] selectArgs = {mail, mail}; // para buscar en las dos tablas repetimos el parametro
         StringBuilder query = new StringBuilder("SELECT UIDTEACHER, NAME, LASTNAME, EMAIL, UIDTYPEUSER FROM TEACHERS" +
                 " WHERE EMAIL = ?" +
@@ -34,13 +33,11 @@ public class UserDAO {
             user.setUserType(cursor.getString(4));
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
         return user;
     }
 
     public User getUserDetails(int UIDUSER) {
         User user = new User();
-        sqLiteOpenHelper.openDatabase();
         String[] selectArgs = {Integer.toString(UIDUSER), Integer.toString(UIDUSER)}; // para buscar en las dos tablas repetimos el parametro
         StringBuilder query = new StringBuilder("SELECT UIDTEACHER, NAME, LASTNAME, EMAIL, UIDTYPEUSER FROM TEACHERS" +
                 " WHERE UIDTEACHER = ?" +
@@ -56,12 +53,10 @@ public class UserDAO {
             user.setUserType(cursor.getString(4));
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
         return user;
     }
 
     public boolean verifyLogin(String mail, String password) {
-        sqLiteOpenHelper.openDatabase();
         String[] selectArgs = {mail, password, mail, password}; //se repiten parametros para poder buscar en dos tablas
         StringBuilder query = new StringBuilder("SELECT * FROM TEACHERS" +
                 " WHERE EMAIL = ? AND PASSWORD = ?" +
@@ -73,7 +68,6 @@ public class UserDAO {
             return true;
         //Only 1 resul
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
         return false;
     }
 

@@ -6,17 +6,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.RelativeLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ActivitiesRecyclerViewAdapter;
@@ -45,7 +45,6 @@ public class ActivitiesActivity extends AppCompatActivity implements OnItemClick
 
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setLayout();
-
     }
 
     @Override
@@ -60,8 +59,13 @@ public class ActivitiesActivity extends AppCompatActivity implements OnItemClick
         IntentFilter filter = new IntentFilter();
         filter.addAction(getPackageName() + ".newActivity");
         registerReceiver(myReceiver, filter);
-
         updateActivitiesList();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        ActivityDAOImplementation.getInstance(this).closeDBHelper();
     }
 
     @Override

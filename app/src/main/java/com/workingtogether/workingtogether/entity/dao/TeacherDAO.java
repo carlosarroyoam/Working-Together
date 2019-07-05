@@ -21,7 +21,7 @@ public class TeacherDAO {
     public ArrayList<Teacher> getTeachers() {
         ArrayList<Teacher> teachersArrayList = new ArrayList<>();
         Teacher teacher = new Teacher();
-        sqLiteOpenHelper.openDatabase();
+        
         StringBuilder query = new StringBuilder("SELECT UIDTEACHER, NAME, LASTNAME, EMAIL, UIDTYPEUSER" +
                 " FROM TEACHERS");
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
@@ -35,13 +35,13 @@ public class TeacherDAO {
             teachersArrayList.add(teacher);
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return teachersArrayList;
     }
 
     public Teacher getTeacherById(int UIDTEACHER) {
         Teacher teacher = new Teacher();
-        sqLiteOpenHelper.openDatabase();
+        
         String[] selectArgs = {Integer.toString(UIDTEACHER)}; // para buscar en las dos tablas repetimos el parametro
         StringBuilder query = new StringBuilder("SELECT UIDTEACHER, NAME, LASTNAME, EMAIL, UIDTYPEUSER" +
                 " FROM TEACHERS" +
@@ -55,7 +55,7 @@ public class TeacherDAO {
             teacher.setUserType(cursor.getString(4));
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return teacher;
     }
 

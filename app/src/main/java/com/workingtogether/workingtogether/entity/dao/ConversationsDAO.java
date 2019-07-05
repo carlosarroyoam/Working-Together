@@ -24,7 +24,7 @@ public class ConversationsDAO {
     public ArrayList<Conversation> getAllConversations() {
         ArrayList<Conversation> conversationList = new ArrayList<>();
 
-        sqLiteOpenHelper.openDatabase();
+        
         StringBuilder query = new StringBuilder("SELECT UIDCONVERSATION, UIDUSER" +
                 " FROM CONVERSATIONS");
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
@@ -37,13 +37,13 @@ public class ConversationsDAO {
             conversationList.add(conversation);
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return conversationList;
     }
 
     public Conversation getConversationById(int UIDCONVERSATION) {
         Conversation conversation = new Conversation();
-        sqLiteOpenHelper.openDatabase();
+        
         String[] selectArgs = {Integer.toString(UIDCONVERSATION)};
         StringBuilder query = new StringBuilder("SELECT UIDCONVERSATION, UIDUSER" +
                 " FROM CONVERSATIONS" +
@@ -54,13 +54,13 @@ public class ConversationsDAO {
             conversation.setIdUser(cursor.getInt(1));
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return conversation;
     }
 
     public Conversation getConversationByContactId(int UIDUSER) {
         Conversation conversation = new Conversation();
-        sqLiteOpenHelper.openDatabase();
+        
         String[] selectArgs = {Integer.toString(UIDUSER)};
         StringBuilder query = new StringBuilder("SELECT UIDCONVERSATION, UIDUSER" +
                 " FROM CONVERSATIONS" +
@@ -71,12 +71,12 @@ public class ConversationsDAO {
             conversation.setIdUser(cursor.getInt(1));
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return conversation;
     }
 
     public void insertConversation(int UIDUSER) {
-        sqLiteOpenHelper.openDatabase();
+        
 
         try {
             mDatabase.execSQL("INSERT INTO CONVERSATIONS (UIDUSER) " +
@@ -86,14 +86,14 @@ public class ConversationsDAO {
         } catch (SQLiteException e) {
             Log.d("Exception: ", e.getMessage());
         }
-        sqLiteOpenHelper.closeDatabase();
+        
     }
 
     public void deleteConversation(int UIDCONVERSATION) {
-        sqLiteOpenHelper.openDatabase();
+        
         String[] whereArgs = {Integer.toString(UIDCONVERSATION)};
         mDatabase.delete("CONVERSATIONS", "UIDCONVERSATION = ?", whereArgs);
-        sqLiteOpenHelper.closeDatabase();
+        
 
     }
 

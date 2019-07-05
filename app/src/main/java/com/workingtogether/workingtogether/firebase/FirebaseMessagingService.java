@@ -3,7 +3,6 @@ package com.workingtogether.workingtogether.firebase;
 import android.content.Intent;
 import android.util.Log;
 
-import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.workingtogether.workingtogether.database.DatabaseSchema;
 import com.workingtogether.workingtogether.entity.Activity;
@@ -25,7 +24,9 @@ import org.json.JSONObject;
 
 import static com.workingtogether.workingtogether.firebase.NotificationsBuilder.buildNotification;
 
-public class FirebaseMessagingServiceImplementation extends FirebaseMessagingService {
+public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
+
+    private final String TAG = this.getClass().getSimpleName();
 
     @Override
     public void onNewToken(String newToken) {
@@ -48,35 +49,25 @@ public class FirebaseMessagingServiceImplementation extends FirebaseMessagingSer
 
             if (sessionDAO.getUserlogged().getTYPEUSER().equals(User.UserTypes.PARENT_USER)) {
                 if (!remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).trim().equals("")) {
-
-                    if (remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).equals(NotificationsBuilder.HOMEWORK_NOTIFICATION)) {
-                        try {
+                    try {
+                        if (remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).equals(NotificationsBuilder.HOMEWORK_NOTIFICATION)) {
                             JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("HOMEWORKCONTENT"));
                             sendHomeworkToDatabase(dataPayload);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
+
+                        } else if (remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).equals(NotificationsBuilder.ACTIVITY_NOTIFICATION)) {
+                                JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("ACTIVITYCONTENT"));
+                                sendActivityToDatabase(dataPayload);
+
+                        } else if (remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
+                                JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("NOTESCONTENT"));
+                                sendNoteToDatabase(dataPayload);
+
                         }
-
-                    } else if (remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).equals(NotificationsBuilder.ACTIVITY_NOTIFICATION)) {
-                        try {
-                            JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("ACTIVITYCONTENT"));
-                            sendActivityToDatabase(dataPayload);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
-
-                    } else if (remoteMessage.getData().get(NotificationsBuilder.NOTIFICATION_TYPE).equals(NotificationsBuilder.NOTES_NOTIFICATION)) {
-                        try {
-                            JSONObject dataPayload = new JSONObject(remoteMessage.getData().get("NOTESCONTENT"));
-                            sendNoteToDatabase(dataPayload);
-                        } catch (JSONException e) {
-                            e.printStackTrace();
-                        }
-
+                    } catch (JSONException e) {
+                        e.printStackTrace();
                     }
                 } else {
-                    Log.d("NBuilder Error: ", "No notification type specified");
+                    Log.d(TAG, "No notification type specified");
                 }
             }
 
@@ -112,13 +103,14 @@ public class FirebaseMessagingServiceImplementation extends FirebaseMessagingSer
         homework.setDeliveryDate(delivery_date);
 
         HomeworksDAOImplementation.getInstance(this).create(homework);
+        HomeworksDAOImplementation.getInstance(this).closeDBHelper();
 
         sendNotificationToDatabase("Diana López publico una nueva tarea", title, NotificationsBuilder.HOMEWORK_NOTIFICATION, 1);
         buildNotification(this, title, description, NotificationsBuilder.HOMEWORK_NOTIFICATION);
         sendNewHomeworkBroadcastReceiver();
     }
 
-    private void sendNewHomeworkBroadcastReceiver(){
+    private void sendNewHomeworkBroadcastReceiver() {
         Intent intent = new Intent();
         intent.setAction(getPackageName() + ".newHomework");
         sendBroadcast(intent);
@@ -140,13 +132,14 @@ public class FirebaseMessagingServiceImplementation extends FirebaseMessagingSer
         activity.setDeliveryDate(delivery_date);
 
         ActivityDAOImplementation.getInstance(this).create(activity);
+        ActivityDAOImplementation.getInstance(this).closeDBHelper();
 
         sendNotificationToDatabase("Diana López publico una nueva actividad", title, NotificationsBuilder.ACTIVITY_NOTIFICATION, 1);
         buildNotification(this, title, description, NotificationsBuilder.ACTIVITY_NOTIFICATION);
         sendNewActivityBroadcastReceiver();
     }
 
-    private void sendNewActivityBroadcastReceiver(){
+    private void sendNewActivityBroadcastReceiver() {
         Intent intent = new Intent();
         intent.setAction(getPackageName() + ".newActivity");
         sendBroadcast(intent);
@@ -156,7 +149,7 @@ public class FirebaseMessagingServiceImplementation extends FirebaseMessagingSer
         sendNewNoteBroadcastReceiver();
     }
 
-    private void sendNewNoteBroadcastReceiver(){
+    private void sendNewNoteBroadcastReceiver() {
         Intent intent = new Intent();
         intent.setAction(getPackageName() + ".newNote");
         sendBroadcast(intent);
@@ -192,14 +185,14 @@ public class FirebaseMessagingServiceImplementation extends FirebaseMessagingSer
         }
     }
 
-    private void sendNewMessageBroadcastReceiver(){
+    private void sendNewMessageBroadcastReceiver() {
         Intent intent = new Intent();
         intent.setAction(getPackageName() + ".newMessage");
         sendBroadcast(intent);
     }
 
     private void sendRegistrationToServer(String newToken) {
-
+        //TODO store device token on backend server
     }
 
 }

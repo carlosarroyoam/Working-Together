@@ -21,7 +21,7 @@ public class ParentDAO {
     public ArrayList<Parent> getParents() {
         ArrayList<Parent> parentsArrayList = new ArrayList<>();
         Parent parent = new Parent();
-        sqLiteOpenHelper.openDatabase();
+        
         StringBuilder query = new StringBuilder("SELECT UIDPARENT, NAME, LASTNAME, EMAIL, UIDTYPEUSER" +
                 " FROM PARENTS");
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
@@ -35,13 +35,13 @@ public class ParentDAO {
             parentsArrayList.add(parent);
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return parentsArrayList;
     }
 
     public Parent getParentById(int UIDPARENT) {
         Parent parent = new Parent();
-        sqLiteOpenHelper.openDatabase();
+        
         String[] selectArgs = {Integer.toString(UIDPARENT)}; // para buscar en las dos tablas repetimos el parametro
         StringBuilder query = new StringBuilder("SELECT UIDPARENT, NAME, LASTNAME, EMAIL, UIDTYPEUSER" +
                 " FROM PARENTS" +
@@ -55,7 +55,7 @@ public class ParentDAO {
             parent.setUserType(cursor.getString(4));
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return parent;
     }
 

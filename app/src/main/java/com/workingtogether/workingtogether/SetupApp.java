@@ -2,7 +2,6 @@ package com.workingtogether.workingtogether;
 
 import android.app.Application;
 
-import com.workingtogether.workingtogether.database.DatabaseUtils;
 import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 
 /**
@@ -16,7 +15,6 @@ public class SetupApp extends Application {
 
         if (isAppFirstRunOccurred()) {
             NotificationsBuilder.createNotificationChannels(this);
-            DatabaseUtils.copyDatabaseToDevice(this);
 //            markAppAsFirstRunOccurred();
         }
     }

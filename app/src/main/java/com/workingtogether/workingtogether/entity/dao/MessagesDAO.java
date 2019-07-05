@@ -24,7 +24,7 @@ public class MessagesDAO {
     public ArrayList<Message> getAllMessagesByConversationId(int UIDCONVERSATION) {
         ArrayList<Message> messageArrayList = new ArrayList<>();
 
-        sqLiteOpenHelper.openDatabase();
+        
         String[] selectArgs = {Integer.toString(UIDCONVERSATION)};
         StringBuilder query = new StringBuilder("SELECT UIDMESSAGE, UIDCONVERSATION, UIDUSERFROM, UIDUSERTO, DATA, SENDDATE, DELIVERDATE, READEDDATE, SENDSTATE, DELIVERSTATE, READEDSTATE" +
                 " FROM MESSAGES" +
@@ -49,14 +49,14 @@ public class MessagesDAO {
             messageArrayList.add(message);
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return messageArrayList;
     }
 
     public Message getLastConversationMessage(int UIDCONVERSATION) {
         Message message = new Message();
 
-        sqLiteOpenHelper.openDatabase();
+        
         String[] selectArgs = {Integer.toString(UIDCONVERSATION)};
         StringBuilder query = new StringBuilder("SELECT UIDMESSAGE, UIDCONVERSATION, UIDUSERFROM, UIDUSERTO, DATA, SENDDATE, DELIVERDATE, READEDDATE, SENDSTATE, DELIVERSTATE, READEDSTATE" +
                 " FROM MESSAGES" +
@@ -80,12 +80,12 @@ public class MessagesDAO {
 
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return message;
     }
 
     public void insertMessage(int UIDCONVERSATION, int UIDUSERFROM, int UIDUSERTO, String DATA, String SENDDATE) {
-        sqLiteOpenHelper.openDatabase();
+        
 
         try {
             mDatabase.execSQL("INSERT INTO MESSAGES (UIDCONVERSATION, UIDUSERFROM, UIDUSERTO, DATA, SENDDATE, SENDSTATE) " +
@@ -95,22 +95,22 @@ public class MessagesDAO {
         } catch (SQLiteException e) {
             Log.d("Exception: ", e.getMessage());
         }
-        sqLiteOpenHelper.closeDatabase();
+        
     }
 
     public void deleteMessages(int UIDCONVERSATION) {
-        sqLiteOpenHelper.openDatabase();
+        
         String[] whereArgs = {Integer.toString(UIDCONVERSATION)};
         mDatabase.delete("MESSAGES", "UIDCONVERSATION = ?", whereArgs);
-        sqLiteOpenHelper.closeDatabase();
+        
 
     }
 
     public void deleteMessagesById(int UIDMESSAGE) {
-        sqLiteOpenHelper.openDatabase();
+        
         String[] whereArgs = {Integer.toString(UIDMESSAGE)};
         mDatabase.delete("MESSAGES", "UIDMESSAGE = ?", whereArgs);
-        sqLiteOpenHelper.closeDatabase();
+        
 
     }
 

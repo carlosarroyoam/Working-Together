@@ -1,6 +1,7 @@
 package com.workingtogether.workingtogether.entity;
 
 public class Notification {
+
     private int UIDNOTIFICATION;
     private String TITLE;
     private String DESCRIPTION;
@@ -64,4 +65,5 @@ public class Notification {
     public void setUIDRESOURSE(int UIDRESOURSE) {
         this.UIDRESOURSE = UIDRESOURSE;
     }
+
 }

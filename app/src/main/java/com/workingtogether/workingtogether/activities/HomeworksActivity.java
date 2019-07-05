@@ -6,17 +6,17 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.RelativeLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.HomeworksRecyclerViewAdapter;
@@ -60,8 +60,13 @@ public class HomeworksActivity extends AppCompatActivity implements OnItemClickL
         IntentFilter filter = new IntentFilter();
         filter.addAction(getPackageName() + ".newHomework");
         registerReceiver(myReceiver, filter);
-
         updateHomeworksList();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        HomeworksDAOImplementation.getInstance(this).closeDBHelper();
     }
 
     @Override

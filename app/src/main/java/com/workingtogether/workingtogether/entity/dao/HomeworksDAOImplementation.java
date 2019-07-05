@@ -8,12 +8,12 @@ import android.database.sqlite.SQLiteDatabase;
 import com.workingtogether.workingtogether.database.DatabaseSchema;
 import com.workingtogether.workingtogether.database.SQLiteOpenHelper;
 import com.workingtogether.workingtogether.entity.Homework;
-import com.workingtogether.workingtogether.entity.dao.interfaces.HomeworksDAOInterface;
+import com.workingtogether.workingtogether.entity.dao.interfaces.HomeworksDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeworksDAOImplementation implements HomeworksDAOInterface {
+public class HomeworksDAOImplementation implements HomeworksDAO {
 
     SQLiteOpenHelper mSQLiteOpenHelper;
     SQLiteDatabase mDatabase;
@@ -30,7 +30,6 @@ public class HomeworksDAOImplementation implements HomeworksDAOInterface {
 
     private HomeworksDAOImplementation(Context context) {
         mSQLiteOpenHelper = new SQLiteOpenHelper(context);
-        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
     }
 
     @Override
@@ -45,8 +44,8 @@ public class HomeworksDAOImplementation implements HomeworksDAOInterface {
                 DatabaseSchema.HomeworksTable.Cols.DELIVERY_DATE
         };
         String sortOrder = DatabaseSchema.HomeworksTable.Cols.UUID + " DESC";
-        mSQLiteOpenHelper.openDatabase();
 
+        mDatabase = mSQLiteOpenHelper.getReadableDatabase();
         Cursor cursor = mDatabase.query(
                 DatabaseSchema.HomeworksTable.TABLE_NAME,
                 projection,
@@ -62,7 +61,6 @@ public class HomeworksDAOImplementation implements HomeworksDAOInterface {
 
             while (cursor.moveToNext()) {
                 Homework homework = new Homework();
-
                 homework.setId(cursor.getInt(0));
                 homework.setTitle(cursor.getString(1));
                 homework.setDescription(cursor.getString(2));
@@ -74,7 +72,6 @@ public class HomeworksDAOImplementation implements HomeworksDAOInterface {
         }
 
         cursor.close();
-        mSQLiteOpenHelper.closeDatabase();
         return homeworkList;
     }
 
@@ -92,8 +89,8 @@ public class HomeworksDAOImplementation implements HomeworksDAOInterface {
         String selection = DatabaseSchema.HomeworksTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(id)};
         String sortOrder = DatabaseSchema.HomeworksTable.Cols.UUID + " DESC";
-        mSQLiteOpenHelper.openDatabase();
 
+        mDatabase = mSQLiteOpenHelper.getReadableDatabase();
         Cursor cursor = mDatabase.query(
                 DatabaseSchema.HomeworksTable.TABLE_NAME,
                 projection,
@@ -106,7 +103,6 @@ public class HomeworksDAOImplementation implements HomeworksDAOInterface {
 
         while (cursor.moveToNext()) {
             homework = new Homework();
-
             homework.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseSchema.HomeworksTable.Cols.UUID)));
             homework.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.HomeworksTable.Cols.TITLE)));
             homework.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.HomeworksTable.Cols.DESCRIPTION)));
@@ -116,7 +112,6 @@ public class HomeworksDAOImplementation implements HomeworksDAOInterface {
         }
 
         cursor.close();
-        mSQLiteOpenHelper.closeDatabase();
 
         return homework;
     }
@@ -130,9 +125,8 @@ public class HomeworksDAOImplementation implements HomeworksDAOInterface {
         contentValues.put(DatabaseSchema.HomeworksTable.Cols.UPDATED_AT, homework.getUpdatedAt());
         contentValues.put(DatabaseSchema.HomeworksTable.Cols.DELIVERY_DATE, homework.getDeliveryDate());
 
-        mSQLiteOpenHelper.openDatabase();
+        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
         Long newRowId = mDatabase.insert(DatabaseSchema.HomeworksTable.TABLE_NAME, null, contentValues);
-        mSQLiteOpenHelper.closeDatabase();
 
         return get(newRowId.intValue());
     }
@@ -148,30 +142,30 @@ public class HomeworksDAOImplementation implements HomeworksDAOInterface {
 
         String selection = DatabaseSchema.HomeworksTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(homework.getId())};
-        mSQLiteOpenHelper.openDatabase();
-        boolean thereAreUpdatedRows = (mDatabase.update(
+        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+
+        return mDatabase.update(
                 DatabaseSchema.HomeworksTable.TABLE_NAME,
                 contentValues,
                 selection,
-                selectionArgs)) > 0 ? true : false;
-
-        mSQLiteOpenHelper.closeDatabase();
-
-        return thereAreUpdatedRows;
+                selectionArgs) > 0;
     }
 
     @Override
     public boolean delete(Homework homework) {
         String selection = DatabaseSchema.HomeworksTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(homework.getId())};
-        mSQLiteOpenHelper.openDatabase();
-        boolean thereAreDeletedRows = (mDatabase.delete(
+        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+
+        return mDatabase.delete(
                 DatabaseSchema.HomeworksTable.TABLE_NAME,
                 selection,
-                selectionArgs) > 0) ? true : false;
+                selectionArgs) > 0;
+    }
 
-        mSQLiteOpenHelper.closeDatabase();
-        return thereAreDeletedRows;
+    @Override
+    public void closeDBHelper() {
+        mSQLiteOpenHelper.close();
     }
 
 }

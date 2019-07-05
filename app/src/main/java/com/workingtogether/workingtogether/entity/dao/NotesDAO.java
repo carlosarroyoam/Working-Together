@@ -24,7 +24,7 @@ public class NotesDAO {
     public ArrayList<Note> getAllNotes() {
         ArrayList<Note> noteArrayList = new ArrayList<>();
 
-        sqLiteOpenHelper.openDatabase();
+        
         StringBuilder query = new StringBuilder("SELECT UIDNOTE, NOTE, SUBJECT" +
                 " FROM NOTES");
         Cursor cursor = mDatabase.rawQuery(query.toString(), null);
@@ -38,12 +38,12 @@ public class NotesDAO {
             noteArrayList.add(note);
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return noteArrayList;
     }
 
     public void insertNote(String TITLE, String DESCRIPTION, String DELIVERDATE, String PUBISHDATE) {
-        sqLiteOpenHelper.openDatabase();
+        
 
         try {
             //TODO crar query para insertar calificacion
@@ -54,7 +54,7 @@ public class NotesDAO {
         } catch (SQLiteException e) {
             Log.d("Exception: ", e.getMessage());
         }
-        sqLiteOpenHelper.closeDatabase();
+        
     }
 
 }

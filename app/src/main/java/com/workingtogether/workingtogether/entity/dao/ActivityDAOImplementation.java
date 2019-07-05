@@ -8,12 +8,15 @@ import android.database.sqlite.SQLiteDatabase;
 import com.workingtogether.workingtogether.database.DatabaseSchema;
 import com.workingtogether.workingtogether.database.SQLiteOpenHelper;
 import com.workingtogether.workingtogether.entity.Activity;
-import com.workingtogether.workingtogether.entity.dao.interfaces.ActivityDAOInterface;
+import com.workingtogether.workingtogether.entity.dao.interfaces.ActivityDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivityDAOImplementation implements ActivityDAOInterface {
+/**
+ * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ */
+public class ActivityDAOImplementation implements ActivityDAO {
 
     SQLiteOpenHelper mSQLiteOpenHelper;
     SQLiteDatabase mDatabase;
@@ -30,7 +33,6 @@ public class ActivityDAOImplementation implements ActivityDAOInterface {
 
     private ActivityDAOImplementation(Context context) {
         mSQLiteOpenHelper = new SQLiteOpenHelper(context);
-        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
     }
 
     @Override
@@ -45,8 +47,8 @@ public class ActivityDAOImplementation implements ActivityDAOInterface {
                 DatabaseSchema.ActivitiesTable.Cols.DELIVERY_DATE
         };
         String sortOrder = DatabaseSchema.ActivitiesTable.Cols.UUID + " DESC";
-        mSQLiteOpenHelper.openDatabase();
 
+        mDatabase = mSQLiteOpenHelper.getReadableDatabase();
         Cursor cursor = mDatabase.query(
                 DatabaseSchema.ActivitiesTable.TABLE_NAME,
                 projection,
@@ -62,7 +64,6 @@ public class ActivityDAOImplementation implements ActivityDAOInterface {
 
             while (cursor.moveToNext()) {
                 Activity activity = new Activity();
-
                 activity.setId(cursor.getInt(0));
                 activity.setTitle(cursor.getString(1));
                 activity.setDescription(cursor.getString(2));
@@ -74,7 +75,6 @@ public class ActivityDAOImplementation implements ActivityDAOInterface {
         }
 
         cursor.close();
-        mSQLiteOpenHelper.closeDatabase();
         return activitiesList;
     }
 
@@ -92,8 +92,8 @@ public class ActivityDAOImplementation implements ActivityDAOInterface {
         String selection = DatabaseSchema.ActivitiesTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(id)};
         String sortOrder = DatabaseSchema.ActivitiesTable.Cols.UUID + " DESC";
-        mSQLiteOpenHelper.openDatabase();
 
+        mDatabase = mSQLiteOpenHelper.getReadableDatabase();
         Cursor cursor = mDatabase.query(
                 DatabaseSchema.ActivitiesTable.TABLE_NAME,
                 projection,
@@ -106,7 +106,6 @@ public class ActivityDAOImplementation implements ActivityDAOInterface {
 
         while (cursor.moveToNext()) {
             activity = new Activity();
-
             activity.setId(cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.UUID)));
             activity.setTitle(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.TITLE)));
             activity.setDescription(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseSchema.ActivitiesTable.Cols.DESCRIPTION)));
@@ -116,7 +115,6 @@ public class ActivityDAOImplementation implements ActivityDAOInterface {
         }
 
         cursor.close();
-        mSQLiteOpenHelper.closeDatabase();
 
         return activity;
     }
@@ -130,9 +128,8 @@ public class ActivityDAOImplementation implements ActivityDAOInterface {
         contentValues.put(DatabaseSchema.ActivitiesTable.Cols.UPDATED_AT, activity.getUpdatedAt());
         contentValues.put(DatabaseSchema.ActivitiesTable.Cols.DELIVERY_DATE, activity.getDeliveryDate());
 
-        mSQLiteOpenHelper.openDatabase();
+        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
         Long newRowId = mDatabase.insert(DatabaseSchema.ActivitiesTable.TABLE_NAME, null, contentValues);
-        mSQLiteOpenHelper.closeDatabase();
 
         return get(newRowId.intValue());
     }
@@ -148,30 +145,30 @@ public class ActivityDAOImplementation implements ActivityDAOInterface {
 
         String selection = DatabaseSchema.ActivitiesTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(activity.getId())};
-        mSQLiteOpenHelper.openDatabase();
-        boolean thereAreUpdatedRows = (mDatabase.update(
+        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+
+        return mDatabase.update(
                 DatabaseSchema.ActivitiesTable.TABLE_NAME,
                 contentValues,
                 selection,
-                selectionArgs)) > 0 ? true : false;
-
-        mSQLiteOpenHelper.closeDatabase();
-
-        return thereAreUpdatedRows;
+                selectionArgs) > 0;
     }
 
     @Override
     public boolean delete(Activity activity) {
         String selection = DatabaseSchema.ActivitiesTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(activity.getId())};
-        mSQLiteOpenHelper.openDatabase();
-        boolean thereAreDeletedRows = (mDatabase.delete(
+        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+
+        return mDatabase.delete(
                 DatabaseSchema.ActivitiesTable.TABLE_NAME,
                 selection,
-                selectionArgs) > 0) ? true : false;
+                selectionArgs) > 0;
+    }
 
-        mSQLiteOpenHelper.closeDatabase();
-        return thereAreDeletedRows;
+    @Override
+    public void closeDBHelper() {
+        mSQLiteOpenHelper.close();
     }
 
 }

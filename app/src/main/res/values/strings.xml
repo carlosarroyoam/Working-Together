@@ -99,4 +99,7 @@
     <string name="homeworks_channel_name">Taraeas</string>
     <string name="homeworks_channel_description">Tareas</string>
 
+    <!--Filter views-->
+    <string name="filter_view_http">filter_view_http</string>
+
 </resources>

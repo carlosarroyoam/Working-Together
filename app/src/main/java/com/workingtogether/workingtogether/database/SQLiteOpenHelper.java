@@ -3,34 +3,50 @@ package com.workingtogether.workingtogether.database;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
+/**
+ * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ */
 public class SQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelper {
-    private Context mContext;
-    private SQLiteDatabase mDatabase;
+
+    private static final String SQL_CREATE_ACTIVITIES_TABLE =
+            "CREATE TABLE " + DatabaseSchema.ActivitiesTable.TABLE_NAME + " (" +
+                    DatabaseSchema.ActivitiesTable.Cols.UUID + " INTEGER PRIMARY KEY," +
+                    DatabaseSchema.ActivitiesTable.Cols.TITLE + " TEXT," +
+                    DatabaseSchema.ActivitiesTable.Cols.DESCRIPTION + " TEXT," +
+                    DatabaseSchema.ActivitiesTable.Cols.CREATED_AT + " TEXT," +
+                    DatabaseSchema.ActivitiesTable.Cols.UPDATED_AT + " TEXT," +
+                    DatabaseSchema.ActivitiesTable.Cols.DELIVERY_DATE + " TEXT)";
+
+    private static final String SQL_DELETE_ACTIVITIES_TABLE =
+            "DROP TABLE IF EXISTS " + DatabaseSchema.ActivitiesTable.TABLE_NAME;
+
+    private static final String SQL_CREATE_HOMEWORKS_TABLE =
+            "CREATE TABLE " + DatabaseSchema.HomeworksTable.TABLE_NAME + " (" +
+                    DatabaseSchema.HomeworksTable.Cols.UUID + " INTEGER PRIMARY KEY," +
+                    DatabaseSchema.HomeworksTable.Cols.TITLE + " TEXT," +
+                    DatabaseSchema.HomeworksTable.Cols.DESCRIPTION + " TEXT," +
+                    DatabaseSchema.HomeworksTable.Cols.CREATED_AT + " TEXT," +
+                    DatabaseSchema.HomeworksTable.Cols.UPDATED_AT + " TEXT," +
+                    DatabaseSchema.HomeworksTable.Cols.DELIVERY_DATE + " TEXT)";
+
+    private static final String SQL_DELETE_HOMEWORKS_TABLE =
+            "DROP TABLE IF EXISTS " + DatabaseSchema.HomeworksTable.TABLE_NAME;
 
     public SQLiteOpenHelper(Context context) {
         super(context, context.getApplicationInfo().dataDir + "/databases/" + DatabaseSchema.DATABASE_NAME, null, DatabaseSchema.DB_VERSION);
-        this.mContext = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
+        db.execSQL(SQL_CREATE_ACTIVITIES_TABLE);
+        db.execSQL(SQL_CREATE_HOMEWORKS_TABLE);
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-    }
-
-    public void openDatabase() {
-        String dbPath = mContext.getDatabasePath(DatabaseSchema.DATABASE_NAME).getPath();
-        if (mDatabase != null && mDatabase.isOpen()) {
-            return;
-        }
-        mDatabase = SQLiteDatabase.openDatabase(dbPath, null, SQLiteDatabase.OPEN_READWRITE);
-    }
-
-    public void closeDatabase() {
-        if (mDatabase != null) {
-            mDatabase.close();
-        }
+        //TODO need to perform actions to save db data before update schema
+        db.execSQL(SQL_DELETE_ACTIVITIES_TABLE);
+        db.execSQL(SQL_DELETE_HOMEWORKS_TABLE);
+        onCreate(db);
     }
 }

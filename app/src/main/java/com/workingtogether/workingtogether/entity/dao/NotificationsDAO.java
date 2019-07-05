@@ -24,7 +24,7 @@ public class NotificationsDAO {
     public ArrayList<Notification> getAllNotifications() {
         ArrayList<Notification> notificationList = new ArrayList<>();
 
-        sqLiteOpenHelper.openDatabase();
+        
         StringBuilder query = new StringBuilder("SELECT UIDNOTIFICATION, TITLE, DESCRIPTION, DATE, NOTIFICATION_TYPE, UIDRESOURSE" +
                 " FROM NOTIFICATIONS" +
                 " ORDER BY DATE DESC");
@@ -42,14 +42,14 @@ public class NotificationsDAO {
             notificationList.add(notification);
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return notificationList;
     }
 
     public ArrayList<Notification> getLastestNotifications() {
         ArrayList<Notification> notificationList = new ArrayList<>();
 
-        sqLiteOpenHelper.openDatabase();
+        
         StringBuilder query = new StringBuilder("SELECT UIDNOTIFICATION, TITLE, DESCRIPTION, DATE, NOTIFICATION_TYPE, UIDRESOURSE" +
                 " FROM NOTIFICATIONS" +
                 " ORDER BY DATE DESC LIMIT 10");
@@ -67,13 +67,13 @@ public class NotificationsDAO {
             notificationList.add(notification);
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return notificationList;
     }
 
     public Notification getNotificationById(int UIDHOMEWORK) {
         Notification notification = new Notification();
-        sqLiteOpenHelper.openDatabase();
+        
         String[] selectArgs = {Integer.toString(UIDHOMEWORK)};
         StringBuilder query = new StringBuilder("SELECT UIDNOTIFICATION, TITLE, DESCRIPTION, DATE, NOTIFICATION_TYPE, UIDRESOURSE" +
                 " FROM NOTIFICATION" +
@@ -88,12 +88,12 @@ public class NotificationsDAO {
             notification.setUIDRESOURSE(cursor.getInt(5));
         }
         cursor.close();
-        sqLiteOpenHelper.closeDatabase();
+        
         return notification;
     }
 
     public void insertNotification(String TITLE, String DESCRIPTION, String DATE, String NOTIFICATIONTYPE, int UIDRESOURSE) {
-        sqLiteOpenHelper.openDatabase();
+        
 
         try {
             mDatabase.execSQL("INSERT INTO NOTIFICATIONS (TITLE, DESCRIPTION, DATE, NOTIFICATIONTYPE, UIDRESOURSE) " +
@@ -103,14 +103,14 @@ public class NotificationsDAO {
         } catch (SQLiteException e) {
             Log.d("Exception: ", e.getMessage());
         }
-        sqLiteOpenHelper.closeDatabase();
+        
     }
 
     public void deleteNotification(int UIDNOTIFICATION) {
-        sqLiteOpenHelper.openDatabase();
+        
         String[] whereArgs = {Integer.toString(UIDNOTIFICATION)};
         mDatabase.delete("NOTIFICATIONS","UIDNOTIFICATION = ?", whereArgs);
-        sqLiteOpenHelper.closeDatabase();
+        
 
     }
 

@@ -21,18 +21,18 @@ public class SessionDAO {
     }
 
     public boolean isUserlogged() {
-        sqLiteOpenHelper.openDatabase();
+        
         String[] selectArgs = {Integer.toString(1)};
         Cursor cursor = mDatabase.rawQuery("SELECT * FROM SESSION WHERE SESSTATE = ?", selectArgs);
         if (cursor.moveToFirst())
             return true;
-        sqLiteOpenHelper.closeDatabase();
+        
         return false;
     }
 
     public SessionApp getUserlogged() {
         SessionApp sessionApp = new SessionApp();
-        sqLiteOpenHelper.openDatabase();
+        
         String[] selectArgs = {Integer.toString(1)};
         Cursor cursor = mDatabase.rawQuery("SELECT UIDUSER, TYPEUSER, SESSTATE FROM SESSION WHERE SESSTATE = ?", selectArgs);
         while (cursor.moveToNext()) {
@@ -40,7 +40,7 @@ public class SessionDAO {
             sessionApp.setTYPEUSER(cursor.getString(1));
             sessionApp.setSESSTATE(cursor.getInt(2));
         }
-        sqLiteOpenHelper.closeDatabase();
+        
 
         return sessionApp;
     }
@@ -49,7 +49,7 @@ public class SessionDAO {
     public void addSession(int UIDUSER, String TYPEUSER) {
 
         try {
-            sqLiteOpenHelper.openDatabase();
+            
             mDatabase.execSQL("INSERT INTO SESSION (UIDUSER, TYPEUSER, SESSTATE) " +
                     "VALUES ('" + UIDUSER + "', '" + TYPEUSER + "', 1)");
 
@@ -60,7 +60,7 @@ public class SessionDAO {
             Log.d("Exception: ", e.getMessage());
 
         } finally {
-            sqLiteOpenHelper.closeDatabase();
+            
 
         }
 
@@ -71,9 +71,9 @@ public class SessionDAO {
         contentValues.put("SESSTATE", SESSTATE);
         String[] whereArgs = {Integer.toString(UIDUSER)};
 
-        sqLiteOpenHelper.openDatabase();
+        
         mDatabase.update("SESSION", contentValues, "UIDUSER = ?", whereArgs);
-        sqLiteOpenHelper.closeDatabase();
+        
     }
 
     public void closeSession() {
@@ -81,9 +81,9 @@ public class SessionDAO {
         contentValues.put("SESSTATE", 0);
         String[] whereArgs = {Integer.toString(1)};
 
-        sqLiteOpenHelper.openDatabase();
+        
         mDatabase.update("SESSION", contentValues, "SESSTATE = ?", whereArgs);
-        sqLiteOpenHelper.closeDatabase();
+        
     }
 
 }

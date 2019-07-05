@@ -8,11 +8,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 
+/**
+ * This class provides method to manage databases files
+ *
+ * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ */
 public class DatabaseUtils {
 
     /**
-     * Copy database file from app/assets to application's private folder in device storage.
-     * Database will only be copied if it doesn't exists.
+     * Copies the database file from app/assets to application's private folder in device storage.
+     * Database will only be copied only if it doesn't exists.
      *
      * @param context
      */

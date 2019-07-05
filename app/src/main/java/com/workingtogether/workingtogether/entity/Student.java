@@ -1,6 +1,7 @@
 package com.workingtogether.workingtogether.entity;
 
 public class Student {
+
     private int UIDSTUDENT;
     private String NAME;
     private String LASTNAME;

@@ -9,6 +9,9 @@ import com.workingtogether.workingtogether.activities.DashboardActivity;
 import com.workingtogether.workingtogether.activities.SigninActivity;
 import com.workingtogether.workingtogether.entity.dao.SessionDAO;
 
+/**
+ * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ */
 public class SplashScreen extends AppCompatActivity {
 
     @Override

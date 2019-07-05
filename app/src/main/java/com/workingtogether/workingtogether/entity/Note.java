@@ -1,6 +1,7 @@
 package com.workingtogether.workingtogether.entity;
 
 public class Note {
+
     private int UIDNOTE;
     private int UIDSUBJECT;
     private int UIDSTUDENT;
@@ -64,4 +65,5 @@ public class Note {
     public void setUpdatedAt(String updated_at) {
         this.updated_at = updated_at;
     }
+
 }

@@ -54,8 +54,8 @@ public class User {
         return created_at;
     }
 
-    public void setCreatedAt(String deliverdate) {
-        this.created_at = deliverdate;
+    public void setCreatedAt(String created_at) {
+        this.created_at = created_at;
     }
 
     public String getUpdatedAt() {
@@ -67,8 +67,8 @@ public class User {
     }
 
     public static class UserTypes {
-        public static final String TEACHER_USER = "TEACHER_USER";
-        public static final String PARENT_USER = "PARENT_USER";
-
+        public static final String TEACHER_USER = "teacher_user";
+        public static final String PARENT_USER = "parent_user";
     }
+
 }

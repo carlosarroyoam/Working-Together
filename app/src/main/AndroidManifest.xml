@@ -24,6 +24,24 @@
         </activity>
 
         <activity
+            android:name=".activities.DashboardActivity"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/layout_dashboard_name"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter android:label="@string/filter_view_http">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="www.workingtogether.com"
+                    android:pathPrefix="/"
+                    android:scheme="https" />
+            </intent-filter>
+        </activity>
+
+        <activity
             android:name=".activities.SigninActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signin_name"
@@ -36,12 +54,6 @@
             android:label="@string/layout_signup_name"
             android:parentActivityName=".activities.SigninActivity"
             android:windowSoftInputMode="adjustNothing" />
-
-        <activity
-            android:name=".activities.DashboardActivity"
-            android:configChanges="keyboardHidden|orientation|screenSize"
-            android:label="@string/layout_dashboard_name"
-            android:theme="@style/AppTheme.NoActionBar" />
 
         <activity
             android:name=".activities.NotificationsTrayActivity"
@@ -128,7 +140,7 @@
             android:label="@string/layout_about_name"
             android:parentActivityName=".activities.DashboardActivity" />
 
-        <service android:name=".firebase.FirebaseMessagingServiceImplementation">
+        <service android:name=".firebase.FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

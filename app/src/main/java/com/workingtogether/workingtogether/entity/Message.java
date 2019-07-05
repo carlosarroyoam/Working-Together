@@ -1,6 +1,7 @@
 package com.workingtogether.workingtogether.entity;
 
 public class Message {
+
     private int UIDMESSAGE;
     private int UIDCONVERSATION;
     private int UIDUSERFROM;
@@ -118,4 +119,5 @@ public class Message {
     public void setREADEDSTATE(boolean READEDSTATE) {
         this.READEDSTATE = READEDSTATE;
     }
+
 }

@@ -1,6 +1,10 @@
 package com.workingtogether.workingtogether.entity;
 
+/**
+ * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ */
 public class Activity {
+
     private int id;
     private String title;
     private String description;
@@ -55,4 +59,5 @@ public class Activity {
     public void setDeliveryDate(String delivered_at) {
         this.delivery_date = delivered_at;
     }
+
 }

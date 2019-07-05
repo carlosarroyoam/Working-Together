@@ -1,6 +1,7 @@
 package com.workingtogether.workingtogether.entity;
 
 public class Homework {
+    
     private int id;
     private String title;
     private String description;
