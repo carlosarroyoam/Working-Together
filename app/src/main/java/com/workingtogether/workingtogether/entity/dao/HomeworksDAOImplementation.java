@@ -13,6 +13,9 @@ import com.workingtogether.workingtogether.entity.dao.interfaces.HomeworksDAO;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class HomeworksDAOImplementation implements HomeworksDAO {
 
     SQLiteOpenHelper mSQLiteOpenHelper;

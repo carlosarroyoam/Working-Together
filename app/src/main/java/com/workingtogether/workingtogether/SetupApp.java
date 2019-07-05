@@ -5,7 +5,7 @@ import android.app.Application;
 import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 
 /**
- * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class SetupApp extends Application {
 

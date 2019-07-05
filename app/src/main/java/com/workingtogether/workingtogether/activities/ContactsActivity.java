@@ -2,18 +2,18 @@ package com.workingtogether.workingtogether.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
-import android.widget.RelativeLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ContactsRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListenerInterface;
+import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListener;
 import com.workingtogether.workingtogether.entity.Conversation;
 import com.workingtogether.workingtogether.entity.SessionApp;
 import com.workingtogether.workingtogether.entity.User;
@@ -25,7 +25,10 @@ import com.workingtogether.workingtogether.util.GlobalParams;
 
 import java.util.ArrayList;
 
-public class ContactsActivity extends AppCompatActivity implements OnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
+public class ContactsActivity extends AppCompatActivity implements OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private ContactsRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

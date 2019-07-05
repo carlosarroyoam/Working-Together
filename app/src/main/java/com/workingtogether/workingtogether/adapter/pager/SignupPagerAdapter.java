@@ -1,15 +1,18 @@
 package com.workingtogether.workingtogether.adapter.pager;
 
 import android.content.Context;
-
-import androidx.viewpager.widget.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewStub;
 
+import androidx.viewpager.widget.PagerAdapter;
+
 import com.workingtogether.workingtogether.R;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class SignupPagerAdapter extends PagerAdapter {
     private Context context;
     private int[] slide_layouts = {

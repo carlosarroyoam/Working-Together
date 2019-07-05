@@ -2,19 +2,21 @@ package com.workingtogether.workingtogether.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
-
-import com.google.android.material.textfield.TextInputLayout;
-
-import androidx.appcompat.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+
+import com.google.android.material.textfield.TextInputLayout;
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.entity.User;
 import com.workingtogether.workingtogether.entity.dao.SessionDAO;
 import com.workingtogether.workingtogether.entity.dao.UserDAO;
 import com.workingtogether.workingtogether.util.AlertDialogsUtils;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class SigninActivity extends AppCompatActivity {
 
     @Override

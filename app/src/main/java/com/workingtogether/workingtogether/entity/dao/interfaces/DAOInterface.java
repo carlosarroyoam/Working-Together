@@ -5,7 +5,8 @@ import java.util.List;
 /**
  * Specifies all methods that should be implemented on dao entities classes
  *
- * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ * @param <T> Object type
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public interface DAOInterface<T> {
     List<T> getAll();

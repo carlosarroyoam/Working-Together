@@ -1,25 +1,29 @@
 package com.workingtogether.workingtogether.adapter.recyclerview;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.entity.Homework;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class HomeworksRecyclerViewAdapter extends RecyclerView.Adapter<HomeworksRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Homework> mHomeworksDataset;
-    private OnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
+    private OnItemClickListener mRecyclerViewOnItemClickListener;
     private SparseBooleanArray mSelectedItems;
 
-    public HomeworksRecyclerViewAdapter(OnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<Homework> homeworkList) {
+    public HomeworksRecyclerViewAdapter(OnItemClickListener mRecyclerViewOnItemClickListener, ArrayList<Homework> homeworkList) {
         this.mHomeworksDataset = homeworkList;
-        this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;
+        this.mRecyclerViewOnItemClickListener = mRecyclerViewOnItemClickListener;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -85,12 +89,12 @@ public class HomeworksRecyclerViewAdapter extends RecyclerView.Adapter<Homeworks
 
         @Override
         public void onClick(View v) {
-            mRecyclerViewOnItemClickListenerInterface.onClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            mRecyclerViewOnItemClickListenerInterface.onLongClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListener.onLongClick(v, getAdapterPosition());
             return true;
         }
     }

@@ -21,6 +21,9 @@ import com.workingtogether.workingtogether.activities.parent.ParentNotes;
 
 import java.util.Random;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class NotificationsBuilder {
 
     // Notifications types

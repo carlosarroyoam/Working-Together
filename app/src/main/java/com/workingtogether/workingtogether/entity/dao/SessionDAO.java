@@ -11,6 +11,9 @@ import android.util.Log;
 import com.workingtogether.workingtogether.database.SQLiteOpenHelper;
 import com.workingtogether.workingtogether.entity.SessionApp;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class SessionDAO {
     SQLiteOpenHelper sqLiteOpenHelper;
     SQLiteDatabase mDatabase;

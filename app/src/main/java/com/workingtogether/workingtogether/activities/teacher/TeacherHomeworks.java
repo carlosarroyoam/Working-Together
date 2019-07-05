@@ -28,6 +28,9 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class TeacherHomeworks extends AppCompatActivity {
     TextInputLayout titleTextInputLayout;
     TextInputLayout descTextInputLayout;

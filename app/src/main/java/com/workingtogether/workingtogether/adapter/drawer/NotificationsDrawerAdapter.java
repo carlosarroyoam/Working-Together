@@ -19,6 +19,9 @@ import com.workingtogether.workingtogether.util.DatesUtils;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class NotificationsDrawerAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<com.workingtogether.workingtogether.entity.Notification> mNotificationDataset;

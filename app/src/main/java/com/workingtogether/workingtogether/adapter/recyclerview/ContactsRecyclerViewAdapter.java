@@ -1,6 +1,5 @@
 package com.workingtogether.workingtogether.adapter.recyclerview;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,19 +7,24 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.entity.User;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRecyclerViewAdapter.ViewHolder> {
     private ArrayList<User> mContactsDataset;
-    private OnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
+    private OnItemClickListener mRecyclerViewOnItemClickListener;
     private SparseBooleanArray mSelectedItems;
 
-    public ContactsRecyclerViewAdapter(OnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<User> conversationArrayList) {
+    public ContactsRecyclerViewAdapter(OnItemClickListener mRecyclerViewOnItemClickListener, ArrayList<User> conversationArrayList) {
         this.mContactsDataset = conversationArrayList;
-        this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;
+        this.mRecyclerViewOnItemClickListener = mRecyclerViewOnItemClickListener;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -89,7 +93,7 @@ public class ContactsRecyclerViewAdapter extends RecyclerView.Adapter<ContactsRe
 
         @Override
         public void onClick(View v) {
-            mRecyclerViewOnItemClickListenerInterface.onClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
         }
 
     }

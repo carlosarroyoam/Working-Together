@@ -1,6 +1,10 @@
 package com.workingtogether.workingtogether.entity;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class Conversation {
+
     private int id;
     private int id_user;
     private String created_at;
@@ -53,4 +57,5 @@ public class Conversation {
     public void setUpdatedAt(String updated_at) {
         this.updated_at = updated_at;
     }
+
 }

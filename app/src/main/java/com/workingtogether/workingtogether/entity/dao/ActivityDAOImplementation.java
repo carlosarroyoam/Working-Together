@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class ActivityDAOImplementation implements ActivityDAO {
 

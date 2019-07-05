@@ -1,16 +1,20 @@
 package com.workingtogether.workingtogether.adapter.recyclerview;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.entity.Note;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class ParentsNotesRecyclerViewAdapter extends RecyclerView.Adapter<ParentsNotesRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Note> mNotesDataset;
 

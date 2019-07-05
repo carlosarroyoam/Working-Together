@@ -2,7 +2,10 @@ package com.workingtogether.workingtogether.adapter.recyclerview;
 
 import android.view.View;
 
-public interface OnItemClickListenerInterface {
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
+public interface OnItemClickListener {
 
     void onClick(View v, int position);
 

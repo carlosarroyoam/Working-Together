@@ -12,6 +12,9 @@ import com.workingtogether.workingtogether.entity.Note;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class NotesDAO {
     SQLiteOpenHelper sqLiteOpenHelper;
     SQLiteDatabase mDatabase;

@@ -12,6 +12,9 @@ import com.workingtogether.workingtogether.entity.Conversation;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class ConversationsDAO {
     SQLiteOpenHelper sqLiteOpenHelper;
     SQLiteDatabase mDatabase;

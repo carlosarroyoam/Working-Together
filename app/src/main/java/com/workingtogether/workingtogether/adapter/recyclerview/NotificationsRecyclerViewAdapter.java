@@ -15,14 +15,17 @@ import com.workingtogether.workingtogether.util.DatesUtils;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<NotificationsRecyclerViewAdapter.ViewHolder> {
     private ArrayList<com.workingtogether.workingtogether.entity.Notification> mNotificationDataset;
-    private OnItemClickListenerInterface mOnItemClickListenerInterface;
+    private OnItemClickListener mOnItemClickListener;
     private SparseBooleanArray mSelectedItems;
 
-    public NotificationsRecyclerViewAdapter(OnItemClickListenerInterface mOnItemClickListenerInterface, ArrayList<com.workingtogether.workingtogether.entity.Notification> notificationArrayList) {
+    public NotificationsRecyclerViewAdapter(OnItemClickListener mOnItemClickListener, ArrayList<com.workingtogether.workingtogether.entity.Notification> notificationArrayList) {
         this.mNotificationDataset = notificationArrayList;
-        this.mOnItemClickListenerInterface = mOnItemClickListenerInterface;
+        this.mOnItemClickListener = mOnItemClickListener;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -105,12 +108,12 @@ public class NotificationsRecyclerViewAdapter extends RecyclerView.Adapter<Notif
 
         @Override
         public void onClick(View v) {
-            mOnItemClickListenerInterface.onClick(v, getAdapterPosition());
+            mOnItemClickListener.onClick(v, getAdapterPosition());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            mOnItemClickListenerInterface.onLongClick(v, getAdapterPosition());
+            mOnItemClickListener.onLongClick(v, getAdapterPosition());
             return true;
         }
     }

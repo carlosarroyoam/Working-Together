@@ -30,6 +30,9 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class ConversationDetailsActivity extends AppCompatActivity {
     private ListView messages_listview;
     private ConversationDetailListAdapter mAdapter;

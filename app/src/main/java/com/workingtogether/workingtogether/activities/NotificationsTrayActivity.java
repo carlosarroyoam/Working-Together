@@ -22,13 +22,16 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.activities.parent.ParentNotes;
 import com.workingtogether.workingtogether.adapter.recyclerview.NotificationsRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListenerInterface;
+import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListener;
 import com.workingtogether.workingtogether.entity.dao.NotificationsDAO;
 import com.workingtogether.workingtogether.firebase.NotificationsBuilder;
 
 import java.util.ArrayList;
 
-public class NotificationsTrayActivity extends AppCompatActivity implements OnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
+public class NotificationsTrayActivity extends AppCompatActivity implements OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private NotificationsRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

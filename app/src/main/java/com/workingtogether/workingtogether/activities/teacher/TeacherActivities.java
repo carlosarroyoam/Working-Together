@@ -35,6 +35,9 @@ import org.json.JSONObject;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class TeacherActivities extends AppCompatActivity {
     private static final int PICKFILE_REQUEST_CODE = 1234;
     private TextInputLayout titleTextInputLayout;

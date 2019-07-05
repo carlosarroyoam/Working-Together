@@ -1,15 +1,18 @@
 package com.workingtogether.workingtogether.activities;
 
 import android.os.Bundle;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
-import android.widget.TextView;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.entity.Homework;
 import com.workingtogether.workingtogether.entity.dao.HomeworksDAOImplementation;
 import com.workingtogether.workingtogether.util.GlobalParams;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class HomeworkDetailsActivity extends AppCompatActivity {
     private Homework homework;
 

@@ -1,14 +1,14 @@
 package com.workingtogether.workingtogether.adapter.recyclerview;
 
 import android.content.Context;
-
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.entity.Conversation;
@@ -22,16 +22,19 @@ import com.workingtogether.workingtogether.util.DatesUtils;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<ConversationsRecyclerViewAdapter.ViewHolder> {
     private ArrayList<Conversation> mConversationsDataset;
-    private OnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
+    private OnItemClickListener mRecyclerViewOnItemClickListener;
     private SparseBooleanArray mSelectedItems;
     private Context mContext;
 
-    public ConversationsRecyclerViewAdapter(Context context, OnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface, ArrayList<Conversation> conversationArrayList) {
+    public ConversationsRecyclerViewAdapter(Context context, OnItemClickListener mRecyclerViewOnItemClickListener, ArrayList<Conversation> conversationArrayList) {
         this.mContext = context;
         this.mConversationsDataset = conversationArrayList;
-        this.mRecyclerViewOnItemClickListenerInterface = mRecyclerViewOnItemClickListenerInterface;
+        this.mRecyclerViewOnItemClickListener = mRecyclerViewOnItemClickListener;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -127,12 +130,12 @@ public class ConversationsRecyclerViewAdapter extends RecyclerView.Adapter<Conve
 
         @Override
         public void onClick(View v) {
-            mRecyclerViewOnItemClickListenerInterface.onClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            mRecyclerViewOnItemClickListenerInterface.onLongClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListener.onLongClick(v, getAdapterPosition());
             return true;
         }
     }

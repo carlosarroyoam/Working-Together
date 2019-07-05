@@ -11,7 +11,7 @@ import java.io.OutputStream;
 /**
  * This class provides method to manage databases files
  *
- * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class DatabaseUtils {
 

@@ -24,6 +24,9 @@ import org.json.JSONObject;
 
 import static com.workingtogether.workingtogether.firebase.NotificationsBuilder.buildNotification;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
 
     private final String TAG = this.getClass().getSimpleName();

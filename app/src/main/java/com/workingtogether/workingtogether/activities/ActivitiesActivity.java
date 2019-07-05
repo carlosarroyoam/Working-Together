@@ -20,14 +20,17 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ActivitiesRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListenerInterface;
+import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListener;
 import com.workingtogether.workingtogether.entity.Activity;
 import com.workingtogether.workingtogether.entity.dao.ActivityDAOImplementation;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ActivitiesActivity extends AppCompatActivity implements OnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
+public class ActivitiesActivity extends AppCompatActivity implements OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private ActivitiesRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

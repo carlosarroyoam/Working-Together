@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 
 /**
- * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class SQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelper {
 

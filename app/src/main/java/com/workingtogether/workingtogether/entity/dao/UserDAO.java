@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteDatabase;
 import com.workingtogether.workingtogether.database.SQLiteOpenHelper;
 import com.workingtogether.workingtogether.entity.User;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class UserDAO {
     SQLiteOpenHelper sqLiteOpenHelper;
     SQLiteDatabase mDatabase;

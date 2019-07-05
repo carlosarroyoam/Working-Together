@@ -6,22 +6,22 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuItem;
+import android.view.View;
+import android.widget.RelativeLayout;
 
-import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.view.ActionMode;
 import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.Menu;
-import android.view.MenuItem;
-import android.view.View;
-import android.widget.RelativeLayout;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ConversationsRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListenerInterface;
+import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListener;
 import com.workingtogether.workingtogether.entity.Conversation;
 import com.workingtogether.workingtogether.entity.dao.ConversationsDAO;
 import com.workingtogether.workingtogether.entity.dao.MessagesDAO;
@@ -29,7 +29,10 @@ import com.workingtogether.workingtogether.util.GlobalParams;
 
 import java.util.ArrayList;
 
-public class ConversationsActivity extends AppCompatActivity implements OnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
+public class ConversationsActivity extends AppCompatActivity implements OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private ConversationsRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

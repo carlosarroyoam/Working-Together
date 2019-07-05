@@ -1,25 +1,29 @@
 package com.workingtogether.workingtogether.adapter.recyclerview;
 
-import androidx.recyclerview.widget.RecyclerView;
 import android.util.SparseBooleanArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import androidx.recyclerview.widget.RecyclerView;
+
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.entity.Activity;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class ActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<ActivitiesRecyclerViewAdapter.ViewHolder> {
     private ArrayList mActivitiesDataset;
-    private OnItemClickListenerInterface mRecyclerViewOnItemClickListenerInterface;
+    private OnItemClickListener mRecyclerViewOnItemClickListener;
     private SparseBooleanArray mSelectedItems;
 
-    public ActivitiesRecyclerViewAdapter(OnItemClickListenerInterface onItemClickListenerInterface, ArrayList activityArrayList) {
+    public ActivitiesRecyclerViewAdapter(OnItemClickListener onItemClickListener, ArrayList activityArrayList) {
         this.mActivitiesDataset = activityArrayList;
-        this.mRecyclerViewOnItemClickListenerInterface = onItemClickListenerInterface;
+        this.mRecyclerViewOnItemClickListener = onItemClickListener;
         this.mSelectedItems = new SparseBooleanArray();
     }
 
@@ -85,12 +89,12 @@ public class ActivitiesRecyclerViewAdapter extends RecyclerView.Adapter<Activiti
 
         @Override
         public void onClick(View v) {
-            mRecyclerViewOnItemClickListenerInterface.onClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListener.onClick(v, getAdapterPosition());
         }
 
         @Override
         public boolean onLongClick(View v) {
-            mRecyclerViewOnItemClickListenerInterface.onLongClick(v, getAdapterPosition());
+            mRecyclerViewOnItemClickListener.onLongClick(v, getAdapterPosition());
             return true;
         }
     }

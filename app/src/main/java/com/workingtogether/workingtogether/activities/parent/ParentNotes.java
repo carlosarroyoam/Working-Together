@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.RelativeLayout;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-import android.view.View;
-import android.widget.RelativeLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.ParentsNotesRecyclerViewAdapter;
@@ -19,6 +19,9 @@ import com.workingtogether.workingtogether.entity.dao.NotesDAO;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class ParentNotes extends AppCompatActivity {
     private RecyclerView mRecyclerView;
     private RecyclerView.Adapter mAdapter;

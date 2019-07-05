@@ -1,7 +1,7 @@
 package com.workingtogether.workingtogether.entity;
 
 /**
- * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class Activity {
 

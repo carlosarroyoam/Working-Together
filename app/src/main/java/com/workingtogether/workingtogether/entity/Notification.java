@@ -1,5 +1,8 @@
 package com.workingtogether.workingtogether.entity;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class Notification {
 
     private int UIDNOTIFICATION;

@@ -1,10 +1,14 @@
 package com.workingtogether.workingtogether.activities.teacher;
 
-import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.workingtogether.workingtogether.R;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class TeacherStudents extends AppCompatActivity {
 
     @Override

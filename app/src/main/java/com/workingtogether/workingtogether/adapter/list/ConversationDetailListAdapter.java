@@ -18,6 +18,9 @@ import com.workingtogether.workingtogether.util.DatesUtils;
 
 import java.util.ArrayList;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class ConversationDetailListAdapter extends BaseAdapter {
     private Context mContext;
     private ArrayList<Message> mMessagesDataset;

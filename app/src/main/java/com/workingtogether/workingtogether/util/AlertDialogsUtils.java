@@ -6,7 +6,7 @@ import android.content.DialogInterface;
 import androidx.appcompat.app.AlertDialog;
 
 /**
- * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class AlertDialogsUtils {
 

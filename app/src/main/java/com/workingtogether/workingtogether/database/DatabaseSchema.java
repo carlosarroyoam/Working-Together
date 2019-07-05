@@ -4,7 +4,7 @@ package com.workingtogether.workingtogether.database;
  * This class provides schema layout for all database tables
  * as well as global constants related to database
  *
- * @author Carlos Alberto Arroyo Martinez <carlosarroyoam@gmail.com>
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class DatabaseSchema {
 

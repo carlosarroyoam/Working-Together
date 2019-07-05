@@ -20,7 +20,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.recyclerview.HomeworksRecyclerViewAdapter;
-import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListenerInterface;
+import com.workingtogether.workingtogether.adapter.recyclerview.OnItemClickListener;
 import com.workingtogether.workingtogether.entity.Homework;
 import com.workingtogether.workingtogether.entity.dao.HomeworksDAOImplementation;
 import com.workingtogether.workingtogether.util.GlobalParams;
@@ -28,7 +28,10 @@ import com.workingtogether.workingtogether.util.GlobalParams;
 import java.util.ArrayList;
 import java.util.List;
 
-public class HomeworksActivity extends AppCompatActivity implements OnItemClickListenerInterface, SwipeRefreshLayout.OnRefreshListener {
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
+public class HomeworksActivity extends AppCompatActivity implements OnItemClickListener, SwipeRefreshLayout.OnRefreshListener {
     private RecyclerView mRecyclerView;
     private HomeworksRecyclerViewAdapter mAdapter;
     private RecyclerView.LayoutManager mLayoutManager;

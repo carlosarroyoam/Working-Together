@@ -4,9 +4,6 @@ package com.workingtogether.workingtogether.activities;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-
-import androidx.viewpager.widget.ViewPager;
-import androidx.appcompat.app.AppCompatActivity;
 import android.text.Html;
 import android.view.View;
 import android.widget.LinearLayout;
@@ -14,11 +11,16 @@ import android.widget.LinearLayout.LayoutParams;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.viewpager.widget.ViewPager;
+
 import com.workingtogether.workingtogether.R;
 import com.workingtogether.workingtogether.adapter.pager.SignupPagerAdapter;
 import com.workingtogether.workingtogether.util.AlertDialogsUtils;
-import com.workingtogether.workingtogether.util.DatesUtils;
 
+/**
+ * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
+ */
 public class SignupActivity extends AppCompatActivity {
     private ViewPager view_pager;
     private LinearLayout dots_layout;
