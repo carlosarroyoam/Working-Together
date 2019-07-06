@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
     tools:mContext=".activities.ActivitiesActivity">
 
-    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
         android:id="@+id/swipe_refresh_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -24,7 +25,7 @@
                 android:scrollbars="vertical" />
 
             <!-- Empty tray View -->
-            <RelativeLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+            <RelativeLayout
                 android:id="@+id/activity_activities_empty_tray"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
@@ -36,8 +37,8 @@
                     android:layout_height="@dimen/emty_tray_squared_icon_size"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/half_margin"
-                    app:srcCompat="@drawable/ic_activities"
-                    android:contentDescription="" />
+                    android:contentDescription=""
+                    app:srcCompat="@drawable/ic_activities" />
 
                 <TextView
                     android:id="@+id/textview"

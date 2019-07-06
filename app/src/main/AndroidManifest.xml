@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.workingtogether.workingtogether">
+    package="com.workingtogether.android">
 
     <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
-        android:name=".SetupApp"
+        android:name="com.workingtogether.android.SetupApp"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
@@ -15,7 +15,7 @@
         android:theme="@style/AppTheme">
 
         <activity
-            android:name=".SplashScreen"
+            android:name="com.workingtogether.android.SplashScreen"
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -24,7 +24,7 @@
         </activity>
 
         <activity
-            android:name=".activities.DashboardActivity"
+            android:name="com.workingtogether.android.activities.DashboardActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_dashboard_name"
             android:theme="@style/AppTheme.NoActionBar">
@@ -42,105 +42,105 @@
         </activity>
 
         <activity
-            android:name=".activities.SigninActivity"
+            android:name="com.workingtogether.android.activities.SigninActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signin_name"
             android:theme="@style/AppTheme.NoActionBar"
             android:windowSoftInputMode="adjustNothing" />
 
         <activity
-            android:name=".activities.SignupActivity"
+            android:name="com.workingtogether.android.activities.SignupActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_signup_name"
-            android:parentActivityName=".activities.SigninActivity"
+            android:parentActivityName="com.workingtogether.android.activities.SigninActivity"
             android:windowSoftInputMode="adjustNothing" />
 
         <activity
-            android:name=".activities.NotificationsTrayActivity"
+            android:name="com.workingtogether.android.activities.NotificationsTrayActivity"
             android:label="@string/layout_notifications_tray_name" />
 
         <activity
-            android:name=".activities.HomeworksActivity"
+            android:name="com.workingtogether.android.activities.HomeworksActivity"
             android:label="@string/layout_homeworks_name"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity" />
 
         <activity
-            android:name=".activities.HomeworkDetailsActivity"
-            android:parentActivityName=".activities.HomeworksActivity" />
+            android:name="com.workingtogether.android.activities.HomeworkDetailsActivity"
+            android:parentActivityName="com.workingtogether.android.activities.HomeworksActivity" />
 
         <activity
-            android:name=".activities.ConversationsActivity"
+            android:name="com.workingtogether.android.activities.ConversationsActivity"
             android:label="@string/layout_messages_name"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity" />
 
         <activity
-            android:name=".activities.ContactsActivity"
+            android:name="com.workingtogether.android.activities.ContactsActivity"
             android:label="@string/layout_contacts_name"
-            android:parentActivityName=".activities.ConversationsActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.ConversationsActivity" />
 
         <activity
-            android:name=".activities.ConversationDetailsActivity"
-            android:parentActivityName=".activities.ConversationsActivity" />
+            android:name="com.workingtogether.android.activities.ConversationDetailsActivity"
+            android:parentActivityName="com.workingtogether.android.activities.ConversationsActivity" />
 
         <activity
-            android:name=".activities.parent.ParentNotes"
+            android:name="com.workingtogether.android.activities.parent.ParentNotes"
             android:label="@string/layout_parent_notes_name"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity" />
 
         <activity
-            android:name=".activities.parent.ParentStudents"
+            android:name="com.workingtogether.android.activities.parent.ParentStudents"
             android:label="@string/layout_parent_students_name"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity" />
 
         <activity
-            android:name=".activities.ActivitiesActivity"
+            android:name="com.workingtogether.android.activities.ActivitiesActivity"
             android:label="@string/layout_activities_name"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity" />
 
         <activity
-            android:name=".activities.DetailsActivity"
-            android:parentActivityName=".activities.ActivitiesActivity" />
+            android:name="com.workingtogether.android.activities.DetailsActivity"
+            android:parentActivityName="com.workingtogether.android.activities.ActivitiesActivity" />
 
         <activity
-            android:name=".activities.parent.ParentSemaphore"
+            android:name="com.workingtogether.android.activities.parent.ParentSemaphore"
             android:label="@string/layout_parent_semaphore_name"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity" />
 
         <activity
-            android:name=".activities.teacher.TeacherHomeworks"
+            android:name="com.workingtogether.android.activities.teacher.TeacherHomeworks"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_teacher_homeworks_name"
-            android:parentActivityName=".activities.DashboardActivity"
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity"
             android:windowSoftInputMode="adjustNothing" />
 
         <activity
-            android:name=".activities.teacher.TeacherStudents"
+            android:name="com.workingtogether.android.activities.teacher.TeacherStudents"
             android:label="@string/layout_teacher_students_name"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity" />
 
         <activity
-            android:name=".activities.teacher.TeacherActivities"
+            android:name="com.workingtogether.android.activities.teacher.TeacherActivities"
             android:configChanges="keyboardHidden|orientation|screenSize"
             android:label="@string/layout_teacher_activities_name"
-            android:parentActivityName=".activities.DashboardActivity"
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity"
             android:windowSoftInputMode="adjustNothing" />
 
         <activity
-            android:name=".activities.teacher.TeacherNotes"
+            android:name="com.workingtogether.android.activities.teacher.TeacherNotes"
             android:label="@string/layout_teacher_notes_name"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity" />
 
         <activity
-            android:name=".activities.TechnicalSupportActivity"
+            android:name="com.workingtogether.android.activities.TechnicalSupportActivity"
             android:label="@string/layout_support_name"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity" />
 
         <activity
-            android:name=".activities.AboutActivity"
+            android:name="com.workingtogether.android.activities.AboutActivity"
             android:label="@string/layout_about_name"
-            android:parentActivityName=".activities.DashboardActivity" />
+            android:parentActivityName="com.workingtogether.android.activities.DashboardActivity" />
 
-        <service android:name=".firebase.FirebaseMessagingService">
+        <service android:name="com.workingtogether.android.firebase.FirebaseMessagingService">
             <intent-filter>
                 <action android:name="com.google.firebase.MESSAGING_EVENT" />
             </intent-filter>

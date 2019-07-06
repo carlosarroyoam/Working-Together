@@ -8,20 +8,12 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:279070312128:android:6b8c7b8a54d1ce89",
+        "mobilesdk_app_id": "1:279070312128:android:f6ab02b2c4128f1c",
         "android_client_info": {
-          "package_name": "com.workingtogether.workingtogether"
+          "package_name": "com.workingtogether.android"
         }
       },
       "oauth_client": [
-        {
-          "client_id": "279070312128-li60d1h4gafp5e1nsumcd4v65kt09cmq.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.workingtogether.workingtogether",
-            "certificate_hash": "90dc6c34826da6339a494e85ba385fc92f6a9a95"
-          }
-        },
         {
           "client_id": "279070312128-5ddblniomhfrq50bk9o7889rao7753m2.apps.googleusercontent.com",
           "client_type": 3
@@ -33,20 +25,13 @@
         }
       ],
       "services": {
-        "analytics_service": {
-          "status": 1
-        },
         "appinvite_service": {
-          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "279070312128-5ddblniomhfrq50bk9o7889rao7753m2.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
-        },
-        "ads_service": {
-          "status": 2
         }
       }
     }
