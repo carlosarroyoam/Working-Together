@@ -21,9 +21,9 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 import com.workingtogether.android.R;
 import com.workingtogether.android.adapter.recyclerview.HomeworksRecyclerViewAdapter;
 import com.workingtogether.android.adapter.recyclerview.OnItemClickListener;
+import com.workingtogether.android.database.DatabaseSchema;
 import com.workingtogether.android.entity.Homework;
-import com.workingtogether.android.entity.dao.HomeworksDAOImplementation;
-import com.workingtogether.android.util.GlobalParams;
+import com.workingtogether.android.entity.dao.HomeworkDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -69,7 +69,7 @@ public class HomeworksActivity extends AppCompatActivity implements OnItemClickL
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        HomeworksDAOImplementation.getInstance(this).closeDBHelper();
+		HomeworkDao.getInstance(this).closeDatabaseHelper();
     }
 
     @Override
@@ -92,7 +92,7 @@ public class HomeworksActivity extends AppCompatActivity implements OnItemClickL
     public void onClick(View v, int position) {
         Homework homework = mDataset.get(position);
         Intent intent = new Intent(this, HomeworkDetailsActivity.class);
-        intent.putExtra(GlobalParams.UIDHOMEWORK, homework.getId());
+		intent.putExtra(DatabaseSchema.HomeworksTable.Cols.UUID, homework.getId());
         this.startActivity(intent);
     }
 
@@ -156,7 +156,7 @@ public class HomeworksActivity extends AppCompatActivity implements OnItemClickL
     }
 
     private List<Homework> loadHomeworksList() {
-        return HomeworksDAOImplementation.getInstance(this).getAll();
+		return HomeworkDao.getInstance(this).getAll();
     }
 
     private void updateHomeworksList() {
@@ -208,7 +208,7 @@ public class HomeworksActivity extends AppCompatActivity implements OnItemClickL
 
     private void deleteHomeworks(ArrayList<Homework> selectedItems) {
         for (int i = 0; i < selectedItems.size(); i++) {
-            HomeworksDAOImplementation.getInstance(this).delete(selectedItems.get(i));
+			HomeworkDao.getInstance(this).delete(selectedItems.get(i));
             updateHomeworksList();
         }
     }

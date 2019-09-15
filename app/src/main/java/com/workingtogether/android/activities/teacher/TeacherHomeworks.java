@@ -18,7 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.textfield.TextInputLayout;
 import com.workingtogether.android.R;
 import com.workingtogether.android.entity.Homework;
-import com.workingtogether.android.entity.dao.HomeworksDAOImplementation;
+import com.workingtogether.android.entity.dao.HomeworkDao;
 import com.workingtogether.android.util.DatesUtils;
 import com.workingtogether.android.util.firebaseConsoleWS;
 
@@ -147,7 +147,7 @@ public class TeacherHomeworks extends AppCompatActivity {
                     homework.setTitle(description);
                     homework.setDeliveryDate(deliveryDate);
 
-                    HomeworksDAOImplementation.getInstance(this).create(homework);
+					HomeworkDao.getInstance(this).create(homework);
 
                     //TODO reemplazar por un servicio de un servidor propio
                     StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENT_USER\",\"NOTIFICATION_TYPE\":\"HOMEWORK_NOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\" " + title + "\",\"DESCRIPTION\":\"" + description + "\",\"DELIVERDATE\":\"" + deliveryDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"\",\"DESCRIPTION\":\"\",\"DELIVERDATE\":\"\",\"PUBLISHDATE\":\"\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");

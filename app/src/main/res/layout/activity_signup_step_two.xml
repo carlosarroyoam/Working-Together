@@ -14,7 +14,7 @@
         android:padding="@dimen/padding">
 
         <TextView
-            android:id="@+id/title_txt"
+            android:id="@+id/title_textview"
             android:layout_width="@dimen/txt_width"
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
@@ -27,7 +27,7 @@
             android:id="@+id/activity_signup_name_etxt"
             android:layout_width="@dimen/etxt_width"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/title_txt"
+            android:layout_below="@+id/title_textview"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin">
 
@@ -78,7 +78,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/activity_signin_pass_etxt"
+            android:id="@+id/password_textinputlayout"
             android:layout_width="@dimen/etxt_width"
             android:layout_height="wrap_content"
             android:layout_below="@+id/activity_signup_email_etxt"
@@ -100,7 +100,7 @@
             android:id="@+id/activity_signin_confirm_pass_etxt"
             android:layout_width="@dimen/etxt_width"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/activity_signin_pass_etxt"
+            android:layout_below="@+id/password_textinputlayout"
             android:layout_centerHorizontal="true"
             android:layout_marginTop="@dimen/margin"
             app:passwordToggleEnabled="true">

@@ -2,13 +2,15 @@ package com.workingtogether.android.database;
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteOpenHelper;
 
 /**
+ *
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
-public class SQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelper {
+public class DatabaseOpenHelper extends SQLiteOpenHelper {
 
-    private static SQLiteOpenHelper sqLiteOpenHelperInstance;
+	private static DatabaseOpenHelper databaseOpenHelperInstance;
 
     private static final String SQL_CREATE_ACTIVITIES_TABLE =
             "CREATE TABLE " + DatabaseSchema.ActivitiesTable.TABLE_NAME + " (" +
@@ -34,14 +36,15 @@ public class SQLiteOpenHelper extends android.database.sqlite.SQLiteOpenHelper {
     private static final String SQL_DELETE_HOMEWORKS_TABLE =
             "DROP TABLE IF EXISTS " + DatabaseSchema.HomeworksTable.TABLE_NAME;
 
-    public static synchronized SQLiteOpenHelper getInstance(Context context) {
-        if (sqLiteOpenHelperInstance == null) {
-            sqLiteOpenHelperInstance = new SQLiteOpenHelper(context.getApplicationContext());
+	public static synchronized DatabaseOpenHelper getInstance(Context context) {
+		if (databaseOpenHelperInstance == null) {
+			databaseOpenHelperInstance = new DatabaseOpenHelper(context.getApplicationContext());
         }
-        return sqLiteOpenHelperInstance;
+
+		return databaseOpenHelperInstance;
     }
 
-    private SQLiteOpenHelper(Context context) {
+	private DatabaseOpenHelper(Context context) {
         super(context, context.getApplicationInfo().dataDir + "/databases/" + DatabaseSchema.DATABASE_NAME, null, DatabaseSchema.DB_VERSION);
     }
 

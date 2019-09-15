@@ -22,7 +22,7 @@ import com.workingtogether.android.R;
 import com.workingtogether.android.adapter.recyclerview.ActivitiesRecyclerViewAdapter;
 import com.workingtogether.android.adapter.recyclerview.OnItemClickListener;
 import com.workingtogether.android.entity.Activity;
-import com.workingtogether.android.entity.dao.ActivityDAOImplementation;
+import com.workingtogether.android.entity.dao.ActivityDao;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,7 +68,7 @@ public class ActivitiesActivity extends AppCompatActivity implements OnItemClick
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        ActivityDAOImplementation.getInstance(this).closeDBHelper();
+		ActivityDao.getInstance(this).closeDatabaseHelper();
     }
 
     @Override
@@ -153,7 +153,7 @@ public class ActivitiesActivity extends AppCompatActivity implements OnItemClick
     }
 
     private List<Activity> loadActivitiesList() {
-        List<Activity> activityArrayList = ActivityDAOImplementation.getInstance(this).getAll();
+		List<Activity> activityArrayList = ActivityDao.getInstance(this).getAll();
         return activityArrayList;
     }
 
@@ -210,7 +210,7 @@ public class ActivitiesActivity extends AppCompatActivity implements OnItemClick
 
     private void deleteHomeworks(ArrayList<Activity> selectedItems) {
         for (int i = 0; i < selectedItems.size(); i++) {
-            ActivityDAOImplementation.getInstance(this).delete(selectedItems.get(i));
+			ActivityDao.getInstance(this).delete(selectedItems.get(i));
             updateActivitiesList();
         }
     }

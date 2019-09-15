@@ -28,7 +28,7 @@
                 android:padding="@dimen/padding">
 
                 <TextView
-                    android:id="@+id/textview"
+                    android:id="@+id/welcome_message_textview"
                     android:layout_width="@dimen/txt_width"
                     android:layout_height="wrap_content"
                     android:layout_centerHorizontal="true"
@@ -41,7 +41,7 @@
                     android:id="@+id/activity_teacher_activities_title_etxt"
                     android:layout_width="@dimen/etxt_width"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textview"
+                    android:layout_below="@+id/welcome_message_textview"
                     android:layout_centerHorizontal="true"
                     android:layout_marginTop="@dimen/margin">
 

@@ -8,19 +8,19 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.workingtogether.android.database.SQLiteOpenHelper;
+import com.workingtogether.android.database.DatabaseOpenHelper;
 import com.workingtogether.android.entity.SessionApp;
 
 /**
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class SessionDAO {
-    private SQLiteOpenHelper sqLiteOpenHelper;
+	private DatabaseOpenHelper databaseOpenHelper;
     private SQLiteDatabase mDatabase;
 
     public SessionDAO(Context context) {
-        sqLiteOpenHelper = null;
-        mDatabase = sqLiteOpenHelper.getWritableDatabase();
+		databaseOpenHelper = null;
+		mDatabase = databaseOpenHelper.getWritableDatabase();
     }
 
     public boolean isUserlogged() {

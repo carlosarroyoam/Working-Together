@@ -33,7 +33,7 @@ public class SignupActivity extends AppCompatActivity {
         setContentView(R.layout.activity_signup);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
-        view_pager = findViewById(R.id.activity_signup_slide_viewPager);
+		view_pager = findViewById(R.id.signup_slide_viewpager);
         dots_layout = findViewById(R.id.activity_signup_dots);
 
         signupPagerAdapter = new SignupPagerAdapter(this);

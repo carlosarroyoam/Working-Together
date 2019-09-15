@@ -6,9 +6,9 @@ import android.widget.TextView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.workingtogether.android.R;
+import com.workingtogether.android.database.DatabaseSchema;
 import com.workingtogether.android.entity.Homework;
-import com.workingtogether.android.entity.dao.HomeworksDAOImplementation;
-import com.workingtogether.android.util.GlobalParams;
+import com.workingtogether.android.entity.dao.HomeworkDao;
 
 /**
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
@@ -47,6 +47,6 @@ public class HomeworkDetailsActivity extends AppCompatActivity {
     }
 
     private Homework getHomework() {
-        return HomeworksDAOImplementation.getInstance(this).get(getIntent().getIntExtra(GlobalParams.UIDHOMEWORK, 0));
+		return HomeworkDao.getInstance(this).get(getIntent().getIntExtra(DatabaseSchema.HomeworksTable.Cols.UUID, 0));
     }
 }

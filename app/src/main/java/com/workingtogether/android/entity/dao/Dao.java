@@ -1,14 +1,15 @@
-package com.workingtogether.android.entity.dao.interfaces;
+package com.workingtogether.android.entity.dao;
 
 import java.util.List;
 
 /**
  * Specifies all methods that should be implemented on dao entities classes
  *
- * @param <T> Object type
+ * @param <T> the object type of entities classes
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
-public interface DAOInterface<T> {
+public interface Dao<T> {
+
     List<T> getAll();
 
     T get(int id);
@@ -19,5 +20,6 @@ public interface DAOInterface<T> {
 
     boolean delete(T t);
 
-    void closeDBHelper();
+	void closeDatabaseHelper();
+
 }

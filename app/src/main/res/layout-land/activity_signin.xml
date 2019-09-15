@@ -7,69 +7,98 @@
     android:layout_height="match_parent"
     android:fillViewport="true">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/colorPrimary"
-        android:padding="@dimen/padding"
-        tools:mContext=".Signin">
+        android:padding="@dimen/half_padding">
 
         <androidx.cardview.widget.CardView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/margin"
-            android:padding="@dimen/padding"
-            android:layout_centerHorizontal="true"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="@dimen/half_padding"
             app:cardCornerRadius="8dp"
-            app:cardElevation="8dp">
+            app:cardElevation="8dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
 
-            <RelativeLayout
-                android:layout_width="wrap_content"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:padding="@dimen/padding">
 
+                <TextView
+                    android:id="@+id/title_textview"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/half_margin"
+                    android:layout_marginTop="@dimen/half_margin"
+                    android:layout_marginEnd="@dimen/half_margin"
+                    android:text="@string/layout_signin_name"
+                    android:textAlignment="center"
+                    android:textSize="@dimen/txt_title_text_size"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
                 <ImageView
-                    android:id="@+id/image"
+                    android:id="@+id/app_icon_imageview"
                     android:layout_width="@dimen/squared_app_icon_size"
                     android:layout_height="@dimen/squared_app_icon_size"
-                    android:layout_centerHorizontal="true"
-                    android:layout_margin="@dimen/margin"
-                    app:srcCompat="@mipmap/ic_launcher_foreground"
-                    android:contentDescription="" />
+                    android:layout_marginTop="@dimen/margin"
+                    android:contentDescription="@string/app_logo_content_description"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/title_textview"
+                    app:srcCompat="@mipmap/ic_launcher_foreground" />
 
                 <TextView
-                    android:id="@+id/textview"
-                    android:layout_width="match_parent"
+                    android:id="@+id/welcome_message_textview"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/image"
+                    android:layout_marginTop="@dimen/margin"
                     android:text="@string/txt_signin_msg"
                     android:textAlignment="center"
-                    android:textSize="@dimen/txt_subtitle_text_size"
-                    android:textStyle="bold" />
+                    android:textSize="@dimen/txt_text_size"
+                    android:textStyle="bold"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/app_icon_imageview" />
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/activity_signin_user_etxt"
-                    android:layout_width="match_parent"
+                    android:id="@+id/email_textinputlayout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/textview"
-                    android:layout_marginTop="@dimen/margin">
+                    android:layout_marginStart="8dp"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/welcome_message_textview">
 
                     <EditText
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:hint="@string/etxt_user"
                         android:imeOptions="flagNoExtractUi"
+                        android:importantForAutofill="no"
                         android:inputType="textEmailAddress"
-                        android:textSize="@dimen/etxt_text_size"
-                        android:importantForAutofill="no" />
+                        android:textSize="@dimen/etxt_text_size" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    android:id="@+id/activity_signin_pass_etxt"
-                    android:layout_width="match_parent"
+                    android:id="@+id/password_textinputlayout"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/activity_signin_user_etxt"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/email_textinputlayout"
                     app:passwordToggleEnabled="true">
 
                     <EditText
@@ -77,57 +106,62 @@
                         android:layout_height="wrap_content"
                         android:hint="@string/etxt_password"
                         android:imeOptions="flagNoExtractUi"
+                        android:importantForAutofill="no"
                         android:inputType="textPassword"
                         android:textSize="@dimen/etxt_text_size"
-                        android:importantForAutofill="no" />
+                        tools:text="@tools:sample/lorem" />
 
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <Button
-                    android:id="@+id/activity_signin_signin_btn"
-                    android:layout_width="@dimen/btn_width"
+                    android:id="@+id/send_mail_to_support_button"
+                    android:layout_width="0dp"
                     android:layout_height="@dimen/btn_height"
-                    android:layout_below="@+id/activity_signin_pass_etxt"
-                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
                     android:layout_marginTop="@dimen/margin"
                     android:background="@drawable/positive_button_shape"
                     android:onClick="signin"
                     android:text="@string/btn_signin"
                     android:textColor="@color/white"
-                    android:textSize="@dimen/btn_text_size" />
+                    android:textSize="@dimen/btn_text_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/password_textinputlayout" />
 
                 <TextView
-                    android:id="@+id/activity_signin_forgot_password_btn"
-                    android:layout_width="match_parent"
+                    android:id="@+id/forgot_password_button"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@+id/activity_signin_signin_btn"
-                    android:layout_marginTop="@dimen/half_margin"
+                    android:layout_marginStart="8dp"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginTop="@dimen/margin"
                     android:onClick="forgotPassword"
                     android:text="@string/forgot_password_msg"
                     android:textAlignment="center"
-                    android:textSize="@dimen/btn_text_size" />
+                    android:textSize="@dimen/btn_text_size"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/send_mail_to_support_button" />
 
                 <TextView
-                    android:id="@+id/activity_signin_signup_btn"
-                    android:layout_width="match_parent"
+                    android:id="@+id/signup_button"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_alignParentBottom="true"
+                    android:layout_marginTop="@dimen/double_margin"
                     android:onClick="signup"
-                    android:padding="@dimen/padding"
                     android:text="@string/txt_no_account_msg"
                     android:textAlignment="center"
-                    android:textSize="@dimen/txt_text_size" />
+                    android:textSize="@dimen/txt_text_size"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/forgot_password_button" />
 
-                <Space
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_below="@id/activity_signin_forgot_password_btn"
-                    android:layout_margin="@dimen/double_margin" />
-
-            </RelativeLayout>
+            </androidx.constraintlayout.widget.ConstraintLayout>
 
         </androidx.cardview.widget.CardView>
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </ScrollView>

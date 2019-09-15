@@ -6,37 +6,38 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.workingtogether.android.database.DatabaseOpenHelper;
 import com.workingtogether.android.database.DatabaseSchema;
-import com.workingtogether.android.database.SQLiteOpenHelper;
 import com.workingtogether.android.entity.Homework;
-import com.workingtogether.android.entity.dao.interfaces.HomeworksDAO;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
+ * Homeworks entity dao class
+ *
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
-public class HomeworksDAOImplementation implements HomeworksDAO {
+public class HomeworkDao implements Dao<Homework> {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    private SQLiteOpenHelper mSQLiteOpenHelper;
+	private DatabaseOpenHelper mDatabaseOpenHelper;
     private SQLiteDatabase mDatabase;
 
-    private static HomeworksDAOImplementation ActivityDAOImplementationInstance;
+	private static HomeworkDao ActivityDAOImplementationInstance;
 
-    public static HomeworksDAOImplementation getInstance(Context context) {
+	public static HomeworkDao getInstance(Context context) {
         if (ActivityDAOImplementationInstance == null) {
-            ActivityDAOImplementationInstance = new HomeworksDAOImplementation(context);
+			ActivityDAOImplementationInstance = new HomeworkDao(context);
         }
 
         return ActivityDAOImplementationInstance;
     }
 
-    private HomeworksDAOImplementation(Context context) {
-        mSQLiteOpenHelper = SQLiteOpenHelper.getInstance(context);
+	private HomeworkDao(Context context) {
+		mDatabaseOpenHelper = DatabaseOpenHelper.getInstance(context);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class HomeworksDAOImplementation implements HomeworksDAO {
                 DatabaseSchema.HomeworksTable.Cols.DELIVERY_DATE
         };
         String sortOrder = DatabaseSchema.HomeworksTable.Cols.UUID + " DESC";
-        mDatabase = mSQLiteOpenHelper.getReadableDatabase();
+		mDatabase = mDatabaseOpenHelper.getReadableDatabase();
 
         try (Cursor cursor = mDatabase.query(
                 DatabaseSchema.HomeworksTable.TABLE_NAME,
@@ -100,7 +101,7 @@ public class HomeworksDAOImplementation implements HomeworksDAO {
         String[] selectionArgs = {String.valueOf(id)};
         String sortOrder = DatabaseSchema.HomeworksTable.Cols.UUID + " DESC";
 
-        mDatabase = mSQLiteOpenHelper.getReadableDatabase();
+		mDatabase = mDatabaseOpenHelper.getReadableDatabase();
 
         try (Cursor cursor = mDatabase.query(
                 DatabaseSchema.HomeworksTable.TABLE_NAME,
@@ -138,7 +139,7 @@ public class HomeworksDAOImplementation implements HomeworksDAO {
         contentValues.put(DatabaseSchema.HomeworksTable.Cols.DELIVERY_DATE, homework.getDeliveryDate());
 
         Long newRowId = Long.valueOf("-1");
-        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+		mDatabase = mDatabaseOpenHelper.getWritableDatabase();
         mDatabase.beginTransaction();
 
         try {
@@ -166,7 +167,7 @@ public class HomeworksDAOImplementation implements HomeworksDAO {
         String selection = DatabaseSchema.HomeworksTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(homework.getId())};
         boolean thereAreUpdatedRows = false;
-        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+		mDatabase = mDatabaseOpenHelper.getWritableDatabase();
         mDatabase.beginTransaction();
 
         try {
@@ -192,7 +193,7 @@ public class HomeworksDAOImplementation implements HomeworksDAO {
         String selection = DatabaseSchema.HomeworksTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(homework.getId())};
         boolean thereAreDeletedRows = false;
-        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+		mDatabase = mDatabaseOpenHelper.getWritableDatabase();
         mDatabase.beginTransaction();
 
         try {
@@ -212,8 +213,8 @@ public class HomeworksDAOImplementation implements HomeworksDAO {
     }
 
     @Override
-    public void closeDBHelper() {
-        mSQLiteOpenHelper.close();
+	public void closeDatabaseHelper() {
+		mDatabaseOpenHelper.close();
     }
 
 }

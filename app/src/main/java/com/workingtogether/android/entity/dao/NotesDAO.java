@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteException;
 import android.util.Log;
 
-import com.workingtogether.android.database.SQLiteOpenHelper;
+import com.workingtogether.android.database.DatabaseOpenHelper;
 import com.workingtogether.android.entity.Note;
 
 import java.util.ArrayList;
@@ -16,12 +16,12 @@ import java.util.ArrayList;
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class NotesDAO {
-    private SQLiteOpenHelper sqLiteOpenHelper;
+	private DatabaseOpenHelper databaseOpenHelper;
     private SQLiteDatabase mDatabase;
 
     public NotesDAO(Context context) {
-        sqLiteOpenHelper = null;
-        mDatabase = sqLiteOpenHelper.getWritableDatabase();
+		databaseOpenHelper = null;
+		mDatabase = databaseOpenHelper.getWritableDatabase();
     }
 
     public ArrayList<Note> getAllNotes() {

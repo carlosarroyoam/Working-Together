@@ -3,6 +3,8 @@ package com.workingtogether.android.firebase;
 import android.content.Intent;
 import android.util.Log;
 
+import androidx.annotation.NonNull;
+
 import com.google.firebase.messaging.RemoteMessage;
 import com.workingtogether.android.database.DatabaseSchema;
 import com.workingtogether.android.entity.Activity;
@@ -10,9 +12,9 @@ import com.workingtogether.android.entity.Conversation;
 import com.workingtogether.android.entity.Homework;
 import com.workingtogether.android.entity.SessionApp;
 import com.workingtogether.android.entity.User;
-import com.workingtogether.android.entity.dao.ActivityDAOImplementation;
+import com.workingtogether.android.entity.dao.ActivityDao;
 import com.workingtogether.android.entity.dao.ConversationsDAO;
-import com.workingtogether.android.entity.dao.HomeworksDAOImplementation;
+import com.workingtogether.android.entity.dao.HomeworkDao;
 import com.workingtogether.android.entity.dao.MessagesDAO;
 import com.workingtogether.android.entity.dao.NotificationsDAO;
 import com.workingtogether.android.entity.dao.SessionDAO;
@@ -22,9 +24,8 @@ import com.workingtogether.android.util.DatesUtils;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import static com.workingtogether.android.firebase.NotificationsBuilder.buildNotification;
-
 /**
+ *
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class FirebaseMessagingService extends com.google.firebase.messaging.FirebaseMessagingService {
@@ -32,14 +33,14 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
     private final String TAG = this.getClass().getSimpleName();
 
     @Override
-    public void onNewToken(String newToken) {
+	public void onNewToken(@NonNull String newToken) {
         super.onNewToken(newToken);
         sendRegistrationToServer(newToken);
         Log.d("newToken: ", newToken);
     }
 
     @Override
-    public void onMessageReceived(RemoteMessage remoteMessage) {
+	public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         super.onMessageReceived(remoteMessage);
 
         Log.d("From: ", remoteMessage.getFrom());
@@ -112,11 +113,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         homework.setUpdatedAt(updated_at);
         homework.setDeliveryDate(delivery_date);
 
-        HomeworksDAOImplementation.getInstance(this).create(homework);
-        HomeworksDAOImplementation.getInstance(this).closeDBHelper();
+		HomeworkDao.getInstance(this).create(homework);
+		HomeworkDao.getInstance(this).closeDatabaseHelper();
 
         sendNotificationToDatabase("Diana López publico una nueva tarea", title, NotificationsBuilder.HOMEWORK_NOTIFICATION, 1);
-        buildNotification(this, title, description, NotificationsBuilder.HOMEWORK_NOTIFICATION);
+		NotificationsBuilder.buildNotification(this, title, description, NotificationsBuilder.HOMEWORK_NOTIFICATION);
         sendNewHomeworkBroadcastReceiver();
     }
 
@@ -141,11 +142,11 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
         activity.setUpdatedAt(updated_at);
         activity.setDeliveryDate(delivery_date);
 
-        ActivityDAOImplementation.getInstance(this).create(activity);
-        ActivityDAOImplementation.getInstance(this).closeDBHelper();
+		ActivityDao.getInstance(this).create(activity);
+		ActivityDao.getInstance(this).closeDatabaseHelper();
 
         sendNotificationToDatabase("Diana López publico una nueva actividad", title, NotificationsBuilder.ACTIVITY_NOTIFICATION, 1);
-        buildNotification(this, title, description, NotificationsBuilder.ACTIVITY_NOTIFICATION);
+		NotificationsBuilder.buildNotification(this, title, description, NotificationsBuilder.ACTIVITY_NOTIFICATION);
         sendNewActivityBroadcastReceiver();
     }
 
@@ -190,8 +191,8 @@ public class FirebaseMessagingService extends com.google.firebase.messaging.Fire
             User userFrom = userDAO.getUserDetails(uuid_user_from);
 
             sendNotificationToDatabase("Tienes un nuevo mensaje de " + userFrom.getFirstName() + " " + userFrom.getLastName(), data, NotificationsBuilder.MESSAGE_NOTIFICATION, 1);
-            buildNotification(this, "Tienes un nuevo mensaje de " + userFrom.getFirstName() + " " + userFrom.getLastName(), data, NotificationsBuilder.MESSAGE_NOTIFICATION);
             sendNewMessageBroadcastReceiver();
+			NotificationsBuilder.buildNotification(this, "Tienes un nuevo mensaje de " + userFrom.getFirstName() + " " + userFrom.getLastName(), data, NotificationsBuilder.MESSAGE_NOTIFICATION);
         }
     }
 

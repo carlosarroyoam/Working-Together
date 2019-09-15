@@ -8,8 +8,8 @@ package com.workingtogether.android.database;
  */
 public class DatabaseSchema {
 
-    public static final String DATABASE_NAME = "working_together.db";
-    public static final int DB_VERSION = 1;
+	static final String DATABASE_NAME = "working_together.db";
+	static final int DB_VERSION = 1;
 
     public static class HomeworksTable {
 

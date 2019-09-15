@@ -61,15 +61,15 @@
     <string name="txt_support_msg">¿Necesitas ayuda? Escríbenos</string>
     <string name="txt_support_msg2">Envíanos un correo en donde nos cuentes en que podemos ayudarte, tan pronto como sea posible nos pondremos en contacto contigo</string>
     <string name="txt_about_msg">Acerca de</string>
-    <string name="txt_about_copyright_msg">©2018 WORKING TOGETHER. TODOS LOS DERECHOS RESERVADOS.</string>
+    <string name="txt_about_copyright_msg">© 2018 Working Together. Todos los derechos reservados.</string>
     <string name="txt_signup_msg">Crea tu cuenta gratuita</string>
     <string name="txt_signup_msg_2">Comenzemos, antes que nada necesitamos algunos datos para crear tu cuenta, nosotros te guiaremos, primero necesitamos saber que tipo de cuenta vas a crear:</string>
     <string name="txt_no_account_msg">¿Aun no tienes cuenta? Crea una gratis</string>
 
     <string name="semaphore_red_status_name">Rojo</string>
-    <string name="semaphore_red_status_msg"></string>
+    <string name="semaphore_red_status_msg">Tu desempeño es muy bajo, trabaja mas duro.</string>
     <string name="semaphore_yellow_status_name">Amarillo</string>
-    <string name="semaphore_yellow_status_msg"></string>
+    <string name="semaphore_yellow_status_msg">Nada mal, esfuerzate un poco mas.</string>
     <string name="semaphore_green_status_name">Verde</string>
     <string name="semaphore_green_status_msg">Tu desempeño ha sido muy bueno, muchas felicidades.</string>
 
@@ -101,5 +101,10 @@
 
     <!--Filter views-->
     <string name="filter_view_http">filter_view_http</string>
+    <string name="profile_picture_content_desciption">Profile picture</string>
+    <string name="show_all_notifications_button">Mostrar todas las notificaciones</string>
+
+    <!--    Images content desciptions-->
+    <string name="app_logo_content_description">App\'s logo: A sided bee</string>
 
 </resources>

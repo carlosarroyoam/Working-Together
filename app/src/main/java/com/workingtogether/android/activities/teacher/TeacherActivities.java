@@ -24,7 +24,7 @@ import com.google.android.material.snackbar.Snackbar;
 import com.google.android.material.textfield.TextInputLayout;
 import com.workingtogether.android.R;
 import com.workingtogether.android.entity.Activity;
-import com.workingtogether.android.entity.dao.ActivityDAOImplementation;
+import com.workingtogether.android.entity.dao.ActivityDao;
 import com.workingtogether.android.util.DatesUtils;
 import com.workingtogether.android.util.KeyboardUtils;
 import com.workingtogether.android.util.firebaseConsoleWS;
@@ -148,7 +148,7 @@ public class TeacherActivities extends AppCompatActivity {
                     activity.setTitle(description);
                     activity.setDeliveryDate(deliveryDate);
 
-                    ActivityDAOImplementation.getInstance(this).create(activity);
+					ActivityDao.getInstance(this).create(activity);
 
                     //TODO reemplazar por un servicio de un servidor propio
                     StringBuilder json = new StringBuilder("{\"to\":\"/topics/NOTIFICACIONES\",\"data\":{\"TYPEUSER\":\"PARENT_USER\",\"NOTIFICATION_TYPE\":\"ACTIVITY_NOTIFICATION\",\"HOMEWORKCONTENT\":{\"TITLE\":\"INVESTIGACION\",\"DESCRIPTION\":\"Aquí estará todo el contenido de la tarea\",\"DELIVERDATE\":\"4/10/2018\",\"PUBLISHDATE\":\"4/10/2018 03:23:40\"},\"ACTIVITYCONTENT\":{\"TITLE\":\"" + title + "\",\"DESCRIPTION\":\"" + title + "\",\"URL\":\"" + url + "\",\"DELIVERDATE\":\"" + deliveryDate + "\",\"PUBLISHDATE\":\"" + dateTime + "\"},\"NOTESCONTENT\":{\"NOTE\":\"\"},\"MESSAGECONTENT\":{\"CONTENT\":\"\"}}}");

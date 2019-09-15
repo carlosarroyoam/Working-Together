@@ -1,67 +1,75 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/relativeLayout"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="#ffffffff"
+    android:background="@android:color/white"
     android:orientation="vertical">
 
 
     <ImageView
         android:id="@+id/img"
         android:layout_width="match_parent"
-        android:layout_height="120dp"
+        android:layout_height="100dp"
         android:background="@color/colorPrimary"
         android:gravity="center"
         android:scaleType="fitCenter"
-        app:srcCompat="@drawable/ic_link_24dp"
-        android:tint="@color/white" />
+        android:tint="@android:color/white"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_link_24dp" />
 
     <ImageView
         android:id="@+id/imgClose"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/half_margin"
-        android:layout_alignParentRight="true"
-        app:srcCompat="@drawable/ic_close_24dp"
-        android:tint="@color/white" />
+        android:layout_marginTop="@dimen/half_margin"
+        android:layout_marginEnd="@dimen/half_margin"
+        android:tint="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_close_24dp" />
 
     <TextView
         android:id="@+id/text_dialog"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/img"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
         android:layout_marginLeft="4dp"
-        android:layout_marginRight="4dp"
         android:layout_marginTop="20dp"
+        android:layout_marginRight="4dp"
+        android:layout_marginBottom="20dp"
         android:gravity="center_horizontal"
         android:text="@string/dialog_attach_url_msg"
-        android:textColor="#ff000000"
-        android:textSize="@dimen/txt_text_size" />
+        android:textColor="@android:color/secondary_text_light"
+        android:textSize="@dimen/txt_text_size"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/img" />
 
     <EditText
         android:id="@+id/dialog_url"
-        android:layout_width="@dimen/etxt_width"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/text_dialog"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="@dimen/double_margin"
-        android:layout_marginRight="@dimen/double_margin" />
+        android:layout_marginEnd="@dimen/padding"
+        android:layout_marginStart="@dimen/padding"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/text_dialog" />
 
     <Button
         android:id="@+id/btn_dialog"
         android:layout_width="@dimen/btn_width"
         android:layout_height="@dimen/btn_height"
-        android:layout_below="@+id/dialog_url"
-        android:layout_centerHorizontal="true"
-        android:layout_marginBottom="20dp"
-        android:layout_marginLeft="@dimen/double_margin"
-        android:layout_marginRight="@dimen/double_margin"
+        android:layout_marginTop="@dimen/double_margin"
+        android:layout_marginBottom="@dimen/margin"
         android:background="@drawable/positive_button_shape"
-        android:gravity="center_vertical|center_horizontal"
         android:text="@string/dialog_attach_url_confirm_button"
         android:textAllCaps="false"
-        android:textColor="#ffffffff" />
+        android:textColor="@android:color/white"
+        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/dialog_url"
+        app:layout_constraintBottom_toBottomOf="parent" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

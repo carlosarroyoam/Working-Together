@@ -26,8 +26,8 @@ public class SigninActivity extends AppCompatActivity {
     }
 
     public void signin(View view) {
-        final TextInputLayout userWrapper = findViewById(R.id.activity_signin_user_etxt);
-        final TextInputLayout passwordWrapper = findViewById(R.id.activity_signin_pass_etxt);
+		final TextInputLayout userWrapper = findViewById(R.id.email_textinputlayout);
+		final TextInputLayout passwordWrapper = findViewById(R.id.password_textinputlayout);
 
         String email = userWrapper.getEditText().getText().toString();
         String password = passwordWrapper.getEditText().getText().toString();

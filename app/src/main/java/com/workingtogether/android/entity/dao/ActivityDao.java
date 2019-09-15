@@ -6,37 +6,38 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
+import com.workingtogether.android.database.DatabaseOpenHelper;
 import com.workingtogether.android.database.DatabaseSchema;
-import com.workingtogether.android.database.SQLiteOpenHelper;
 import com.workingtogether.android.entity.Activity;
-import com.workingtogether.android.entity.dao.interfaces.ActivityDAO;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
 /**
+ * Activity entity dao class
+ *
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
-public class ActivityDAOImplementation implements ActivityDAO {
+public class ActivityDao implements Dao<Activity> {
 
     private final String TAG = this.getClass().getSimpleName();
 
-    private SQLiteOpenHelper mSQLiteOpenHelper;
+	private DatabaseOpenHelper mDatabaseOpenHelper;
     private SQLiteDatabase mDatabase;
 
-    private static ActivityDAOImplementation ActivityDAOImplementationInstance;
+	private static ActivityDao activityDaoInstance;
 
-    public static ActivityDAOImplementation getInstance(Context context) {
-        if (ActivityDAOImplementationInstance == null) {
-            ActivityDAOImplementationInstance = new ActivityDAOImplementation(context);
+	public static ActivityDao getInstance(Context context) {
+		if (activityDaoInstance == null) {
+			activityDaoInstance = new ActivityDao(context);
         }
 
-        return ActivityDAOImplementationInstance;
+		return activityDaoInstance;
     }
 
-    private ActivityDAOImplementation(Context context) {
-        mSQLiteOpenHelper = SQLiteOpenHelper.getInstance(context);
+	private ActivityDao(Context context) {
+		mDatabaseOpenHelper = DatabaseOpenHelper.getInstance(context);
     }
 
     @Override
@@ -50,7 +51,7 @@ public class ActivityDAOImplementation implements ActivityDAO {
                 DatabaseSchema.ActivitiesTable.Cols.DELIVERY_DATE
         };
         String sortOrder = DatabaseSchema.ActivitiesTable.Cols.UUID + " DESC";
-        mDatabase = mSQLiteOpenHelper.getReadableDatabase();
+		mDatabase = mDatabaseOpenHelper.getReadableDatabase();
 
         try (Cursor cursor = mDatabase.query(
                 DatabaseSchema.ActivitiesTable.TABLE_NAME,
@@ -100,7 +101,7 @@ public class ActivityDAOImplementation implements ActivityDAO {
         String[] selectionArgs = {String.valueOf(id)};
         String sortOrder = DatabaseSchema.ActivitiesTable.Cols.UUID + " DESC";
 
-        mDatabase = mSQLiteOpenHelper.getReadableDatabase();
+		mDatabase = mDatabaseOpenHelper.getReadableDatabase();
 
 
         try (Cursor cursor = mDatabase.query(
@@ -139,7 +140,7 @@ public class ActivityDAOImplementation implements ActivityDAO {
         contentValues.put(DatabaseSchema.ActivitiesTable.Cols.DELIVERY_DATE, activity.getDeliveryDate());
 
         Long newRowId = Long.valueOf("-1");
-        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+		mDatabase = mDatabaseOpenHelper.getWritableDatabase();
         mDatabase.beginTransaction();
 
         try {
@@ -167,7 +168,7 @@ public class ActivityDAOImplementation implements ActivityDAO {
         String selection = DatabaseSchema.ActivitiesTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(activity.getId())};
         boolean thereAreUpdatedRows = false;
-        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+		mDatabase = mDatabaseOpenHelper.getWritableDatabase();
         mDatabase.beginTransaction();
 
         try {
@@ -192,7 +193,7 @@ public class ActivityDAOImplementation implements ActivityDAO {
         String selection = DatabaseSchema.ActivitiesTable.Cols.UUID + " = ?";
         String[] selectionArgs = {String.valueOf(activity.getId())};
         boolean thereAreDeletedRows = false;
-        mDatabase = mSQLiteOpenHelper.getWritableDatabase();
+		mDatabase = mDatabaseOpenHelper.getWritableDatabase();
         mDatabase.beginTransaction();
 
         try {
@@ -212,8 +213,8 @@ public class ActivityDAOImplementation implements ActivityDAO {
     }
 
     @Override
-    public void closeDBHelper() {
-        mSQLiteOpenHelper.close();
+	public void closeDatabaseHelper() {
+		mDatabaseOpenHelper.close();
     }
 
 }

@@ -1,33 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:clipToPadding="false"
-    android:paddingLeft="60dp"
-    android:paddingRight="15dp"
-    android:paddingVertical="10dp">
+    android:paddingStart="60dp"
+    android:paddingTop="10dp"
+    android:paddingEnd="15dp"
+    android:paddingBottom="10dp">
 
     <TextView
         android:id="@+id/message_body"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
         android:background="@drawable/my_message_shape"
         android:elevation="2dp"
         android:padding="10dp"
         android:text="Placeholder message"
         android:textColor="#fff"
-        android:textSize="@dimen/txt_subtitle_text_size" />
+        android:textSize="@dimen/txt_subtitle_text_size"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/message_date"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignParentRight="true"
-        android:layout_below="@id/message_body"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/half_margin"
         android:elevation="2dp"
         android:text="12/10/2018"
         android:textColor="@color/gray"
-        android:textSize="@dimen/txt_small_text_size" />
+        android:textSize="@dimen/txt_small_text_size"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/message_body" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -5,7 +5,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:padding="@dimen/padding">
@@ -14,42 +14,37 @@
             android:id="@+id/img"
             android:layout_width="@dimen/drawer_squared_icon_size"
             android:layout_height="@dimen/drawer_squared_icon_size"
-            android:layout_alignParentRight="true"
-            android:layout_margin="@dimen/half_margin"
             android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/ic_notification" />
 
         <TextView
+            android:id="@+id/textView"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="top"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
             android:text="Notificaciones"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/img"
-            android:layout_marginTop="@dimen/half_padding"
+
+        <Button
+            android:layout_width="@dimen/btn_width"
+            android:layout_height="@dimen/btn_height"
+            android:layout_marginTop="@dimen/double_margin"
+            android:background="@drawable/positive_button_shape"
             android:gravity="center"
-            android:orientation="horizontal">
+            android:onClick="showAllNotifications"
+            android:text="@string/show_all_notifications_button"
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:textSize="@dimen/txt_text_size"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/img" />
 
-            <Button
-                android:layout_width="@dimen/btn_width"
-                android:layout_height="@dimen/btn_height"
-                android:layout_gravity="bottom"
-                android:background="@drawable/positive_button_shape"
-                android:gravity="center"
-                android:onClick="showAllNotifications"
-                android:text="Mostrar todas las notificaciones"
-                android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-                android:textSize="@dimen/txt_text_size" />
-
-        </LinearLayout>
-
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

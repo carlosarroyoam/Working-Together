@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.workingtogether.android.database.SQLiteOpenHelper;
+import com.workingtogether.android.database.DatabaseOpenHelper;
 import com.workingtogether.android.entity.User;
 
 /**
@@ -12,12 +12,12 @@ import com.workingtogether.android.entity.User;
  */
 public class UserDAO {
 
-    private SQLiteOpenHelper sqLiteOpenHelper;
+	private DatabaseOpenHelper databaseOpenHelper;
     private SQLiteDatabase mDatabase;
 
     public UserDAO(Context context) {
-        sqLiteOpenHelper = null;
-        mDatabase = sqLiteOpenHelper.getWritableDatabase();
+		databaseOpenHelper = null;
+		mDatabase = databaseOpenHelper.getWritableDatabase();
     }
 
     public User getUserDetails(String mail) {

@@ -4,7 +4,7 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.workingtogether.android.database.SQLiteOpenHelper;
+import com.workingtogether.android.database.DatabaseOpenHelper;
 import com.workingtogether.android.entity.Parent;
 
 import java.util.ArrayList;
@@ -13,12 +13,12 @@ import java.util.ArrayList;
  * @author Carlos Alberto Arroyo Martínez <carlosarroyoam@gmail.com>
  */
 public class ParentDAO {
-    private SQLiteOpenHelper sqLiteOpenHelper;
+	private DatabaseOpenHelper databaseOpenHelper;
     private SQLiteDatabase mDatabase;
 
     public ParentDAO(Context context) {
-        sqLiteOpenHelper = null;
-        mDatabase = sqLiteOpenHelper.getWritableDatabase();
+		databaseOpenHelper = null;
+		mDatabase = databaseOpenHelper.getWritableDatabase();
     }
 
     public ArrayList<Parent> getParents() {

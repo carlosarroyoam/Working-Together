@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:background="@color/colorPrimary">
 
-    <RelativeLayout
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="@dimen/half_margin">
@@ -15,33 +15,35 @@
             android:layout_width="@dimen/drawer_squared_icon_size"
             android:layout_height="@dimen/drawer_squared_icon_size"
             android:scaleType="centerCrop"
-            app:srcCompat="@drawable/ic_student" />
+            android:src="@drawable/ic_student"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/nav_drawer_user_name"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="10dp"
+            android:text="carlosarroyoam@gmaill.com"
+            android:textAlignment="viewEnd"
             android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
-            android:text="usuario"
             android:textSize="@dimen/txt_title_text_size"
             android:textStyle="bold"
-            android:textAlignment="viewEnd" />
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
             android:id="@+id/nav_drawer_email"
-            android:layout_width="match_parent"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_below="@+id/nav_drawer_user_name"
-            android:layout_marginBottom="10dp"
-            android:layout_marginLeft="10dp"
-            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
             android:text="usuario@gmail.com"
-            android:textSize="@dimen/txt_text_size"
             android:textAlignment="viewEnd"
-            android:textStyle="bold" />
+            android:textAppearance="@style/TextAppearance.AppCompat.Large.Inverse"
+            android:textSize="@dimen/txt_text_size"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/nav_drawer_user_name" />
 
-    </RelativeLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 
 </FrameLayout>

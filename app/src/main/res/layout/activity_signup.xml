@@ -12,7 +12,7 @@
         tools:mContext=".activities.SignupActivity">
 
         <androidx.viewpager.widget.ViewPager
-            android:id="@+id/activity_signup_slide_viewPager"
+            android:id="@+id/signup_slide_viewpager"
             android:layout_width="match_parent"
             android:layout_height="match_parent">
 
