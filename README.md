@@ -1,2 +1,2 @@
-# Working-Together
-Simple Android Application
+# Working Together
+working-together app source code.
